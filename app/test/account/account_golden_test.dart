@@ -15,10 +15,9 @@ import 'package:flutter_riverpod/misc.dart' show Override;
 
 import 'support.dart';
 
-List<Override> _fixed(AccountState state, {AccountBalance? balance = sampleBalance}) => [
+List<Override> _fixed(AccountState state) => [
   ...accountOverrides(),
   accountProvider.overrideWith(() => FixedAccount(state)),
-  accountBalanceProvider.overrideWith((ref) async => balance),
 ];
 
 const _signedOut = AccountState(phase: AccountPhase.signedOut, connected: true, links: links);
@@ -73,7 +72,7 @@ void main() {
   goldenBoth(
     'account_signed_out',
     () => const AccountPage(),
-    overrides: () => _fixed(const AccountState(phase: AccountPhase.signedOut, connected: false), balance: null),
+    overrides: () => _fixed(const AccountState(phase: AccountPhase.signedOut, connected: false)),
   );
 
   goldenBoth('account_signing_in', () => const AccountPage(), overrides: () => _fixed(_waiting));

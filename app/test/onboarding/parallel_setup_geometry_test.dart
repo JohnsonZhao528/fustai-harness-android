@@ -11,7 +11,6 @@ import 'package:dsh_app/state/connection_state.dart';
 import 'package:dsh_app/state/drawer_view_state.dart';
 import 'package:dsh_app/state/onboarding_state.dart';
 import 'package:dsh_app/state/settings_state.dart';
-import 'package:dsh_app/state/balance_state.dart';
 import 'package:dsh_app/ui/common/progress_halo.dart';
 import 'package:dsh_app/ui/common/side_insets.dart';
 import 'package:dsh_app/ui/onboarding/appearance_step.dart';
@@ -44,7 +43,6 @@ Widget _app(Widget home, {required Locale locale, required List<Override> overri
   overrides: [
     localConnectionProvider.overrideWith(FakeConnection.new),
     onboardingPrefsProvider.overrideWith(FakeOnboardingPrefs.new),
-    accountWalletBalanceProvider.overrideWithValue(null),
     drawerClockProvider.overrideWithValue(() => sampleNow),
     settingsProvider.overrideWith(() => FakeSettings(const AppSettings(loaded: true))),
     accountProvider.overrideWith(RecordingAccount.new),

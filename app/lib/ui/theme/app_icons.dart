@@ -27,7 +27,7 @@ abstract final class AppIcons {
   static const expand = DshGlyphs.caretDown;
   static const collapse = DshGlyphs.caretUp;
 
-  /// 可切换的选择器:主机、工作区、余额。
+  /// 可切换的选择器:主机、工作区。
   static const dropdown = DshGlyphs.caretUpDown;
   static const openExternal = DshGlyphs.arrowSquareOut;
   static const openLink = DshGlyphs.arrowUpRight;

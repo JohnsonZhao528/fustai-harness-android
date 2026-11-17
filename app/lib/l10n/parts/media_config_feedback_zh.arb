@@ -4,7 +4,7 @@
   "mediaConfigKeyNote": "密钥是否存在以主机返回为准。保存不代表已验证身份或模型权限。",
   "mediaConfigConsumers": "使用此密钥的媒体服务：{services}。修改或移除会影响这些服务；主机上的其他集成也可能使用它。",
   "mediaConfigCheck": "检查已保存配置",
-  "mediaConfigCheckNote": "仅检查本地配置快照，不请求供应商，不产生生成费用。不验证密钥、连通性、余额、模型权限或地区；配置是否接受仍以主机为准。",
+  "mediaConfigCheckNote": "仅检查本地配置快照，不请求供应商，不产生生成费用。不验证密钥、连通性、模型权限或地区；配置是否接受仍以主机为准。",
   "mediaConfigCheckReady": "未发现本地配置问题",
   "mediaConfigCheckMissingKey": "主机尚未报告已保存的密钥。",
   "mediaConfigCheckModels": "未选择模型，或部分已选模型不在目录中、协议不匹配。",

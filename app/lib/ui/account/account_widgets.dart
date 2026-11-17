@@ -420,7 +420,7 @@ class AccountFacts extends StatelessWidget {
     final l10n = context.l10n;
     return Column(
       children: [
-        OnboardingFact(icon: AppIcons.balance, text: l10n.engineAccountUsageFact),
+        OnboardingFact(icon: AppIcons.chart, text: l10n.engineAccountUsageFact),
         OnboardingFact(icon: AppIcons.browser, text: l10n.engineAccountBrowserFact),
         OnboardingFact(icon: AppIcons.localOnly, text: l10n.engineAccountCredentialsFact),
       ],

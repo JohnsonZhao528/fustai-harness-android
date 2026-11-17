@@ -36,7 +36,7 @@ The system suspends the app soon after it leaves the screen: a running chat may 
 
 To keep it going, keep the app on screen, or run it on a connected remote host. HarmonyOS has no battery-optimization or lock-in-Recents steps to try.
 
-Alerts need the app running, and none go out while it's suspended; also turn on the alerts you want in the app's **Notifications** and allow DSH Go notifications in system settings. Scheduled tasks on this phone only fire while the app is running too, and won't run on time while it's suspended.
+Alerts need the app running, and none go out while it's suspended; also turn on the alerts you want in the app's **Notifications** and allow FustAI Harness notifications in system settings. Scheduled tasks on this phone only fire while the app is running too, and won't run on time while it's suspended.
 
 ## The engine keeps failing to start
 
@@ -50,11 +50,11 @@ If the engine has already started since the app opened, restoring and entering o
 
 ## The app can chat, but headless reports MISSING_CREDENTIAL
 
-`dsh --profile headless` starts a separate one-shot task. Its default profile disables the interactive credential store, authorization and DeepSeek account services, so it does not automatically use API keys or account sign-ins saved in the app. A working chat in the app does not mean this command has credentials configured.
+`dsh --profile headless` starts a separate one-shot task. Its default profile disables the interactive credential store, authorization and FustAI account services, so it does not automatically use API keys or account sign-ins saved in the app. A working chat in the app does not mean this command has credentials configured.
 
-The default DeepSeek official API route needs `DEEPSEEK_API_KEY`. Supply it in the process environment that launches the command, or set your own API key as `DEEPSEEK_API_KEY=...` in the launch directory's `.env` or `$DSH_HOME/.env`. These are read in order: process environment, launch directory's `.env`, then `$DSH_HOME/.env`. An exported empty variable also shadows the `.env` fallback; unset that empty variable before using a file instead. Keep real keys out of chats, issue reports and source control.
+The official API route needs `DEEPSEEK_API_KEY`. Supply it in the process environment that launches the command, or set your own API key as `DEEPSEEK_API_KEY=...` in the launch directory's `.env` or `$DSH_HOME/.env`. These are read in order: process environment, launch directory's `.env`, then `$DSH_HOME/.env`. An exported empty variable also shadows the `.env` fallback; unset that empty variable before using a file instead. Keep real keys out of chats, issue reports and source control.
 
-DeepSeek account sign-in and an official API key are different credentials. An account sign-in token cannot be used as `DEEPSEEK_API_KEY`. You can keep using the account in the app, or configure an API key separately for headless.
+FustAI account sign-in and an official API key are different credentials. An account sign-in token cannot be used as `DEEPSEEK_API_KEY`. You can keep using the account in the app, or configure an API key separately for headless.
 
 Adding the app's sign-in patch alone does not enable the services that headless disables by default. Custom profiles and remote hosts may use different configurations; follow the configuration of that host.
 
@@ -63,7 +63,7 @@ Adding the app's sign-in patch alone does not enable the services that headless 
 The top of the system actions page says where things stand:
 
 - **On, waiting for the local engine**: start the local engine.
-- **On, works once you're back in DSH Go**: the system doesn't let background apps do these, so come back to DSH Go.
+- **On, works once you're back in FustAI Harness**: the system doesn't let background apps do these, so come back to FustAI Harness.
 - **On, can't connect right now, retrying**: give it a moment.
 - **Not available in this version**: this version doesn't support system actions.
 - **You're connected to a remote host**: switch to **This phone**.

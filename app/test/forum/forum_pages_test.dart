@@ -261,12 +261,12 @@ void main() {
   });
 
   group('links', () {
-    test('dshgo://forum paths', () {
-      expect(forumRouteFor(Uri.parse('dshgo://forum')), isNotNull);
-      expect(forumRouteFor(Uri.parse('dshgo://forum/t/101/3')), isNotNull);
-      expect(forumRouteFor(Uri.parse('dshgo://forum/t/some-slug/101')), isNotNull);
-      expect(forumRouteFor(Uri.parse('dshgo://forum/u/someone')), isNull);
-      expect(forumRouteFor(Uri.parse('dshgo://forum/t/x')), isNull);
+    test('fustai://forum paths', () {
+      expect(forumRouteFor(Uri.parse('fustai://forum')), isNotNull);
+      expect(forumRouteFor(Uri.parse('fustai://forum/t/101/3')), isNotNull);
+      expect(forumRouteFor(Uri.parse('fustai://forum/t/some-slug/101')), isNotNull);
+      expect(forumRouteFor(Uri.parse('fustai://forum/u/someone')), isNull);
+      expect(forumRouteFor(Uri.parse('fustai://forum/t/x')), isNull);
     });
 
     testWidgets('ForumLinkHost takes the sign-in redirect and topic links', (tester) async {
@@ -279,12 +279,12 @@ void main() {
         ...forumOverrides(FakeForumApi(), authController: () => auth = _RecordingAuth()),
         linkRouterProvider.overrideWithValue(router),
       ]);
-      links.add(Uri.parse('dshgo://forum/auth?payload=abc'));
+      links.add(Uri.parse('fustai://forum/auth?payload=abc'));
       await settle(tester);
       expect(auth.redirects.single.queryParameters['payload'], 'abc');
       expect(find.text('已登录论坛'), findsOneWidget);
 
-      links.add(Uri.parse('dshgo://forum/t/101'));
+      links.add(Uri.parse('fustai://forum/t/101'));
       await settle(tester);
       expect(find.byType(ForumTopicPage), findsOneWidget);
     });

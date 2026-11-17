@@ -23,5 +23,5 @@
   "setupCapsuleFailed": "安装未完成",
   "setupWaitingBody": "完成后自动进入",
   "setupNotifyWhenDone": "完成时会通知你",
-  "setupAwaitSignIn": "就绪后自动打开 DeepSeek 登录"
+  "setupAwaitSignIn": "就绪后自动打开 FustAI 登录"
 }

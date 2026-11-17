@@ -1,4 +1,4 @@
-// dsh-go share landing page (docs/design/share-codes.md). Reads the share
+// FustAI Harness share landing page (docs/design/share-codes.md). Reads the share
 // code from the URL fragment — which browsers never send to the server —
 // decodes it here, shows what it holds and hands it to the app as a
 // dshgo:// link. Nothing is uploaded; only a Gist link fetches its Gist.
@@ -39,25 +39,25 @@
       "version": "版本",
       "checksum": "校验",
       "checksumIncluded": "附带校验",
-      "pluginSuffix": " · dsh-go 插件",
-      "profile": "dsh-go 配置",
+      "pluginSuffix": " · FustAI Harness 插件",
+      "profile": "FustAI Harness 配置",
       "official": "官方",
       "settings": "设置",
       "preset": "预设",
       "skill": "技能",
       "globalInstructions": "全局指令",
-      "viewerTitle": "查看对话 · dsh-go",
+      "viewerTitle": "查看对话 · FustAI Harness",
       "incompleteLink": "这个链接不完整",
       "wechatHint": "请点右上角「…」，在浏览器中打开",
-      "shareTitle": "dsh-go 分享",
-      "viewInApp": "在 dsh-go 里查看内容",
-      "errorNewer": "需要更新 dsh-go 才能打开",
+      "shareTitle": "FustAI Harness 分享",
+      "viewInApp": "在 FustAI Harness 里查看内容",
+      "errorNewer": "需要更新 FustAI Harness 才能打开",
       "errorGist": "没能读取这个 Gist",
       "errorCode": "这个分享码不完整或已损坏",
       "share": "分享",
       "reading": "正在读取…",
-      "openApp": "用 dsh-go 打开",
-      "download": "下载 dsh-go",
+      "openApp": "用 FustAI Harness 打开",
+      "download": "下载 FustAI Harness",
       "plugins": "插件",
       "presets": "预设",
       "skills": "技能",
@@ -95,25 +95,25 @@
       "version": "Version",
       "checksum": "Checksum",
       "checksumIncluded": "Checksum included",
-      "pluginSuffix": " · dsh-go plugin",
-      "profile": "dsh-go profile",
+      "pluginSuffix": " · FustAI Harness plugin",
+      "profile": "FustAI Harness profile",
       "official": "Official",
       "settings": "Settings",
       "preset": "Preset",
       "skill": "Skill",
       "globalInstructions": "Global instructions",
-      "viewerTitle": "View chat · dsh-go",
+      "viewerTitle": "View chat · FustAI Harness",
       "incompleteLink": "This link is incomplete",
       "wechatHint": "Tap “…” at the top right, then open in your browser",
-      "shareTitle": "dsh-go share",
-      "viewInApp": "View this in dsh-go",
-      "errorNewer": "Update dsh-go to open this",
+      "shareTitle": "FustAI Harness share",
+      "viewInApp": "View this in FustAI Harness",
+      "errorNewer": "Update FustAI Harness to open this",
       "errorGist": "Couldn’t read this Gist",
       "errorCode": "This share code is incomplete or damaged",
       "share": "Share",
       "reading": "Reading…",
-      "openApp": "Open in dsh-go",
-      "download": "Download dsh-go",
+      "openApp": "Open in FustAI Harness",
+      "download": "Download FustAI Harness",
       "plugins": "Plugins",
       "presets": "Presets",
       "skills": "Skills",
@@ -362,7 +362,7 @@
       return [str(s && s.name, 64) || tr('skill'), tr('fileCount', {n: n})];
     }));
     if (typeof body.agentsMd === 'string') addGroup(tr('globalInstructions'), [['AGENTS.md', tr('lineCount', {n: body.agentsMd.split('\n').length})]]);
-    document.title = title + ' · dsh-go';
+    document.title = title + ' · FustAI Harness';
   }
 
   function fail(message) {

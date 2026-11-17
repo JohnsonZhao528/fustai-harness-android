@@ -1,4 +1,4 @@
-// Hosted links opened in the app (link router, shared text, `dshgo://`), the
+// Hosted links opened in the app (link router, shared text, `fustai://`), the
 // landing page on the share host (old github.io links still read), and the
 // two entries to 「我的分享链接」.
 
@@ -46,7 +46,7 @@ void main() {
       expect(isLandingUri(Uri.parse('https://ccch1mneyyy.github.io/dsh-go/other/')), isFalse);
       expect(isLandingUri(Uri.parse('https://go.dshtui.com/c/')), isFalse);
       expect(
-        ShareLink.inline(ShareLink.parse(Uri.parse('dshgo://share/plugin?p=$code'))!.kind!, code).webLink,
+        ShareLink.inline(ShareLink.parse(Uri.parse('fustai://share/plugin?p=$code'))!.kind!, code).webLink,
         startsWith('https://go.dshtui.com/share/#p='),
       );
     });
@@ -56,9 +56,9 @@ void main() {
     final key = encodeHostedKey(newHostedKey());
 
     test('https and dshgo forms, on our host only', () {
-      expect(parseHostedUrl('dshgo://go.dshtui.com/c/Ab3dE5gH9k#k=$key')?.origin, 'https://go.dshtui.com');
+      expect(parseHostedUrl('fustai://go.dshtui.com/c/Ab3dE5gH9k#k=$key')?.origin, 'https://go.dshtui.com');
       expect(isHostedLink(Uri.parse('https://go.dshtui.com/c/Ab3dE5gH9k#k=$key')), isTrue);
-      expect(isHostedLink(Uri.parse('dshgo://go.dshtui.com/c/Ab3dE5gH9k#k=$key')), isTrue);
+      expect(isHostedLink(Uri.parse('fustai://go.dshtui.com/c/Ab3dE5gH9k#k=$key')), isTrue);
       expect(isHostedLink(Uri.parse('https://evil.example/c/Ab3dE5gH9k#k=$key')), isFalse);
       expect(isHostedLink(Uri.parse('https://go.dshtui.com:8443/c/Ab3dE5gH9k#k=$key')), isFalse);
     });
@@ -67,7 +67,7 @@ void main() {
       final url = 'https://go.dshtui.com/c/Ab3dE5gH9k#k=$key';
       expect(findHostedUrl('「修复登录」· dsh-go 对话\n$url'), Uri.parse(url));
       expect(findHostedUrl('看这个：$url。'), Uri.parse(url));
-      expect(findHostedUrl('dshgo://go.dshtui.com/c/Ab3dE5gH9k#k=$key'), Uri.parse(url));
+      expect(findHostedUrl('fustai://go.dshtui.com/c/Ab3dE5gH9k#k=$key'), Uri.parse(url));
       expect(findHostedUrl('https://evil.example/c/Ab3dE5gH9k#k=$key'), isNull);
       expect(findHostedUrl('https://go.dshtui.com/c/Ab3dE5gH9k#k=short'), isNull);
       expect(findHostedUrl('https://go.dshtui.com/share/#p=a.b'), isNull);

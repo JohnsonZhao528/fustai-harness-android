@@ -1,13 +1,12 @@
-// Tool-group summaries, change cards + diff page, slash palette, usage sheet,
-// balance banner and the empty model catalog: behaviour tests and goldens
-// (light + dark). Regenerate with
+// Tool-group summaries, change cards + diff page, slash palette, usage sheet
+// and the empty model catalog: behaviour tests and goldens (light + dark).
+// Regenerate with
 // `flutter test --update-goldens test/chat/chat_features_test.dart`.
 
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:dsh_app/ui/common/app_sheet.dart';
-import 'package:dsh_app/state/balance_state.dart';
 import 'package:dsh_app/state/chat_state.dart';
 import 'package:dsh_app/state/sessions_state.dart';
 import 'package:dsh_app/state/settings_state.dart';
@@ -94,8 +93,8 @@ Future<void> pumpChat(
   await pumpFrames(tester, frames);
 }
 
-ChatHarness _changesHarness({BalanceResult balance = healthyBalance}) =>
-    ChatHarness(session: 's1', states: {'s1': fileChangesState()}, usage: const {'s1': _usage}, balance: balance);
+ChatHarness _changesHarness() =>
+    ChatHarness(session: 's1', states: {'s1': fileChangesState()}, usage: const {'s1': _usage});
 
 Widget _featureSheet(List<FileChange> turnOne) {
   final t = _fixture();
@@ -384,7 +383,7 @@ void main() {
       expect(harness.controllers['fresh']!.commandLines, ['/compact']);
     });
 
-    testWidgets('context ring opens the usage sheet with the balance', (tester) async {
+    testWidgets('context ring opens the usage sheet', (tester) async {
       final harness = _changesHarness();
       await pumpChat(tester, harness);
       expect(find.descendant(of: find.byType(ContextRing), matching: find.text('6%')), findsOneWidget);
@@ -394,18 +393,6 @@ void main() {
       expect(find.text('6%'), findsNWidgets(2)); // the ring and the sheet
       expect(find.text('71K'), findsOneWidget); // input incl. cache
       expect(find.text('74%'), findsOneWidget); // cache hit rate
-      expect(find.text('¥110.00'), findsOneWidget);
-      expect(harness.balanceRequests, [testKey], reason: 'throttled');
-    });
-
-    testWidgets('low balance banner: top-up link and dismiss', (tester) async {
-      final harness = _changesHarness(balance: lowBalance);
-      await pumpChat(tester, harness);
-      expect(find.textContaining('余额仅剩 ¥3.20'), findsOneWidget);
-      expect(find.text('去充值'), findsOneWidget);
-      await tester.tap(find.byTooltip('关闭').last);
-      await pumpFrames(tester, 4);
-      expect(find.textContaining('余额仅剩 ¥3.20'), findsNothing);
     });
 
     testWidgets('empty catalog asks for an API key', (tester) async {
@@ -423,7 +410,6 @@ void main() {
       await pumpFrames(tester, 8);
       expect(find.text('需要 API Key'), findsOneWidget);
       expect(find.text('填写 API Key'), findsOneWidget);
-      expect(harness.balanceRequests, isEmpty);
     });
   });
 
@@ -467,16 +453,11 @@ void main() {
         await expectLater(find.byType(ChatScreen), matchesGoldenFile('goldens/slash_palette_$suffix.png'));
       });
 
-      testWidgets('usage sheet with balance', (tester) async {
+      testWidgets('usage sheet', (tester) async {
         await pumpChat(tester, _changesHarness(), brightness: brightness);
         await tester.tap(find.byType(ContextRing));
         await pumpFrames(tester, 10);
         await expectLater(find.byType(MaterialApp), matchesGoldenFile('goldens/usage_sheet_$suffix.png'));
-      });
-
-      testWidgets('low balance banner', (tester) async {
-        await pumpChat(tester, _changesHarness(balance: lowBalance), brightness: brightness);
-        await expectLater(find.byType(ChatScreen), matchesGoldenFile('goldens/low_balance_$suffix.png'));
       });
 
       testWidgets('model sheet', (tester) async {

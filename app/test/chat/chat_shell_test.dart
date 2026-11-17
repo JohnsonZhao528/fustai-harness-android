@@ -171,7 +171,6 @@ void main() {
       final harness = ChatHarness(
         session: 's1',
         states: {'s1': const ChatState(loading: false, running: true, title: '修复登录重复提交')},
-        balance: lowBalance,
       );
       await _pump(tester, harness);
       expect(tester.takeException(), isNull);

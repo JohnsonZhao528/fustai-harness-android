@@ -61,7 +61,7 @@ class _Exporter extends ShareExporter {
   Future<String> save(File image) async {
     if (saveError case final error?) throw error;
     saved.add(image);
-    return 'Download/DSH-Go/${image.uri.pathSegments.last}';
+    return 'Download/FustAI/${image.uri.pathSegments.last}';
   }
 }
 
@@ -84,7 +84,7 @@ class _Out extends ConversationOut {
     if (saveError case final error?) throw error;
     final file = await write(name, content);
     saved.add((file, format));
-    return 'Download/DSH-Go/${file.uri.pathSegments.last}';
+    return 'Download/FustAI/${file.uri.pathSegments.last}';
   }
 }
 
@@ -706,11 +706,11 @@ void main() {
     expect(find.text('没能保存，请重试'), findsOneWidget);
   });
 
-  testWidgets('文件: a DSH Go file, a web page, Markdown; 预览 opens the replay', (tester) async {
+  testWidgets('文件: a FustAI Harness file, a web page, Markdown; 预览 opens the replay', (tester) async {
     final panel = await _open(tester, state: _fixture(), reply: 'a6', scope: ShareScope.whole);
     await _key(tester, 'share-to-file');
     expect(find.text('修复登录重复提交.dshgo'), findsOneWidget);
-    expect(find.text('在 DSH Go 里回放、接着聊'), findsOneWidget);
+    expect(find.text('在 FustAI Harness 里回放、接着聊'), findsOneWidget);
     await _key(tester, 'share-file-save');
     final (saved, format) = panel.out.saved.single;
     expect(format, ConversationFormat.file);
@@ -725,7 +725,7 @@ void main() {
     expect(pageFormat, ConversationFormat.page);
     expect(page.uri.pathSegments.last, '修复登录重复提交.html');
     final html = page.readAsStringSync();
-    expect(html, contains('<title>修复登录重复提交 · DSH Go</title>'));
+    expect(html, contains('<title>修复登录重复提交 · FustAI Harness</title>'));
     expect(html, contains("connect-src 'none'"));
 
     await _tap(tester, find.text('Markdown'));
@@ -868,7 +868,7 @@ void main() {
 
       await _key(tester, 'share-to-file');
       expect(tester.takeException(), isNull);
-      for (final label in ['对话文件', '网页', 'Markdown', '保存', '分享', '在 DSH Go 里回放、接着聊']) {
+      for (final label in ['对话文件', '网页', 'Markdown', '保存', '分享', '在 FustAI Harness 里回放、接着聊']) {
         _expectWhole(tester, label);
       }
       await _back(tester);

@@ -1,6 +1,6 @@
 # Tavern
 
-The Tavern is the app's role-play area: import SillyTavern character cards and chat with a character or follow a story. Cards, chats and tavern settings live only on this phone, and it calls the model directly with the DeepSeek API key from Settings — no on-device runtime and no remote host needed.
+The Tavern is the app's role-play area: import SillyTavern character cards and chat with a character or follow a story. Cards, chats and tavern settings live only on this phone, and it calls the model directly with the FustAI API key from Settings — no on-device runtime and no remote host needed.
 
 ## Getting in
 
@@ -18,12 +18,12 @@ Tap the **Switch mode** key at the top of the chat list and pick **Tavern** unde
 
 **Import chats** takes SillyTavern .jsonl files, one or several at a time. Importing an ST theme lives under **Display** in **Tavern settings**.
 
-### Bringing a chat over from DeepSeek
+### Bringing a chat over from FustAI
 
 <!-- nav: tavernTitle,tavernImport,tavernImportFromDeepSeek -->
-`Tavern › Import › Bring over from DeepSeek`
+`Tavern › Import › Bring over from FustAI`
 
-A long chat that DeepSeek's own app won't continue can be carried over and continued here. Export all chats in DeepSeek's settings to get a ZIP, then either share that file to dsh-Go from a file manager, or tap **Bring over from DeepSeek** under **Import** in the tavern and pick it.
+A long chat that FustAI's own app won't continue can be carried over and continued here. Export all chats in FustAI's settings to get a ZIP, then either share that file to FustAI Harness from a file manager, or tap **Bring over from FustAI** under **Import** in the tavern and pick it.
 
 The list is sorted by length with the longest chat already ticked; the button at the bottom opens it, ready for your next line. Each chat becomes a character on the shelf, with the branches left by regenerating and editing kept; replies that were withdrawn or never finished stay, but are no longer sent to the model. A chat brought over before isn't copied again: tapping it opens it.
 
@@ -77,7 +77,7 @@ Each chat can pick its own layout under **This chat** on the **Stage**; the defa
 <!-- nav: tavernTitle,tavernSectionMe,tavernSettings -->
 `Tavern › Me › Tavern settings`
 
-- **Model & connection**: the main model, **Flash** or **V4 Pro**, **Thinking** on or off, and the **DeepSeek API key** (the same key as the chat screen; the page points you to fill it in when missing).
+- **Model & connection**: the main model, **Flash** or **V4 Pro**, **Thinking** on or off, and the **FustAI API key** (the same key as the chat screen; the page points you to fill it in when missing).
 - **Generation**: the default preset's **Reply limit** and **Temperature**; a chat that brought its own preset keeps it.
 - **Display**: **Layout** (**Bubbles**, **Novel**, **Visual novel**), **Text size**, **Colours**, whether to **Use the card's own look**, **Import an ST theme**, and the switches for HTML panels and the whole-story canvas.
 - **Safety**: **No card scripts in those pages** and **Keep those pages offline**, both off by default.
@@ -92,7 +92,7 @@ Cards, chats, lorebooks, presets, personas, settings and Live2D models live only
 
 ## Things to know
 
-- The tavern talks to DeepSeek directly, not through the on-device engine or a remote host; the key comes from Settings and is shared with the chat screen.
+- The tavern talks to FustAI directly, not through the on-device engine or a remote host; the key comes from Settings and is shared with the chat screen.
 - The tavern doesn't review card or model content; HTML and scripts a card carries run inside its messages. Turn on **No card scripts in those pages** and **Keep those pages offline** under **Safety** to stop them.
 - Deleting a character deletes its chats too, after a confirmation; it can't be undone.
 - Longer stories cost more: a longer context remembers more and uses more tokens each turn.

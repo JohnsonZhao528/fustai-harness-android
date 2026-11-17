@@ -133,7 +133,7 @@ void main() {
 
   group('on HarmonyOS', () {
     late UiSkillBundle harmony;
-    final pageLink = RegExp(r'dshgo://open/([a-z0-9-]+)');
+    final pageLink = RegExp(r'fustai://open/([a-z0-9-]+)');
 
     setUpAll(() async => harmony = await loadUiSkillBundle(readAssetFromDisk, guideSkillName, 'ohos'));
 
@@ -145,8 +145,8 @@ void main() {
       expect(harmony.files['en/04-phone-control.md'], startsWith('# System actions'));
       expect(harmony.files['zh/09-appearance.md'], isNot(contains('跟随壁纸')));
       expect(harmony.files['en/09-appearance.md'], isNot(contains('Use wallpaper colors')));
-      expect(harmony.skillMd, contains('dshgo://open/system-actions'));
-      expect(harmony.skillMd, isNot(contains('dshgo://open/phone')));
+      expect(harmony.skillMd, contains('fustai://open/system-actions'));
+      expect(harmony.skillMd, isNot(contains('fustai://open/phone')));
       // A page HarmonyOS says nothing different about is the one page both read.
       expect(harmony.files['zh/02-models.md'], guide.files['zh/02-models.md']);
 

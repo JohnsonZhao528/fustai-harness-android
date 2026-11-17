@@ -43,7 +43,7 @@ void main() {
       } else {
         secondDone.complete();
       }
-      return 'Download/DSH-Go/$name';
+      return 'Download/FustAI/$name';
     });
     addTearDown(() => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(channel, null));
     final out = ShareOut(

@@ -111,7 +111,7 @@ await test('hosted links: wrong key, missing blob, network, bad magic', async ()
 await test('newer files ask for an update', async () => {
   const body = { v: 2, kind: 'conversation', schema: 2, title: 'x', start: '2026-10-24T00:00:00Z', entries: [] };
   await assert.rejects(Promise.resolve().then(() => V.readConversation(body)), /newer/);
-  assert.equal(V.errorText(new Error('newer')), '需要更新 dsh-go 才能打开');
+  assert.equal(V.errorText(new Error('newer')), '需要更新 FustAI Harness 才能打开');
 });
 
 

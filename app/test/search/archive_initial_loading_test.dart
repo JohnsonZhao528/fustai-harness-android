@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:dsh_app/runtime/runtime_bridge.dart';
 import 'package:dsh_app/runtime/runtime_state.dart';
 import 'package:dsh_app/share_code/guest_fs.dart';
-import 'package:dsh_app/state/balance_state.dart';
 import 'package:dsh_app/state/connection_state.dart';
 import 'package:dsh_app/state/drawer_view_state.dart';
 import 'package:dsh_app/state/hosts_state.dart';
@@ -131,7 +130,6 @@ void main() {
           ProviderScope(
             overrides: [
               onboardingPrefsProvider.overrideWith(FakeOnboardingPrefs.new),
-              accountWalletBalanceProvider.overrideWithValue(null),
               drawerClockProvider.overrideWithValue(() => sampleNow),
               activeHostProvider.overrideWith(_LocalHost.new),
               localRuntimeProvider.overrideWith(_Runtime.new),

@@ -30,7 +30,6 @@ import '../../voice/live_words_model.dart';
 import '../../voice/streaming_pcm.dart';
 import '../../state/agents_state.dart' show subagentParentProvider;
 import '../../state/attachments.dart';
-import '../../state/balance_state.dart';
 import '../../state/chat_error_text.dart';
 import '../../state/chat_state.dart';
 import '../../state/commands_state.dart';
@@ -88,7 +87,6 @@ import '../theme/theme.dart';
 import '../wallpaper/wallpaper_backdrop.dart';
 import '../workspace/workspace_switcher.dart' show showWorkspaceSheet;
 import '../workspace/workspaces_page.dart';
-import 'balance_widgets.dart';
 import 'chat_header.dart';
 import 'chat_list.dart';
 import 'composer.dart';
@@ -439,10 +437,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with WidgetsBindingObse
         setState(() => _showDraft(ref.read(draftStoreProvider).drafts[_draftKey]));
       }
     });
-    // Opening the chat counts as "open" for the balance (throttled to 1/min).
+    // Asked for from another page before this one was built.
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) ref.read(balanceProvider.notifier).refresh();
-      // Asked for from another page before this one was built.
       if (mounted && ref.read(repairDraftProvider) != null) _takeRepairDraft();
       if (mounted && ref.read(composerInsertProvider) != null) {
         _takeComposerInsert();
@@ -1685,7 +1681,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with WidgetsBindingObse
       if (next != null) scheduleMicrotask(_takeCompose);
     });
     if (sessionId != null) {
-      // A finished turn spent money: re-read the balance (throttled).
       ref.listen(chatProvider(sessionId).select((s) => s.running), (previous, running) {
         if (running) {
           _spoken = null;
@@ -1696,7 +1691,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with WidgetsBindingObse
             null || 'completed' || 'max-tokens' => l10n.chatTurnCompleted,
             _ => l10n.chatTurnError,
           };
-          ref.read(balanceProvider.notifier).refresh();
         }
       });
     }
@@ -2094,17 +2088,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with WidgetsBindingObse
                                           ),
                                   ),
                                 ),
-                                PetPerch(
-                                  kind: PerchKind.banner,
-                                  child: SmoothSize(
-                                    duration: AppMotion.of(context, AppMotion.standard),
-                                    curve: AppMotion.std,
-                                    alignment: Alignment.bottomCenter,
-                                    child: connected
-                                        ? const _BalanceBannerSlot()
-                                        : const SizedBox(width: double.infinity),
-                                  ),
-                                ),
                                 // Safe mode / trial banner; draws nothing otherwise.
                                 const PetPerch(
                                   kind: PerchKind.banner,
@@ -2429,18 +2412,6 @@ class _ChatComposerHost implements NativeComposerHost {
 
   @override
   BuildContext? get context => _state.mounted ? _state.context : null;
-}
-
-/// 低余额横幅的位置:没有要说的时候是零高。
-class _BalanceBannerSlot extends ConsumerWidget {
-  const _BalanceBannerSlot();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final show = ref.watch(balanceProvider.select((b) => b.showBanner));
-    if (!show) return const SizedBox(width: double.infinity);
-    return const Padding(padding: EdgeInsets.only(bottom: 8), child: LowBalanceBanner());
-  }
 }
 
 /// The dock (todo / goal bars, the run strip) folding toward the composer

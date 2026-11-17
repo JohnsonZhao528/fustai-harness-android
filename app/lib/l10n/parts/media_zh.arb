@@ -89,7 +89,7 @@
   "mediaErrorPolicyInput": "描述未通过内容审核",
   "mediaErrorPolicyOutput": "生成结果未通过内容审核",
   "mediaErrorAuth": "服务未授权",
-  "mediaErrorBalance": "余额不足",
+  "mediaErrorBalance": "生成额度不足",
   "mediaErrorQuota": "今天的额度已用完",
   "mediaErrorUnavailable": "服务暂时不可用",
   "mediaErrorExpired": "结果已过期",

@@ -328,7 +328,6 @@
   "activityUsageInputIncludesCache": "Input includes cache hits",
   "activityCacheHit": "Cache hit",
   "activitySummaryTodo": "Updated to-dos",
-  "activityUsageBalance": "DeepSeek balance",
   "activityUsageContext": "Context",
   "activityUsageChat": "This chat",
   "activityUsageAfterMessage": "Appears after you send a message",

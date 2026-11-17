@@ -7,8 +7,8 @@
 //
 // mode=mock  the Host's deepseek-account row points at a loopback mock Platform:
 //            the "browser" follows the authorization redirects through the Host's
-//            /oauth/callback, so the whole sign-in, profile, wallets, models and
-//            sign-out run end to end.
+//            /oauth/callback, so the whole sign-in, profile, models and sign-out
+//            run end to end.
 // mode=real  default platform.deepseek.com: runs up to the real authorization
 //            URL, probes the callback route with a bogus state, then cancels.
 //            Never completes a sign-in.
@@ -108,9 +108,9 @@ void main() {
         initial = container.read(accountProvider);
       }
       expect(initial.phase, AccountPhase.signedOut);
-      expect(initial.links?.topUpUrl, endsWith('/top_up'));
+      expect(initial.links?.usageUrl, endsWith('/usage'));
       // ignore: avoid_print
-      print('signed out; topUpUrl=${initial.links?.topUpUrl}');
+      print('signed out; usageUrl=${initial.links?.usageUrl}');
 
       final catalogBefore = await client.listModels();
       // ignore: avoid_print
@@ -159,15 +159,6 @@ void main() {
       // ignore: avoid_print
       print('profile: name=${profile.name} contact=${profile.contact} id=${profile.id}');
       expect(profile.contact, contains('****'));
-
-      final balance = (await account.balance())!;
-      // ignore: avoid_print
-      print(
-        'recharge: ${balance.recharge.map((w) => '${w.currency} ${w.balance} -> ${formatWalletAmount(w.balance)}')}',
-      );
-      // ignore: avoid_print
-      print('bonus: ${balance.bonus.map((w) => '${w.currency} ${w.balance} -> ${formatWalletAmount(w.balance)}')}');
-      expect(balance.bonus, isNotEmpty);
 
       // initializeDefaultModel runs right after success; give it a moment.
       await Future<void>.delayed(const Duration(milliseconds: 500));

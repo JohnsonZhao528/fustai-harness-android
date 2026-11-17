@@ -89,7 +89,7 @@
   "mediaErrorPolicyInput": "The description didn't pass content review",
   "mediaErrorPolicyOutput": "The result didn't pass content review",
   "mediaErrorAuth": "Service not authorized",
-  "mediaErrorBalance": "Insufficient balance",
+  "mediaErrorBalance": "Not enough generation quota",
   "mediaErrorQuota": "Today's limit is used up",
   "mediaErrorUnavailable": "Service unavailable for now",
   "mediaErrorExpired": "The result expired",

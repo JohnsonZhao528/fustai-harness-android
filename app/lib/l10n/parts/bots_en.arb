@@ -159,7 +159,13 @@
   "botsDuplicateHint": "Same settings, fresh chat and memory",
   "botsDuplicateNamed": "Duplicate {name}?",
   "botsDuplicateBody": "The new Bot keeps its job, instructions and model settings, starts with a fresh chat and personal memory, and gets its name from the host. When a model is available, it opens with a greeting.",
-  "@botsDuplicateNamed": {"placeholders": {"name": {"type": "String"}}},
+  "@botsDuplicateNamed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "botsChooseModelStart": "Choose a model to start",
   "botsNoChats": "No chats yet",
   "botsUnreadCount": "{count, plural, =1{1 unread} other{{count} unread}}",
@@ -261,7 +267,7 @@
   "botsCommunity": "Community",
   "botsForum": "Forum",
   "botsForumSubtitle": "Ask, share, connect",
-  "botsProjectHome": "DSH Go project home",
+  "botsProjectHome": "FustAI Harness project home",
   "botsOpenSource": "Open-source project",
   "botsPluginCatalogFailed": "Couldn’t open the plugin catalog",
   "botsTapRetry": "Tap to retry",
@@ -321,7 +327,7 @@
   "botsPetWhaleGirl": "Whale girl",
   "botsPetNone": "None",
   "botsPets": "Pets",
-  "botsPetSource": "From DSH-TUI",
+  "botsPetSource": "From FustAI-TUI",
   "botsPetImport": "Import",
   "botsPetImportHint": "Bring your own pixel pet: a zip with pack.json and PNG frame sheets; the format is in docs/design/pets.md in the repository. Long-press an imported pet to delete it.",
   "botsPetMake": "Make a pet with AI",
@@ -338,7 +344,7 @@
   "botsPetCodexWebp": "The WebP sheet was converted to PNG",
   "botsPetCodexCustomTracks": "Custom motion rows are not tied to any state",
   "botsPetCodexFps": "Frame rates were rounded to whole milliseconds",
-  "botsPetCodexOneShot": "Where a play-once motion returns to is decided by DSH",
+  "botsPetCodexOneShot": "Where a play-once motion returns to is decided by FustAI",
   "botsPetCodexMissingAuthor": "The pack names no author",
   "botsPetCodexMissingLicense": "The pack names no license",
   "botsPetCodexMissingSource": "The pack names no source",
@@ -443,7 +449,7 @@
     }
   },
   "botsMobileUnsupportedTitle": "DS Bot isn't on mobile yet",
-  "botsMobileApiRequired": "Use it in DSH Web for now",
-  "botsMobileApiMissing": "Not on mobile yet. Use it in DSH Web for now",
+  "botsMobileApiRequired": "Use it in FustAI Web for now",
+  "botsMobileApiMissing": "Not on mobile yet. Use it in FustAI Web for now",
   "botsCreationConnectionChanged": "The connection changed. Reopen this form to create on the current host."
 }

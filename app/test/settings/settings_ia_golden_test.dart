@@ -1,6 +1,6 @@
 // Goldens of the regrouped settings (docs/design/settings-ia.md §4.2–4.3):
 // the whole hub on a tall phone, with values in its rows, and the pages it
-// gained — 个性化, 界面, 隐私与分享, 关于 DSH Go — light and dark.
+// gained — 个性化, 界面, 隐私与分享, 关于 FustAI Harness — light and dark.
 //
 //   flutter test --update-goldens test/settings/settings_ia_golden_test.dart
 
@@ -9,7 +9,6 @@ import 'dart:io';
 import 'package:dsh_app/runtime/runtime_state.dart';
 import 'package:dsh_app/share_code/guest_fs.dart';
 import 'package:dsh_app/state/account_state.dart';
-import 'package:dsh_app/state/balance_state.dart';
 import 'package:dsh_app/state/hosts_state.dart';
 import 'package:dsh_app/state/settings_state.dart';
 import 'package:dsh_app/state/update_state.dart';
@@ -22,12 +21,11 @@ import 'package:dsh_app/ui/settings/settings_screen.dart';
 import 'package:dsh_app/update/version.dart';
 import 'package:dsh_client/dsh_client.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../account/support.dart' show FixedAccount, sampleBalance, sampleProfile;
+import '../account/support.dart' show FixedAccount, sampleProfile;
 import '../engine_settings/support.dart' as engine;
 import '../phone/support.dart' show FixedActiveHost, FixedHosts;
 import '../shell/golden_harness.dart';
@@ -62,10 +60,7 @@ void main() {
       addTearDown(tester.view.reset);
       await tester.pumpWidget(
         goldenApp(
-          home: ProviderScope(
-            overrides: [accountWalletBalanceProvider.overrideWithValue(sampleBalance)],
-            child: const SettingsScreen(),
-          ),
+          home: const SettingsScreen(),
           brightness: brightness,
           overrides: [
             ..._local(autoApprove: true),

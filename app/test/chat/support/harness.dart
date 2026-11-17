@@ -6,7 +6,6 @@ import 'package:dsh_app/speech/voice_cloud.dart';
 import 'package:dsh_app/runtime/runtime_bridge.dart';
 import 'package:dsh_app/runtime/runtime_state.dart';
 import 'package:dsh_app/state/attachments.dart';
-import 'package:dsh_app/state/balance_state.dart';
 import 'package:dsh_app/state/chat_state.dart';
 import 'package:dsh_app/state/commands_state.dart';
 import 'package:dsh_app/state/connection_state.dart';
@@ -48,7 +47,7 @@ void usePhoneView(WidgetTester tester) {
 
 Widget testApp(Widget home, {Brightness brightness = Brightness.light, List<Override> overrides = const []}) {
   return ProviderScope(
-    overrides: [accountWalletBalanceProvider.overrideWithValue(null), ...overrides],
+    overrides: overrides,
     child: MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: testTheme(Brightness.light),
@@ -325,10 +324,6 @@ class TestSettings extends SettingsController {
 
 const testKey = 'sk-0123456789abcdef0123456789abcdef';
 
-const healthyBalance = BalanceOk(DeepSeekBalance(currency: 'CNY', total: 110, granted: 10, toppedUp: 100));
-
-const lowBalance = BalanceOk(DeepSeekBalance(currency: 'CNY', total: 3.2, granted: 0, toppedUp: 3.2));
-
 /// Serves a fixed [SessionUsage] instead of watching the Host.
 class FakeUsage extends SessionUsageController {
   FakeUsage(super.sessionId, this.usage);
@@ -384,7 +379,6 @@ class ChatHarness {
     this.connected = true,
     String created = 'new-session',
     this.usage = const {},
-    this.balance = healthyBalance,
     this.settings = const AppSettings(loaded: true, apiKey: testKey),
     this.catalog,
     this.runtime,
@@ -399,7 +393,6 @@ class ChatHarness {
   final bool connected;
   final FakeSessions sessions;
   final Map<String, SessionUsage> usage;
-  final BalanceResult balance;
   final AppSettings settings;
   final ModelCatalog? catalog;
   final LocalRuntimeController Function()? runtime;
@@ -413,7 +406,6 @@ class ChatHarness {
   /// catalog requests in flight (test/chat/new_chat_options_test.dart opts in).
   final bool newChatCatalogs;
   final controllers = <String, FakeChatController>{};
-  final balanceRequests = <String>[];
 
   /// How many times the model catalog was read (`session/modelCatalog`).
   var catalogReads = 0;
@@ -439,10 +431,6 @@ class ChatHarness {
     // engine's recognizers as before (test/speech covers the cloud ones).
     voiceCloudProvider.overrideWithValue((_) async => null),
     voiceCloudLikelyProvider.overrideWithValue(() => false),
-    balanceFetcherProvider.overrideWithValue((key) async {
-      balanceRequests.add(key);
-      return balance;
-    }),
     hostCommandsProvider.overrideWith((ref, sessionId) async => testHostCommands),
     if (!newChatCatalogs) ...[
       agentPresetsProvider.overrideWith((ref) async => null),

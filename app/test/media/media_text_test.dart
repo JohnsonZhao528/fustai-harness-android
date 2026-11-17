@@ -27,7 +27,7 @@ void main() {
     expect(mediaErrorText(const MediaFailure('policy', 'input')), '描述未通过内容审核');
     expect(mediaErrorText(const MediaFailure('policy', 'output')), '生成结果未通过内容审核');
     expect(mediaErrorText(const MediaFailure('policy-output', null)), '生成结果未通过内容审核');
-    expect(mediaErrorText(const MediaFailure('balance', null)), '余额不足');
+    expect(mediaErrorText(const MediaFailure('balance', null)), '生成额度不足');
     expect(mediaErrorText(const MediaFailure('E_WEIRD_42', 'stack…')), '没能生成');
     expect(mediaErrorText(null), '没能生成');
   });

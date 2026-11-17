@@ -9,7 +9,7 @@ Plugins install on the current host. The top of the page says **Install to: This
 <!-- nav: commonSettings,hubPlugins -->
 `Settings › Plugins` · [Open](dshgo://open/plugins)
 
-Two tabs: **Installed** and **Plugin market**. Installed shows your plugins and **DSH official** components; some official components need **Get** to install first. Pull down or tap refresh at the top right.
+Two tabs: **Installed** and **Plugin market**. Installed shows your plugins and **FustAI official** components; some official components need **Get** to install first. Pull down or tap refresh at the top right.
 
 ## Install
 
@@ -30,7 +30,7 @@ Web-only plugins are hidden by default; use the button in the market to show the
 - **Settings**: if a plugin has settings, open them from its details once it's enabled; see Edit plugin settings in the app below. Some plugins also add rows under Plugins on the Settings page.
 - **Update**: in the plugin's market details, tap the update button. Updating uninstalls the old version first; if the new one fails to install, the plugin is left uninstalled and you can retry. The running engine keeps the old version until it restarts: on the local engine, a finished update shows **Engine restart needed**, where you can tap **Restart engine** right away or **Later**; on a remote host, you're told to restart DSH on that computer.
 - **Uninstall**: in the details, tap **Uninstall** and confirm; you can tap **Undo** on the notice within 4 seconds, and leaving the app uninstalls it at once. The plugin is removed from the host; its data and settings are kept. Sometimes an engine restart is needed to remove it fully.
-- **DSH official** components can be turned on or off but not uninstalled, and the switch applies to every chat on that host.
+- **FustAI official** components can be turned on or off but not uninstalled, and the switch applies to every chat on that host.
 
 Over DSH Remote, plugins can only be turned on or off. To install or uninstall, tap **Get install command** or **Get uninstall command** and run it on that computer. Plugins can't be installed or uninstalled in Safe mode.
 
@@ -60,9 +60,9 @@ The first time a plugin reads your draft, clipboard or a reply, it asks first. I
 
 The native UI needs the dsh-go bridge on the host: this phone's engine has it built in, remote hosts usually don't, and it never shows over DSH Remote.
 
-## DSH Go market
+## FustAI Harness market
 
-The market offers Official, Adapted for DSH Go and All sections. When an official index lists a package, its checked, pinned version takes precedence over other listings of the same name. Details include risk flags, native features, minimum app version, screenshots and localized descriptions. Risk flags describe capabilities rather than a guarantee of safety. Medium- and high-risk installations ask for confirmation.
+The market offers Official, Adapted for FustAI Harness and All sections. When an official index lists a package, its checked, pinned version takes precedence over other listings of the same name. Details include risk flags, native features, minimum app version, screenshots and localized descriptions. Risk flags describe capabilities rather than a guarantee of safety. Medium- and high-risk installations ask for confirmation.
 
 Before installation or an update, the app compares the declared digest with npm registry metadata. An unavailable or mismatching digest stops the operation before removing an old version. This does not verify the bytes eventually downloaded by the host; that requires host protocol support. Changing host or connection invalidates pending consent. Withdrawn installed versions show a warning.
 

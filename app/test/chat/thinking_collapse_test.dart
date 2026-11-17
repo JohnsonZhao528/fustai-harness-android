@@ -137,7 +137,7 @@ void main() {
                 const LinkHost(),
                 Padding(
                   padding: const EdgeInsets.all(16),
-                  child: ThinkingPill(reasoning: '先看看[打开手机操控](dshgo://open/phone)再决定。\n\n第二段。'),
+                  child: ThinkingPill(reasoning: '先看看[打开手机操控](fustai://open/phone)再决定。\n\n第二段。'),
                 ),
               ],
             ),

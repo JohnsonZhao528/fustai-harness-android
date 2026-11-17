@@ -14,6 +14,7 @@ import '../../diagnostics/automatic_diagnostics.dart';
 import '../../runtime/runtime_bridge.dart';
 import '../../runtime/runtime_state.dart';
 import '../../share_code/guest_fs.dart';
+import '../../state/account_state.dart';
 import '../../state/android_features.dart';
 import '../../state/app_mode_state.dart';
 import '../../state/engine_control.dart';
@@ -23,6 +24,7 @@ import '../../state/ohos_linux_state.dart';
 import '../../state/onboarding_state.dart';
 import '../../state/settings_state.dart';
 import '../../ui_config/ui_skill.dart';
+import '../onboarding/connect_page.dart';
 import '../onboarding/onboarding_flow.dart';
 import '../onboarding/setup_progress.dart';
 import '../remote/remote_screen.dart';
@@ -385,9 +387,19 @@ class _RootGateState extends ConsumerState<RootGate> {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (mounted) _maybeAutoStart();
         });
-        // The native shell or the web page, by 界面 (ui_mode_state.dart); an
-        // install from before usage statistics is told about them there, once.
-        child = UsageUpgradeNotice(child: widget.home ?? const ModeHome());
+        // 登录门: once the local engine is there, the shell (chat, plugins,
+        // terminal, models) opens only for a FustAI account that signed in.
+        final account = ref.watch(accountProvider);
+        if (account.connected && account.phase == AccountPhase.unknown) {
+          // The stored grant is being read; the gate decides next frame.
+          child = const _Splash();
+        } else if (account.connected && !account.signedIn) {
+          child = ConnectPage(onDone: _afterKey);
+        } else {
+          // The native shell or the web page, by 界面 (ui_mode_state.dart); an
+          // install from before usage statistics is told about them there, once.
+          child = UsageUpgradeNotice(child: widget.home ?? const ModeHome());
+        }
       }
     }
     if (child is! _Splash && !_launchReady) {
@@ -406,7 +418,15 @@ class _RootGateState extends ConsumerState<RootGate> {
       switchInCurve: AppMotion.enter,
       switchOutCurve: AppMotion.exit,
       child: KeyedSubtree(
-        key: ValueKey(child is _Splash ? 'splash' : (_step == null ? 'home' : 'onboarding')),
+        key: ValueKey(
+          child is _Splash
+              ? 'splash'
+              : _step != null
+              ? 'onboarding'
+              : child is ConnectPage
+              ? 'gate'
+              : 'home',
+        ),
         child: child,
       ),
     );

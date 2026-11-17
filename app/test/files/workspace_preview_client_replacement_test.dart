@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:dsh_app/remote/link_status.dart';
 import 'package:dsh_app/remote/secret_store.dart';
-import 'package:dsh_app/state/balance_state.dart';
 import 'package:dsh_app/state/connection_state.dart';
 import 'package:dsh_app/state/hosts_state.dart';
 import 'package:dsh_app/state/sessions_state.dart';
@@ -296,7 +295,6 @@ void main() {
           usePhoneView(tester);
           final c = ProviderContainer(overrides: [
             secretStoreProvider.overrideWithValue(MemorySecretStore()),
-            accountWalletBalanceProvider.overrideWithValue(null),
             hostLinkProvider(_host).overrideWithValue(link),
           ]);
           container = c;

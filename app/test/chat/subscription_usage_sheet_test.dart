@@ -1,9 +1,7 @@
 import 'dart:async';
 
-import 'package:dsh_app/state/balance_state.dart';
 import 'package:dsh_app/state/subscriptions_state.dart';
 import 'package:dsh_app/state/usage_state.dart';
-import 'package:dsh_app/ui/chat/balance_widgets.dart';
 import 'package:dsh_app/ui/chat/usage_sheet.dart';
 import 'package:dsh_client/dsh_client.dart';
 import 'package:flutter/material.dart';
@@ -22,16 +20,8 @@ const _usage = SubscriptionUsage(
   ],
 );
 
-class _FakeBalanceController extends BalanceController {
-  @override
-  BalanceState build() => const BalanceState(status: BalanceStatus.noKey);
-
-  @override
-  Future<void> refresh() async {}
-}
-
 void main() {
-  testWidgets('OAuth usage replaces DeepSeek balance and labels reported windows', (tester) async {
+  testWidgets('OAuth usage fills the quota block and labels reported windows', (tester) async {
     await tester.pumpWidget(
       testApp(
         const Scaffold(
@@ -39,14 +29,12 @@ void main() {
         ),
         overrides: [
           sessionUsageProvider.overrideWith2((id) => FakeUsage(id, SessionUsage.empty)),
-          balanceProvider.overrideWith(_FakeBalanceController.new),
           subscriptionProfileProvider(_subscription).overrideWith((ref) async => _profile),
           subscriptionUsageProvider(_subscription).overrideWith((ref) async => _usage),
         ],
       ),
     );
     await tester.pumpAndSettle();
-    expect(find.byType(BalanceCard), findsNothing);
     expect(find.text('Codex · 订阅额度'), findsOneWidget);
     expect(find.text('5 小时'), findsOneWidget);
     expect(find.text('7 天'), findsOneWidget);
@@ -54,7 +42,7 @@ void main() {
     expect(find.text('已使用 75%'), findsOneWidget);
   });
 
-  testWidgets('same-named API key route uses DeepSeek balance, not OAuth quota', (tester) async {
+  testWidgets('a same-named API key route shows no subscription quota', (tester) async {
     var requests = 0;
     await tester.pumpWidget(
       testApp(
@@ -63,7 +51,6 @@ void main() {
         ),
         overrides: [
           sessionUsageProvider.overrideWith2((id) => FakeUsage(id, SessionUsage.empty)),
-          balanceProvider.overrideWith(_FakeBalanceController.new),
           subscriptionProfileProvider(_subscription).overrideWith(
             (ref) async => const ProviderProfile(route: 'openai-codex', displayName: 'Key', apiKeyEnv: 'TEST_KEY'),
           ),
@@ -75,7 +62,6 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    expect(find.byType(BalanceCard), findsOneWidget);
     expect(find.text('Codex · 订阅额度'), findsNothing);
     expect(requests, 0);
   });
@@ -90,7 +76,6 @@ void main() {
         ),
         overrides: [
           sessionUsageProvider.overrideWith2((id) => FakeUsage(id, SessionUsage.empty)),
-          balanceProvider.overrideWith(_FakeBalanceController.new),
           subscriptionProfileProvider(_subscription).overrideWith((ref) async => _profile),
           subscriptionUsageProvider(_subscription).overrideWith((ref) {
             requests++;

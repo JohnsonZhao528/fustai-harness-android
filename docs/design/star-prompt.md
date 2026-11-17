@@ -42,8 +42,8 @@
 
 ```
 ╭──────────────────────────────────╮
-│            ( 鲸娘 )              │  贴纸 ≤192，背后一圈很淡的主题色光晕
-│      本鱼已经在 DSH Go           │  titleLarge · 居中 · 两行等宽（不让「啦~」单独一行）
+│            〔 F• 〕              │  标识 ≤192，背后一圈很淡的主题色光晕
+│   本鱼已经在 FustAI Harness      │  titleLarge · 居中 · 两行等宽（不让「啦~」单独一行）
 │      里陪你半个小时啦~            │
 │   这是一个免费开源的项目，如果它……   │  bodyMedium · onSurfaceVariant · 居中
 │      拜托你啦~ 这真的很重要！！      │  bodyMedium w600 · 主色
@@ -56,8 +56,8 @@
 ```
 
 - **卡片**：主题的对话框（`popupFill`、发丝描边、28 圆角），宽度 280～360，手机两侧各留 24；平板上也是这个宽度。内容放在滚动视图里，矮屏或大字号时滚动，不溢出。
-- **贴纸**：`assets/star/star_whale.webp`，576×576（192dp 的 3 倍），WebP 带透明，约 128 KB，中英文共用。原图下摆被画布截平，最后 40px 渐隐到透明，落在卡片上不显得被裁。边长取对话框可用高度的 30%，限制在 112～192dp。
-- **入场**：对话框本身淡入；鲸娘从 0.86 倍、低 14dp 处轻轻弹起，略过 1 倍再落定（560ms，`easeOutBack`）。系统「移除动画」时直接显示。
+- **标识**：`BrandMark(tile: true)`，边长取对话框可用高度的 30%，限制在 112～192dp，居中缩到方框的 72 %，中英文共用。
+- **入场**：对话框本身淡入；标识从 0.86 倍、低 14dp 处轻轻弹起，略过 1 倍再落定（560ms，`easeOutBack`）。系统「移除动画」时直接显示。
 - **返回、点外面**：等于「下次再说」。没有 ×。
 
 ## 4. 文案
@@ -95,12 +95,12 @@ tooling/build-apk.sh -f all -- --dart-define=DSH_STAR_PROMPT=true
 | 文件 | 内容 |
 |---|---|
 | `app/lib/state/star_prompt.dart` | 开关、规则、本地记录（`star_prompt`，JSON v2；读到旧 v1 只保留「已结束」）、前台计时、空闲判断、手机操控观察器、打开链接的接缝 |
-| `app/lib/ui/star/star_prompt_dialog.dart` | 对话框、贴纸和入场、两行等宽的标题、打开 GitHub |
+| `app/lib/ui/star/star_prompt_dialog.dart` | 对话框、标识和入场、两行等宽的标题、打开 GitHub |
 | `app/lib/ui/star/star_prompt_host.dart` | 挂在首页外壳上；记录或场景一变就判断，安静 3 秒后弹出 |
 | `app/lib/app.dart` | 开关打开时从启动起持有记录（开始计时） |
 | `app/lib/state/notify_state.dart` | `launchNoticeShownProvider`：使用统计提示、更新弹层、后台联网那一行出现时置位 |
-| `app/lib/ui/settings/about_page.dart` | 「关于」里的「给 dsh-go 点个 star」 |
+| `app/lib/ui/settings/about_page.dart` | 「关于」里的「给 FustAI Harness 点个 star」 |
 
 ## 8. 测试
 
-`app/test/star/star_prompt_test.dart`：29 分钟不弹、30 分钟弹；只在 `resumed` 时计时、跨启动累加；「下次再说」后 4 小时 59 分不弹、5 小时弹，第一句写实际小时数；返回、点外面等于「下次再说」，第二次后不再问；「去 GitHub 点 Star」打开 `https://github.com/ccch1mneyyy/dsh-go`、「已经点过啦」都永不再问；打不开浏览器时复制网址；首次引导、对话在跑、有审批、页面盖着、不在前台、手机操控、听写、键盘、草稿、抽屉、本次启动已有提示时都不弹，条件解除后会弹；开关关闭时不读写；偏好读写失败；设置行；360×780 / 360×640 × 1、1.3 倍字号和平板的几何（不溢出、贴纸方正居中、主键通栏、标题两行等宽）；英文；入场动画开关；浅色、深色 golden。
+`app/test/star/star_prompt_test.dart`：29 分钟不弹、30 分钟弹；只在 `resumed` 时计时、跨启动累加；「下次再说」后 4 小时 59 分不弹、5 小时弹，第一句写实际小时数；返回、点外面等于「下次再说」，第二次后不再问；「去 GitHub 点 Star」打开 `https://github.com/ccch1mneyyy/dsh-go`、「已经点过啦」都永不再问；打不开浏览器时复制网址；首次引导、对话在跑、有审批、页面盖着、不在前台、手机操控、听写、键盘、草稿、抽屉、本次启动已有提示时都不弹，条件解除后会弹；开关关闭时不读写；偏好读写失败；设置行；360×780 / 360×640 × 1、1.3 倍字号和平板的几何（不溢出、标识方正居中、主键通栏、标题两行等宽）；英文；入场动画开关；浅色、深色 golden。

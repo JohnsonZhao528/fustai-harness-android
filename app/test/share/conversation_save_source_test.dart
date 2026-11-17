@@ -48,7 +48,7 @@ class _NativeSaves {
     save.content = await File(save.path).readAsString();
     read[index].complete();
     if (refuse) throw PlatformException(code: 'permission', message: 'controlled native save refusal');
-    return 'Download/DSH-Go/${save.name}';
+    return 'Download/FustAI/${save.name}';
   }
 
   void unblock() {

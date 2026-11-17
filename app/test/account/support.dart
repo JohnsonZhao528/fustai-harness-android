@@ -17,10 +17,7 @@ import '../support/test_fonts.dart';
 
 // ── Views ────────────────────────────────────────────────────────────────────
 
-const links = AccountLinks(
-  usageUrl: 'https://platform.deepseek.com/usage',
-  topUpUrl: 'https://platform.deepseek.com/top_up',
-);
+const links = AccountLinks(usageUrl: 'https://platform.deepseek.com/usage');
 
 const authorizeUrl = 'https://platform.deepseek.com/dsh/authorize?authorize_id=a-1';
 
@@ -40,11 +37,6 @@ SignInAttempt attempt(SignInPhase phase, {String id = 'att-1', String? url, Sign
 
 const sampleProfile = AccountProfile(id: 'u-1001', name: '雾蓝', contact: '138****5678');
 
-const sampleBalance = AccountBalance(
-  recharge: [AccountWallet(currency: 'CNY', balance: '128.4567')],
-  bonus: [AccountWallet(currency: 'CNY', balance: '10.0000000000000000')],
-);
-
 // ── Fake Host ────────────────────────────────────────────────────────────────
 
 /// In-memory stand-in for the Host's `account/*` namespace. Unary calls answer
@@ -61,8 +53,6 @@ class FakeAccountApi implements AccountApi {
   Future<AccountView> Function(String id)? onCancel;
   AccountProfile? profile = sampleProfile;
   Object? profileError;
-  AccountBalance? balance = sampleBalance;
-  Object? balanceError;
   bool runningTasks = false;
   Object? getStateError;
 
@@ -135,13 +125,6 @@ class FakeAccountApi implements AccountApi {
     calls.add('getProfile');
     if (profileError case final e?) throw e;
     return current.signedIn ? profile : null;
-  }
-
-  @override
-  Future<AccountBalance?> getBalance() async {
-    calls.add('getBalance');
-    if (balanceError case final e?) throw e;
-    return current.signedIn ? balance : null;
   }
 
   @override

@@ -109,10 +109,10 @@ Widget _shell({List<Override> extra = const []}) => ProviderScope(
 );
 
 void main() {
-  testWidgets('a cold-start dshgo:// link reaches a handler a feature registers at startup', (tester) async {
+  testWidgets('a cold-start fustai:// link reaches a handler a feature registers at startup', (tester) async {
     final native = _FakeLinksNative(tester);
     // The intent that launched the app, before Flutter draws anything.
-    await native.arrive('dshgo://demo/hello?payload=cold');
+    await native.arrive('fustai://demo/hello?payload=cold');
 
     await tester.pumpWidget(_shell());
     await tester.pump();
@@ -130,14 +130,14 @@ void main() {
     expect(got.single.queryParameters['payload'], 'cold');
 
     // Later links while the app runs (onNewIntent) go straight through, once.
-    await native.arrive('dshgo://demo/hello?payload=warm');
+    await native.arrive('fustai://demo/hello?payload=warm');
     await tester.pump();
     expect(got.map((u) => u.queryParameters['payload']), ['cold', 'warm']);
     await tester.pump(const Duration(seconds: 5));
     expect(find.text('无法打开这个链接'), findsNothing);
   });
 
-  testWidgets('a cold-start dshgo://share/plugin link opens the install sheet', (tester) async {
+  testWidgets('a cold-start fustai://share/plugin link opens the install sheet', (tester) async {
     final native = _FakeLinksNative(tester);
     final link = ShareLink.inline(ShareKind.plugin, encodeShareCode(const PluginShare(_plugin)));
     await native.arrive(link.appLink.toString());

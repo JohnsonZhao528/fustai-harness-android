@@ -532,7 +532,7 @@ void main() {
 
     testWidgets('ids no destination answers to are dropped, repeats too; the order holds', (tester) async {
       SharedPreferences.setMockInitialValues({
-        QuickPanelController.itemsKey: ['settings', 'gone', 'dshgo://open/settings', 'web', 'settings'],
+        QuickPanelController.itemsKey: ['settings', 'gone', 'fustai://open/settings', 'web', 'settings'],
       });
       await _pump(tester);
       await _swipeOpen(tester);

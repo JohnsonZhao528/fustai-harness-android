@@ -1,22 +1,20 @@
 // Goldens of the settings family's secondary pages that have no other home:
 // diagnostics, background running, and the settings hub signed in to a
-// DeepSeek account.
+// FustAI account.
 //
 //   flutter test --update-goldens test/settings
 
 import 'package:dsh_app/runtime/runtime_bridge.dart';
 import 'package:dsh_app/runtime/runtime_state.dart';
 import 'package:dsh_app/state/account_state.dart';
-import 'package:dsh_app/state/balance_state.dart';
 import 'package:dsh_app/state/settings_state.dart';
 import 'package:dsh_app/ui/settings/background_guide_page.dart';
 import 'package:dsh_app/ui/settings/diagnostics_page.dart';
 import 'package:dsh_app/ui/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../account/support.dart' show FixedAccount, sampleBalance, sampleProfile;
+import '../account/support.dart' show FixedAccount, sampleProfile;
 import '../shell/golden_harness.dart';
 import '../support/english_preview.dart';
 
@@ -28,12 +26,7 @@ void main() {
     usePhoneSurface(tester);
     await tester.pumpWidget(
       goldenApp(
-        home: inEnglish(
-          ProviderScope(
-            overrides: [accountWalletBalanceProvider.overrideWithValue(sampleBalance)],
-            child: const SettingsScreen(),
-          ),
-        ),
+        home: inEnglish(const SettingsScreen()),
         brightness: Brightness.light,
         overrides: [
           localRuntimeProvider.overrideWith(
@@ -74,14 +67,10 @@ void main() {
     },
   );
 
-  // The hub's overview card for a signed-in account: avatar, name, balance.
+  // The hub's overview card for a signed-in account: avatar, name, contact.
   goldenBoth(
     'settings_signed_in',
-    // The harness pins the wallets to null at the root; this scope has them.
-    () => ProviderScope(
-      overrides: [accountWalletBalanceProvider.overrideWithValue(sampleBalance)],
-      child: const SettingsScreen(),
-    ),
+    () => const SettingsScreen(),
     overrides: () => [
       localRuntimeProvider.overrideWith(
         () => FakeRuntime(const LocalRuntimeState(loaded: true, status: runningStatus)),

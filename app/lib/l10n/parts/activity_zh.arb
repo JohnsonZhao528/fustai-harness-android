@@ -328,7 +328,6 @@
   "activityUsageInputIncludesCache": "输入含缓存命中",
   "activityCacheHit": "缓存命中",
   "activitySummaryTodo": "更新了待办",
-  "activityUsageBalance": "DeepSeek 余额",
   "activityUsageContext": "上下文",
   "activityUsageChat": "本对话",
   "activityUsageAfterMessage": "发送消息后显示",
@@ -811,8 +810,20 @@
   "activityQuotaSevenDaySonnet": "7 天 · Sonnet",
   "activityQuotaSevenDayOpus": "7 天 · Opus",
   "activityQuotaUsed": "已使用 {value}",
-  "@activityQuotaUsed": {"placeholders": {"value": {"type": "String"}}},
+  "@activityQuotaUsed": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
   "activityQuotaReset": "重置时间：{time}",
-  "@activityQuotaReset": {"placeholders": {"time": {"type": "String"}}},
+  "@activityQuotaReset": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "activityToolListSeparator": "、"
 }

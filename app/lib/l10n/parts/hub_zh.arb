@@ -36,7 +36,7 @@
   "hubSettingsFullAccessBody": "AI 执行命令、改动文件前不再问你。",
   "hubSettingsStorageTitle": "让 AI 访问手机文件？",
   "hubSettingsStorageAllow": "允许读写",
-  "hubSettingsStorageDenied": "没有拿到存储权限。到系统设置里给 DSH Go 开启「所有文件访问」后再试",
+  "hubSettingsStorageDenied": "没有拿到存储权限。到系统设置里给 FustAI Harness 开启「所有文件访问」后再试",
   "hubSettingsRestartRequired": "重启引擎后生效",
   "hubSettingsRestartNow": "立即重启",
   "hubSettingsInterface": "界面",
@@ -64,12 +64,11 @@
   "hubSettingsAbout": "关于",
   "hubSettingsCommunity": "社区",
   "hubSettingsLicenses": "开源许可",
-  "hubSettingsAccount": "DeepSeek 账号",
+  "hubSettingsAccount": "FustAI 账号",
   "hubSettingsSigningIn": "正在登录…",
-  "hubSettingsInvalidKey": "Key 无效，查不到余额",
   "hubSettingsNoApiKey": "未设置 API Key",
   "hubSettingsApiKeyHint": "填写 Key 后即可对话",
-  "hubSettingsSignInAccount": "登录 DeepSeek 账号",
+  "hubSettingsSignInAccount": "登录 FustAI 账号",
   "hubSettingsOrApiKey": "或填写 API Key",
   "hubPluginShare": "分享插件",
   "hubPluginDetails": "插件详情",
@@ -78,7 +77,7 @@
   "hubPluginStars": "星标",
   "hubPluginSource": "来源",
   "hubPluginInstalledVersion": "已装版本",
-  "hubPluginRequiresDsh": "需要 DSH",
+  "hubPluginRequiresDsh": "需要 FustAI",
   "hubPluginPackageName": "包名",
   "hubPluginHomepage": "主页",
   "hubPluginRepository": "代码仓库",
@@ -90,7 +89,7 @@
   "hubPluginInstalling": "安装中…",
   "hubPluginAllowBuilds": "允许构建脚本并重试",
   "hubPluginRetryInstall": "重试安装",
-  "hubPluginOfficial": "DSH 官方",
+  "hubPluginOfficial": "FustAI 官方",
   "hubPluginNotLoaded": "没有正常加载",
   "hubPluginComponents": "组件",
   "hubPluginSafeModeRemove": "安全模式下不能卸载",
@@ -193,22 +192,6 @@
     }
   },
   "hubSettingsStorageBody": "AI 能读取和修改相册、下载、文档等手机文件，引擎会重启一次。",
-  "hubSettingsBalance": "余额 {amount}",
-  "@hubSettingsBalance": {
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      }
-    }
-  },
-  "hubSettingsBalanceLow": "余额 {amount} · 余额不足",
-  "@hubSettingsBalanceLow": {
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      }
-    }
-  },
   "hubSettingsAccountSemantics": "账号：{title}，{subtitle}",
   "@hubSettingsAccountSemantics": {
     "placeholders": {
@@ -231,7 +214,7 @@
       }
     }
   },
-  "hubSettingsApiKey": "DeepSeek API Key",
+  "hubSettingsApiKey": "FustAI API Key",
   "hubPluginBrowserFailed": "没能打开浏览器，请手动访问 {address}",
   "@hubPluginBrowserFailed": {
     "placeholders": {
@@ -288,7 +271,7 @@
   "hubPrivacy": "隐私与分享",
   "hubPrivacySharing": "分享",
   "hubInterfaceHome": "首页",
-  "hubInterfaceWebHint": "DSH 官方网页版",
+  "hubInterfaceWebHint": "FustAI 官方网页版",
   "hubInterfaceOpenWeb": "打开网页版",
   "hubInterfacePhoneLayout": "手机布局",
   "hubTableTint": "表格底色",
@@ -298,8 +281,8 @@
   "hubTableTintFillHint": "隔行淡一档，长表格更好扫读",
   "hubTableTintFollowHint": "表头浅底，表身跟随正文",
   "hubTableTintNoneHint": "只剩网格线，最轻",
-  "hubAbout": "关于 DSH Go",
-  "hubAboutAuthor": "DSH Go 原作者",
+  "hubAbout": "关于 FustAI Harness",
+  "hubAboutAuthor": "FustAI Harness 原作者",
   "hubAboutBilibili": "B站主页",
   "hubAboutX": "X 主页",
   "hubAboutGithub": "GitHub 主页",

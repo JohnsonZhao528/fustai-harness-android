@@ -15,8 +15,8 @@
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     <!-- Composer voice input (voice/VoicePlugin.kt), asked for on the first tap of the mic. -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <!-- Remote 扫码配对电脑 (ui/remote/pairing_page.dart, mobile_scanner), asked for when the
-         scanner opens; the photo and paste paths work without it. Never required. -->
+    <!-- Composer "拍照" (state/attachments.dart, image_picker camera source), asked for when the
+         system camera app is launched. Never required; picking from photos needs no camera. -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera" android:required="false" />
     <!-- TODO(targetSdk >= 30): package visibility hides recognition services from
@@ -52,7 +52,7 @@
          TODO(targetSdk >= 31): also configure dataExtractionRules. -->
     <application
         android:allowBackup="false"
-        android:label="DSH Go"
+        android:label="FustAI Harness"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -155,7 +155,7 @@
             <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts" />
         </activity-alias>
 
-        <!-- 分享码: dshgo:// links and .dshgo files, handed to MainActivity's own task
+        <!-- 分享码: fustai:// links and .dshgo files, handed to MainActivity's own task
              (links/LinkTrampolineActivity.kt → links/LinksPlugin.kt). https App Links need an
              assetlinks.json on the landing domain first (docs/design/share-codes.md §6). -->
         <activity
@@ -169,7 +169,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="dshgo" />
+                <data android:scheme="fustai" />
             </intent-filter>
             <!-- Opened from a file manager / chat app. (Shared ones come through ShareActivity:
                  one share target, not two.) -->
@@ -253,7 +253,7 @@
             android:foregroundServiceType="specialUse">
             <property
                 android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
-                android:value="Runs the user's local DeepSeek Harness agent server" />
+                android:value="Runs the user's local FustAI Harness agent server" />
         </service>
 
         <!-- Keeps the floating pet's process up when only remote hosts are used (pet/PetOverlayService.kt). -->
@@ -294,7 +294,7 @@
             android:name=".phone.background.AdbPairingNotification$Receiver"
             android:exported="false">
             <intent-filter>
-                <action android:name="io.github.ccch1mneyyy.dsh_app.PHONE_ADB_PAIR_CODE" />
+                <action android:name="com.fustai.harness.PHONE_ADB_PAIR_CODE" />
             </intent-filter>
         </receiver>
 
@@ -343,7 +343,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-        <!-- Initialized on demand by Remote pairing or an admitted local OCR call, never at app startup. -->
+        <!-- Initialized on demand by an admitted local OCR call, never at app startup. -->
         <provider
             android:name="com.google.mlkit.common.internal.MlKitInitProvider"
             android:authorities="${applicationId}.mlkitinitprovider"

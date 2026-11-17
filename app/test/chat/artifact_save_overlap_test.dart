@@ -120,7 +120,7 @@ void main() {
       nativeEntered[index].complete(args);
       try {
         await nativeRelease[index].future;
-        return 'Download/DSH-Go/${args['name']}';
+        return 'Download/FustAI/${args['name']}';
       } finally {
         nativeFinished[index].complete();
       }

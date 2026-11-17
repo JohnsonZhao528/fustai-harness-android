@@ -159,11 +159,14 @@ class _RuntimeHarness {
         }),
         localReadListRootProvider.overrideWithValue(const AsyncData('/canonical-root')),
         providerKeyVaultProvider.overrideWithValue(_EmptyVault()),
+        // 生产账号接入已改为 App 内 PKCE（FustaiAccountApi，不经 mux）；这里验证的是
+        // 引擎侧账号通道跨 mux 世代的身份证明，因此固定用 Host RPC 实现。
+        accountApiProvider.overrideWithValue(DshAccountApi(client, callbackOrigin: 'http://127.0.0.1:3080')),
         settingsProvider.overrideWith(() => FakeSettings(const AppSettings(loaded: true))),
       ],
     );
-    // The runtime, local connection, account API, account state, identity and
-    // model providers are all the actual product implementations.
+    // The runtime, local connection, account state, identity and model providers
+    // are all the actual product implementations.
     c.listen(modelListViewProvider, (_, _) {});
     addTearDown(() async {
       c.dispose();

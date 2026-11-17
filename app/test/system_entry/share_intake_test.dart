@@ -88,7 +88,7 @@ void main() {
     });
 
     test('a forwarded share link is found in the text', () {
-      final link = ShareLink.find('dshgo://share/plugin?p=abc.def12345');
+      final link = ShareLink.find('fustai://share/plugin?p=abc.def12345');
       expect(link, isNotNull);
       final share = IncomingShare(text: '试试这个插件：${link!.webLink}');
       expect(share.shareLink?.webLink, link.webLink);

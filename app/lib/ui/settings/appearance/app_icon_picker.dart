@@ -21,7 +21,7 @@ import '../../common/brief_notice.dart';
 ///
 /// ```
 ///   ╭───╮      ╭───╮      ╭───╮      ╭───╮
-///  ( ◖● )     │ ◖● │     │ ◖● │     │ ◖● │    a ring [ringGap] off the chosen
+///  ( F• )     │ F• │     │ F• │     │ F• │    a ring [ringGap] off the chosen
 ///   ╰───╯      ╰───╯      ╰───╯      ╰───╯    icon, in the icon's own shape
 ///   雾蓝        夜幕        霜白         墨
 /// ```
@@ -215,9 +215,9 @@ class AppIconArt {
   static const end = Offset(100.43, 113.87);
 
   static AppIconArt of(AppIcon icon) => switch (icon) {
-    // The default icon; on the phone its glyph is the original art, here the
-    // brand master's glass (the same fit).
-    AppIcon.mist => const AppIconArt._(Color(0xFF9AB0E8), Color(0xFF405AAD), AppIconGlyph.glassDark),
+    // The default icon: the same diagonal and glyph as ic_launcher_background.xml
+    // and the brand master's glass rendering.
+    AppIcon.mist => const AppIconArt._(Color(0xFF5E82E4), Color(0xFF1E3884), AppIconGlyph.glassDark),
     AppIcon.night => const AppIconArt._(Color(0xFF2C3D6C), Color(0xFF0C122D), AppIconGlyph.glassDark),
     AppIcon.frost => const AppIconArt._(Color(0xFFFCFDFF), Color(0xFFDDE5F8), AppIconGlyph.glassLight),
     AppIcon.ink => const AppIconArt._(Color(0xFF292B30), Color(0xFF0D0E11), AppIconGlyph.mono, Color(0xFFF5F7FB)),

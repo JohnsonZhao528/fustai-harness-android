@@ -115,7 +115,7 @@ void main() {
       final q = url.queryParameters;
       expect(q['application_name'], 'dsh-go');
       expect(q['scopes'], 'read,write,notifications,session_info');
-      expect(q['auth_redirect'], 'dshgo://forum/auth');
+      expect(q['auth_redirect'], 'fustai://forum/auth');
       expect(q['padding'], 'oaep');
       expect(q['public_key'], _keys.publicPem);
       expect(q['nonce'], hasLength(32));
@@ -137,7 +137,7 @@ void main() {
           .join('\n');
       final ok = await c
           .read(forumAuthProvider.notifier)
-          .handleRedirect(Uri.parse('dshgo://forum/auth?payload=${Uri.encodeQueryComponent('$wrapped\n')}'));
+          .handleRedirect(Uri.parse('fustai://forum/auth?payload=${Uri.encodeQueryComponent('$wrapped\n')}'));
       expect(ok, isTrue);
       await settled(c);
       final state = c.read(forumAuthProvider);
@@ -163,12 +163,12 @@ void main() {
       final b64 = base64.encode(encryptForumPayload(utf8.encode(payload), _keys));
       final notifier = c.read(forumAuthProvider.notifier);
       expect(
-        await notifier.handleRedirect(Uri.parse('dshgo://forum/auth?payload=${Uri.encodeQueryComponent(b64)}')),
+        await notifier.handleRedirect(Uri.parse('fustai://forum/auth?payload=${Uri.encodeQueryComponent(b64)}')),
         isFalse,
       );
       expect(c.read(forumAuthProvider).signedIn, isFalse);
       expect(c.read(forumAuthProvider).error, '登录没有完成，请重试');
-      expect(await notifier.handleRedirect(Uri.parse('dshgo://forum/auth')), isFalse);
+      expect(await notifier.handleRedirect(Uri.parse('fustai://forum/auth')), isFalse);
     });
 
     test('sign-out revokes the key and forgets it; a dead key signs out', () async {

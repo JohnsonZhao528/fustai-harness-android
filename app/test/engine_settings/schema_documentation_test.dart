@@ -244,7 +244,7 @@ void main() {
     const markdown = '''[Web](https://example.test/manual)
 [Relative](/settings)
 [File](file:///tmp/private)
-[App](dshgo://open/settings)
+[App](fustai://open/settings)
 ![image](https://example.test/pixel.png)
 <img src="https://example.test/html.png">
 ```dsh-ui
@@ -278,7 +278,7 @@ void main() {
     for (final link in [
       '/settings',
       'file:///tmp/private',
-      'dshgo://open/settings',
+      'fustai://open/settings',
       '//example.test/path',
       'https://user:secret@example.test',
     ]) {

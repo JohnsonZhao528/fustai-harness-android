@@ -102,9 +102,9 @@ void main() {
             'created_at': '2026-10-24T01:02:03.000Z',
             'post_number': 3,
             'topic_id': 5,
-            'fancy_title': '欢迎来到 dsh-go 社区 :wave:',
+            'fancy_title': '欢迎来到 FustAI Harness 社区 :wave:',
             'slug': 'dsh-go',
-            'data': {'display_username': 'xiamu', 'topic_title': '欢迎来到 dsh-go 社区'},
+            'data': {'display_username': 'xiamu', 'topic_title': '欢迎来到 FustAI Harness 社区'},
           },
         ],
         'total_rows_notifications': 1,
@@ -112,7 +112,7 @@ void main() {
       });
       final n = page.notifications.single;
       expect(n.actor, 'xiamu');
-      expect(n.title, '欢迎来到 dsh-go 社区 👋');
+      expect(n.title, '欢迎来到 FustAI Harness 社区 👋');
       expect(n.read, isFalse);
       expect(page.hasMore, isTrue);
     });

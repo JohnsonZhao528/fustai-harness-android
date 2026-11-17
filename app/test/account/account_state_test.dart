@@ -40,7 +40,7 @@ void main() {
       await _flush();
       expect(_state(c).phase, AccountPhase.signedOut);
       expect(_state(c).connected, isTrue);
-      expect(_state(c).links?.topUpUrl, links.topUpUrl);
+      expect(_state(c).links?.usageUrl, links.usageUrl);
     });
 
     test('a login made elsewhere loads the profile', () async {
@@ -405,19 +405,6 @@ void main() {
   });
 
   group('signed in', () {
-    test('balance keeps recharge and bonus apart; failures throw', () async {
-      final api = FakeAccountApi(initial: signedInView());
-      final c = _container(api: api);
-      await _flush();
-      final balance = await _account(c).balance();
-      expect(balance?.recharge.single.balance, '128.4567');
-      expect(balance?.bonus.single.balance, '10.0000000000000000');
-      expect(await c.read(accountBalanceProvider.future), isNotNull);
-
-      api.balanceError = const AccountQueryFailed('balance');
-      expect(_account(c).balance(), throwsA(isA<AccountQueryFailed>()));
-    });
-
     test('sign-out ends signed out and forgets the profile', () async {
       final api = FakeAccountApi(initial: signedInView())..runningTasks = true;
       final c = _container(api: api);
@@ -426,19 +413,16 @@ void main() {
       await _account(c).signOut();
       expect(_state(c).phase, AccountPhase.signedOut);
       expect(_state(c).profile, isNull);
-      expect(await _account(c).balance(), isNull);
     });
 
-    test('engine stopping keeps the last known login and hides wallets', () async {
+    test('engine stopping keeps the last known login', () async {
       final api = FakeAccountApi(initial: signedInView());
       final c = _container(api: api);
       await _flush();
-      expect(await c.read(accountBalanceProvider.future), isNotNull);
       c.read(apiSwitchProvider.notifier).set(null);
       await _flush();
       expect(_state(c).signedIn, isTrue);
       expect(_state(c).connected, isFalse);
-      expect(await c.read(accountBalanceProvider.future), isNull, reason: 'unknown, not zero');
     });
 
     test('expiry elsewhere (grant rejected) flips to signed out', () async {
@@ -463,18 +447,17 @@ void main() {
         },
         'links': {
           'usageUrl': 'https://platform.deepseek.com/usage',
-          'topUpUrl': 'https://platform.deepseek.com/top_up',
         },
       });
       expect(view.signedIn, isFalse);
       expect(view.attempt?.phase, SignInPhase.waitingBrowser);
       expect(view.attempt?.expiresAt?.millisecondsSinceEpoch, 1792729254569);
-      expect(view.links?.topUpUrl, endsWith('/top_up'));
+      expect(view.links?.usageUrl, endsWith('/usage'));
 
       final failed = AccountView.fromJson({
         'status': 'signed-out',
         'attempt': {'id': 'a', 'phase': 'failed', 'errorCode': 'no-response'},
-        'links': {'usageUrl': 'u', 'topUpUrl': 't'},
+        'links': {'usageUrl': 'u'},
       });
       expect(failed.attempt?.errorCode, SignInErrorCode.noResponse);
       expect(AccountView.fromJson({'status': 'credential-stored', 'attempt': null}).signedIn, isTrue);
@@ -504,37 +487,6 @@ void main() {
       expect(m['locale'], 'zh-CN');
       expect(m['version'], isNot(contains('+')));
       expect(m['timezoneOffsetSeconds'], isA<int>());
-    });
-  });
-
-  group('money', () {
-    test('Platform Web formatting on decimal strings', () {
-      expect(formatWalletAmount('12.3456'), '12.34');
-      expect(formatWalletAmount('5.0000000000000000'), '5.00');
-      expect(formatWalletAmount('0E-16'), '0.00');
-      expect(formatWalletAmount('0'), '0.00');
-      expect(formatWalletAmount('0.004'), '<0.01');
-      expect(formatWalletAmount('-0.004'), '-0.01');
-      expect(formatWalletAmount('-12.345'), '-12.35');
-      expect(formatWalletAmount('1234567.899'), '1,234,567.89');
-      expect(formatWalletAmount('.5'), '0.50');
-      expect(formatWalletAmount('1e3'), '1,000.00');
-      expect(formatWalletAmount('2.5E-1'), '0.25');
-      expect(formatWalletAmount('NaN'), 'NaN');
-    });
-
-    test('sums wallets per currency', () {
-      const wallets = [
-        AccountWallet(currency: 'CNY', balance: '1.25'),
-        AccountWallet(currency: 'CNY', balance: '0E-16'),
-        AccountWallet(currency: 'USD', balance: '3'),
-        AccountWallet(currency: 'CNY', balance: '-0.5'),
-      ];
-      expect(sumWallets(wallets, 'CNY'), '0.7500000000000000');
-      expect(formatWalletAmount(sumWallets(wallets, 'CNY')!), '0.75');
-      expect(sumWallets(wallets, 'USD'), '3');
-      expect(sumWallets(wallets, 'EUR'), isNull);
-      expect(currencySymbol('CNY'), '¥');
     });
   });
 }

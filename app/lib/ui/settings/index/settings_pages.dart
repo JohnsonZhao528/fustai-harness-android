@@ -1,5 +1,5 @@
 // The page behind each [SettingsPageId], and what a settings link
-// (`dshgo://open/<id>`) opens: a page by one of its link ids, or the page a
+// (`fustai://open/<id>`) opens: a page by one of its link ids, or the page a
 // row is on.
 
 import 'package:flutter/material.dart';

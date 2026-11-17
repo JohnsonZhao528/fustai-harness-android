@@ -1,12 +1,12 @@
-// The star prompt's dialog (docs/design/star-prompt.md §3): the whale girl
-// holding out her star, how long she has kept the person company, why a star
-// helps, then 「去 GitHub 点 Star」 and, quieter under it, 「已经点过啦」 and
-// 「下次再说」. Back or a tap outside is 「下次再说」.
+// The star prompt's dialog (docs/design/star-prompt.md §3): the app's mark,
+// how long it has kept the person company, why a star helps, then
+// 「去 GitHub 点 Star」 and, quieter under it, 「已经点过啦」 and 「下次再说」.
+// Back or a tap outside is 「下次再说」.
 //
 // ```
 // ╭──────────────────────────────────╮
-// │            ( 鲸娘 )              │  192 at most, a soft glow of the palette behind
-// │  本鱼已经在 DSH Go 里陪你半个小时啦~ │  titleLarge · centred
+// │            〔 F• 〕              │  192 at most, a soft glow of the palette behind
+// │  本鱼已经在 FustAI Harness 里陪你半个小时啦~ │  titleLarge · centred
 // │   这是一个免费开源的项目，如果它……   │  bodyMedium · onSurfaceVariant
 // │      拜托你啦~ 这真的很重要！！      │  bodyMedium w600 · primary
 // │ ┌──────────────────────────────┐ │
@@ -26,6 +26,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/l10n.dart';
 import '../../state/star_prompt.dart';
 import '../common/app_dialog.dart';
+import '../shell/brand_mark.dart';
 import '../theme/app_icons.dart';
 import '../theme/theme.dart';
 
@@ -83,8 +84,8 @@ class StarPromptDialog extends StatelessWidget {
   /// Whole hours of use (0: half an hour).
   final int hours;
 
-  /// The picture: 576 px, the 192 dp it is drawn at most, at 3×.
-  static const asset = 'assets/star/star_whale.webp';
+  /// The mark's side, as a fraction of the square it sits in.
+  static const markScale = 0.72;
 
   /// The picture's side: 30 % of the height the dialog may take, within these.
   static const pictureMax = 192.0;
@@ -226,9 +227,8 @@ class BalancedText extends StatelessWidget {
   }
 }
 
-/// The whale girl and her star on a soft glow of the palette, [side] square,
-/// never cropped. She rises in with a little bob; with animations off she is
-/// simply there.
+/// The app's mark on a soft glow of the palette, [side] square. It rises in with
+/// a little bob; with animations off it is simply there.
 class StarPicture extends StatelessWidget {
   const StarPicture({super.key, required this.side});
 
@@ -253,7 +253,7 @@ class StarPicture extends StatelessWidget {
               gradient: RadialGradient(colors: [glow, glow.withValues(alpha: 0)], stops: const [0.3, 1]),
             ),
           ),
-          Image.asset(StarPromptDialog.asset, fit: BoxFit.contain, excludeFromSemantics: true),
+          Center(child: BrandMark(tile: true, size: side * StarPromptDialog.markScale)),
         ],
       ),
     );

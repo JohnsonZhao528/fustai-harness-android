@@ -60,9 +60,9 @@ void main() {
     });
 
     test('nothing worth keeping: a dated name', () {
-      expect(galleryFileName(null, 'image/png', now: now), 'DSH_20261024_153012.png');
-      expect(galleryFileName('图片', 'image/gif', now: now), 'DSH_20261024_153012.gif');
-      expect(galleryFileName('  ', 'image/jpeg', now: now), 'DSH_20261024_153012.jpg');
+      expect(galleryFileName(null, 'image/png', now: now), 'FustAI_20261024_153012.png');
+      expect(galleryFileName('图片', 'image/gif', now: now), 'FustAI_20261024_153012.gif');
+      expect(galleryFileName('  ', 'image/jpeg', now: now), 'FustAI_20261024_153012.jpg');
     });
 
     test('UTF-16 cap never splits a supplementary character', () {
@@ -133,9 +133,9 @@ void main() {
 
   group('saveToGallery', () {
     test('sends the bytes, the name and the type; returns the place', () async {
-      final calls = _mockMedia((_) async => 'Pictures/DSH Go/chart.png');
+      final calls = _mockMedia((_) async => 'Pictures/FustAI/chart.png');
       final where = await saveToGallery(const MediaChannel(), _png, name: 'chart.png');
-      expect(where, 'Pictures/DSH Go/chart.png');
+      expect(where, 'Pictures/FustAI/chart.png');
       expect(calls.single.method, 'saveImage');
       final args = calls.single.arguments as Map;
       expect(args['name'], 'chart.png');
@@ -193,7 +193,7 @@ void main() {
         return saved;
       }
 
-      for (final (os, place) in [('android', 'Pictures/DSH Go/a.png'), ('ohos', 'file://media/Photo/1/a.png')]) {
+      for (final (os, place) in [('android', 'Pictures/FustAI/a.png'), ('ohos', 'file://media/Photo/1/a.png')]) {
         testWidgets('$os: saved says so, whatever the place looks like', (tester) async {
           _mockMedia((_) async => place);
           expect(await save(tester, os), isTrue);
@@ -222,14 +222,14 @@ void main() {
       final expected = '$prefix.png';
       final calls = _mockMedia((call) async {
         final args = call.arguments as Map;
-        return 'Pictures/DSH Go/${args['name']}';
+        return 'Pictures/FustAI/${args['name']}';
       });
       final where = await saveToGallery(const MediaChannel(), _png, name: '$prefix😀.png');
       final args = calls.single.arguments as Map;
       expect(args['name'], expected);
       expect(args['bytes'], _png);
       expect(args['mime'], 'image/png');
-      expect(where, 'Pictures/DSH Go/$expected');
+      expect(where, 'Pictures/FustAI/$expected');
     });
   });
 
@@ -248,7 +248,7 @@ void main() {
     }
 
     testWidgets('saved: 已保存到相册, and the key shows a tick for a moment', (tester) async {
-      _mockMedia((_) async => 'Pictures/DSH Go/chart.png');
+      _mockMedia((_) async => 'Pictures/FustAI/chart.png');
       await pumpButton(tester);
       await tester.tap(find.byTooltip('保存到相册'));
       await pumpFrames(tester, 2);
@@ -275,7 +275,7 @@ void main() {
     });
 
     testWidgets('long-press menu: save goes through the same path', (tester) async {
-      final calls = _mockMedia((_) async => 'Pictures/DSH Go/chart.png');
+      final calls = _mockMedia((_) async => 'Pictures/FustAI/chart.png');
       usePhoneView(tester);
       await tester.pumpWidget(
         testApp(

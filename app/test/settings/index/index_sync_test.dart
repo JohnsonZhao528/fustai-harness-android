@@ -8,7 +8,6 @@
 import 'package:dsh_app/l10n/l10n.dart';
 import 'package:dsh_app/runtime/runtime_state.dart';
 import 'package:dsh_app/state/account_state.dart';
-import 'package:dsh_app/state/balance_state.dart';
 import 'package:dsh_app/state/connection_state.dart';
 import 'package:dsh_app/state/settings_state.dart';
 import 'package:dsh_app/ui/engine/engine_screen.dart';
@@ -42,7 +41,7 @@ import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../account/support.dart' show FixedAccount, sampleBalance, sampleProfile;
+import '../../account/support.dart' show FixedAccount, sampleProfile;
 import '../../engine_settings/support.dart' as engine;
 import '../../phone/harness.dart';
 import '../../plugins/support/fake_plugin_host.dart';
@@ -206,10 +205,7 @@ void main() {
       SettingsPageId.hub,
       () => _app(
         tester,
-        ProviderScope(
-          overrides: [accountWalletBalanceProvider.overrideWithValue(sampleBalance)],
-          child: const SettingsScreen(),
-        ),
+        const SettingsScreen(),
         [
           ..._running(),
           accountProvider.overrideWith(
@@ -233,7 +229,7 @@ void main() {
     );
   });
 
-  testWidgets('关于 DSH Go', (tester) async {
+  testWidgets('关于 FustAI Harness', (tester) async {
     await _check(tester, SettingsPageId.about, () => _app(tester, const AboutPage(), _running()));
   });
 

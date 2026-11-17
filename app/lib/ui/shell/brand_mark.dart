@@ -5,7 +5,7 @@ import '../../state/app_info.dart';
 import '../theme/theme.dart';
 import 'brand_glyph.g.dart';
 
-/// The dsh-go mark: a fish tail with its bubble.
+/// The FustAI Harness mark: the F monogram and its accent dot.
 ///
 /// Vector paths generated from the brand masters in `assets/brand/`
 /// (`brand_glyph.g.dart`, by `tool/make_brand_mark.py`), in the launcher icon's
@@ -98,8 +98,8 @@ class _BrandPainter extends CustomPainter {
     canvas.restore();
   }
 
-  /// The colour glyph: the tail's gradient over the whole silhouette, the fin (behind
-  /// the stem) and the belly (in front of it) over that, then the bubble.
+  /// The colour glyph: the monogram's gradient over the whole silhouette, the stem's
+  /// highlight (behind it) and the middle arm's highlight (in front), then the accent dot.
   static void _glass(Canvas canvas, {required bool dark}) {
     canvas
       ..drawPath(BrandGlyph.body, Paint()..shader = dark ? BrandGlyph.tailDark : BrandGlyph.tailLight)
@@ -118,8 +118,8 @@ class _BrandPainter extends CustomPainter {
 /// text scale):
 /// - the glyph is [glyphScale] × the word's size tall;
 /// - its visual centre ([BrandMark.visualCentre]) sits on the centre of the word's
-///   main band: the x-height for a lowercase word (「dsh-go」), the cap height for
-///   capitals (「DSH」);
+///   main band: the x-height for a lowercase word, the cap height for capitals
+///   (「FustAI」);
 /// - [gapScale] × the word's size separates the glyph's ink from the word.
 class BrandLockup extends StatelessWidget {
   const BrandLockup({

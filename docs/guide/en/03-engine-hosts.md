@@ -35,7 +35,7 @@ The first time you open the app, choose how to use it:
 
 - **This phone**: installs the runtime on your phone; everything runs on this phone. The option shows the storage and memory it needs.
 - **Remote host**: uses DSH on your computer or server, with nothing installed on the phone. Recommended when the phone is short on memory or storage.
-- **Chat with characters**: the tavern only, with nothing installed; the app opens straight into the tavern, now and on later launches. Bringing chats over from DeepSeek starts here too.
+- **Chat with characters**: the tavern only, with nothing installed; the app opens straight into the tavern, now and on later launches. Bringing chats over from FustAI starts here too.
 
 You can add DSH to this phone anytime: tap **Install runtime** on the engine page, or tap **This phone** when switching hosts. It starts once installed.
 
@@ -46,7 +46,7 @@ You can add DSH to this phone anytime: tap **Install runtime** on the engine pag
 
 - **Start**, **Stop**, **Restart**: stopping asks first; both stopping and restarting interrupt active chats.
 - If the engine fails to start, the page shows the cause and ways to fix it, such as retrying, **Start in Safe mode** or viewing logs.
-- **Start when DSH Go opens**: on by default. As long as DSH is installed on this phone, opening the app starts it, even while you use a remote host. Turn it off if you don't need that.
+- **Start when FustAI Harness opens**: on by default. As long as DSH is installed on this phone, opening the app starts it, even while you use a remote host. Turn it off if you don't need that.
 - **Automatic Safe mode**: on by default. After two failed starts in a row, starts without plugins.
 - **Start in Safe mode**: enter Safe mode by hand. Once fixed, tap **Return to normal mode**. Entering and leaving both restart the engine.
 - **Logs**: the engine's live output.
@@ -70,14 +70,14 @@ Deletes data on this phone and reinstalls the runtime, to fix a runtime that won
 - **Keep interface settings and skills**: on by default.
 - **Keep installed plugins and settings**: off by default.
 
-With the defaults, chats, workspaces, plugins and settings are deleted, including custom model providers; the DeepSeek key saved in the app is filled back in. Anything else in the home folder (`/root`) goes too, including files in your workspaces, `AGENTS.md` and data that plugins store themselves, such as memories. The dialog spells out what will go; tap **Delete and reset** and the app reinstalls the runtime. A reset can't be undone, so export chats you need first with `/export` or **Export chat log** in All features.
+With the defaults, chats, workspaces, plugins and settings are deleted, including custom model providers; the FustAI key saved in the app is filled back in. Anything else in the home folder (`/root`) goes too, including files in your workspaces, `AGENTS.md` and data that plugins store themselves, such as memories. The dialog spells out what will go; tap **Delete and reset** and the app reinstalls the runtime. A reset can't be undone, so export chats you need first with `/export` or **Export chat log** in All features.
 
 ## Uninstall the runtime
 
 <!-- nav: commonSettings,hubSettingsEngine,localEnvUninstall -->
 `Settings › Local engine › Uninstall runtime`
 
-Frees up storage. Chats, workspaces, plugins, settings, interface settings and skills on this phone are all deleted, and nothing is reinstalled. To use this phone's engine again, tap **Install runtime** on the same page. If you only need a break, stop the engine and turn off **Start when DSH Go opens**.
+Frees up storage. Chats, workspaces, plugins, settings, interface settings and skills on this phone are all deleted, and nothing is reinstalled. To use this phone's engine again, tap **Install runtime** on the same page. If you only need a break, stop the engine and turn off **Start when FustAI Harness opens**.
 
 ## Switch hosts
 
@@ -102,13 +102,13 @@ The host needs SSH enabled and DSH installed (`npm i -g @deepseek-ai/dsh`).
 1. On the remote hosts page, tap **Add SSH host**.
 2. Enter the **Host** and **Username**. **Port** defaults to 22. The name is optional.
 3. Sign in with a **Password** or a **Private key**. You can **Import from file**, and add a **Private key passphrase (optional)**. Passwords and keys stay on this phone.
-4. **Instance management** defaults to **Managed**: **Start command** defaults to `dsh web`; if you installed DSH with nvm, enter its full path. For an instance you manage yourself, select **Attach only** and enter its **Remote DSH port** and **DSH launch token** from its launch URL. **Working directory (optional)** is where new chats start; use an absolute path in attach-only mode.
+4. **Instance management** defaults to **Managed**: **Start command** defaults to `dsh web`; if you installed DSH with nvm, enter its full path. For an instance you manage yourself, select **Attach only** and enter its **Remote FustAI port** and **FustAI launch token** from its launch URL. **Working directory (optional)** is where new chats start; use an absolute path in attach-only mode.
 5. Tap **Test connection**. The first time, **Trust this host?** appears: check the fingerprint on the host, and tap **Trust and connect** if it matches.
 6. Tap **Save**, then select the host in the list.
 
 In managed mode, testing starts or reuses DSH on the host, and it keeps running afterwards. **Attach only** opens an SSH tunnel to the specified port on remote `127.0.0.1`. It never discovers instances, starts, stops or restarts DSH, or reads/writes managed state files. Start the instance yourself first and keep it running. If connection fails, check the port and token; the app never restarts it as a repair. The token stays in secure storage on this phone, like the SSH password and private key.
 
-Managed mode refuses to replace a live instance whose start command differs or launch log is missing. A rejected token or refused reused port never authorizes a restart either. Check the settings or use **Attach only** first. If you really intend to replace the app-recorded instance, choose **Restart managed DSH** in the DSH section of Edit host and confirm. This may interrupt other clients and active chats; normal **Test connection** never performs it. Confirmed dead managed processes can still be started automatically.
+Managed mode refuses to replace a live instance whose start command differs or launch log is missing. A rejected token or refused reused port never authorizes a restart either. Check the settings or use **Attach only** first. If you really intend to replace the app-recorded instance, choose **Restart managed FustAI** in the DSH section of Edit host and confirm. This may interrupt other clients and active chats; normal **Test connection** never performs it. Confirmed dead managed processes can still be started automatically.
 
 **SSH compression** is on by default, negotiating compression after authentication. Unsupported servers continue uncompressed. Turn it off in the host form if needed; save and establish a new SSH connection to apply.
 
@@ -121,8 +121,6 @@ No network setup, end-to-end encrypted. Good for computers on another network.
 1. Install the remote plugin in the host's DSH and sign in.
 2. On the remote hosts page, choose the same sign-in provider you used on that host, for example “Continue with GitHub”, and sign in with the same account. If the page lists no providers and shows only **Sign in in browser**, tap that button.
 3. Select an online host. On first connection, check that the identity fingerprint matches the one the host's remote plugin shows, then tap **Trust and connect**.
-
-When the server supports it, you can also choose **Pair a computer by scanning**: sign in to DeepSeek in the app, scan the code shown by the computer’s Remote plugin, check the computer fingerprint, then enter the verification code as prompted. Camera permission is only for capturing the QR code; reading an image from photos or pasting the pairing link still works without it. Opening the scanner initializes the shared ML Kit SDK on demand, without requiring or enabling phone control’s text recognition. See the [FAQ](11-faq.md#local-text-recognition-and-google-ml-kit) for SDK statistics disclosures.
 
 Connections automatically try LAN / P2P, then TURN, and finally Relay without a direct-connection switch. Each path requires compatible server and Host support. Tap the route label on the connection card or beside a Host to see the actual route, connection time, available round-trip latency and fallback reason. WebRTC routes also show the selected ICE candidates' phone/Host IPv4 or IPv6 and UDP or TCP, never raw IP addresses. Unmeasured or unconfirmed values are not presented as known results.
 

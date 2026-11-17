@@ -192,17 +192,14 @@ void main() {
       return (api, browser);
     }
 
-    testWidgets('shows profile and both wallets; top-up opens the Host\'s link', (tester) async {
-      final (api, browser) = await pumpPage(tester, FakeAccountApi(initial: signedInView()));
+    testWidgets('shows the profile; usage details open the Host\'s link', (tester) async {
+      final (_, browser) = await pumpPage(tester, FakeAccountApi(initial: signedInView()));
       expect(find.text('雾蓝'), findsOneWidget);
       expect(find.text('138****5678'), findsOneWidget);
-      expect(find.text('¥128.45'), findsOneWidget);
-      expect(find.text('¥10.00'), findsOneWidget);
 
-      await tester.tap(find.text('去充值'));
+      await tester.tap(find.text('用量明细'));
       await _settle(tester);
-      expect(browser.opened.single.toString(), links.topUpUrl);
-      expect(api.calls.where((c) => c == 'getBalance'), hasLength(1));
+      expect(browser.opened.single.toString(), links.usageUrl);
     });
 
     testWidgets('sign-out asks first, then lands on the sign-in panel', (tester) async {
@@ -252,15 +249,6 @@ void main() {
       expect(find.textContaining('退出会立即中断它们'), findsOneWidget);
     });
 
-    testWidgets('a wallet failure keeps the page usable', (tester) async {
-      await pumpPage(
-        tester,
-        FakeAccountApi(initial: signedInView())..balanceError = const AccountQueryFailed('balance'),
-      );
-      expect(find.text('余额暂时读不到'), findsOneWidget);
-      expect(find.text('雾蓝'), findsOneWidget);
-    });
-
     testWidgets('signed out: signs in from the page', (tester) async {
       final (api, browser) = await pumpPage(tester, FakeAccountApi());
       await tester.tap(find.widgetWithText(FilledButton, '用 DeepSeek 账号登录'));
@@ -271,7 +259,6 @@ void main() {
       expect(browser.opened, hasLength(1));
       api.emit(signedInView(attempt: attempt(SignInPhase.succeeded)));
       await _settle(tester);
-      expect(find.text('¥128.45'), findsOneWidget);
       expect(find.text('已登录 DeepSeek 账号'), findsOneWidget);
     });
   });
@@ -326,15 +313,6 @@ void main() {
             overrides: [
               ...accountOverrides(),
               accountProvider.overrideWith(() => FixedAccount(state)),
-              accountBalanceProvider.overrideWith(
-                (ref) async => const AccountBalance(
-                  recharge: [AccountWallet(currency: 'CNY', balance: '123456789.99')],
-                  bonus: [
-                    AccountWallet(currency: 'CNY', balance: '20'),
-                    AccountWallet(currency: 'USD', balance: '3.5'),
-                  ],
-                ),
-              ),
             ],
           ),
         );

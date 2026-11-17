@@ -1,6 +1,6 @@
 # Models and providers
 
-Use a DeepSeek account or API key, or connect any OpenAI- or Anthropic-compatible service. When the engine supports it, you can also sign in with a ChatGPT or Claude subscription. For models in custom providers, set the context, image input and thinking levels yourself.
+Use a FustAI account or API key, or connect any OpenAI- or Anthropic-compatible service. When the engine supports it, you can also sign in with a ChatGPT or Claude subscription. For models in custom providers, set the context, image input and thinking levels yourself.
 
 Providers are stored in the current host's engine. On a remote host, you manage that host's providers.
 
@@ -33,7 +33,7 @@ Switching hosts or reconnecting reads that host's defaults again; unsubmitted ch
 
 Providers come in three groups:
 
-- **Official**: DeepSeek. Tap it to open your account, where you sign in or enter an API key. On a remote host, this only shows whether that host is set up; configure it on that host.
+- **Official**: FustAI. Tap it to open your account, where you sign in or enter an API key. On a remote host, this only shows whether that host is set up; configure it on that host.
 - **Subscriptions**: shown when the engine supports them and is connected. Tap **Sign in** and follow the steps in your browser. Open a signed-in subscription to see its models or **Sign out**, which removes its models from the model list.
 - **Custom**: providers you add, plus ones configured in DSH Web or the engine's config file. Connect to the engine to add one.
 
@@ -71,9 +71,9 @@ Tap a provider in the list to open it:
 
 Providers configured in DSH Web can only be viewed or deleted here. Providers from the engine's config file can't be deleted here.
 
-## DeepSeek account and API key
+## FustAI account and API key
 
-Tap DeepSeek under **Official**, or the account card at the top of Settings:
+Tap FustAI under **Official**, or the account card at the top of Settings:
 
-- **Sign in with DeepSeek**: sign in with your browser. Needs DSH installed on this phone.
-- **DeepSeek API key**: enter one if you haven't; otherwise **Replace key** or **Clear**. Clearing while this phone's engine is running deletes the engine's key too. If the engine isn't running, the engine keeps its key; remove it in DSH Web's model settings.
+- **Sign in with FustAI**: sign in with your browser. Needs DSH installed on this phone.
+- **FustAI API key**: enter one if you haven't; otherwise **Replace key** or **Clear**. Clearing while this phone's engine is running deletes the engine's key too. If the engine isn't running, the engine keeps its key; remove it in DSH Web's model settings.

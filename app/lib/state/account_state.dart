@@ -1,13 +1,14 @@
-/// DeepSeek account sign-in for the on-device engine.
+/// FustAI account sign-in for the on-device engine.
 ///
-/// Flow (the Host owns PKCE, state, the code exchange and the stored grant):
+/// Flow (the app owns PKCE, the loopback callback, the code exchange and the
+/// stored grant; the account center issues the model credential):
 /// ```text
-/// signIn() ─► engine running? ─► account/startSignIn(callbackOrigin = http://127.0.0.1:<port>, web)
-///          ─► account/watch: initializing → waiting-browser(authorizeUrl) ─► open Custom Tab
-///             user approves on platform.deepseek.com ─► 302 to 127.0.0.1:<port>/oauth/callback
-///          ─► exchanging → committing → succeeded + credential-stored ─► profile, default model
+/// signIn() ─► POST /dsh/auth_init ─► waiting-browser(authorize_url) ─► Custom Tab
+///             user approves on the account center ─► 302 to 127.0.0.1:<port>/oauth/callback
+///          ─► exchanging → committing → succeeded + credential-stored ─► profile, model key
 /// ```
-/// Signing in makes the `deepseek-account` model route usable without an API key.
+/// Signing in installs the account's model key in the local engine, so the model
+/// works without a separately entered API key.
 library;
 
 import 'dart:async';
@@ -24,22 +25,24 @@ import '../runtime/runtime_bridge.dart';
 import '../runtime/runtime_state.dart';
 import 'account_api.dart';
 import 'connection_state.dart';
+import 'fustai_account.dart';
 import 'read_list_epoch.dart';
 
 export 'account_api.dart';
 
 // ── Dependencies (overridable in tests) ─────────────────────────────────────
 
-/// Account API of the on-device engine; null until it is running and connected.
+/// FustAI account API; null until the on-device engine is running and connected.
 ///
-/// Only the local engine qualifies: the browser on this phone must reach the
-/// Host's `/oauth/callback`, and a remote Host's loopback is not reachable.
+/// PKCE, the loopback callback and the stored grant live in the app
+/// ([FustaiAccountApi]); the engine connection is only where the account's model
+/// key is installed. A remote Host never qualifies.
 final accountApiProvider = Provider<AccountApi?>((ref) {
   final conn = ref.watch(localConnectionProvider).value;
   if (conn == null || !conn.isLocal) return null;
-  final origin = loopbackCallbackOrigin(ref.read(localRuntimeProvider).status.baseUrl);
-  if (origin == null) return null;
-  return DshAccountApi(conn.client, callbackOrigin: origin);
+  final api = FustaiAccountApi(conn.client);
+  ref.onDispose(api.dispose);
+  return api;
 });
 
 /// Opens Platform pages (authorization, top-up) outside the app's WebView.
@@ -316,8 +319,17 @@ class AccountController extends Notifier<AccountState> {
     return current == null || _viewGeneration == _apiGeneration && identical(_viewMuxGeneration, current);
   }
 
-  bool readListIdentityFor(DshClient client) =>
-      readListIdentityKnown && _api is DshAccountApi && identical((_api! as DshAccountApi).client, client);
+  /// [client] is the local engine whose read list the proven identity belongs
+  /// to. Both implementations keep their own `client`, so an identity proven
+  /// for one engine is never reused for another.
+  bool readListIdentityFor(DshClient client) {
+    if (!readListIdentityKnown) return false;
+    return switch (_api) {
+      DshAccountApi(client: final c) => identical(c, client),
+      FustaiAccountApi(client: final c) => identical(c, client),
+      _ => false,
+    };
+  }
 
   bool _scopeCurrent(AccountApi api, int generation) =>
       ref.mounted &&
@@ -428,14 +440,6 @@ class AccountController extends Notifier<AccountState> {
     } catch (_) {
       return null;
     }
-  }
-
-  /// Recharge and bonus wallets; null when signed out. Throws
-  /// [AccountQueryFailed] when Platform did not answer (the login is kept).
-  Future<AccountBalance?> balance() async {
-    final api = _api;
-    if (api == null || !state.signedIn) return null;
-    return api.getBalance();
   }
 
   Future<void> refreshProfile() async {
@@ -898,16 +902,3 @@ class _Cancelled implements Exception {
 }
 
 final accountProvider = NotifierProvider<AccountController, AccountState>(AccountController.new);
-
-/// Wallets of the signed-in account; null while signed out or while the engine
-/// is not connected (unknown, not zero). Refetched on sign-in, on reconnect and
-/// when invalidated (refresh, coming back from the top-up page).
-final accountBalanceProvider = FutureProvider.autoDispose<AccountBalance?>(
-  (ref) async {
-    final ready = ref.watch(accountProvider.select((s) => s.signedIn && s.connected));
-    if (!ready) return null;
-    return ref.read(accountProvider.notifier).balance();
-  },
-  // A failed Platform query shows "retry" instead of an endless automatic retry.
-  retry: (_, _) => null,
-);

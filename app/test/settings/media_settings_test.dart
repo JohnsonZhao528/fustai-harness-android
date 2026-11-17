@@ -19,7 +19,7 @@ final _zh = lookupL10n(AppLocale.zhCN);
 final _en = lookupL10n(AppLocale.en);
 
 void main() {
-  test('it sits in 能力, after 联网搜索, and opens from dshgo://open/media', () {
+  test('it sits in 能力, after 联网搜索, and opens from fustai://open/media', () {
     final page = SettingsIndex.page(SettingsPageId.media);
     expect(page.title(_zh), '图像与视频');
     expect(page.group!(_zh), '能力');

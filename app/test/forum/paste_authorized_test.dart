@@ -24,7 +24,7 @@ void main() {
       if (call.method == 'readText') {
         nativeReads++;
         expect((call.arguments as Map)['requestId'], isA<String>());
-        return {'status': 'text', 'text': 'dshgo://share/plugin?p=clipboard.12345678'};
+        return {'status': 'text', 'text': 'fustai://share/plugin?p=clipboard.12345678'};
       }
       return false;
     });

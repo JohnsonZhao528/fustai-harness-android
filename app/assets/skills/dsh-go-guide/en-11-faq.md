@@ -44,7 +44,7 @@ Results stay in app memory. Only **Let the AI read diagnostics** or a manual bun
 
 Follow the guide to turn off battery optimization, keep the "engine running" notification, and lock the app in Recents. Limits vary by brand, and Android may still stop the engine.
 
-For notifications, also turn on the alerts you want in the app's **Notifications** and allow DSH Go notifications in system settings. Alerts from remote hosts need the app running and the connection online.
+For notifications, also turn on the alerts you want in the app's **Notifications** and allow FustAI Harness notifications in system settings. Alerts from remote hosts need the app running and the connection online.
 
 ## The engine keeps failing to start
 
@@ -58,11 +58,11 @@ After an upgrade from an earlier version, the first direct start tidies your plu
 
 ## The app can chat, but headless reports MISSING_CREDENTIAL
 
-`dsh --profile headless` starts a separate one-shot task. Its default profile disables the interactive credential store, authorization and DeepSeek account services, so it does not automatically use API keys or account sign-ins saved in the app. A working chat in the app does not mean this command has credentials configured.
+`dsh --profile headless` starts a separate one-shot task. Its default profile disables the interactive credential store, authorization and FustAI account services, so it does not automatically use API keys or account sign-ins saved in the app. A working chat in the app does not mean this command has credentials configured.
 
-The default DeepSeek official API route needs `DEEPSEEK_API_KEY`. Supply it in the process environment that launches the command, or set your own API key as `DEEPSEEK_API_KEY=...` in the launch directory's `.env` or `$DSH_HOME/.env`. These are read in order: process environment, launch directory's `.env`, then `$DSH_HOME/.env`. An exported empty variable also shadows the `.env` fallback; unset that empty variable before using a file instead. Keep real keys out of chats, issue reports and source control.
+The official API route needs `DEEPSEEK_API_KEY`. Supply it in the process environment that launches the command, or set your own API key as `DEEPSEEK_API_KEY=...` in the launch directory's `.env` or `$DSH_HOME/.env`. These are read in order: process environment, launch directory's `.env`, then `$DSH_HOME/.env`. An exported empty variable also shadows the `.env` fallback; unset that empty variable before using a file instead. Keep real keys out of chats, issue reports and source control.
 
-DeepSeek account sign-in and an official API key are different credentials. An account sign-in token cannot be used as `DEEPSEEK_API_KEY`. You can keep using the account in the app, or configure an API key separately for headless.
+FustAI account sign-in and an official API key are different credentials. An account sign-in token cannot be used as `DEEPSEEK_API_KEY`. You can keep using the account in the app, or configure an API key separately for headless.
 
 Adding the app's sign-in patch alone does not enable the services that headless disables by default. Custom profiles and remote hosts may use different configurations; follow the configuration of that host.
 
@@ -110,8 +110,6 @@ These statistics never include accounts, API keys, chats, character cards, files
 Phone control uses bundled Google ML Kit Chinese text recognition (`com.google.mlkit:text-recognition-chinese:16.0.1`), enabled by default; expand **More settings** on that page and turn it off separately with **Text recognition**. Recognition runs on this device; screenshots and recognized text are not sent to Google. Google’s SDK collects usage statistics such as device model, app version and processing time. The anonymous usage statistics switch above does not control this SDK.
 
 Screenshots and recognized text may be sent to your configured model as part of phone control. While off, recognition requests do not trigger SDK loading or initialization. Turning local recognition off prevents new recognition; work already started may still finish. It does not uninstall the SDK, clear previously accumulated SDK statistics, or guarantee that old SDK statistics stop being sent. A device that has never initialized the SDK and a device previously used with recognition enabled have different histories.
-
-Remote’s pairing scanner also uses ML Kit and initializes the shared SDK separately when the scanner opens. Camera scanning and reading a gallery image do not require phone control or text recognition to be enabled, and do not change that setting. To connect without using ML Kit for pairing, use the Remote account sign-in path instead.
 
 See [Google ML Kit terms](https://developers.google.com/ml-kit/terms) and [Android SDK data disclosure](https://developers.google.com/ml-kit/android-data-disclosure). These SDK terms are distinct from the Apache 2.0 license attached to example code in the documentation.
 

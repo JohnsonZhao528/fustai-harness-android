@@ -1,5 +1,5 @@
 // A conversation file opened with dsh-go (「打开方式」, system share, a
-// dshgo:// link) goes to its replay; anything else still to the importer.
+// fustai:// link) goes to its replay; anything else still to the importer.
 //
 //   flutter test test/replay/open_conversation_test.dart
 

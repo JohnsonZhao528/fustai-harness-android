@@ -123,9 +123,9 @@ void main() {
     expect(find.byKey(const ValueKey('tavern-notice')), findsNothing);
   });
 
-  testWidgets('too little balance says so', (tester) async {
+  testWidgets('a used-up quota says so', (tester) async {
     await _sendOneLine(tester, _Ending(failure: TavernFailure.insufficientBalance));
-    expect(_inBanner('余额不足'), findsOneWidget);
+    expect(_inBanner('额度已用尽'), findsOneWidget);
   });
 
   testWidgets('parameters the model refused say which', (tester) async {

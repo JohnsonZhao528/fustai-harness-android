@@ -58,7 +58,7 @@ class OverviewCard extends StatefulWidget {
   /// First line (titleMedium).
   final Widget title;
 
-  /// Second line (bodyMedium, secondary colour): a balance, one short state.
+  /// Second line (bodyMedium, secondary colour): one short state.
   final Widget? subtitle;
 
   /// Replaces the chevron, e.g. a master switch.

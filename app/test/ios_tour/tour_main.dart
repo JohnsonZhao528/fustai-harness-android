@@ -6,7 +6,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dsh_app/runtime/runtime_state.dart';
-import 'package:dsh_app/state/balance_state.dart';
 import 'package:dsh_app/state/connection_state.dart';
 import 'package:dsh_app/state/drawer_view_state.dart';
 import 'package:dsh_app/state/onboarding_state.dart';
@@ -70,7 +69,6 @@ class _Stop {
 List<Override> _shell() => [
   localConnectionProvider.overrideWith(FakeConnection.new),
   onboardingPrefsProvider.overrideWith(FakeOnboardingPrefs.new),
-  accountWalletBalanceProvider.overrideWithValue(null),
   drawerClockProvider.overrideWithValue(() => sampleNow),
   localRuntimeProvider.overrideWith(() => FakeRuntime(const LocalRuntimeState(loaded: true, status: runningStatus))),
   localRuntimeLogsProvider.overrideWithBuild((ref, notifier) => sampleLogs),
@@ -79,10 +77,9 @@ List<Override> _shell() => [
   currentSessionProvider.overrideWith(() => FakeCurrentSession('s2')),
 ];
 
-List<Override> _emptyChat() => [accountWalletBalanceProvider.overrideWithValue(null), ...ChatHarness().overrides];
+List<Override> _emptyChat() => ChatHarness().overrides;
 
 List<Override> _conversation() => [
-  accountWalletBalanceProvider.overrideWithValue(null),
   ...ChatHarness(session: 's1', states: {'s1': conversationState()}).overrides,
 ];
 

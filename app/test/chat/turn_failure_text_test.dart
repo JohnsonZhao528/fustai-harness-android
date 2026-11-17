@@ -5,7 +5,7 @@ void main() {
   final cases = <String?, String>{
     'AUTH': 'API Key 无效或已过期',
     'INVALID_CREDENTIAL': 'API Key 无效或已过期',
-    'QUOTA': '余额不足',
+    'QUOTA': '配额不足',
     'ACCOUNT_QUOTA': '账号额度已用完',
     'RATE_LIMIT': '请求太频繁，稍后再试',
     'CONTEXT_WINDOW_EXCEEDED': '对话太长。若 /compact 也失败，请新建对话或换模型',

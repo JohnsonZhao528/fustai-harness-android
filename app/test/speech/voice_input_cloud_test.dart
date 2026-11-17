@@ -122,7 +122,7 @@ void main() {
     await rig.voice.start();
     await rig.voice.stop();
     expect(rig.input.text, '前面 ');
-    expect(rig.messages.last.text, contains('余额'));
+    expect(rig.messages.last.text, contains('额度'));
   });
 
   testWidgets('the system mode never asks for a cloud recognizer', (tester) async {

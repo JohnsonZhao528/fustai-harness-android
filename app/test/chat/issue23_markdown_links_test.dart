@@ -35,7 +35,7 @@ void main() {
       'mailto:user@example.com',
       'javascript:alert(1)',
       'intent://open',
-      'dshgo://open',
+      'fustai://open',
       'data:text/plain,hello',
       'tel:123',
       'file%3A%2F%2F%252Froot',

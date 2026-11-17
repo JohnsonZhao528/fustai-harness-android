@@ -32,7 +32,7 @@ String sampleFeed({int revision = 7, String tagline = '开源项目，欢迎点�
       'url': 'https://qm.qq.com/q/example',
       'copy': '123456789',
     },
-    {'kind': 'wechat', 'title': '微信公众号', 'subtitle': '搜索「dsh-go」', 'qr': 'https://example.com/wechat'},
+    {'kind': 'wechat', 'title': '微信公众号', 'subtitle': '搜索「FustAI Harness」', 'qr': 'https://example.com/wechat'},
     {'kind': 'telegram', 'title': 'Telegram', 'subtitle': 't.me/example', 'url': 'https://t.me/example'},
     {'kind': 'qq', 'title': '没填的群', 'url': '', 'qr': '', 'copy': ''},
     {'kind': 'forum', 'title': '不安全的链接', 'url': 'http://example.com/forum'},

@@ -135,7 +135,7 @@ void main() {
         OverviewCard(
           leading: const OverviewGlyph(AppIcons.apiKey),
           title: const Text('雾蓝'),
-          subtitle: const Text('余额 ¥128.45'),
+          subtitle: const Text('运行 128.45 小时'),
           onTap: () {},
           footer: const OverviewFooter(tone: StatusTone.ok, text: '引擎 · 运行中 · DSH 0.2.1'),
           onFooterTap: () {},

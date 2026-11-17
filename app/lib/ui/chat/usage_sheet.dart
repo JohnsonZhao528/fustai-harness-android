@@ -14,7 +14,6 @@ import '../../state/providers_state.dart';
 import '../common/app_sheet.dart';
 import '../common/sheet_title_bar.dart';
 import '../theme/theme.dart';
-import 'balance_widgets.dart';
 
 /// `999` / `1K` / `43K` / `500K` / `1.05M` / `100M`: K is a thousand and M a
 /// million in every UI language (no 万/亿), the same units model context
@@ -143,7 +142,7 @@ class _RingPainter extends CustomPainter {
   bool shouldRepaint(_RingPainter old) => old.fraction != fraction || old.track != track || old.fill != fill;
 }
 
-/// 用量弹层:上下文窗口、本对话的 token、DeepSeek 余额。
+/// 用量弹层:上下文窗口、本对话的 token(订阅线路另有额度块)。
 Future<void> showUsageSheet(BuildContext context, {required String sessionId, ModelSelection? model}) {
   return showAppSheet<void>(
     context,
@@ -161,7 +160,7 @@ Future<void> showUsageSheet(BuildContext context, {required String sessionId, Mo
 ///   │ ▰▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱ │
 ///   │ 系统 1.5K · 工具 5.2K · 消息 54.9K    │
 ///   ╰──────────────────────────────────────╯
-///     本对话 …          DeepSeek 余额 …
+///     本对话 …
 /// ```
 class UsageSheet extends ConsumerWidget {
   const UsageSheet({super.key, required this.sessionId, this.model});
@@ -186,11 +185,10 @@ class UsageSheet extends ConsumerWidget {
           children: [
             SheetTitleBar(l10n.activityUsage),
             SessionUsageSections(usage: usage, pricing: pricing, sheet: true, margin: _margin),
-            const SizedBox(height: 16),
-            if (Subscription.fromWire(model?.provider) case final subscription?)
-              _SubscriptionQuota(subscription: subscription, margin: _margin)
-            else
-              BalanceCard(title: l10n.activityUsageBalance, margin: _margin),
+            if (Subscription.fromWire(model?.provider) case final subscription?) ...[
+              const SizedBox(height: 16),
+              _SubscriptionQuota(subscription: subscription, margin: _margin),
+            ],
           ],
         ),
       ),
@@ -209,7 +207,7 @@ class _SubscriptionQuota extends ConsumerWidget {
     final profile = ref.watch(subscriptionProfileProvider(subscription));
     final currentProfile = profile.isLoading || profile.hasError ? null : profile.value;
     if (currentProfile != null && !isSubscriptionRoute(currentProfile)) {
-      return BalanceCard(title: l10n.activityUsageBalance, margin: margin);
+      return const SizedBox.shrink();
     }
     Widget message(String text) => SheetGroup(
       margin: margin,

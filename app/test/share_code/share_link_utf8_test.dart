@@ -9,9 +9,9 @@ void main() {
   final valid = ShareLink.inline(ShareKind.profile, validCode);
 
   for (final entry in <String, String>{
-    'query': 'dshgo://share/profile?p=%FF',
+    'query': 'fustai://share/profile?p=%FF',
     'fragment': '$shareLandingUrl#p=%FF',
-    'path': 'dshgo://share/pro%FFfile?p=$validCode',
+    'path': 'fustai://share/pro%FFfile?p=$validCode',
   }.entries) {
     test('parse rejects non-UTF8 ${entry.key} without throwing', () {
       // These are structurally valid URIs. The bad bytes appear only when
@@ -23,7 +23,7 @@ void main() {
   }
 
   test('find continues from a malformed candidate to a valid share link', () {
-    final found = ShareLink.find('broken dshgo://share/profile?p=%FF\nvalid ${valid.appLink}');
+    final found = ShareLink.find('broken fustai://share/profile?p=%FF\nvalid ${valid.appLink}');
     expect(found, isNotNull);
     expect(found!.kind, ShareKind.profile);
     expect(found.code, validCode);

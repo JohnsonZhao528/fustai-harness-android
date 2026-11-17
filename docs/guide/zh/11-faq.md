@@ -44,7 +44,7 @@ App 会在本机有界保存错误类别、有限的自有源码位置和语音�
 
 按指南关闭电池优化、保留「引擎运行中」通知、在最近任务里锁定 App。各品牌限制不同，做完这些仍可能被系统结束。
 
-通知还要在 App 的**通知**里开启对应提醒，并在系统设置里允许 DSH Go 通知。远程主机的提醒需要 App 在运行、连接在线。
+通知还要在 App 的**通知**里开启对应提醒，并在系统设置里允许 FustAI Harness 通知。远程主机的提醒需要 App 在运行、连接在线。
 
 ## 引擎反复启动失败
 
@@ -58,11 +58,11 @@ App 会在本机有界保存错误类别、有限的自有源码位置和语音�
 
 ## App 能对话，headless 命令却报 MISSING_CREDENTIAL
 
-`dsh --profile headless` 启动独立的一次性任务。默认配置不启用交互式凭据存储、授权和 DeepSeek 账号服务，因此不会自动使用 App 里保存的 API Key 或账号登录。App 能对话，不代表这条命令已经配好凭据。
+`dsh --profile headless` 启动独立的一次性任务。默认配置不启用交互式凭据存储、授权和 FustAI 账号服务，因此不会自动使用 App 里保存的 API Key 或账号登录。App 能对话，不代表这条命令已经配好凭据。
 
-默认的 DeepSeek 官方 API 路线需要 `DEEPSEEK_API_KEY`。在启动命令的进程环境中提供它，或在启动目录的 `.env`、`$DSH_HOME/.env` 中按 `DEEPSEEK_API_KEY=...` 的格式配置自己的 API Key。读取优先级依次为进程环境、启动目录的 `.env`、`$DSH_HOME/.env`；导出的空变量也会挡住 `.env` 回退，改用文件配置时先取消该空变量。不要把真实 Key 放进对话、问题反馈或提交到代码仓库。
+默认的官方 API 路线需要 `DEEPSEEK_API_KEY`。在启动命令的进程环境中提供它，或在启动目录的 `.env`、`$DSH_HOME/.env` 中按 `DEEPSEEK_API_KEY=...` 的格式配置自己的 API Key。读取优先级依次为进程环境、启动目录的 `.env`、`$DSH_HOME/.env`；导出的空变量也会挡住 `.env` 回退，改用文件配置时先取消该空变量。不要把真实 Key 放进对话、问题反馈或提交到代码仓库。
 
-如果 App 用的是 DeepSeek 账号登录，它和官方 API Key 是不同的凭据；账号登录令牌不能填进 `DEEPSEEK_API_KEY`。可以继续在 App 中使用账号，或为 headless 单独配置 API Key。
+如果 App 用的是 FustAI 账号登录，它和官方 API Key 是不同的凭据；账号登录令牌不能填进 `DEEPSEEK_API_KEY`。可以继续在 App 中使用账号，或为 headless 单独配置 API Key。
 
 只叠加 App 的登录补丁不会启用 headless 默认关闭的服务。自定义 profile 或远程主机采用不同配置时，以那台主机的实际配置为准。
 
@@ -110,8 +110,6 @@ dsh-go 自身的匿名使用统计默认开启，第一次打开 App 时的欢�
 手机操控使用内置的 Google ML Kit 中文文字识别（`com.google.mlkit:text-recognition-chinese:16.0.1`），默认开启，可以展开这一页的 **更多设置**，在 **文字识别** 里单独关闭。识别在本机进行，截图和文字不会发给 Google；Google 的 SDK 会收集机型、应用版本、耗时等使用统计。上面的匿名统计开关不控制这个 SDK。
 
 手机操控可能将截图和识别文字发给你配置的模型。关闭时，识别请求不会触发 SDK 加载或初始化。关闭本机识别后不再开始新的识别，已经开始的工作可能仍在收尾。关闭不会卸载 SDK、清除此前积累的 SDK 统计，也不保证历史 SDK 统计停止发送。从未初始化过 SDK 的设备，与此前开启并使用过识别的设备，历史状态不同。
-
-Remote 的「扫码配对电脑」也使用 ML Kit，在打开扫码界面时独立按需初始化；相机扫码和相册识码不要求先使用手机操控或开启文字识别，也不会改变本机文字识别开关。不想为配对使用 ML Kit 时，可改用 Remote 账号登录方式连接主机。
 
 参见 [Google ML Kit 条款](https://developers.google.com/ml-kit/terms)和 [Android SDK 数据披露](https://developers.google.com/ml-kit/android-data-disclosure)。SDK 条款与文档示例代码的 Apache 2.0 许可证不同。
 

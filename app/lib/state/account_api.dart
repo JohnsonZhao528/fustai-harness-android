@@ -4,7 +4,7 @@
 /// The Host owns PKCE, the `/oauth/callback` route on its webserver, the
 /// credential store and the `deepseek-account` model route. This client only
 /// starts/cancels attempts, follows the state stream and reads display-safe
-/// profile and wallet data; tokens never reach the app.
+/// profile data; tokens never reach the app.
 ///
 /// Wire (unary `POST /api/account/<method>`, stream on `/api/remote.mux`):
 /// ```text
@@ -14,7 +14,6 @@
 /// account/cancelSignIn     {attemptId}              -> AccountView
 /// account/signOut          {client}                 -> AccountView
 /// account/getProfile       {client}                 -> {status:'ready', value:{id,name,contact,avatarUrl}} | {status:'failed'} | null
-/// account/getBalance       {client}                 -> {status:'ready', value:[wallet], bonusWallets:[wallet]} | {status:'failed'} | null
 /// account/hasRunningAccountTasks                    -> bool
 /// session/initializeDefaultModel                    -> void
 /// ```
@@ -122,17 +121,14 @@ class SignInAttempt {
 
 /// Browser destinations derived from the Host's `platformOrigin`; never carry tokens.
 class AccountLinks {
-  const AccountLinks({required this.usageUrl, required this.topUpUrl});
+  const AccountLinks({required this.usageUrl});
 
   final String usageUrl;
-  final String topUpUrl;
 
   static AccountLinks? fromJson(Object? json) {
-    final map = _asMap(json);
-    final usage = _asString(map?['usageUrl']);
-    final topUp = _asString(map?['topUpUrl']);
-    if (usage == null || topUp == null) return null;
-    return AccountLinks(usageUrl: usage, topUpUrl: topUp);
+    final usage = _asString(_asMap(json)?['usageUrl']);
+    if (usage == null) return null;
+    return AccountLinks(usageUrl: usage);
   }
 }
 
@@ -191,31 +187,7 @@ class AccountProfile {
   }
 }
 
-/// One wallet; [balance] is Platform's decimal string, kept verbatim (`0E-16`, `5.0000000000000000`).
-class AccountWallet {
-  const AccountWallet({required this.currency, required this.balance});
-
-  final String currency;
-  final String balance;
-
-  static AccountWallet? fromJson(Object? json) {
-    final map = _asMap(json);
-    final currency = _asString(map?['currency']);
-    final balance = _asString(map?['balance']);
-    if (currency == null || balance == null) return null;
-    return AccountWallet(currency: currency, balance: balance);
-  }
-}
-
-/// Recharge (`normal_wallets`) and bonus (`bonus_wallets`) balances, kept apart.
-class AccountBalance {
-  const AccountBalance({this.recharge = const [], this.bonus = const []});
-
-  final List<AccountWallet> recharge;
-  final List<AccountWallet> bonus;
-}
-
-/// Platform could not answer a profile or balance query (the grant is kept).
+/// Platform could not answer a profile query (the grant is kept).
 class AccountQueryFailed implements Exception {
   const AccountQueryFailed(this.field);
   final String field;
@@ -273,9 +245,6 @@ abstract interface class AccountApi {
 
   /// Null when signed out or the grant changed during the query.
   Future<AccountProfile?> getProfile();
-
-  /// Null when signed out; throws [AccountQueryFailed] when Platform did not answer.
-  Future<AccountBalance?> getBalance();
 
   /// Whether running agents are using the account route (sign-out would cancel them).
   Future<bool> hasRunningAccountTasks();
@@ -378,16 +347,6 @@ class DshAccountApi implements AccountApi {
   }
 
   @override
-  Future<AccountBalance?> getBalance() async {
-    final value = _asMap(await client.rpc.call('account/getBalance', {'client': _client}));
-    if (value == null) return null;
-    if (value['status'] != 'ready') throw const AccountQueryFailed('balance');
-    List<AccountWallet> wallets(Object? list) =>
-        _asListOrEmpty(list).map(AccountWallet.fromJson).whereType<AccountWallet>().toList(growable: false);
-    return AccountBalance(recharge: wallets(value['value']), bonus: wallets(value['bonusWallets']));
-  }
-
-  @override
   Future<bool> hasRunningAccountTasks() async => await client.rpc.call('account/hasRunningAccountTasks') == true;
 
   @override
@@ -412,109 +371,4 @@ String? loopbackCallbackOrigin(String? baseUrl) {
 
 Map<String, Object?>? _asMap(Object? value) => value is Map ? value.cast<String, Object?>() : null;
 Map<String, Object?> _asMapOrEmpty(Object? value) => _asMap(value) ?? const {};
-List<Object?> _asListOrEmpty(Object? value) => value is List ? value.cast<Object?>() : const [];
 String? _asString(Object? value) => value is String ? value : null;
-
-// ── Display helpers ──────────────────────────────────────────────────────────
-
-/// Platform Web's money format: two decimals with grouping, positive amounts
-/// truncated to cents, positive sub-cent amounts as `<0.01`, negative amounts
-/// rounded with a minimum magnitude of 0.01. Works on the decimal string so
-/// `0E-16` and 18-digit fractions never pass through a double.
-String formatWalletAmount(String raw) {
-  final parsed = _Decimal.tryParse(raw);
-  if (parsed == null) return raw;
-  if (parsed.isZero) return '0.00';
-  if (!parsed.negative) {
-    final cents = parsed.centsTruncated();
-    if (cents == BigInt.zero) return '<0.01';
-    return _groupCents(cents);
-  }
-  var cents = parsed.centsRounded();
-  if (cents == BigInt.zero) cents = BigInt.one;
-  return '-${_groupCents(cents)}';
-}
-
-String currencySymbol(String currency) => switch (currency) {
-  'CNY' => '¥',
-  'USD' => r'$',
-  _ => '$currency ',
-};
-
-/// Sum of [wallets] in [currency] as a decimal string, or null when none match.
-String? sumWallets(List<AccountWallet> wallets, String currency) {
-  _Decimal? total;
-  for (final w in wallets) {
-    if (w.currency != currency) continue;
-    final d = _Decimal.tryParse(w.balance);
-    if (d == null) continue;
-    total = total == null ? d : total + d;
-  }
-  return total?.toPlainString();
-}
-
-String _groupCents(BigInt cents) {
-  final whole = (cents ~/ BigInt.from(100)).toString();
-  final frac = (cents % BigInt.from(100)).toString().padLeft(2, '0');
-  final grouped = StringBuffer();
-  for (var i = 0; i < whole.length; i++) {
-    if (i > 0 && (whole.length - i) % 3 == 0) grouped.write(',');
-    grouped.write(whole[i]);
-  }
-  return '$grouped.$frac';
-}
-
-/// Exact decimal: unscaled magnitude × 10^-scale.
-class _Decimal {
-  const _Decimal(this.negative, this.digits, this.scale);
-
-  final bool negative;
-  final BigInt digits;
-  final int scale;
-
-  static final _grammar = RegExp(r'^(-?)(\d*)(?:\.(\d*))?(?:[eE]([+-]?\d+))?$');
-
-  static _Decimal? tryParse(String raw) {
-    final m = _grammar.firstMatch(raw.trim());
-    if (m == null) return null;
-    final intPart = m.group(2) ?? '';
-    final fracPart = m.group(3) ?? '';
-    if (intPart.isEmpty && fracPart.isEmpty) return null;
-    final exp = int.tryParse(m.group(4) ?? '0') ?? 0;
-    var digits = BigInt.parse('${intPart.isEmpty ? '0' : intPart}$fracPart');
-    var scale = fracPart.length - exp;
-    if (scale < 0) {
-      digits *= BigInt.from(10).pow(-scale);
-      scale = 0;
-    }
-    return _Decimal(m.group(1) == '-' && digits != BigInt.zero, digits, scale);
-  }
-
-  bool get isZero => digits == BigInt.zero;
-
-  BigInt get _pow => BigInt.from(10).pow(scale);
-
-  BigInt centsTruncated() =>
-      scale <= 2 ? digits * BigInt.from(10).pow(2 - scale) : digits ~/ BigInt.from(10).pow(scale - 2);
-
-  BigInt centsRounded() {
-    if (scale <= 2) return digits * BigInt.from(10).pow(2 - scale);
-    final div = BigInt.from(10).pow(scale - 2);
-    final q = digits ~/ div;
-    return (digits % div) * BigInt.two >= div ? q + BigInt.one : q;
-  }
-
-  _Decimal operator +(_Decimal other) {
-    final s = scale > other.scale ? scale : other.scale;
-    BigInt signed(_Decimal d) => (d.negative ? -d.digits : d.digits) * BigInt.from(10).pow(s - d.scale);
-    final sum = signed(this) + signed(other);
-    return _Decimal(sum.isNegative, sum.abs(), s);
-  }
-
-  String toPlainString() {
-    if (scale == 0) return '${negative ? '-' : ''}$digits';
-    final whole = digits ~/ _pow;
-    final frac = (digits % _pow).toString().padLeft(scale, '0');
-    return '${negative ? '-' : ''}$whole.$frac';
-  }
-}

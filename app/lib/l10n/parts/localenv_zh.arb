@@ -1,5 +1,5 @@
 {
-  "localEnvChooseTitle": "DSH 在哪里运行？",
+  "localEnvChooseTitle": "FustAI 在哪里运行？",
   "localEnvChooseMessage": "之后可以在设置里更改",
   "localEnvThisPhoneDetail": "存储约 {storage} MB · 内存约 {memory} MB",
   "@localEnvThisPhoneDetail": {
@@ -28,12 +28,12 @@
       }
     }
   },
-  "localEnvRemoteDetail": "连接电脑或服务器上的 DSH",
-  "localEnvUnavailable": "这台设备暂时不能在本机运行 DSH",
+  "localEnvRemoteDetail": "连接电脑或服务器上的 FustAI",
+  "localEnvUnavailable": "这台设备暂时不能在本机运行 FustAI",
   "localEnvUnsupported": "暂不支持",
   "localEnvRecommended": "推荐",
   "localEnvInstallTitle": "安装本机运行环境",
-  "localEnvInstallMessage": "在这台手机上运行 DSH",
+  "localEnvInstallMessage": "在这台手机上运行 FustAI",
   "localEnvFactStorage": "约 {storage} MB 存储空间",
   "@localEnvFactStorage": {
     "placeholders": {
@@ -65,7 +65,13 @@
   "engineReopenFailed": "引擎要重新打开 App 才能再启动，请手动重开一次。",
   "engineCapShell": "命令行",
   "engineCapShellBuiltin": "内置 {count} 个命令",
-  "@engineCapShellBuiltin": {"placeholders": {"count": {"type": "int"}}},
+  "@engineCapShellBuiltin": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "engineCapShellSystem": "系统",
   "engineCapNodeScripts": "Node 脚本",
   "engineCapMarket": "安装市场插件",
@@ -75,7 +81,7 @@
   "engineCapYes": "可以",
   "engineCapNone": "不可用",
   "marketInstallRefused": "这个引擎不能安装市场插件",
-  "localEnvChooseUseTitle": "想怎么用 dsh-Go？",
+  "localEnvChooseUseTitle": "想怎么用 FustAI Harness？",
   "localEnvTavernTitle": "和角色聊天",
-  "localEnvTavernDetail": "接回 DeepSeek 的对话也在这里 · 不用安装"
+  "localEnvTavernDetail": "接回 FustAI 的对话也在这里 · 不用安装"
 }

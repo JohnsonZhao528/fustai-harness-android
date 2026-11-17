@@ -1394,7 +1394,7 @@ class _ChatListState extends ConsumerState<ChatList> with SingleTickerProviderSt
     final code = notice.failure?.code ?? '';
     final refused = notice.kind == 'error' && (modelRefusalCodes.contains(code) || code == 'CONTEXT_WINDOW_EXCEEDED');
     final repeatable = switch (notice.kind) {
-      // 换个说法、再发一次都没用的:Key、余额、账号额度、模型本身用不了。
+      // 换个说法、再发一次都没用的:Key、配额、账号额度、模型本身用不了。
       'error' =>
         !refused && !const {'AUTH', 'INVALID_CREDENTIAL', 'QUOTA'}.contains(code) && !code.startsWith('ACCOUNT_'),
       'interrupted' || 'max-tokens' => true,

@@ -6,7 +6,6 @@
 import 'package:dsh_app/runtime/runtime_state.dart';
 import 'package:dsh_app/state/adaptive_layout_state.dart';
 import 'package:dsh_app/state/attachments.dart';
-import 'package:dsh_app/state/balance_state.dart';
 import 'package:dsh_app/state/bots_state.dart' show dsBotApiFactoryProvider;
 import 'package:dsh_app/state/chat_state.dart';
 import 'package:dsh_app/state/commands_state.dart';
@@ -140,7 +139,6 @@ List<Override> homeOverrides({
   modelCatalogProvider.overrideWith((ref) async => testCatalog),
   attachmentPickerProvider.overrideWithValue(FakePicker()),
   settingsProvider.overrideWith(() => TestSettings()),
-  balanceFetcherProvider.overrideWithValue((key) async => healthyBalance),
   hostCommandsProvider.overrideWith((ref, id) async => testHostCommands),
   sessionUsageProvider.overrideWith2((id) => FakeUsage(id, sampleUsage)),
   sessionsProvider.overrideWith(() => _Sessions(sampleSessions())),

@@ -186,7 +186,7 @@ void main() {
     test('app link and landing link carry the same code', () {
       final code = encodeShareCode(const PluginShare(_plugin));
       final link = ShareLink.inline(ShareKind.plugin, code);
-      expect(link.appLink.toString(), 'dshgo://share/plugin?p=$code');
+      expect(link.appLink.toString(), 'fustai://share/plugin?p=$code');
       expect(link.webLink, '$shareLandingUrl#p=$code');
 
       final fromApp = ShareLink.parse(link.appLink)!;
@@ -201,17 +201,17 @@ void main() {
 
     test('gist links', () {
       const link = ShareLink.gist('aa5a315d61ae9438b18d', 'AbCdEf12');
-      expect(link.appLink.toString(), 'dshgo://share/profile?gist=aa5a315d61ae9438b18d&c=AbCdEf12');
+      expect(link.appLink.toString(), 'fustai://share/profile?gist=aa5a315d61ae9438b18d&c=AbCdEf12');
       final back = ShareLink.parse(Uri.parse(link.webLink))!;
       expect(back.gistId, 'aa5a315d61ae9438b18d');
       expect(back.gistSum, 'AbCdEf12');
-      expect(ShareLink.parse(Uri.parse('dshgo://share/profile?gist=../../x&c=AbCdEf12')), isNull);
+      expect(ShareLink.parse(Uri.parse('fustai://share/profile?gist=../../x&c=AbCdEf12')), isNull);
     });
 
     test('other hosts and links are not share links', () {
-      expect(ShareLink.parse(Uri.parse('dshgo://forum/auth?p=a.b')), isNull);
+      expect(ShareLink.parse(Uri.parse('fustai://forum/auth?p=a.b')), isNull);
       expect(ShareLink.parse(Uri.parse('https://evil.example/dsh-go/share/#p=a.b')), isNull);
-      expect(ShareLink.parse(Uri.parse('dshgo://share/plugin')), isNull);
+      expect(ShareLink.parse(Uri.parse('fustai://share/plugin')), isNull);
       expect(isLandingUri(Uri.parse('https://ccch1mneyyy.github.io/dsh-go/sharer/')), isFalse);
     });
 
@@ -219,7 +219,7 @@ void main() {
       final code = encodeShareCode(const PluginShare(_plugin));
       final text = '试试这个插件：$shareLandingUrl#p=$code 很好用';
       expect(ShareLink.find(text)?.code, code);
-      expect(ShareLink.find('dshgo://share/plugin?p=$code\n')?.kind, ShareKind.plugin);
+      expect(ShareLink.find('fustai://share/plugin?p=$code\n')?.kind, ShareKind.plugin);
       expect(ShareLink.find('没有链接'), isNull);
     });
   });

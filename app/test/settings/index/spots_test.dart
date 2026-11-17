@@ -82,7 +82,7 @@ void main() {
     expect(ids.toSet().intersection(catalogPageLinks), isEmpty);
     for (final id in ids) {
       expect(id, matches(RegExp(r'^[a-z0-9-]+$')), reason: id);
-      expect(pageLinkId(Uri.parse('dshgo://open/$id')), id);
+      expect(pageLinkId(Uri.parse('fustai://open/$id')), id);
     }
   });
 

@@ -1,4 +1,4 @@
-// dsh-go conversation viewer (docs/design/share-codes.md). One source,
+// FustAI Harness conversation viewer (docs/design/share-codes.md). One source,
 // three ways a conversation arrives ([boot]):
 //
 //   - a `.dshgo` file picked or dropped on the landing page (site/share/);
@@ -28,8 +28,8 @@
       "allText": "全文",
       "progress": "回放进度",
       "speed": "倍速",
-      "openApp": "用 dsh-go 打开",
-      "download": "下载 dsh-go",
+      "openApp": "用 FustAI Harness 打开",
+      "download": "下载 FustAI Harness",
       "saveChat": "存为对话文件",
       "pause": "暂停",
       "replay": "重新播放",
@@ -62,7 +62,7 @@
       "fileTooLarge": "文件太大",
       "drop": "松手打开",
       "opening": "正在打开…",
-      "errorNewer": "需要更新 dsh-go 才能打开",
+      "errorNewer": "需要更新 FustAI Harness 才能打开",
       "errorBrowser": "这个浏览器打不开，换个新版浏览器试试",
       "errorKind": "这不是对话文件",
       "errorGone": "链接已过期或被删除",
@@ -80,7 +80,7 @@
       "messages": "{n} 条消息",
       "thoughts": "{n} 段思考",
       "tokenCount": "{count} tokens",
-      "viewerTitle": "查看对话 · dsh-go"
+      "viewerTitle": "查看对话 · FustAI Harness"
     },
     "en": {
       "chat": "Chat",
@@ -89,8 +89,8 @@
       "allText": "Full text",
       "progress": "Replay progress",
       "speed": "Speed",
-      "openApp": "Open in dsh-go",
-      "download": "Download dsh-go",
+      "openApp": "Open in FustAI Harness",
+      "download": "Download FustAI Harness",
       "saveChat": "Save chat file",
       "pause": "Pause",
       "replay": "Replay",
@@ -123,7 +123,7 @@
       "fileTooLarge": "File is too large",
       "drop": "Drop to open",
       "opening": "Opening…",
-      "errorNewer": "Update dsh-go to open this",
+      "errorNewer": "Update FustAI Harness to open this",
       "errorBrowser": "Can’t open this in your browser. Try a newer one.",
       "errorKind": "This isn’t a chat file",
       "errorGone": "This link has expired or was deleted",
@@ -156,7 +156,7 @@
         "one": "{count} token",
         "other": "{count} tokens"
       },
-      "viewerTitle": "View chat · dsh-go"
+      "viewerTitle": "View chat · FustAI Harness"
     }
   };
 
@@ -1538,7 +1538,7 @@
         var text = await file.text();
         var opened = await openFile(text);
         mount(host, opened.conversation, { assets: opened.assets, fileText: text, download: opts.download });
-        document.title = opened.conversation.title + ' · dsh-go';
+        document.title = opened.conversation.title + ' · FustAI Harness';
         detachDrop();
       } catch (e) {
         error.textContent = errorText(e);
@@ -1590,7 +1590,7 @@
         if (!key) throw new Error('key');
         card(host, tr('opening'), null, null);
         var hosted = await openHosted(path[1], key);
-        document.title = hosted.conversation.title + ' · dsh-go';
+        document.title = hosted.conversation.title + ' · FustAI Harness';
         mount(host, hosted.conversation, {
           assets: hosted.assets,
           fileText: hosted.fileText,

@@ -9,7 +9,6 @@ import 'dart:ui' as ui;
 
 import 'package:dsh_app/runtime/runtime_state.dart';
 import 'package:dsh_app/state/appearance_state.dart';
-import 'package:dsh_app/state/balance_state.dart';
 import 'package:dsh_app/state/connection_state.dart';
 import 'package:dsh_app/state/drawer_view_state.dart';
 import 'package:dsh_app/state/onboarding_state.dart';
@@ -118,7 +117,6 @@ void main() {
       for (final brightness in Brightness.values) {
         for (final MapEntry(key: name, value: screen) in screens.entries) {
           final overrides = <Override>[
-            accountWalletBalanceProvider.overrideWithValue(null),
             if (name == '聊天') ...[
               ...ChatHarness(session: 's1', states: {'s1': conversationState()}).overrides,
               voiceBridgeProvider.overrideWithValue(_QuietVoice()),

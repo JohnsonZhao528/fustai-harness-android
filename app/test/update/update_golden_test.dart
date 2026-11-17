@@ -87,7 +87,7 @@ class FakeUpdate extends AppUpdateController {
   }
 
   /// What [exportApk] answers; null = the copy failed. Counts the calls.
-  String? exportResult = 'Download/DSH-Go/dsh-go-1.2.0-arm64.apk';
+  String? exportResult = 'Download/FustAI/dsh-go-1.2.0-arm64.apk';
   int exports = 0;
 
   @override
@@ -340,7 +340,7 @@ void main() {
       await tester.tap(find.descendant(of: find.byType(AlertDialog), matching: find.text('导出安装包')));
       await tester.pumpAndSettle();
       expect(update.exports, 1);
-      expect(find.text('已存到 下载/DSH-Go/dsh-go-1.2.0-arm64.apk'), findsOneWidget);
+      expect(find.text('已存到 下载/FustAI/dsh-go-1.2.0-arm64.apk'), findsOneWidget);
     });
 
     testWidgets('nothing was downloaded, so nothing is offered for signing', (tester) async {
@@ -377,7 +377,7 @@ void main() {
     });
   });
 
-  testWidgets('设置 marks 关于 DSH Go; the rows are on that page', (tester) async {
+  testWidgets('设置 marks 关于 FustAI Harness; the rows are on that page', (tester) async {
     usePhoneSurface(tester);
     await tester.pumpWidget(
       goldenApp(
@@ -390,9 +390,9 @@ void main() {
     await tester.drag(find.byType(CustomScrollView), const Offset(0, -5000));
     await tester.pump(const Duration(milliseconds: 600));
     expect(find.widgetWithText(UpdateBadge, '有新版本'), findsOneWidget);
-    await tester.ensureVisible(find.text('关于 DSH Go'));
+    await tester.ensureVisible(find.text('关于 FustAI Harness'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('关于 DSH Go'));
+    await tester.tap(find.text('关于 FustAI Harness'));
     await tester.pumpAndSettle();
     expect(find.byType(AboutPage), findsOneWidget);
     expect(find.byType(AppUpdateTiles), findsOneWidget);

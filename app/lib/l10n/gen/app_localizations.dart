@@ -113,13 +113,13 @@ abstract class L10n {
   /// No description provided for @a11yRestoreNotice.
   ///
   /// In zh, this message translates to:
-  /// **'开启后，在系统设置里关掉无障碍会被自动打开；要关闭手机操控，请在 DSH Go 里关。'**
+  /// **'开启后，在系统设置里关掉无障碍会被自动打开；要关闭手机操控，请在 FustAI Harness 里关。'**
   String get a11yRestoreNotice;
 
   /// No description provided for @a11yRestoreForceStop.
   ///
   /// In zh, this message translates to:
-  /// **'被强制停止后，重新打开 DSH Go 才能恢复。'**
+  /// **'被强制停止后，重新打开 FustAI Harness 才能恢复。'**
   String get a11yRestoreForceStop;
 
   /// No description provided for @a11yRestoreGrant.
@@ -191,7 +191,7 @@ abstract class L10n {
   /// No description provided for @accessPickTitle.
   ///
   /// In zh, this message translates to:
-  /// **'想让 DSH Go 帮你做哪些事'**
+  /// **'想让 FustAI Harness 帮你做哪些事'**
   String get accessPickTitle;
 
   /// No description provided for @accessPickMessage.
@@ -461,7 +461,7 @@ abstract class L10n {
   /// No description provided for @accessPopupWhy.
   ///
   /// In zh, this message translates to:
-  /// **'手机操控做完能回到 DSH Go'**
+  /// **'手机操控做完能回到 FustAI Harness'**
   String get accessPopupWhy;
 
   /// No description provided for @accessVivoPopupPath.
@@ -503,7 +503,7 @@ abstract class L10n {
   /// No description provided for @accessRestrictedTap.
   ///
   /// In zh, this message translates to:
-  /// **'在无障碍里点一下「DSH 手机操控」，出现「受限制的设置」时点确定'**
+  /// **'在无障碍里点一下「FustAI 手机操控」，出现「受限制的设置」时点确定'**
   String get accessRestrictedTap;
 
   /// No description provided for @accessRestrictedMenu.
@@ -521,7 +521,7 @@ abstract class L10n {
   /// No description provided for @accessRestrictedBack.
   ///
   /// In zh, this message translates to:
-  /// **'回到无障碍，打开「DSH 手机操控」'**
+  /// **'回到无障碍，打开「FustAI 手机操控」'**
   String get accessRestrictedBack;
 
   /// No description provided for @accessRestrictedHelp.
@@ -2582,12 +2582,6 @@ abstract class L10n {
   /// **'更新了待办'**
   String get activitySummaryTodo;
 
-  /// No description provided for @activityUsageBalance.
-  ///
-  /// In zh, this message translates to:
-  /// **'DeepSeek 余额'**
-  String get activityUsageBalance;
-
   /// No description provided for @activityUsageContext.
   ///
   /// In zh, this message translates to:
@@ -3215,7 +3209,7 @@ abstract class L10n {
   /// No description provided for @androidShellAuthorizeHint.
   ///
   /// In zh, this message translates to:
-  /// **'先安装并启动 Shizuku，再点此按钮允许 dsh-Go。打开本页或刷新不会申请授权。'**
+  /// **'先安装并启动 Shizuku，再点此按钮允许 FustAI Harness。打开本页或刷新不会申请授权。'**
   String get androidShellAuthorizeHint;
 
   /// No description provided for @androidShellStatus.
@@ -4997,7 +4991,7 @@ abstract class L10n {
   /// No description provided for @botsProjectHome.
   ///
   /// In zh, this message translates to:
-  /// **'DSH Go 项目主页'**
+  /// **'FustAI Harness 项目主页'**
   String get botsProjectHome;
 
   /// No description provided for @botsOpenSource.
@@ -5357,7 +5351,7 @@ abstract class L10n {
   /// No description provided for @botsPetSource.
   ///
   /// In zh, this message translates to:
-  /// **'来自 DSH-TUI'**
+  /// **'来自 FustAI-TUI'**
   String get botsPetSource;
 
   /// No description provided for @botsPetImport.
@@ -5459,7 +5453,7 @@ abstract class L10n {
   /// No description provided for @botsPetCodexOneShot.
   ///
   /// In zh, this message translates to:
-  /// **'只播一次的动作，播完回到哪里由 DSH 决定'**
+  /// **'只播一次的动作，播完回到哪里由 FustAI 决定'**
   String get botsPetCodexOneShot;
 
   /// No description provided for @botsPetCodexMissingAuthor.
@@ -6530,18 +6524,6 @@ abstract class L10n {
   /// **'显示、发送与日志上传'**
   String get catalogGeneralSummary;
 
-  /// No description provided for @catalogAccount.
-  ///
-  /// In zh, this message translates to:
-  /// **'账号与余额'**
-  String get catalogAccount;
-
-  /// No description provided for @catalogAccountSummary.
-  ///
-  /// In zh, this message translates to:
-  /// **'登录、余额与充值'**
-  String get catalogAccountSummary;
-
   /// No description provided for @catalogRemoteSummary.
   ///
   /// In zh, this message translates to:
@@ -6587,7 +6569,7 @@ abstract class L10n {
   /// No description provided for @catalogWebSummary.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 官方界面'**
+  /// **'FustAI 官方界面'**
   String get catalogWebSummary;
 
   /// No description provided for @catalogPluginPanel.
@@ -7145,7 +7127,7 @@ abstract class L10n {
   /// No description provided for @chatComposerHint.
   ///
   /// In zh, this message translates to:
-  /// **'给 DSH 发消息…'**
+  /// **'给 FustAI 发消息…'**
   String get chatComposerHint;
 
   /// No description provided for @chatStopGenerating.
@@ -7481,7 +7463,7 @@ abstract class L10n {
   /// No description provided for @chatImageOffline.
   ///
   /// In zh, this message translates to:
-  /// **'未连接 DSH'**
+  /// **'未连接 FustAI'**
   String get chatImageOffline;
 
   /// No description provided for @chatImageTooLarge.
@@ -7745,7 +7727,7 @@ abstract class L10n {
   /// No description provided for @chatDownloadsFolderHint.
   ///
   /// In zh, this message translates to:
-  /// **'下载/DSH-Go 文件夹'**
+  /// **'下载/FustAI Harness 文件夹'**
   String get chatDownloadsFolderHint;
 
   /// No description provided for @chatSavedToDownloadsPath.
@@ -8267,7 +8249,7 @@ abstract class L10n {
   /// No description provided for @chatDeepSeekKeyMissing.
   ///
   /// In zh, this message translates to:
-  /// **'还没有 DeepSeek API Key'**
+  /// **'还没有 FustAI API Key'**
   String get chatDeepSeekKeyMissing;
 
   /// No description provided for @chatOutputLimitReached.
@@ -8531,7 +8513,7 @@ abstract class L10n {
   /// No description provided for @chatErrBalance.
   ///
   /// In zh, this message translates to:
-  /// **'余额不足'**
+  /// **'配额不足'**
   String get chatErrBalance;
 
   /// No description provided for @chatErrAccountQuota.
@@ -9653,7 +9635,7 @@ abstract class L10n {
   /// No description provided for @companionMemoryUnsupportedHint.
   ///
   /// In zh, this message translates to:
-  /// **'经 DSH Remote 中继连接时用不了，或者这台主机的 dsh-go 桥接比较旧。'**
+  /// **'经 FustAI Remote 中继连接时用不了，或者这台主机的 FustAI Harness 桥接比较旧。'**
   String get companionMemoryUnsupportedHint;
 
   /// No description provided for @companionMemoryLoadFailed.
@@ -9785,13 +9767,13 @@ abstract class L10n {
   /// No description provided for @companionModeFullHint.
   ///
   /// In zh, this message translates to:
-  /// **'主机上的 DSH 引擎，带工具和手机操控'**
+  /// **'主机上的 FustAI 引擎，带工具和手机操控'**
   String get companionModeFullHint;
 
   /// No description provided for @companionLightNoKey.
   ///
   /// In zh, this message translates to:
-  /// **'轻量模式要用 DeepSeek API Key，在设置里填上就能和我聊啦。'**
+  /// **'轻量模式要用 FustAI API Key，在设置里填上就能和我聊啦。'**
   String get companionLightNoKey;
 
   /// No description provided for @companionLightBadKey.
@@ -11117,13 +11099,13 @@ abstract class L10n {
   /// No description provided for @engineAccountSignedIn.
   ///
   /// In zh, this message translates to:
-  /// **'已登录 DeepSeek 账号'**
+  /// **'已登录 FustAI 账号'**
   String get engineAccountSignedIn;
 
   /// No description provided for @engineAccountSignOutTitle.
   ///
   /// In zh, this message translates to:
-  /// **'退出 DeepSeek 账号？'**
+  /// **'退出 FustAI 账号？'**
   String get engineAccountSignOutTitle;
 
   /// No description provided for @engineAccountSignOutBusy.
@@ -11165,7 +11147,7 @@ abstract class L10n {
   /// No description provided for @engineAccountDeepSeek.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek 账号'**
+  /// **'FustAI 账号'**
   String get engineAccountDeepSeek;
 
   /// No description provided for @engineAccountProfileUnavailable.
@@ -11174,53 +11156,11 @@ abstract class L10n {
   /// **'资料暂时读不到'**
   String get engineAccountProfileUnavailable;
 
-  /// No description provided for @engineAccountBalance.
-  ///
-  /// In zh, this message translates to:
-  /// **'余额'**
-  String get engineAccountBalance;
-
-  /// No description provided for @engineAccountBalanceHint.
-  ///
-  /// In zh, this message translates to:
-  /// **'账号模型的费用从余额中扣除'**
-  String get engineAccountBalanceHint;
-
-  /// No description provided for @engineAccountBalanceEngineOff.
-  ///
-  /// In zh, this message translates to:
-  /// **'引擎未运行，启动后显示余额'**
-  String get engineAccountBalanceEngineOff;
-
-  /// No description provided for @engineAccountTopUp.
-  ///
-  /// In zh, this message translates to:
-  /// **'去充值'**
-  String get engineAccountTopUp;
-
   /// No description provided for @engineAccountUsageDetails.
   ///
   /// In zh, this message translates to:
   /// **'用量明细'**
   String get engineAccountUsageDetails;
-
-  /// No description provided for @engineAccountToppedUpBalance.
-  ///
-  /// In zh, this message translates to:
-  /// **'充值余额'**
-  String get engineAccountToppedUpBalance;
-
-  /// No description provided for @engineAccountGrantedBalance.
-  ///
-  /// In zh, this message translates to:
-  /// **'赠送余额'**
-  String get engineAccountGrantedBalance;
-
-  /// No description provided for @engineAccountBalanceUnavailable.
-  ///
-  /// In zh, this message translates to:
-  /// **'余额暂时读不到'**
-  String get engineAccountBalanceUnavailable;
 
   /// No description provided for @engineAccountNoKeyNeeded.
   ///
@@ -11237,7 +11177,7 @@ abstract class L10n {
   /// No description provided for @engineAccountSignInDeepSeek.
   ///
   /// In zh, this message translates to:
-  /// **'用 DeepSeek 账号登录'**
+  /// **'用 FustAI 账号登录'**
   String get engineAccountSignInDeepSeek;
 
   /// No description provided for @engineAccountAutoStart.
@@ -11303,7 +11243,7 @@ abstract class L10n {
   /// No description provided for @engineAccountOpenDeepSeekNext.
   ///
   /// In zh, this message translates to:
-  /// **'马上打开 DeepSeek 登录页'**
+  /// **'马上打开 FustAI 登录页'**
   String get engineAccountOpenDeepSeekNext;
 
   /// No description provided for @engineAccountFinishInBrowser.
@@ -11315,7 +11255,7 @@ abstract class L10n {
   /// No description provided for @engineAccountReturnToDsh.
   ///
   /// In zh, this message translates to:
-  /// **'登录完成后回到 DSH Go'**
+  /// **'登录完成后回到 FustAI Harness'**
   String get engineAccountReturnToDsh;
 
   /// No description provided for @engineAccountFinishingSignIn.
@@ -11375,13 +11315,13 @@ abstract class L10n {
   /// No description provided for @engineAccountUsageFact.
   ///
   /// In zh, this message translates to:
-  /// **'用量从账号余额中扣除'**
+  /// **'用量由你的 API Key 所属平台计费'**
   String get engineAccountUsageFact;
 
   /// No description provided for @engineAccountBrowserFact.
   ///
   /// In zh, this message translates to:
-  /// **'在浏览器中登录，密码不经过 DSH'**
+  /// **'在浏览器中登录，密码不经过 FustAI'**
   String get engineAccountBrowserFact;
 
   /// No description provided for @engineAccountCredentialsFact.
@@ -11561,7 +11501,7 @@ abstract class L10n {
   /// No description provided for @engineSettingsVersionRequired.
   ///
   /// In zh, this message translates to:
-  /// **'需要 DSH 0.2.1 或更新版本'**
+  /// **'需要 FustAI 0.2.1 或更新版本'**
   String get engineSettingsVersionRequired;
 
   /// No description provided for @engineGeneralWebDisplay.
@@ -11795,7 +11735,7 @@ abstract class L10n {
   /// No description provided for @engineChatLogUpload.
   ///
   /// In zh, this message translates to:
-  /// **'向 DeepSeek 上传对话日志'**
+  /// **'向 FustAI 上传对话日志'**
   String get engineChatLogUpload;
 
   /// No description provided for @engineTranslationProvider.
@@ -11807,13 +11747,13 @@ abstract class L10n {
   /// No description provided for @engineTranslationAccountPaid.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek 账号（付费）'**
+  /// **'FustAI 账号（付费）'**
   String get engineTranslationAccountPaid;
 
   /// No description provided for @engineTranslationApiPaid.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek API（付费）'**
+  /// **'FustAI API（付费）'**
   String get engineTranslationApiPaid;
 
   /// No description provided for @engineTranslationTargetLanguage.
@@ -12341,7 +12281,7 @@ abstract class L10n {
   /// No description provided for @engineSearchDeepSeek.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek 搜索'**
+  /// **'FustAI 搜索'**
   String get engineSearchDeepSeek;
 
   /// No description provided for @engineSearchNewApi.
@@ -13241,7 +13181,7 @@ abstract class L10n {
   /// No description provided for @featuresCordisRemoteUnavailable.
   ///
   /// In zh, this message translates to:
-  /// **'经 DSH Remote 中转时不可用'**
+  /// **'经 FustAI Remote 中转时不可用'**
   String get featuresCordisRemoteUnavailable;
 
   /// No description provided for @featuresCordisReadFailed.
@@ -13535,7 +13475,7 @@ abstract class L10n {
   /// No description provided for @featuresPresetCreatorDescription.
   ///
   /// In zh, this message translates to:
-  /// **'让 Agent 写插件，定制 DSH 本身'**
+  /// **'让 Agent 写插件，定制 FustAI 本身'**
   String get featuresPresetCreatorDescription;
 
   /// No description provided for @featuresHostUnreachable.
@@ -13625,7 +13565,7 @@ abstract class L10n {
   /// No description provided for @featuresJobOutputSubject.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 任务输出'**
+  /// **'FustAI 任务输出'**
   String get featuresJobOutputSubject;
 
   /// No description provided for @featuresJobOutputReadFailed.
@@ -15227,7 +15167,7 @@ abstract class L10n {
   /// No description provided for @featuresExportRemoteHint.
   ///
   /// In zh, this message translates to:
-  /// **'经 DSH Remote 中转时拿不到日志，可以在电脑上的网页版导出'**
+  /// **'经 FustAI Remote 中转时拿不到日志，可以在电脑上的网页版导出'**
   String get featuresExportRemoteHint;
 
   /// No description provided for @featuresExportShareHint.
@@ -15245,7 +15185,7 @@ abstract class L10n {
   /// No description provided for @featuresExportDownloadsHint.
   ///
   /// In zh, this message translates to:
-  /// **'存进 下载/DSH-Go'**
+  /// **'存进 下载/FustAI Harness'**
   String get featuresExportDownloadsHint;
 
   /// No description provided for @featuresExportContents.
@@ -15689,7 +15629,7 @@ abstract class L10n {
   /// No description provided for @harmonyNotificationSettingsFailed.
   ///
   /// In zh, this message translates to:
-  /// **'没能打开系统设置。到「设置 → 通知和状态栏 → DSH Go」里开启'**
+  /// **'没能打开系统设置。到「设置 → 通知和状态栏 → FustAI Harness」里开启'**
   String get harmonyNotificationSettingsFailed;
 
   /// No description provided for @harmonySearchUnavailable.
@@ -15725,7 +15665,7 @@ abstract class L10n {
   /// No description provided for @harmonyCredentialsClearBody.
   ///
   /// In zh, this message translates to:
-  /// **'重试没有用。清除后，App 保存的 API key、DSH Remote 登录、SSH 密码和私钥、论坛登录都会被删除，需要重新填写或登录。已发布的分享链接还在，但这台手机上删不掉了。对话和主机列表会保留。此操作无法撤销。'**
+  /// **'重试没有用。清除后，App 保存的 API key、FustAI Remote 登录、SSH 密码和私钥、论坛登录都会被删除，需要重新填写或登录。已发布的分享链接还在，但这台手机上删不掉了。对话和主机列表会保留。此操作无法撤销。'**
   String get harmonyCredentialsClearBody;
 
   /// No description provided for @harmonyCredentialsClearAction.
@@ -15953,7 +15893,7 @@ abstract class L10n {
   /// No description provided for @harmonyLiveBlockedText.
   ///
   /// In zh, this message translates to:
-  /// **'在系统设置里为 DSH Go 打开通知'**
+  /// **'在系统设置里为 FustAI Harness 打开通知'**
   String get harmonyLiveBlockedText;
 
   /// No description provided for @harmonyAlertsOffTitle.
@@ -16043,7 +15983,7 @@ abstract class L10n {
   /// No description provided for @harmonyVoiceAutoHint.
   ///
   /// In zh, this message translates to:
-  /// **'有 DeepSeek 账号或 API Key 时用 DeepSeek，否则用系统识别'**
+  /// **'有 FustAI 账号或 API Key 时用 FustAI，否则用系统识别'**
   String get harmonyVoiceAutoHint;
 
   /// No description provided for @harmonyVoiceSystemUnavailable.
@@ -16181,7 +16121,7 @@ abstract class L10n {
   /// No description provided for @harmonySafeRepairPrompt.
   ///
   /// In zh, this message translates to:
-  /// **'我的 DSH 正常模式出了问题（{what}）。现在是安全模式，用的是随包的默认配置，我原来的配置没有动。请帮我找原因，动手改之前先告诉我要改什么。'**
+  /// **'我的 FustAI 正常模式出了问题（{what}）。现在是安全模式，用的是随包的默认配置，我原来的配置没有动。请帮我找原因，动手改之前先告诉我要改什么。'**
   String harmonySafeRepairPrompt(String what);
 
   /// No description provided for @harmonyRemindersTitle.
@@ -16463,7 +16403,7 @@ abstract class L10n {
   /// No description provided for @hubSettingsStorageDenied.
   ///
   /// In zh, this message translates to:
-  /// **'没有拿到存储权限。到系统设置里给 DSH Go 开启「所有文件访问」后再试'**
+  /// **'没有拿到存储权限。到系统设置里给 FustAI Harness 开启「所有文件访问」后再试'**
   String get hubSettingsStorageDenied;
 
   /// No description provided for @hubSettingsRestartRequired.
@@ -16631,7 +16571,7 @@ abstract class L10n {
   /// No description provided for @hubSettingsAccount.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek 账号'**
+  /// **'FustAI 账号'**
   String get hubSettingsAccount;
 
   /// No description provided for @hubSettingsSigningIn.
@@ -16639,12 +16579,6 @@ abstract class L10n {
   /// In zh, this message translates to:
   /// **'正在登录…'**
   String get hubSettingsSigningIn;
-
-  /// No description provided for @hubSettingsInvalidKey.
-  ///
-  /// In zh, this message translates to:
-  /// **'Key 无效，查不到余额'**
-  String get hubSettingsInvalidKey;
 
   /// No description provided for @hubSettingsNoApiKey.
   ///
@@ -16661,7 +16595,7 @@ abstract class L10n {
   /// No description provided for @hubSettingsSignInAccount.
   ///
   /// In zh, this message translates to:
-  /// **'登录 DeepSeek 账号'**
+  /// **'登录 FustAI 账号'**
   String get hubSettingsSignInAccount;
 
   /// No description provided for @hubSettingsOrApiKey.
@@ -16715,7 +16649,7 @@ abstract class L10n {
   /// No description provided for @hubPluginRequiresDsh.
   ///
   /// In zh, this message translates to:
-  /// **'需要 DSH'**
+  /// **'需要 FustAI'**
   String get hubPluginRequiresDsh;
 
   /// No description provided for @hubPluginPackageName.
@@ -16787,7 +16721,7 @@ abstract class L10n {
   /// No description provided for @hubPluginOfficial.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 官方'**
+  /// **'FustAI 官方'**
   String get hubPluginOfficial;
 
   /// No description provided for @hubPluginNotLoaded.
@@ -16904,18 +16838,6 @@ abstract class L10n {
   /// **'AI 能读取和修改相册、下载、文档等手机文件，引擎会重启一次。'**
   String get hubSettingsStorageBody;
 
-  /// No description provided for @hubSettingsBalance.
-  ///
-  /// In zh, this message translates to:
-  /// **'余额 {amount}'**
-  String hubSettingsBalance(String amount);
-
-  /// No description provided for @hubSettingsBalanceLow.
-  ///
-  /// In zh, this message translates to:
-  /// **'余额 {amount} · 余额不足'**
-  String hubSettingsBalanceLow(String amount);
-
   /// No description provided for @hubSettingsAccountSemantics.
   ///
   /// In zh, this message translates to:
@@ -16931,7 +16853,7 @@ abstract class L10n {
   /// No description provided for @hubSettingsApiKey.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek API Key'**
+  /// **'FustAI API Key'**
   String get hubSettingsApiKey;
 
   /// No description provided for @hubPluginBrowserFailed.
@@ -17045,7 +16967,7 @@ abstract class L10n {
   /// No description provided for @hubInterfaceWebHint.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 官方网页版'**
+  /// **'FustAI 官方网页版'**
   String get hubInterfaceWebHint;
 
   /// No description provided for @hubInterfaceOpenWeb.
@@ -17105,13 +17027,13 @@ abstract class L10n {
   /// No description provided for @hubAbout.
   ///
   /// In zh, this message translates to:
-  /// **'关于 DSH Go'**
+  /// **'关于 FustAI Harness'**
   String get hubAbout;
 
   /// No description provided for @hubAboutAuthor.
   ///
   /// In zh, this message translates to:
-  /// **'DSH Go 原作者'**
+  /// **'FustAI Harness 原作者'**
   String get hubAboutAuthor;
 
   /// No description provided for @hubAboutBilibili.
@@ -17261,7 +17183,7 @@ abstract class L10n {
   /// No description provided for @iosFilesFolderHint.
   ///
   /// In zh, this message translates to:
-  /// **'文件 App 的 DSH Go 文件夹'**
+  /// **'文件 App 的 FustAI Harness 文件夹'**
   String get iosFilesFolderHint;
 
   /// No description provided for @iosSavingToFiles.
@@ -17285,7 +17207,7 @@ abstract class L10n {
   /// No description provided for @iosNotificationSettingsFailed.
   ///
   /// In zh, this message translates to:
-  /// **'没能打开系统设置。到「设置 → DSH Go → 通知」里开启'**
+  /// **'没能打开系统设置。到「设置 → FustAI Harness → 通知」里开启'**
   String get iosNotificationSettingsFailed;
 
   /// No description provided for @iosVoiceSystemHint.
@@ -17303,13 +17225,13 @@ abstract class L10n {
   /// No description provided for @iosPluginsPermissionLocalThirdParty.
   ///
   /// In zh, this message translates to:
-  /// **'插件以 DSH 的权限运行：能读写文件、执行命令、读取 API Key，不受工作区沙箱限制。由第三方提供，DSH 官方未审核。'**
+  /// **'插件以 FustAI 的权限运行：能读写文件、执行命令、读取 API Key，不受工作区沙箱限制。由第三方提供，FustAI 官方未审核。'**
   String get iosPluginsPermissionLocalThirdParty;
 
   /// No description provided for @iosPluginsPermissionLocalTrusted.
   ///
   /// In zh, this message translates to:
-  /// **'插件以 DSH 的权限运行：能读写文件、执行命令、读取 API Key，不受工作区沙箱限制。只装你信任的插件。'**
+  /// **'插件以 FustAI 的权限运行：能读写文件、执行命令、读取 API Key，不受工作区沙箱限制。只装你信任的插件。'**
   String get iosPluginsPermissionLocalTrusted;
 
   /// No description provided for @iosIconChanged.
@@ -17771,13 +17693,13 @@ abstract class L10n {
   /// No description provided for @iosSpeechCallEndNoRecognizer.
   ///
   /// In zh, this message translates to:
-  /// **'语音通话需要能识别录音的方式：登录 DeepSeek 账号、填写 API Key，或配置其他可用的云端识别。iOS 暂不提供本地语音模型下载。'**
+  /// **'语音通话需要能识别录音的方式：登录 FustAI 账号、填写 API Key，或配置其他可用的云端识别。iOS 暂不提供本地语音模型下载。'**
   String get iosSpeechCallEndNoRecognizer;
 
   /// No description provided for @iosSpeechCallEndNoRecognizerSignedIn.
   ///
   /// In zh, this message translates to:
-  /// **'当前连接不能用已登录账号识别通话录音（例如经 DSH Remote 中继）；请填写 DeepSeek API Key 或配置其他可用的云端识别。iOS 暂不提供本地语音模型下载。'**
+  /// **'当前连接不能用已登录账号识别通话录音（例如经 FustAI Remote 中继）；请填写 FustAI API Key 或配置其他可用的云端识别。iOS 暂不提供本地语音模型下载。'**
   String get iosSpeechCallEndNoRecognizerSignedIn;
 
   /// No description provided for @iosPhoneLinkErrorPairingRejected.
@@ -18155,7 +18077,7 @@ abstract class L10n {
   /// No description provided for @iconShortcutNote.
   ///
   /// In zh, this message translates to:
-  /// **'系统不允许把桌面图标换成任意图片，这里会另放一个打开 DSH Go 的快捷方式；部分桌面会在它的角上加一个小标'**
+  /// **'系统不允许把桌面图标换成任意图片，这里会另放一个打开 FustAI Harness 的快捷方式；部分桌面会在它的角上加一个小标'**
   String get iconShortcutNote;
 
   /// No description provided for @iconShortcutAdded.
@@ -18173,7 +18095,7 @@ abstract class L10n {
   /// No description provided for @iconShortcutNoDialog.
   ///
   /// In zh, this message translates to:
-  /// **'没有弹窗？在系统设置里允许 DSH Go 创建桌面快捷方式'**
+  /// **'没有弹窗？在系统设置里允许 FustAI Harness 创建桌面快捷方式'**
   String get iconShortcutNoDialog;
 
   /// No description provided for @iconShortcutSettings.
@@ -18551,25 +18473,25 @@ abstract class L10n {
   /// No description provided for @livePublicRunning.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 正在干活'**
+  /// **'FustAI 正在干活'**
   String get livePublicRunning;
 
   /// No description provided for @livePublicWaiting.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 在等你处理'**
+  /// **'FustAI 在等你处理'**
   String get livePublicWaiting;
 
   /// No description provided for @livePublicDone.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 做完了'**
+  /// **'FustAI 做完了'**
   String get livePublicDone;
 
   /// No description provided for @livePublicFailed.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 出错了'**
+  /// **'FustAI 出错了'**
   String get livePublicFailed;
 
   /// No description provided for @liveSettingsTitle.
@@ -18611,7 +18533,7 @@ abstract class L10n {
   /// No description provided for @liveBlockedText.
   ///
   /// In zh, this message translates to:
-  /// **'在系统设置里为 DSH Go 打开「实时活动」（有的手机叫「在流体云中显示」）'**
+  /// **'在系统设置里为 FustAI Harness 打开「实时活动」（有的手机叫「在流体云中显示」）'**
   String get liveBlockedText;
 
   /// No description provided for @localeTitle.
@@ -18641,7 +18563,7 @@ abstract class L10n {
   /// No description provided for @localEnvChooseTitle.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 在哪里运行？'**
+  /// **'FustAI 在哪里运行？'**
   String get localEnvChooseTitle;
 
   /// No description provided for @localEnvChooseMessage.
@@ -18671,13 +18593,13 @@ abstract class L10n {
   /// No description provided for @localEnvRemoteDetail.
   ///
   /// In zh, this message translates to:
-  /// **'连接电脑或服务器上的 DSH'**
+  /// **'连接电脑或服务器上的 FustAI'**
   String get localEnvRemoteDetail;
 
   /// No description provided for @localEnvUnavailable.
   ///
   /// In zh, this message translates to:
-  /// **'这台设备暂时不能在本机运行 DSH'**
+  /// **'这台设备暂时不能在本机运行 FustAI'**
   String get localEnvUnavailable;
 
   /// No description provided for @localEnvUnsupported.
@@ -18701,7 +18623,7 @@ abstract class L10n {
   /// No description provided for @localEnvInstallMessage.
   ///
   /// In zh, this message translates to:
-  /// **'在这台手机上运行 DSH'**
+  /// **'在这台手机上运行 FustAI'**
   String get localEnvInstallMessage;
 
   /// No description provided for @localEnvFactStorage.
@@ -18863,7 +18785,7 @@ abstract class L10n {
   /// No description provided for @localEnvChooseUseTitle.
   ///
   /// In zh, this message translates to:
-  /// **'想怎么用 dsh-Go？'**
+  /// **'想怎么用 FustAI Harness？'**
   String get localEnvChooseUseTitle;
 
   /// No description provided for @localEnvTavernTitle.
@@ -18875,7 +18797,7 @@ abstract class L10n {
   /// No description provided for @localEnvTavernDetail.
   ///
   /// In zh, this message translates to:
-  /// **'接回 DeepSeek 的对话也在这里 · 不用安装'**
+  /// **'接回 FustAI 的对话也在这里 · 不用安装'**
   String get localEnvTavernDetail;
 
   /// No description provided for @marketSectionOfficial.
@@ -18887,7 +18809,7 @@ abstract class L10n {
   /// No description provided for @marketSectionAdapted.
   ///
   /// In zh, this message translates to:
-  /// **'适配 DSH Go'**
+  /// **'适配 FustAI Harness'**
   String get marketSectionAdapted;
 
   /// No description provided for @marketSectionAll.
@@ -18923,7 +18845,7 @@ abstract class L10n {
   /// No description provided for @marketTierAdapted.
   ///
   /// In zh, this message translates to:
-  /// **'适配 DSH Go'**
+  /// **'适配 FustAI Harness'**
   String get marketTierAdapted;
 
   /// No description provided for @marketRiskMedium.
@@ -19013,13 +18935,13 @@ abstract class L10n {
   /// No description provided for @marketFlagNotAdapted.
   ///
   /// In zh, this message translates to:
-  /// **'未适配 DSH Go'**
+  /// **'未适配 FustAI Harness'**
   String get marketFlagNotAdapted;
 
   /// No description provided for @marketFlagNotAdaptedBody.
   ///
   /// In zh, this message translates to:
-  /// **'没有声明 DSH Go 原生协议，在 App 里没有原生界面'**
+  /// **'没有声明 FustAI Harness 原生协议，在 App 里没有原生界面'**
   String get marketFlagNotAdaptedBody;
 
   /// No description provided for @marketFlagOtherBody.
@@ -19079,13 +19001,13 @@ abstract class L10n {
   /// No description provided for @marketRequiresApp.
   ///
   /// In zh, this message translates to:
-  /// **'需要 DSH Go'**
+  /// **'需要 FustAI Harness'**
   String get marketRequiresApp;
 
   /// No description provided for @marketNeedsApp.
   ///
   /// In zh, this message translates to:
-  /// **'需要 DSH Go {version} 或更高版本'**
+  /// **'需要 FustAI Harness {version} 或更高版本'**
   String marketNeedsApp(String version);
 
   /// No description provided for @marketUpdateAvailable.
@@ -19325,7 +19247,7 @@ abstract class L10n {
   /// No description provided for @mediaErrorBalance.
   ///
   /// In zh, this message translates to:
-  /// **'余额不足'**
+  /// **'生成额度不足'**
   String get mediaErrorBalance;
 
   /// No description provided for @mediaErrorQuota.
@@ -20057,7 +19979,7 @@ abstract class L10n {
   /// No description provided for @mediaConfigCheckNote.
   ///
   /// In zh, this message translates to:
-  /// **'仅检查本地配置快照，不请求供应商，不产生生成费用。不验证密钥、连通性、余额、模型权限或地区；配置是否接受仍以主机为准。'**
+  /// **'仅检查本地配置快照，不请求供应商，不产生生成费用。不验证密钥、连通性、模型权限或地区；配置是否接受仍以主机为准。'**
   String get mediaConfigCheckNote;
 
   /// No description provided for @mediaConfigCheckReady.
@@ -20231,7 +20153,7 @@ abstract class L10n {
   /// No description provided for @modeWorkSubtitle.
   ///
   /// In zh, this message translates to:
-  /// **'和 DSH 一起干活'**
+  /// **'和 FustAI 一起干活'**
   String get modeWorkSubtitle;
 
   /// No description provided for @modeCompanionShort.
@@ -20543,7 +20465,7 @@ abstract class L10n {
   /// No description provided for @phoneDiagnosticsSaveHint.
   ///
   /// In zh, this message translates to:
-  /// **'存进 下载/DSH-Go'**
+  /// **'存进 下载/FustAI Harness'**
   String get phoneDiagnosticsSaveHint;
 
   /// No description provided for @phoneDiagnosticsNote.
@@ -20861,7 +20783,7 @@ abstract class L10n {
   /// No description provided for @phoneLogShareTitle.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 引擎日志'**
+  /// **'FustAI 引擎日志'**
   String get phoneLogShareTitle;
 
   /// No description provided for @phoneLogCopyAll.
@@ -21041,7 +20963,7 @@ abstract class L10n {
   /// No description provided for @phoneActionLogEmptyHint.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 在手机上的每一步都会记在这里'**
+  /// **'FustAI 在手机上的每一步都会记在这里'**
   String get phoneActionLogEmptyHint;
 
   /// No description provided for @phoneAppRuleDeny.
@@ -21179,7 +21101,7 @@ abstract class L10n {
   /// No description provided for @phoneAlwaysAllowWarning.
   ///
   /// In zh, this message translates to:
-  /// **'开启后 DSH 可不再询问就把内容发到这些应用，发出后无法撤回。'**
+  /// **'开启后 FustAI 可不再询问就把内容发到这些应用，发出后无法撤回。'**
   String get phoneAlwaysAllowWarning;
 
   /// No description provided for @phoneAlwaysAllowConfirm.
@@ -21251,7 +21173,7 @@ abstract class L10n {
   /// No description provided for @phoneDndShizukuPermissionFailed.
   ///
   /// In zh, this message translates to:
-  /// **'没有拿到授权。可以在 Shizuku 的「应用管理」里给 DSH Go 授权'**
+  /// **'没有拿到授权。可以在 Shizuku 的「应用管理」里给 FustAI Harness 授权'**
   String get phoneDndShizukuPermissionFailed;
 
   /// No description provided for @phoneDndPairedConnect.
@@ -21455,13 +21377,13 @@ abstract class L10n {
   /// No description provided for @phoneDndRootConnected.
   ///
   /// In zh, this message translates to:
-  /// **'root 已连接。断开后要回到这里再选一次；打开「更多设置」中的「保持 root 通道」，DSH Go 才会自己再去申请。'**
+  /// **'root 已连接。断开后要回到这里再选一次；打开「更多设置」中的「保持 root 通道」，FustAI Harness 才会自己再去申请。'**
   String get phoneDndRootConnected;
 
   /// No description provided for @phoneDndRootConnectedKept.
   ///
   /// In zh, this message translates to:
-  /// **'root 已连接。断开后 DSH Go 会自己向 root 管理器再次申请。'**
+  /// **'root 已连接。断开后 FustAI Harness 会自己向 root 管理器再次申请。'**
   String get phoneDndRootConnectedKept;
 
   /// No description provided for @phoneDndRootRetry.
@@ -21491,13 +21413,13 @@ abstract class L10n {
   /// No description provided for @phoneDndGrantShizukuHint.
   ///
   /// In zh, this message translates to:
-  /// **'Shizuku 已在运行，还要给 DSH Go 授权。'**
+  /// **'Shizuku 已在运行，还要给 FustAI Harness 授权。'**
   String get phoneDndGrantShizukuHint;
 
   /// No description provided for @phoneDndGrantShizuku.
   ///
   /// In zh, this message translates to:
-  /// **'授权给 DSH Go'**
+  /// **'授权给 FustAI Harness'**
   String get phoneDndGrantShizuku;
 
   /// No description provided for @phoneDndShizukuAllSet.
@@ -21521,7 +21443,7 @@ abstract class L10n {
   /// No description provided for @phoneDndShizukuGranted.
   ///
   /// In zh, this message translates to:
-  /// **'已授权给 DSH Go'**
+  /// **'已授权给 FustAI Harness'**
   String get phoneDndShizukuGranted;
 
   /// No description provided for @phoneDndShizukuCompatibility.
@@ -21563,7 +21485,7 @@ abstract class L10n {
   /// No description provided for @phoneDndStartPairingStep.
   ///
   /// In zh, this message translates to:
-  /// **'回到这里点「开始配对」，DSH 会发一条通知。'**
+  /// **'回到这里点「开始配对」，FustAI 会发一条通知。'**
   String get phoneDndStartPairingStep;
 
   /// No description provided for @phoneDndGetPairingCodeStep.
@@ -21575,7 +21497,7 @@ abstract class L10n {
   /// No description provided for @phoneDndEnterPairingCodeStep.
   ///
   /// In zh, this message translates to:
-  /// **'下拉通知栏，把配对码填进 DSH 的通知。配对成功后点「连接」。'**
+  /// **'下拉通知栏，把配对码填进 FustAI 的通知。配对成功后点「连接」。'**
   String get phoneDndEnterPairingCodeStep;
 
   /// No description provided for @phoneDndStartPairing.
@@ -21731,13 +21653,13 @@ abstract class L10n {
   /// No description provided for @phoneOpenAccessibilityFailed.
   ///
   /// In zh, this message translates to:
-  /// **'打不开系统设置，请到「设置 → 无障碍」里找到 DSH'**
+  /// **'打不开系统设置，请到「设置 → 无障碍」里找到 FustAI'**
   String get phoneOpenAccessibilityFailed;
 
   /// No description provided for @phoneOpenAppInfoFailed.
   ///
   /// In zh, this message translates to:
-  /// **'打不开应用信息，请到「设置 → 应用」里找到 DSH Go'**
+  /// **'打不开应用信息，请到「设置 → 应用」里找到 FustAI Harness'**
   String get phoneOpenAppInfoFailed;
 
   /// No description provided for @phoneStopFailed.
@@ -21965,7 +21887,7 @@ abstract class L10n {
   /// No description provided for @phoneControlReadScreenHint.
   ///
   /// In zh, this message translates to:
-  /// **'看看 DSH 读到了什么，不发给模型'**
+  /// **'看看 FustAI 读到了什么，不发给模型'**
   String get phoneControlReadScreenHint;
 
   /// No description provided for @phoneControlEnableAccessibilityFirst.
@@ -22103,7 +22025,7 @@ abstract class L10n {
   /// No description provided for @phoneDisclosureWhoBody.
   ///
   /// In zh, this message translates to:
-  /// **'发给你选的 DeepSeek 模型（云端）。银行卡号、身份证号会先打码。'**
+  /// **'发给你选的 FustAI 模型（云端）。银行卡号、身份证号会先打码。'**
   String get phoneDisclosureWhoBody;
 
   /// No description provided for @phoneDisclosureNeverTitle.
@@ -22139,7 +22061,7 @@ abstract class L10n {
   /// No description provided for @phoneDisclosureIntro.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 会像你一样看屏幕、点按，帮你把事办完。开启前，先了解这几点：'**
+  /// **'FustAI 会像你一样看屏幕、点按，帮你把事办完。开启前，先了解这几点：'**
   String get phoneDisclosureIntro;
 
   /// No description provided for @phoneDisclosureRestartNote.
@@ -22211,7 +22133,7 @@ abstract class L10n {
   /// No description provided for @phoneRestrictedTryAccessibility.
   ///
   /// In zh, this message translates to:
-  /// **'先去「无障碍」里点一次 DSH 的开关，看到「受限制的设置」提示后点「确定」。做过这一步，下面的选项才会出现。'**
+  /// **'先去「无障碍」里点一次 FustAI 的开关，看到「受限制的设置」提示后点「确定」。做过这一步，下面的选项才会出现。'**
   String get phoneRestrictedTryAccessibility;
 
   /// No description provided for @phoneRestrictedOpenInfoStep.
@@ -22223,7 +22145,7 @@ abstract class L10n {
   /// No description provided for @phoneRestrictedBackAccessibility.
   ///
   /// In zh, this message translates to:
-  /// **'回到「无障碍」，打开 DSH。'**
+  /// **'回到「无障碍」，打开 FustAI。'**
   String get phoneRestrictedBackAccessibility;
 
   /// No description provided for @phoneRestrictedMenuStep.
@@ -22235,25 +22157,25 @@ abstract class L10n {
   /// No description provided for @phoneRestrictedTryOverlay.
   ///
   /// In zh, this message translates to:
-  /// **'先去「悬浮窗」设置里点一次 DSH Go 的开关，看到「受限制的设置」提示后点「确定」。做过这一步，下面的选项才会出现。'**
+  /// **'先去「悬浮窗」设置里点一次 FustAI Harness 的开关，看到「受限制的设置」提示后点「确定」。做过这一步，下面的选项才会出现。'**
   String get phoneRestrictedTryOverlay;
 
   /// No description provided for @phoneRestrictedBackOverlay.
   ///
   /// In zh, this message translates to:
-  /// **'回到「悬浮窗」设置，打开 DSH Go。'**
+  /// **'回到「悬浮窗」设置，打开 FustAI Harness。'**
   String get phoneRestrictedBackOverlay;
 
   /// No description provided for @phoneRestrictedHuaweiOverlay.
   ///
   /// In zh, this message translates to:
-  /// **'华为 HarmonyOS 4 及更早的系统大多没有这一步，直接去「悬浮窗」设置打开 DSH Go。'**
+  /// **'华为 HarmonyOS 4 及更早的系统大多没有这一步，直接去「悬浮窗」设置打开 FustAI Harness。'**
   String get phoneRestrictedHuaweiOverlay;
 
   /// No description provided for @phoneRestrictedHuaweiAccessibility.
   ///
   /// In zh, this message translates to:
-  /// **'华为 HarmonyOS 4 及更早的系统大多没有这一步，直接去「无障碍」打开 DSH。'**
+  /// **'华为 HarmonyOS 4 及更早的系统大多没有这一步，直接去「无障碍」打开 FustAI。'**
   String get phoneRestrictedHuaweiAccessibility;
 
   /// No description provided for @phoneRestrictedVivoNote.
@@ -22271,7 +22193,7 @@ abstract class L10n {
   /// No description provided for @phoneRestrictedOppoNote.
   ///
   /// In zh, this message translates to:
-  /// **'ColorOS 有时找不到这个选项。这时用系统自带的「文件管理」找到 DSH 的安装包，点它覆盖安装一次（不用卸载，对话和设置都在），再去开无障碍。'**
+  /// **'ColorOS 有时找不到这个选项。这时用系统自带的「文件管理」找到 FustAI 的安装包，点它覆盖安装一次（不用卸载，对话和设置都在），再去开无障碍。'**
   String get phoneRestrictedOppoNote;
 
   /// No description provided for @phoneRestrictedHuaweiNote.
@@ -22475,19 +22397,19 @@ abstract class L10n {
   /// No description provided for @phoneFailureStartup.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 启动失败'**
+  /// **'FustAI 启动失败'**
   String get phoneFailureStartup;
 
   /// No description provided for @phoneFailureCrashedEarly.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 启动后很快崩溃了'**
+  /// **'FustAI 启动后很快崩溃了'**
   String get phoneFailureCrashedEarly;
 
   /// No description provided for @phoneFailureCrashedLate.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 运行中崩溃了'**
+  /// **'FustAI 运行中崩溃了'**
   String get phoneFailureCrashedLate;
 
   /// No description provided for @phoneFailureFatal.
@@ -22607,7 +22529,7 @@ abstract class L10n {
   /// No description provided for @phoneSafeRestoreIntro.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 会回到上次正常运行时的配置：'**
+  /// **'FustAI 会回到上次正常运行时的配置：'**
   String get phoneSafeRestoreIntro;
 
   /// No description provided for @phoneSafeRestoreSettings.
@@ -22829,7 +22751,7 @@ abstract class L10n {
   /// No description provided for @phoneAppRulesLoosenTitle.
   ///
   /// In zh, this message translates to:
-  /// **'让 DSH 操作「{app}」？'**
+  /// **'让 FustAI 操作「{app}」？'**
   String phoneAppRulesLoosenTitle(String app);
 
   /// No description provided for @phoneAppRulesSkipStepsTitle.
@@ -22889,7 +22811,7 @@ abstract class L10n {
   /// No description provided for @phoneControlRemoteHint.
   ///
   /// In zh, this message translates to:
-  /// **'「{host}」上的 DSH 操作不了这台手机，切回「本机」后可用'**
+  /// **'「{host}」上的 FustAI 操作不了这台手机，切回「本机」后可用'**
   String phoneControlRemoteHint(String host);
 
   /// No description provided for @phoneRestrictedSubtitle.
@@ -22919,7 +22841,7 @@ abstract class L10n {
   /// No description provided for @phoneSafeRestoreAt.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 会回到 {when} 正常运行时的配置：'**
+  /// **'FustAI 会回到 {when} 正常运行时的配置：'**
   String phoneSafeRestoreAt(String when);
 
   /// No description provided for @phoneSafeRestoreDisable.
@@ -22979,7 +22901,7 @@ abstract class L10n {
   /// No description provided for @phoneAppRulesLoosenBody.
   ///
   /// In zh, this message translates to:
-  /// **'银行、支付类 App 会检测自动操作，可能限制登录甚至冻结账号；DSH 默认不输密码、不付款。'**
+  /// **'银行、支付类 App 会检测自动操作，可能限制登录甚至冻结账号；FustAI 默认不输密码、不付款。'**
   String get phoneAppRulesLoosenBody;
 
   /// No description provided for @phoneAppRulesSkipStepsBody.
@@ -23063,7 +22985,7 @@ abstract class L10n {
   /// No description provided for @phoneReturnAfterDone.
   ///
   /// In zh, this message translates to:
-  /// **'完成后返回 DSH Go'**
+  /// **'完成后返回 FustAI Harness'**
   String get phoneReturnAfterDone;
 
   /// No description provided for @phoneReturnAfterDoneHint.
@@ -23489,7 +23411,7 @@ abstract class L10n {
   /// No description provided for @phoneSelfCheckSaved.
   ///
   /// In zh, this message translates to:
-  /// **'报告已存入下载/DSH-Go。'**
+  /// **'报告已存入下载/FustAI Harness。'**
   String get phoneSelfCheckSaved;
 
   /// No description provided for @phoneSelfCheckSaveFailed.
@@ -23657,7 +23579,7 @@ abstract class L10n {
   /// No description provided for @phoneLocalOcrDetails.
   ///
   /// In zh, this message translates to:
-  /// **'默认开启。关闭时，文字识别请求不会触发 SDK 加载或初始化；Remote 扫码配对会独立按需初始化共用的 SDK，不会开启文字识别。截图和识别文字可能发送给你配置的模型。关闭后不再开始新的本机文字识别；已经开始的识别可能仍在收尾。关闭不会卸载 SDK，也不承诺清除或停止发送此前积累的 SDK 统计。'**
+  /// **'默认开启。关闭时，文字识别请求不会触发 SDK 加载或初始化。截图和识别文字可能发送给你配置的模型。关闭后不再开始新的本机文字识别；已经开始的识别可能仍在收尾。关闭不会卸载 SDK，也不承诺清除或停止发送此前积累的 SDK 统计。'**
   String get phoneLocalOcrDetails;
 
   /// No description provided for @phoneBackgroundParallelTitle.
@@ -23849,19 +23771,19 @@ abstract class L10n {
   /// No description provided for @phoneBackgroundGuideBody.
   ///
   /// In zh, this message translates to:
-  /// **'需要你确认时，会显示 DSH Go 卡片。卡片不可用时会尝试通知或回到 App。请在系统设置中允许手机操控通知和弹出提醒。'**
+  /// **'需要你确认时，会显示 FustAI Harness 卡片。卡片不可用时会尝试通知或回到 App。请在系统设置中允许手机操控通知和弹出提醒。'**
   String get phoneBackgroundGuideBody;
 
   /// No description provided for @phoneBackgroundOemHint.
   ///
   /// In zh, this message translates to:
-  /// **'在 DSH Go 的系统权限页检查「后台弹出界面」（若提供）。允许后可改善自动返回；菜单名称随系统版本变化。'**
+  /// **'在 FustAI Harness 的系统权限页检查「后台弹出界面」（若提供）。允许后可改善自动返回；菜单名称随系统版本变化。'**
   String get phoneBackgroundOemHint;
 
   /// No description provided for @phoneBackgroundReturnHint.
   ///
   /// In zh, this message translates to:
-  /// **'如果任务完成后没有自动返回，可点通知「任务完成 · 查看结果」。系统关闭通知或限制后台弹出时，可能需要手动打开 DSH Go。'**
+  /// **'如果任务完成后没有自动返回，可点通知「任务完成 · 查看结果」。系统关闭通知或限制后台弹出时，可能需要手动打开 FustAI Harness。'**
   String get phoneBackgroundReturnHint;
 
   /// No description provided for @phoneBackgroundGotIt.
@@ -23885,7 +23807,7 @@ abstract class L10n {
   /// No description provided for @phonePrivilegedUpgrade.
   ///
   /// In zh, this message translates to:
-  /// **'此版本尚不支持该特权通道，请更新 DSH Go 后使用。'**
+  /// **'此版本尚不支持该特权通道，请更新 FustAI Harness 后使用。'**
   String get phonePrivilegedUpgrade;
 
   /// No description provided for @phonePrivilegedSui.
@@ -23951,13 +23873,13 @@ abstract class L10n {
   /// No description provided for @phonePrivilegedRootRiskTitle.
   ///
   /// In zh, this message translates to:
-  /// **'给 DSH Go root 权限？'**
+  /// **'给 FustAI Harness root 权限？'**
   String get phonePrivilegedRootRiskTitle;
 
   /// No description provided for @phonePrivilegedRootRiskBody.
   ///
   /// In zh, this message translates to:
-  /// **'root 管理器（Magisk、KernelSU 或 APatch）会弹窗问你。允许后，DSH Go 以 root 运行自己的后台服务；只有打开「保持 root 通道」，断开或重启后才会自己再去申请。'**
+  /// **'root 管理器（Magisk、KernelSU 或 APatch）会弹窗问你。允许后，FustAI Harness 以 root 运行自己的后台服务；只有打开「保持 root 通道」，断开或重启后才会自己再去申请。'**
   String get phonePrivilegedRootRiskBody;
 
   /// No description provided for @phoneKeepTitle.
@@ -23969,19 +23891,19 @@ abstract class L10n {
   /// No description provided for @phoneKeepRootDescription.
   ///
   /// In zh, this message translates to:
-  /// **'断开、重开 App 或重启手机后，DSH Go 会自己再向 root 管理器申请；给不给仍由管理器决定。'**
+  /// **'断开、重开 App 或重启手机后，FustAI Harness 会自己再向 root 管理器申请；给不给仍由管理器决定。'**
   String get phoneKeepRootDescription;
 
   /// No description provided for @phoneKeepSharedDescription.
   ///
   /// In zh, this message translates to:
-  /// **'断开、重开 App 或重启手机后，DSH Go 用已有的授权自己连回去，不会替你申请授权。'**
+  /// **'断开、重开 App 或重启手机后，FustAI Harness 用已有的授权自己连回去，不会替你申请授权。'**
   String get phoneKeepSharedDescription;
 
   /// No description provided for @phoneKeepAdbDescription.
   ///
   /// In zh, this message translates to:
-  /// **'断开、重开 App 或重启手机后，DSH Go 用已有的配对在 Wi‑Fi 下自己连回去；有「自动恢复无障碍」的权限时，还会试着打开一次无线调试。'**
+  /// **'断开、重开 App 或重启手机后，FustAI Harness 用已有的配对在 Wi‑Fi 下自己连回去；有「自动恢复无障碍」的权限时，还会试着打开一次无线调试。'**
   String get phoneKeepAdbDescription;
 
   /// No description provided for @phoneKeepRestoring.
@@ -24251,7 +24173,7 @@ abstract class L10n {
   /// No description provided for @phoneModeAutoNote.
   ///
   /// In zh, this message translates to:
-  /// **'系统设置和权限页面、密码和验证码、DSH Go 自身仍由你来操作；银行、支付类 App 默认不碰，可在设置里调整。'**
+  /// **'系统设置和权限页面、密码和验证码、FustAI Harness 自身仍由你来操作；银行、支付类 App 默认不碰，可在设置里调整。'**
   String get phoneModeAutoNote;
 
   /// No description provided for @phoneModeAutoUnlockNote.
@@ -24287,7 +24209,7 @@ abstract class L10n {
   /// No description provided for @phoneYoursOwnApp.
   ///
   /// In zh, this message translates to:
-  /// **'DSH Go 自身'**
+  /// **'FustAI Harness 自身'**
   String get phoneYoursOwnApp;
 
   /// No description provided for @phoneYoursDenyList.
@@ -24335,13 +24257,13 @@ abstract class L10n {
   /// No description provided for @phoneUnlockOwnApp.
   ///
   /// In zh, this message translates to:
-  /// **'DSH Go 自身'**
+  /// **'FustAI Harness 自身'**
   String get phoneUnlockOwnApp;
 
   /// No description provided for @phoneUnlockOwnAppHint.
   ///
   /// In zh, this message translates to:
-  /// **'在 DSH Go 里点按和输入'**
+  /// **'在 FustAI Harness 里点按和输入'**
   String get phoneUnlockOwnAppHint;
 
   /// No description provided for @phoneUnlockBusy.
@@ -24401,7 +24323,7 @@ abstract class L10n {
   /// No description provided for @phoneUnlockConfirmOwnAppTitle.
   ///
   /// In zh, this message translates to:
-  /// **'允许 AI 操作 DSH Go 自身？'**
+  /// **'允许 AI 操作 FustAI Harness 自身？'**
   String get phoneUnlockConfirmOwnAppTitle;
 
   /// No description provided for @phoneUnlockCanTitle.
@@ -24485,13 +24407,13 @@ abstract class L10n {
   /// No description provided for @phoneUnlockOwnAppCan1.
   ///
   /// In zh, this message translates to:
-  /// **'在 DSH Go 里点按和输入，包括修改设置'**
+  /// **'在 FustAI Harness 里点按和输入，包括修改设置'**
   String get phoneUnlockOwnAppCan1;
 
   /// No description provided for @phoneUnlockOwnAppCan2.
   ///
   /// In zh, this message translates to:
-  /// **'读取 DSH Go 界面上的对话和设置'**
+  /// **'读取 FustAI Harness 界面上的对话和设置'**
   String get phoneUnlockOwnAppCan2;
 
   /// No description provided for @phoneUnlockOwnAppRisk1.
@@ -24521,7 +24443,7 @@ abstract class L10n {
   /// No description provided for @phoneUnlockDisclaimer3.
   ///
   /// In zh, this message translates to:
-  /// **'由此造成的账号、资金、数据或设备损失由你自行承担，DSH Go 及其开发者不承担责任。'**
+  /// **'由此造成的账号、资金、数据或设备损失由你自行承担，FustAI Harness 及其开发者不承担责任。'**
   String get phoneUnlockDisclaimer3;
 
   /// No description provided for @phoneUnlockDisclaimer4.
@@ -25169,13 +25091,13 @@ abstract class L10n {
   /// No description provided for @pluginsNamespaceDeepSeekModel.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek 模型'**
+  /// **'FustAI 模型'**
   String get pluginsNamespaceDeepSeekModel;
 
   /// No description provided for @pluginsNamespaceAccountModel.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek 账号模型'**
+  /// **'FustAI 账号模型'**
   String get pluginsNamespaceAccountModel;
 
   /// No description provided for @pluginsNamespaceCustomModels.
@@ -25463,7 +25385,7 @@ abstract class L10n {
   /// No description provided for @pluginsProfileTitle.
   ///
   /// In zh, this message translates to:
-  /// **'DSH Go 配置'**
+  /// **'FustAI Harness 配置'**
   String get pluginsProfileTitle;
 
   /// No description provided for @pluginsGistTokenInvalid.
@@ -25529,7 +25451,7 @@ abstract class L10n {
   /// No description provided for @pluginsDshOfficial.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 官方'**
+  /// **'FustAI 官方'**
   String get pluginsDshOfficial;
 
   /// No description provided for @pluginsOfficialToggleOnly.
@@ -25553,7 +25475,7 @@ abstract class L10n {
   /// No description provided for @pluginsPluginsDescription.
   ///
   /// In zh, this message translates to:
-  /// **'插件能给 DSH 加工具、记忆和模型'**
+  /// **'插件能给 FustAI 加工具、记忆和模型'**
   String get pluginsPluginsDescription;
 
   /// No description provided for @pluginsBrowseMarket.
@@ -25661,7 +25583,7 @@ abstract class L10n {
   /// No description provided for @pluginsInstalledRemoteRestart.
   ///
   /// In zh, this message translates to:
-  /// **'已安装「{name}」，重启{host}上的 DSH 后生效'**
+  /// **'已安装「{name}」，重启{host}上的 FustAI 后生效'**
   String pluginsInstalledRemoteRestart(String name, String host);
 
   /// No description provided for @pluginsInstalledNamed.
@@ -25715,7 +25637,7 @@ abstract class L10n {
   /// No description provided for @pluginsBuildScriptWarning.
   ///
   /// In zh, this message translates to:
-  /// **'脚本会以 DSH 的权限在{host}上执行，能读写文件、联网。只在你信任这个插件时允许。'**
+  /// **'脚本会以 FustAI 的权限在{host}上执行，能读写文件、联网。只在你信任这个插件时允许。'**
   String pluginsBuildScriptWarning(String host);
 
   /// No description provided for @pluginsThisDevice.
@@ -25787,7 +25709,7 @@ abstract class L10n {
   /// No description provided for @pluginsCommandAfterInstall.
   ///
   /// In zh, this message translates to:
-  /// **'装好后重启那台电脑上的 DSH，再回来刷新'**
+  /// **'装好后重启那台电脑上的 FustAI，再回来刷新'**
   String get pluginsCommandAfterInstall;
 
   /// No description provided for @pluginsError.
@@ -25979,19 +25901,19 @@ abstract class L10n {
   /// No description provided for @pluginsNotDshPlugin.
   ///
   /// In zh, this message translates to:
-  /// **'不是 DSH 插件，无法加载'**
+  /// **'不是 FustAI 插件，无法加载'**
   String get pluginsNotDshPlugin;
 
   /// No description provided for @pluginsIncompatible.
   ///
   /// In zh, this message translates to:
-  /// **'与当前 DSH 版本不兼容，未加载'**
+  /// **'与当前 FustAI 版本不兼容，未加载'**
   String get pluginsIncompatible;
 
   /// No description provided for @pluginsRequiresDshVersion.
   ///
   /// In zh, this message translates to:
-  /// **'需要 DSH {requiredVersion}，当前 {currentVersion}，未加载'**
+  /// **'需要 FustAI {requiredVersion}，当前 {currentVersion}，未加载'**
   String pluginsRequiresDshVersion(String requiredVersion, String currentVersion);
 
   /// No description provided for @pluginsLoadFailure.
@@ -26483,7 +26405,7 @@ abstract class L10n {
   /// No description provided for @pluginsNotificationSettingsFailed.
   ///
   /// In zh, this message translates to:
-  /// **'没能打开系统设置。到「设置 → 应用 → DSH Go → 通知」里开启'**
+  /// **'没能打开系统设置。到「设置 → 应用 → FustAI Harness → 通知」里开启'**
   String get pluginsNotificationSettingsFailed;
 
   /// No description provided for @pluginsSystemNotificationsOff.
@@ -26837,7 +26759,7 @@ abstract class L10n {
   /// No description provided for @pluginsRemoteRestartToApply.
   ///
   /// In zh, this message translates to:
-  /// **'重启{host}上的 DSH 后生效'**
+  /// **'重启{host}上的 FustAI 后生效'**
   String pluginsRemoteRestartToApply(String host);
 
   /// No description provided for @pluginsImportedCount.
@@ -26951,7 +26873,7 @@ abstract class L10n {
   /// No description provided for @pluginsPluginShareTitle.
   ///
   /// In zh, this message translates to:
-  /// **'DSH Go 插件'**
+  /// **'FustAI Harness 插件'**
   String get pluginsPluginShareTitle;
 
   /// No description provided for @pluginsShareSheetOpenFailed.
@@ -27041,7 +26963,7 @@ abstract class L10n {
   /// No description provided for @pluginsUninstalledRestartRemote.
   ///
   /// In zh, this message translates to:
-  /// **'已卸载「{title}」，重启{host}上的 DSH 后完全移除'**
+  /// **'已卸载「{title}」，重启{host}上的 FustAI 后完全移除'**
   String pluginsUninstalledRestartRemote(String title, String host);
 
   /// No description provided for @pluginsEnableFailed.
@@ -27065,7 +26987,7 @@ abstract class L10n {
   /// No description provided for @pluginsEnabledRestartRemote.
   ///
   /// In zh, this message translates to:
-  /// **'已启用，重启{host}上的 DSH 后生效'**
+  /// **'已启用，重启{host}上的 FustAI 后生效'**
   String pluginsEnabledRestartRemote(String host);
 
   /// No description provided for @pluginsDisabledRestartLocal.
@@ -27077,37 +26999,37 @@ abstract class L10n {
   /// No description provided for @pluginsDisabledRestartRemote.
   ///
   /// In zh, this message translates to:
-  /// **'已停用，重启{host}上的 DSH 后生效'**
+  /// **'已停用，重启{host}上的 FustAI 后生效'**
   String pluginsDisabledRestartRemote(String host);
 
   /// No description provided for @pluginsRelayCommandInstruction.
   ///
   /// In zh, this message translates to:
-  /// **'经 DSH Remote 中转时只能开关插件。在{host}的终端里运行：'**
+  /// **'经 FustAI Remote 中转时只能开关插件。在{host}的终端里运行：'**
   String pluginsRelayCommandInstruction(String host);
 
   /// No description provided for @pluginsPermissionLocalThirdParty.
   ///
   /// In zh, this message translates to:
-  /// **'插件以 DSH 的权限运行：能读写文件、执行命令、读取 API Key 和已授权的手机存储，不受工作区沙箱限制。由第三方提供，DSH 官方未审核。'**
+  /// **'插件以 FustAI 的权限运行：能读写文件、执行命令、读取 API Key 和已授权的手机存储，不受工作区沙箱限制。由第三方提供，FustAI 官方未审核。'**
   String get pluginsPermissionLocalThirdParty;
 
   /// No description provided for @pluginsPermissionLocalTrusted.
   ///
   /// In zh, this message translates to:
-  /// **'插件以 DSH 的权限运行：能读写文件、执行命令、读取 API Key 和已授权的手机存储，不受工作区沙箱限制。只装你信任的插件。'**
+  /// **'插件以 FustAI 的权限运行：能读写文件、执行命令、读取 API Key 和已授权的手机存储，不受工作区沙箱限制。只装你信任的插件。'**
   String get pluginsPermissionLocalTrusted;
 
   /// No description provided for @pluginsPermissionRemoteThirdParty.
   ///
   /// In zh, this message translates to:
-  /// **'插件以 DSH 的权限运行：能读写文件、执行命令、读取 API Key，不受工作区沙箱限制。由第三方提供，DSH 官方未审核。'**
+  /// **'插件以 FustAI 的权限运行：能读写文件、执行命令、读取 API Key，不受工作区沙箱限制。由第三方提供，FustAI 官方未审核。'**
   String get pluginsPermissionRemoteThirdParty;
 
   /// No description provided for @pluginsPermissionRemoteTrusted.
   ///
   /// In zh, this message translates to:
-  /// **'插件以 DSH 的权限运行：能读写文件、执行命令、读取 API Key，不受工作区沙箱限制。只装你信任的插件。'**
+  /// **'插件以 FustAI 的权限运行：能读写文件、执行命令、读取 API Key，不受工作区沙箱限制。只装你信任的插件。'**
   String get pluginsPermissionRemoteTrusted;
 
   /// No description provided for @pluginsSelectedQrCount.
@@ -27371,7 +27293,7 @@ abstract class L10n {
   /// No description provided for @plugslotsIssueNeedsApp.
   ///
   /// In zh, this message translates to:
-  /// **'需要 DSH Go {version} 或更新版本'**
+  /// **'需要 FustAI Harness {version} 或更新版本'**
   String plugslotsIssueNeedsApp(String version);
 
   /// No description provided for @plugslotsIssueNewerProtocol.
@@ -28001,25 +27923,25 @@ abstract class L10n {
   /// No description provided for @remoteManagedHelp.
   ///
   /// In zh, this message translates to:
-  /// **'自动启动或复用 App 托管的 DSH；不会自动替换存活但无法复用的实例。'**
+  /// **'自动启动或复用 App 托管的 FustAI；不会自动替换存活但无法复用的实例。'**
   String get remoteManagedHelp;
 
   /// No description provided for @remoteAttachOnlyHelp.
   ///
   /// In zh, this message translates to:
-  /// **'只转发到远端 127.0.0.1 的固定端口；不启动、停止或重启 DSH。'**
+  /// **'只转发到远端 127.0.0.1 的固定端口；不启动、停止或重启 FustAI。'**
   String get remoteAttachOnlyHelp;
 
   /// No description provided for @remoteDshPort.
   ///
   /// In zh, this message translates to:
-  /// **'远端 DSH 端口'**
+  /// **'远端 FustAI 端口'**
   String get remoteDshPort;
 
   /// No description provided for @remoteDshToken.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 登录令牌'**
+  /// **'FustAI 登录令牌'**
   String get remoteDshToken;
 
   /// No description provided for @remoteDshTokenHelp.
@@ -28031,7 +27953,7 @@ abstract class L10n {
   /// No description provided for @remoteAttachWorkingDirectoryHelp.
   ///
   /// In zh, this message translates to:
-  /// **'既有实例不执行目录探测；请填写远端绝对路径，留空使用 DSH 默认目录。'**
+  /// **'既有实例不执行目录探测；请填写远端绝对路径，留空使用 FustAI 默认目录。'**
   String get remoteAttachWorkingDirectoryHelp;
 
   /// No description provided for @remoteSshCompression.
@@ -28049,31 +27971,31 @@ abstract class L10n {
   /// No description provided for @remoteRestartManaged.
   ///
   /// In zh, this message translates to:
-  /// **'重启托管 DSH'**
+  /// **'重启托管 FustAI'**
   String get remoteRestartManaged;
 
   /// No description provided for @remoteRestartManagedWarning.
   ///
   /// In zh, this message translates to:
-  /// **'这会停止 App 记录的远端 DSH 并重新启动，可能中断其他客户端和进行中的对话。确认没有其他人在使用后再继续。普通测试连接不会执行此操作。'**
+  /// **'这会停止 App 记录的远端 FustAI 并重新启动，可能中断其他客户端和进行中的对话。确认没有其他人在使用后再继续。普通测试连接不会执行此操作。'**
   String get remoteRestartManagedWarning;
 
   /// No description provided for @remoteErrSharedInstance.
   ///
   /// In zh, this message translates to:
-  /// **'远端托管 DSH 仍在运行，但启动命令不同或缺少有效启动日志。为保护共享实例，未自动重启；请检查配置，改用“只连接”，或在编辑主机中明确选择“重启托管 DSH”。'**
+  /// **'远端托管 FustAI 仍在运行，但启动命令不同或缺少有效启动日志。为保护共享实例，未自动重启；请检查配置，改用“只连接”，或在编辑主机中明确选择“重启托管 FustAI”。'**
   String get remoteErrSharedInstance;
 
   /// No description provided for @remoteErrAttachSettings.
   ///
   /// In zh, this message translates to:
-  /// **'请填写有效的远端 DSH 端口和登录令牌'**
+  /// **'请填写有效的远端 FustAI 端口和登录令牌'**
   String get remoteErrAttachSettings;
 
   /// No description provided for @remoteDshAttached.
   ///
   /// In zh, this message translates to:
-  /// **'已连接既有 DSH'**
+  /// **'已连接既有 FustAI'**
   String get remoteDshAttached;
 
   /// No description provided for @remoteStartupSection.
@@ -28109,7 +28031,7 @@ abstract class L10n {
   /// No description provided for @remoteStepStartDsh.
   ///
   /// In zh, this message translates to:
-  /// **'启动 DSH'**
+  /// **'启动 FustAI'**
   String get remoteStepStartDsh;
 
   /// No description provided for @remoteStepTunnel.
@@ -28175,13 +28097,13 @@ abstract class L10n {
   /// No description provided for @remoteErrHostRemoved.
   ///
   /// In zh, this message translates to:
-  /// **'{name}已不在你的 DSH Remote 账号下'**
+  /// **'{name}已不在你的 FustAI Remote 账号下'**
   String remoteErrHostRemoved(String name);
 
   /// No description provided for @remoteErrRelaySignInExpired.
   ///
   /// In zh, this message translates to:
-  /// **'DSH Remote 登录已失效'**
+  /// **'FustAI Remote 登录已失效'**
   String get remoteErrRelaySignInExpired;
 
   /// No description provided for @remoteErrIdentityKeyChanged.
@@ -28211,19 +28133,19 @@ abstract class L10n {
   /// No description provided for @remoteErrHostNotOwned.
   ///
   /// In zh, this message translates to:
-  /// **'主机不在你的 DSH Remote 账号下'**
+  /// **'主机不在你的 FustAI Remote 账号下'**
   String get remoteErrHostNotOwned;
 
   /// No description provided for @remoteErrUpdateNeeded.
   ///
   /// In zh, this message translates to:
-  /// **'版本不匹配，请更新 DSH Go 和主机上的远程插件'**
+  /// **'版本不匹配，请更新 FustAI Harness 和主机上的远程插件'**
   String get remoteErrUpdateNeeded;
 
   /// No description provided for @remoteErrVersionIncompatible.
   ///
   /// In zh, this message translates to:
-  /// **'主机上的 DSH 或远程插件需要更新'**
+  /// **'主机上的 FustAI 或远程插件需要更新'**
   String get remoteErrVersionIncompatible;
 
   /// No description provided for @remoteErrSignInTimeout.
@@ -28295,13 +28217,13 @@ abstract class L10n {
   /// No description provided for @remoteBootstrapReusePort.
   ///
   /// In zh, this message translates to:
-  /// **'复用已在运行的 DSH（端口 {port}）'**
+  /// **'复用已在运行的 FustAI（端口 {port}）'**
   String remoteBootstrapReusePort(int port);
 
   /// No description provided for @remoteBootstrapStarting.
   ///
   /// In zh, this message translates to:
-  /// **'正在远端启动 DSH…'**
+  /// **'正在远端启动 FustAI…'**
   String get remoteBootstrapStarting;
 
   /// No description provided for @remoteErrCommandNotFound.
@@ -28325,19 +28247,19 @@ abstract class L10n {
   /// No description provided for @remoteErrDshStartTimeout.
   ///
   /// In zh, this message translates to:
-  /// **'远端 DSH 启动超时'**
+  /// **'远端 FustAI 启动超时'**
   String get remoteErrDshStartTimeout;
 
   /// No description provided for @remoteErrDshExited.
   ///
   /// In zh, this message translates to:
-  /// **'远端 DSH 启动后立即退出'**
+  /// **'远端 FustAI 启动后立即退出'**
   String get remoteErrDshExited;
 
   /// No description provided for @remoteErrDshStart.
   ///
   /// In zh, this message translates to:
-  /// **'没能在远端启动 DSH'**
+  /// **'没能在远端启动 FustAI'**
   String get remoteErrDshStart;
 
   /// No description provided for @remoteExitCode.
@@ -28373,55 +28295,55 @@ abstract class L10n {
   /// No description provided for @remoteCheckingDsh.
   ///
   /// In zh, this message translates to:
-  /// **'检查远端的 DSH…'**
+  /// **'检查远端的 FustAI…'**
   String get remoteCheckingDsh;
 
   /// No description provided for @remoteErrDshPort.
   ///
   /// In zh, this message translates to:
-  /// **'远端 DSH 端口连不上'**
+  /// **'远端 FustAI 端口连不上'**
   String get remoteErrDshPort;
 
   /// No description provided for @remoteDshReused.
   ///
   /// In zh, this message translates to:
-  /// **'复用了远端已在运行的 DSH'**
+  /// **'复用了远端已在运行的 FustAI'**
   String get remoteDshReused;
 
   /// No description provided for @remoteDshStarted.
   ///
   /// In zh, this message translates to:
-  /// **'已在远端启动 DSH'**
+  /// **'已在远端启动 FustAI'**
   String get remoteDshStarted;
 
   /// No description provided for @remoteErrDshTokenRejected.
   ///
   /// In zh, this message translates to:
-  /// **'远端 DSH 拒绝了登录令牌，未自动重启；请检查令牌，或在编辑主机中明确重启托管实例'**
+  /// **'远端 FustAI 拒绝了登录令牌，未自动重启；请检查令牌，或在编辑主机中明确重启托管实例'**
   String get remoteErrDshTokenRejected;
 
   /// No description provided for @remoteErrDshSignIn.
   ///
   /// In zh, this message translates to:
-  /// **'没能登录远端 DSH'**
+  /// **'没能登录远端 FustAI'**
   String get remoteErrDshSignIn;
 
   /// No description provided for @remoteErrDshTunnel.
   ///
   /// In zh, this message translates to:
-  /// **'没能通过隧道连接 DSH'**
+  /// **'没能通过隧道连接 FustAI'**
   String get remoteErrDshTunnel;
 
   /// No description provided for @remoteErrDshSignInExpired.
   ///
   /// In zh, this message translates to:
-  /// **'远端 DSH 登录已失效'**
+  /// **'远端 FustAI 登录已失效'**
   String get remoteErrDshSignInExpired;
 
   /// No description provided for @remoteErrDshStopped.
   ///
   /// In zh, this message translates to:
-  /// **'远端 DSH 已停止运行'**
+  /// **'远端 FustAI 已停止运行'**
   String get remoteErrDshStopped;
 
   /// No description provided for @remoteErrSshDisconnected.
@@ -29375,7 +29297,7 @@ abstract class L10n {
   /// No description provided for @remoteThisPhoneDsh.
   ///
   /// In zh, this message translates to:
-  /// **'这台手机上的 DSH'**
+  /// **'这台手机上的 FustAI'**
   String get remoteThisPhoneDsh;
 
   /// No description provided for @remoteRemoteLabel.
@@ -29393,7 +29315,7 @@ abstract class L10n {
   /// No description provided for @remoteRelaySwitchWarning.
   ///
   /// In zh, this message translates to:
-  /// **'DSH Remote 一次只连一台主机，切换会断开上一台'**
+  /// **'FustAI Remote 一次只连一台主机，切换会断开上一台'**
   String get remoteRelaySwitchWarning;
 
   /// No description provided for @remoteConnectComputer.
@@ -29411,7 +29333,7 @@ abstract class L10n {
   /// No description provided for @remoteConnectionMethods.
   ///
   /// In zh, this message translates to:
-  /// **'通过 SSH 或 DSH Remote'**
+  /// **'通过 SSH 或 FustAI Remote'**
   String get remoteConnectionMethods;
 
   /// No description provided for @remoteRelayLoginRequired.
@@ -29477,7 +29399,7 @@ abstract class L10n {
   /// No description provided for @remoteHostsIntro.
   ///
   /// In zh, this message translates to:
-  /// **'在手机上接着用电脑或服务器上的 DSH'**
+  /// **'在手机上接着用电脑或服务器上的 FustAI'**
   String get remoteHostsIntro;
 
   /// No description provided for @remoteSshHosts.
@@ -29489,7 +29411,7 @@ abstract class L10n {
   /// No description provided for @remoteSshRequirements.
   ///
   /// In zh, this message translates to:
-  /// **'需要那台主机开着 SSH，并装好 DSH'**
+  /// **'需要那台主机开着 SSH，并装好 FustAI'**
   String get remoteSshRequirements;
 
   /// No description provided for @remoteAddSshHost.
@@ -29639,25 +29561,25 @@ abstract class L10n {
   /// No description provided for @remoteRelaySetupHelp.
   ///
   /// In zh, this message translates to:
-  /// **'在主机的 DSH 里装好远程插件并登录'**
+  /// **'在主机的 FustAI 里装好远程插件并登录'**
   String get remoteRelaySetupHelp;
 
   /// No description provided for @remoteRelaySignOutTitle.
   ///
   /// In zh, this message translates to:
-  /// **'退出 DSH Remote？'**
+  /// **'退出 FustAI Remote？'**
   String get remoteRelaySignOutTitle;
 
   /// No description provided for @remoteRelaySignOutBody.
   ///
   /// In zh, this message translates to:
-  /// **'这台手机会从账号中移除。主机上的 DSH 和对话不受影响，随时可以重新登录。'**
+  /// **'这台手机会从账号中移除。主机上的 FustAI 和对话不受影响，随时可以重新登录。'**
   String get remoteRelaySignOutBody;
 
   /// No description provided for @remoteRelaySignInTitle.
   ///
   /// In zh, this message translates to:
-  /// **'登录 DSH Remote'**
+  /// **'登录 FustAI Remote'**
   String get remoteRelaySignInTitle;
 
   /// No description provided for @remoteRelaySignInHelp.
@@ -29753,7 +29675,7 @@ abstract class L10n {
   /// No description provided for @remoteDeleteHostBody.
   ///
   /// In zh, this message translates to:
-  /// **'这台主机的设置和保存在手机上的密码、私钥都会删除。主机上的 DSH 和对话不受影响。'**
+  /// **'这台主机的设置和保存在手机上的密码、私钥都会删除。主机上的 FustAI 和对话不受影响。'**
   String get remoteDeleteHostBody;
 
   /// No description provided for @remoteErrReadKey.
@@ -29783,7 +29705,7 @@ abstract class L10n {
   /// No description provided for @remoteSshHostIntro.
   ///
   /// In zh, this message translates to:
-  /// **'连接你电脑或服务器上的 DSH'**
+  /// **'连接你电脑或服务器上的 FustAI'**
   String get remoteSshHostIntro;
 
   /// No description provided for @remoteHostBasicInfo.
@@ -30461,10 +30383,10 @@ abstract class L10n {
   /// No description provided for @remoteSshInstallCommand.
   ///
   /// In zh, this message translates to:
-  /// **'还没装 DSH？在主机上运行 {command}'**
+  /// **'还没装 FustAI？在主机上运行 {command}'**
   String remoteSshInstallCommand(String command);
 
-  /// Under the DSH Remote card; project is the upstream GitHub project (liguobao/ds-harness-remote), drawn as a link.
+  /// Under the FustAI Remote card; project is the upstream GitHub project (liguobao/ds-harness-remote), drawn as a link.
   ///
   /// In zh, this message translates to:
   /// **'服务由 {project} 提供'**
@@ -30725,7 +30647,7 @@ abstract class L10n {
   /// No description provided for @remoteCompactHistoryHint.
   ///
   /// In zh, this message translates to:
-  /// **'支持的 DSH Remote 主机会精简历史工具详情，实时回复和审批不变。切换主机或重启 App 后生效；旧主机仍传输完整历史。'**
+  /// **'支持的 FustAI Remote 主机会精简历史工具详情，实时回复和审批不变。切换主机或重启 App 后生效；旧主机仍传输完整历史。'**
   String get remoteCompactHistoryHint;
 
   /// No description provided for @searchKwRemoteCompactHistory.
@@ -30734,238 +30656,10 @@ abstract class L10n {
   /// **'精简 简洁 历史 工具 传输 流量 远程 compact slim lite'**
   String get searchKwRemoteCompactHistory;
 
-  /// No description provided for @remotePairEntry.
-  ///
-  /// In zh, this message translates to:
-  /// **'扫码配对电脑'**
-  String get remotePairEntry;
-
-  /// No description provided for @remotePairEntryHint.
-  ///
-  /// In zh, this message translates to:
-  /// **'扫电脑上 Remote 插件显示的二维码，不用注册 Remote 账号（需要先登录 DeepSeek）'**
-  String get remotePairEntryHint;
-
-  /// No description provided for @remotePairAddComputer.
-  ///
-  /// In zh, this message translates to:
-  /// **'扫码添加电脑'**
-  String get remotePairAddComputer;
-
-  /// No description provided for @remotePairTitle.
-  ///
-  /// In zh, this message translates to:
-  /// **'扫码配对电脑'**
-  String get remotePairTitle;
-
-  /// No description provided for @remotePairSubtitle.
-  ///
-  /// In zh, this message translates to:
-  /// **'不用注册 Remote 账号，也不会传 DeepSeek 密码或登录凭据'**
-  String get remotePairSubtitle;
-
-  /// No description provided for @remotePairNeedsDeepSeek.
-  ///
-  /// In zh, this message translates to:
-  /// **'先登录 DeepSeek 账号'**
-  String get remotePairNeedsDeepSeek;
-
-  /// No description provided for @remotePairNeedsDeepSeekBody.
-  ///
-  /// In zh, this message translates to:
-  /// **'扫码配对要先在 DSH Go 里登录 DeepSeek 账号。配对时只附带账号 ID 用来标记这台手机，不传密码、Cookie 或 Token。'**
-  String get remotePairNeedsDeepSeekBody;
-
-  /// No description provided for @remotePairScanHint.
-  ///
-  /// In zh, this message translates to:
-  /// **'对准电脑上 Remote 插件显示的配对二维码'**
-  String get remotePairScanHint;
-
-  /// No description provided for @remotePairPasteLink.
-  ///
-  /// In zh, this message translates to:
-  /// **'粘贴配对链接'**
-  String get remotePairPasteLink;
-
-  /// No description provided for @remotePairPasteEmpty.
-  ///
-  /// In zh, this message translates to:
-  /// **'剪贴板里没有配对链接'**
-  String get remotePairPasteEmpty;
-
-  /// No description provided for @remotePairScannerFailed.
-  ///
-  /// In zh, this message translates to:
-  /// **'二维码识别器不可用。可以粘贴配对链接继续配对。'**
-  String get remotePairScannerFailed;
-
-  /// No description provided for @remotePairFromImage.
-  ///
-  /// In zh, this message translates to:
-  /// **'从相册识别'**
-  String get remotePairFromImage;
-
-  /// No description provided for @remotePairImageNoCode.
-  ///
-  /// In zh, this message translates to:
-  /// **'这张图里没找到二维码'**
-  String get remotePairImageNoCode;
-
-  /// No description provided for @remotePairCameraDenied.
-  ///
-  /// In zh, this message translates to:
-  /// **'没有相机权限。可以在系统设置里打开，或者用「从相册识别」「粘贴配对链接」'**
-  String get remotePairCameraDenied;
-
-  /// No description provided for @remotePairCameraFailed.
-  ///
-  /// In zh, this message translates to:
-  /// **'相机打不开。可以用「从相册识别」或「粘贴配对链接」'**
-  String get remotePairCameraFailed;
-
-  /// No description provided for @remotePairSystemScan.
-  ///
-  /// In zh, this message translates to:
-  /// **'扫码'**
-  String get remotePairSystemScan;
-
-  /// No description provided for @remotePairSystemScanHint.
-  ///
-  /// In zh, this message translates to:
-  /// **'打开系统扫码，里面也能从相册选截图'**
-  String get remotePairSystemScanHint;
-
-  /// No description provided for @remotePairReading.
-  ///
-  /// In zh, this message translates to:
-  /// **'正在读取配对信息…'**
-  String get remotePairReading;
-
-  /// No description provided for @remotePairConfirmTitle.
-  ///
-  /// In zh, this message translates to:
-  /// **'要连接这台电脑吗？'**
-  String get remotePairConfirmTitle;
-
-  /// No description provided for @remotePairComputer.
-  ///
-  /// In zh, this message translates to:
-  /// **'电脑'**
-  String get remotePairComputer;
-
-  /// No description provided for @remotePairServer.
-  ///
-  /// In zh, this message translates to:
-  /// **'服务器'**
-  String get remotePairServer;
-
-  /// No description provided for @remotePairFingerprint.
-  ///
-  /// In zh, this message translates to:
-  /// **'电脑指纹'**
-  String get remotePairFingerprint;
-
-  /// No description provided for @remotePairFingerprintHint.
-  ///
-  /// In zh, this message translates to:
-  /// **'和电脑 Remote 插件上显示的指纹核对一致再继续。'**
-  String get remotePairFingerprintHint;
-
-  /// No description provided for @remotePairConfirm.
-  ///
-  /// In zh, this message translates to:
-  /// **'确认是这台电脑，开始配对'**
-  String get remotePairConfirm;
-
-  /// No description provided for @remotePairNotThis.
-  ///
-  /// In zh, this message translates to:
-  /// **'不是这台，重新扫'**
-  String get remotePairNotThis;
-
-  /// No description provided for @remotePairClaiming.
-  ///
-  /// In zh, this message translates to:
-  /// **'正在生成验证码…'**
-  String get remotePairClaiming;
-
-  /// No description provided for @remotePairCodeTitle.
-  ///
-  /// In zh, this message translates to:
-  /// **'在电脑上输入这 8 位验证码'**
-  String get remotePairCodeTitle;
-
-  /// No description provided for @remotePairCodeSemantics.
-  ///
-  /// In zh, this message translates to:
-  /// **'验证码 {digits}'**
-  String remotePairCodeSemantics(String digits);
-
-  /// No description provided for @remotePairCodeHint.
-  ///
-  /// In zh, this message translates to:
-  /// **'在电脑的 Remote 插件里输入，点「确认绑定」。手机不用再操作。'**
-  String get remotePairCodeHint;
-
-  /// No description provided for @remotePairOneAttempt.
-  ///
-  /// In zh, this message translates to:
-  /// **'只有一次机会：输错后这次配对作废，要在电脑上重新生成二维码再扫。'**
-  String get remotePairOneAttempt;
-
-  /// No description provided for @remotePairWaiting.
-  ///
-  /// In zh, this message translates to:
-  /// **'等电脑确认 · 剩余 {countdown}'**
-  String remotePairWaiting(String countdown);
-
-  /// No description provided for @remotePairApproved.
-  ///
-  /// In zh, this message translates to:
-  /// **'电脑已确认，正在完成绑定…'**
-  String get remotePairApproved;
-
-  /// No description provided for @remotePairCodeExpired.
-  ///
-  /// In zh, this message translates to:
-  /// **'验证码已过期，请在电脑上重新生成二维码'**
-  String get remotePairCodeExpired;
-
-  /// No description provided for @remotePairConnecting.
-  ///
-  /// In zh, this message translates to:
-  /// **'配对完成，正在连接 {name}…'**
-  String remotePairConnecting(String name);
-
-  /// No description provided for @remotePairFailedTitle.
-  ///
-  /// In zh, this message translates to:
-  /// **'没能配对'**
-  String get remotePairFailedTitle;
-
-  /// No description provided for @remotePairOtherServerBody.
-  ///
-  /// In zh, this message translates to:
-  /// **'这个二维码来自 {server}，和 DSH Go 现在用的 Remote 服务器不同。切换过去继续吗？两个服务器的登录各自保留。'**
-  String remotePairOtherServerBody(String server);
-
-  /// No description provided for @remotePairSwitchServer.
-  ///
-  /// In zh, this message translates to:
-  /// **'切换服务器并继续'**
-  String get remotePairSwitchServer;
-
-  /// No description provided for @remotePairScanAgain.
-  ///
-  /// In zh, this message translates to:
-  /// **'重新扫码'**
-  String get remotePairScanAgain;
-
   /// No description provided for @remotePairErrInvalidCode.
   ///
   /// In zh, this message translates to:
-  /// **'这不是 DSH Go 的配对二维码'**
+  /// **'这不是 FustAI Harness 的配对二维码'**
   String get remotePairErrInvalidCode;
 
   /// No description provided for @remotePairErrOtherServer.
@@ -31027,24 +30721,6 @@ abstract class L10n {
   /// In zh, this message translates to:
   /// **'配对没有完成，请重新扫码'**
   String get remotePairErrFailed;
-
-  /// No description provided for @remotePairSwitchFailedTitle.
-  ///
-  /// In zh, this message translates to:
-  /// **'已和 {name} 配对'**
-  String remotePairSwitchFailedTitle(String name);
-
-  /// No description provided for @remotePairSwitchFailedBody.
-  ///
-  /// In zh, this message translates to:
-  /// **'但没能切换到这台电脑。可以重试，或者回到「远程主机」里点这台电脑。'**
-  String get remotePairSwitchFailedBody;
-
-  /// No description provided for @remotePairDone.
-  ///
-  /// In zh, this message translates to:
-  /// **'完成'**
-  String get remotePairDone;
 
   /// No description provided for @remotePairErrPinSave.
   ///
@@ -31151,7 +30827,7 @@ abstract class L10n {
   /// No description provided for @riskPetOverlayBody.
   ///
   /// In zh, this message translates to:
-  /// **'要在系统设置里为 DSH Go 打开「显示在其他应用上层」，宠物才能出现在别的 App 上。'**
+  /// **'要在系统设置里为 FustAI Harness 打开「显示在其他应用上层」，宠物才能出现在别的 App 上。'**
   String get riskPetOverlayBody;
 
   /// No description provided for @riskPetOverlayAction.
@@ -31181,25 +30857,25 @@ abstract class L10n {
   /// No description provided for @askAiAboutApp.
   ///
   /// In zh, this message translates to:
-  /// **'关于 DSH Go App：{question}'**
+  /// **'关于 FustAI Harness App：{question}'**
   String askAiAboutApp(String question);
 
   /// No description provided for @askAiWithGuide.
   ///
   /// In zh, this message translates to:
-  /// **'关于 DSH Go App：{question}\n请按附件里的使用说明回答。'**
+  /// **'关于 FustAI Harness App：{question}\n请按附件里的使用说明回答。'**
   String askAiWithGuide(String question);
 
   /// No description provided for @askAiNoGuide.
   ///
   /// In zh, this message translates to:
-  /// **'这台主机没有 DSH Go 使用说明，回答可能不准确'**
+  /// **'这台主机没有 FustAI Harness 使用说明，回答可能不准确'**
   String get askAiNoGuide;
 
   /// No description provided for @askAiQuestionOverview.
   ///
   /// In zh, this message translates to:
-  /// **'DSH Go 能做什么？我该从哪里开始？'**
+  /// **'FustAI Harness 能做什么？我该从哪里开始？'**
   String get askAiQuestionOverview;
 
   /// No description provided for @askAiQuestionPhoneControl.
@@ -31427,7 +31103,7 @@ abstract class L10n {
   /// No description provided for @searchKwEngine.
   ///
   /// In zh, this message translates to:
-  /// **'引擎,运行环境,启动,停止,重启,DSH'**
+  /// **'引擎,运行环境,启动,停止,重启,FustAI'**
   String get searchKwEngine;
 
   /// No description provided for @searchKwBackground.
@@ -31511,13 +31187,13 @@ abstract class L10n {
   /// No description provided for @searchKwAccount.
   ///
   /// In zh, this message translates to:
-  /// **'账号,余额,充值,登录,退出登录,API Key,用量,DeepSeek'**
+  /// **'账号,登录,退出登录,API Key,用量,FustAI'**
   String get searchKwAccount;
 
   /// No description provided for @searchKwRemote.
   ///
   /// In zh, this message translates to:
-  /// **'远程,SSH,电脑,服务器,DSH Remote,连接电脑'**
+  /// **'远程,SSH,电脑,服务器,FustAI Remote,连接电脑'**
   String get searchKwRemote;
 
   /// No description provided for @searchKwPermission.
@@ -31967,7 +31643,7 @@ abstract class L10n {
   /// No description provided for @searchKwAbout.
   ///
   /// In zh, this message translates to:
-  /// **'关于,版本,更新,许可,dsh-go'**
+  /// **'关于,版本,更新,许可,FustAI Harness'**
   String get searchKwAbout;
 
   /// No description provided for @searchKwPhoneConfirmEntry.
@@ -32375,13 +32051,13 @@ abstract class L10n {
   /// No description provided for @setupAwaitSignIn.
   ///
   /// In zh, this message translates to:
-  /// **'就绪后自动打开 DeepSeek 登录'**
+  /// **'就绪后自动打开 FustAI 登录'**
   String get setupAwaitSignIn;
 
   /// No description provided for @shellApiKeyPrefixWarning.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek 的 Key 通常以 sk- 开头，确认没有复制错'**
+  /// **'FustAI 的 Key 通常以 sk- 开头，确认没有复制错'**
   String get shellApiKeyPrefixWarning;
 
   /// No description provided for @shellApiKeyIncompleteWarning.
@@ -32423,7 +32099,7 @@ abstract class L10n {
   /// No description provided for @shellApiKeyBilling.
   ///
   /// In zh, this message translates to:
-  /// **'费用由 DeepSeek 开放平台按量结算'**
+  /// **'费用由你的 API Key 所属平台按量结算'**
   String get shellApiKeyBilling;
 
   /// No description provided for @shellSaving.
@@ -32471,13 +32147,13 @@ abstract class L10n {
   /// No description provided for @shellConnectDeepSeek.
   ///
   /// In zh, this message translates to:
-  /// **'连接 DeepSeek'**
+  /// **'连接 FustAI'**
   String get shellConnectDeepSeek;
 
   /// No description provided for @shellConnectDeepSeekMessage.
   ///
   /// In zh, this message translates to:
-  /// **'登录 DeepSeek 账号即可开始，无需 API Key'**
+  /// **'登录 FustAI 账号即可开始，无需 API Key'**
   String get shellConnectDeepSeekMessage;
 
   /// No description provided for @shellAccountSignInUnsupported.
@@ -32489,7 +32165,7 @@ abstract class L10n {
   /// No description provided for @shellSignInDeepSeek.
   ///
   /// In zh, this message translates to:
-  /// **'用 DeepSeek 账号登录'**
+  /// **'用 FustAI 账号登录'**
   String get shellSignInDeepSeek;
 
   /// No description provided for @shellUseApiKey.
@@ -32609,7 +32285,7 @@ abstract class L10n {
   /// No description provided for @shellWelcomeMessage.
   ///
   /// In zh, this message translates to:
-  /// **'把 DeepSeek 智能体\n装进口袋'**
+  /// **'把 FustAI 智能体\n装进口袋'**
   String get shellWelcomeMessage;
 
   /// No description provided for @shellGetStarted.
@@ -33617,7 +33293,7 @@ abstract class L10n {
   /// No description provided for @shellConfigUnknownSlot.
   ///
   /// In zh, this message translates to:
-  /// **'当前 DSH 没有这个 slot，先保留'**
+  /// **'当前 FustAI 没有这个 slot，先保留'**
   String get shellConfigUnknownSlot;
 
   /// No description provided for @shellConfigUnseatableSlot.
@@ -33785,7 +33461,7 @@ abstract class L10n {
   /// No description provided for @shellSkillInstallPrompt.
   ///
   /// In zh, this message translates to:
-  /// **'请在这台主机上安装 DSH Go 的界面技能 {skill}：'**
+  /// **'请在这台主机上安装 FustAI Harness 的界面技能 {skill}：'**
   String shellSkillInstallPrompt(String skill);
 
   /// No description provided for @shellSkillInstallDirectory.
@@ -34025,19 +33701,19 @@ abstract class L10n {
   /// No description provided for @speechVoiceDeepseek.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek'**
+  /// **'FustAI'**
   String get speechVoiceDeepseek;
 
   /// No description provided for @speechVoiceDeepseekHint.
   ///
   /// In zh, this message translates to:
-  /// **'登录的 DeepSeek 账号付费；没登录，或账号不能用于语音时，用设置里的 API Key。不用另外配置'**
+  /// **'登录的 FustAI 账号付费；没登录，或账号不能用于语音时，用设置里的 API Key。不用另外配置'**
   String get speechVoiceDeepseekHint;
 
   /// No description provided for @speechVoiceDeepseekFooter.
   ///
   /// In zh, this message translates to:
-  /// **'按朗读的字数计费，价格见 DeepSeek 开放平台。读出前会去掉代码块、表格和链接地址。'**
+  /// **'按朗读的字数计费，价格见 FustAI 开放平台。读出前会去掉代码块、表格和链接地址。'**
   String get speechVoiceDeepseekFooter;
 
   /// No description provided for @speechVoiceStella.
@@ -34085,31 +33761,31 @@ abstract class L10n {
   /// No description provided for @speechNoCredential.
   ///
   /// In zh, this message translates to:
-  /// **'要先登录 DeepSeek 账号，或在设置里填 API Key'**
+  /// **'要先登录 FustAI 账号，或在设置里填 API Key'**
   String get speechNoCredential;
 
   /// No description provided for @speechAccountUnusable.
   ///
   /// In zh, this message translates to:
-  /// **'已登录的账号在这里付不了 DeepSeek 语音：当前连接的 DSH 版本较旧（更新后就行），或正经 DSH Remote 中继连接。在设置里填 DeepSeek API Key 就能用'**
+  /// **'已登录的账号在这里付不了 云端语音：当前连接的 FustAI 版本较旧（更新后就行），或正经 FustAI Remote 中继连接。在设置里填 FustAI API Key 就能用'**
   String get speechAccountUnusable;
 
   /// No description provided for @speechSignIn.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek 账号用不了语音（可能登录过期，或语音只认 API Key）。重新登录，或在设置里填上 API Key'**
+  /// **'FustAI 账号用不了语音（可能登录过期，或语音只认 API Key）。重新登录，或在设置里填上 API Key'**
   String get speechSignIn;
 
   /// No description provided for @speechUnauthorized.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek API Key 无效，请在设置里检查'**
+  /// **'FustAI API Key 无效，请在设置里检查'**
   String get speechUnauthorized;
 
   /// No description provided for @speechBalance.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek 余额不足'**
+  /// **'语音服务额度不足'**
   String get speechBalance;
 
   /// No description provided for @speechRateLimited.
@@ -34163,7 +33839,7 @@ abstract class L10n {
   /// No description provided for @speechCloudNotice.
   ///
   /// In zh, this message translates to:
-  /// **'语音会发给 DeepSeek 识别。想在手机上识别，可以换成语音模型。'**
+  /// **'语音会发给 FustAI 识别。想在手机上识别，可以换成语音模型。'**
   String get speechCloudNotice;
 
   /// No description provided for @speechCloudNotSetUp.
@@ -34403,13 +34079,13 @@ abstract class L10n {
   /// No description provided for @speechCallEndNoRecognizerSignedIn.
   ///
   /// In zh, this message translates to:
-  /// **'通话要能识别录音。已登录的账号在这里付不了 DeepSeek 语音（当前连接的 DSH 版本较旧，或经 DSH Remote 中继）：在设置里填 DeepSeek API Key，或在设置 › 语音里下载语音模型'**
+  /// **'通话要能识别录音。已登录的账号在这里付不了 云端语音（当前连接的 FustAI 版本较旧，或经 FustAI Remote 中继）：在设置里填 FustAI API Key，或在设置 › 语音里下载语音模型'**
   String get speechCallEndNoRecognizerSignedIn;
 
   /// No description provided for @speechCallEndNoRecognizer.
   ///
   /// In zh, this message translates to:
-  /// **'通话需要能识别录音的方式：登录 DeepSeek 账号、填 API Key，或下载语音模型'**
+  /// **'通话需要能识别录音的方式：登录 FustAI 账号、填 API Key，或下载语音模型'**
   String get speechCallEndNoRecognizer;
 
   /// No description provided for @speechCallEndBackground.
@@ -34637,7 +34313,7 @@ abstract class L10n {
   /// The star prompt's first line. hours is the whole hours of use so far, rounded down; 0 is half an hour (the first ask comes after 30 minutes). The word joiner keeps the ~ on the line of the word before it.
   ///
   /// In zh, this message translates to:
-  /// **'{hours, plural, =0{本鱼已经在 DSH Go 里陪你半个小时啦⁠~} =1{本鱼已经在 DSH Go 里陪你一个小时啦⁠~} other{本鱼已经在 DSH Go 里陪你 {hours} 个小时啦⁠~}}'**
+  /// **'{hours, plural, =0{本鱼已经在 FustAI Harness 里陪你半个小时啦⁠~} =1{本鱼已经在 FustAI Harness 里陪你一个小时啦⁠~} other{本鱼已经在 FustAI Harness 里陪你 {hours} 个小时啦⁠~}}'**
   String starPromptTitle(int hours);
 
   /// No description provided for @starPromptBody.
@@ -34673,7 +34349,7 @@ abstract class L10n {
   /// No description provided for @starSettingsTitle.
   ///
   /// In zh, this message translates to:
-  /// **'给 DSH Go 点个 star'**
+  /// **'给 FustAI Harness 点个 star'**
   String get starSettingsTitle;
 
   /// No description provided for @hubStartPage.
@@ -34727,7 +34403,7 @@ abstract class L10n {
   /// No description provided for @stateDiagnosticsSubject.
   ///
   /// In zh, this message translates to:
-  /// **'DSH Go 诊断包'**
+  /// **'FustAI Harness 诊断包'**
   String get stateDiagnosticsSubject;
 
   /// No description provided for @stateStoragePermission.
@@ -35009,19 +34685,19 @@ abstract class L10n {
   /// No description provided for @stateDeepSeekAccount.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek 账号'**
+  /// **'FustAI 账号'**
   String get stateDeepSeekAccount;
 
   /// No description provided for @stateAccountUnreachable.
   ///
   /// In zh, this message translates to:
-  /// **'连不上 DeepSeek'**
+  /// **'连不上 FustAI'**
   String get stateAccountUnreachable;
 
   /// No description provided for @stateAccountUnavailable.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek 暂时无法登录'**
+  /// **'FustAI 暂时无法登录'**
   String get stateAccountUnavailable;
 
   /// No description provided for @stateSignInIncomplete.
@@ -35189,7 +34865,7 @@ abstract class L10n {
   /// No description provided for @stateAppDisclaimer.
   ///
   /// In zh, this message translates to:
-  /// **'基于 DeepSeek Harness 构建 · 非 DeepSeek 官方应用'**
+  /// **'基于 FustAI Harness 构建'**
   String get stateAppDisclaimer;
 
   /// No description provided for @stateWallpaper.
@@ -35291,7 +34967,7 @@ abstract class L10n {
   /// No description provided for @stateBotTeamBusy.
   ///
   /// In zh, this message translates to:
-  /// **'另一个 DSH 正在使用这个团队'**
+  /// **'另一个 FustAI 正在使用这个团队'**
   String get stateBotTeamBusy;
 
   /// No description provided for @stateBotOperationFailed.
@@ -35861,7 +35537,7 @@ abstract class L10n {
   /// No description provided for @stateBundleBuiltIn.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 内置'**
+  /// **'FustAI 内置'**
   String get stateBundleBuiltIn;
 
   /// No description provided for @stateBundleHeadless.
@@ -36005,7 +35681,7 @@ abstract class L10n {
   /// No description provided for @statePluginIncompatible.
   ///
   /// In zh, this message translates to:
-  /// **'这个插件不支持当前的 DSH 版本。'**
+  /// **'这个插件不支持当前的 FustAI 版本。'**
   String get statePluginIncompatible;
 
   /// No description provided for @statePluginInstallCancelled.
@@ -36023,7 +35699,7 @@ abstract class L10n {
   /// No description provided for @statePluginIncompatibleTitle.
   ///
   /// In zh, this message translates to:
-  /// **'和当前 DSH 不兼容'**
+  /// **'和当前 FustAI 不兼容'**
   String get statePluginIncompatibleTitle;
 
   /// No description provided for @statePluginNetworkFailed.
@@ -36161,7 +35837,7 @@ abstract class L10n {
   /// No description provided for @statePluginInvalid.
   ///
   /// In zh, this message translates to:
-  /// **'这不是 DSH 插件'**
+  /// **'这不是 FustAI 插件'**
   String get statePluginInvalid;
 
   /// No description provided for @statePluginNoEntry.
@@ -36845,13 +36521,13 @@ abstract class L10n {
   /// No description provided for @statePluginRuntimeIncompatible.
   ///
   /// In zh, this message translates to:
-  /// **'这个插件不支持当前的 DSH 版本（{version}）。'**
+  /// **'这个插件不支持当前的 FustAI 版本（{version}）。'**
   String statePluginRuntimeIncompatible(String version);
 
   /// No description provided for @statePluginRequiredVersion.
   ///
   /// In zh, this message translates to:
-  /// **'这个插件要求 DSH {wanted}，当前是 {current}。'**
+  /// **'这个插件要求 FustAI {wanted}，当前是 {current}。'**
   String statePluginRequiredVersion(String wanted, String current);
 
   /// No description provided for @statePluginRegistryUnreachable.
@@ -36917,7 +36593,7 @@ abstract class L10n {
   /// No description provided for @stateSafeRepairPrompt.
   ///
   /// In zh, this message translates to:
-  /// **'我的 DSH 正常模式出了问题（{what}）。请按「安全模式」说明排查原因，先用可逆的办法修好 web 配置，修完用 dsh-app-plugins trial 试启动验证，再告诉我改了什么。'**
+  /// **'我的 FustAI 正常模式出了问题（{what}）。请按「安全模式」说明排查原因，先用可逆的办法修好 web 配置，修完用 dsh-app-plugins trial 试启动验证，再告诉我改了什么。'**
   String stateSafeRepairPrompt(String what);
 
   /// No description provided for @stateScheduleCreatePrompt.
@@ -37037,7 +36713,7 @@ abstract class L10n {
   /// No description provided for @systemActionsOffScreen.
   ///
   /// In zh, this message translates to:
-  /// **'已开启，回到 DSH Go 才能用'**
+  /// **'已开启，回到 FustAI Harness 才能用'**
   String get systemActionsOffScreen;
 
   /// No description provided for @systemActionsConnecting.
@@ -37079,13 +36755,13 @@ abstract class L10n {
   /// No description provided for @systemActionsOnScreenTitle.
   ///
   /// In zh, this message translates to:
-  /// **'只在 DSH Go 在屏幕上时有效'**
+  /// **'只在 FustAI Harness 在屏幕上时有效'**
   String get systemActionsOnScreenTitle;
 
   /// No description provided for @systemActionsOnScreenBody.
   ///
   /// In zh, this message translates to:
-  /// **'系统不让后台应用做这些。AI 打开别的应用后，要等你回到 DSH Go 才能接着做。'**
+  /// **'系统不让后台应用做这些。AI 打开别的应用后，要等你回到 FustAI Harness 才能接着做。'**
   String get systemActionsOnScreenBody;
 
   /// No description provided for @systemActionsCanTitle.
@@ -37289,7 +36965,7 @@ abstract class L10n {
   /// No description provided for @systemActionsDisclosureWhenBody.
   ///
   /// In zh, this message translates to:
-  /// **'只在对话用到、DSH Go 在屏幕上时。默认每次先问你，选了完全权限的对话不问。'**
+  /// **'只在对话用到、FustAI Harness 在屏幕上时。默认每次先问你，选了完全权限的对话不问。'**
   String get systemActionsDisclosureWhenBody;
 
   /// No description provided for @systemActionsDisclosureWhoTitle.
@@ -37337,7 +37013,7 @@ abstract class L10n {
   /// No description provided for @systemActionsHandoffNote.
   ///
   /// In zh, this message translates to:
-  /// **'做完回到 DSH Go 点继续。继续只表示你确认了，AI 看不到其他应用里发生了什么。'**
+  /// **'做完回到 FustAI Harness 点继续。继续只表示你确认了，AI 看不到其他应用里发生了什么。'**
   String get systemActionsHandoffNote;
 
   /// No description provided for @systemActionsHandoffFailed.
@@ -37391,7 +37067,7 @@ abstract class L10n {
   /// No description provided for @systemActionsResultOffScreen.
   ///
   /// In zh, this message translates to:
-  /// **'DSH Go 不在屏幕上，没有执行。'**
+  /// **'FustAI Harness 不在屏幕上，没有执行。'**
   String get systemActionsResultOffScreen;
 
   /// No description provided for @systemActionsResultUnavailable.
@@ -37457,7 +37133,7 @@ abstract class L10n {
   /// No description provided for @tavernEmptyMessage.
   ///
   /// In zh, this message translates to:
-  /// **'接回 DeepSeek 里的对话，或导入一张角色卡'**
+  /// **'接回 FustAI 里的对话，或导入一张角色卡'**
   String get tavernEmptyMessage;
 
   /// No description provided for @tavernContinue.
@@ -37625,13 +37301,13 @@ abstract class L10n {
   /// No description provided for @tavernErrorNoKey.
   ///
   /// In zh, this message translates to:
-  /// **'先在设置里填 DeepSeek API Key'**
+  /// **'先在设置里填 FustAI API Key'**
   String get tavernErrorNoKey;
 
   /// No description provided for @tavernKeyMissing.
   ///
   /// In zh, this message translates to:
-  /// **'还没填 DeepSeek API Key，填好就能开始。'**
+  /// **'还没填 FustAI API Key，填好就能开始。'**
   String get tavernKeyMissing;
 
   /// No description provided for @tavernKeyMissingAction.
@@ -37679,7 +37355,7 @@ abstract class L10n {
   /// No description provided for @tavernErrorBalance.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek 账户余额不足，充值后再试'**
+  /// **'额度已用尽，请稍后再试'**
   String get tavernErrorBalance;
 
   /// No description provided for @tavernErrorParameters.
@@ -37739,7 +37415,7 @@ abstract class L10n {
   /// No description provided for @tavernApiKey.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek API Key'**
+  /// **'FustAI API Key'**
   String get tavernApiKey;
 
   /// No description provided for @tavernApiKeySet.
@@ -38867,13 +38543,13 @@ abstract class L10n {
   /// No description provided for @tavernInspectCostPeak.
   ///
   /// In zh, this message translates to:
-  /// **'按 DeepSeek 官方价，高峰时段'**
+  /// **'按 官方价，高峰时段'**
   String get tavernInspectCostPeak;
 
   /// No description provided for @tavernInspectCostOffPeak.
   ///
   /// In zh, this message translates to:
-  /// **'按 DeepSeek 官方价，低谷时段（半价）'**
+  /// **'按 官方价，低谷时段（半价）'**
   String get tavernInspectCostOffPeak;
 
   /// No description provided for @tavernInspectSegments.
@@ -39413,7 +39089,7 @@ abstract class L10n {
   /// No description provided for @tavernStorybookMadeWith.
   ///
   /// In zh, this message translates to:
-  /// **'用 DSH Go 酒馆写成'**
+  /// **'用 FustAI Harness 酒馆写成'**
   String get tavernStorybookMadeWith;
 
   /// No description provided for @tavernStorybookContents.
@@ -40037,7 +39713,7 @@ abstract class L10n {
   /// No description provided for @tavernShowUsageSubtitle.
   ///
   /// In zh, this message translates to:
-  /// **'模型报告的输入、输出 token 数；DeepSeek 的模型另按官方价估个费用，分高峰和低谷时段'**
+  /// **'模型报告的输入、输出 token 数；FustAI 的模型另按官方价估个费用，分高峰和低谷时段'**
   String get tavernShowUsageSubtitle;
 
   /// No description provided for @tavernUsageLine.
@@ -40073,7 +39749,7 @@ abstract class L10n {
   /// No description provided for @tavernCostAlertSubtitle.
   ///
   /// In zh, this message translates to:
-  /// **'一个回合按 DeepSeek 官方价估的费用超过这条线时，在输入框上方说一声；别的模型不估'**
+  /// **'一个回合按 官方价估的费用超过这条线时，在输入框上方说一声；别的模型不估'**
   String get tavernCostAlertSubtitle;
 
   /// No description provided for @tavernCostAlertOff.
@@ -40913,7 +40589,7 @@ abstract class L10n {
   /// No description provided for @tavernSessionUsageCost.
   ///
   /// In zh, this message translates to:
-  /// **'约 {usd}，按 DeepSeek 官方价，分高峰和低谷时段算；法定节假日全天是低谷价，那几天这里会算高一点'**
+  /// **'约 {usd}，按 官方价，分高峰和低谷时段算；法定节假日全天是低谷价，那几天这里会算高一点'**
   String tavernSessionUsageCost(String usd);
 
   /// No description provided for @tavernSessionUsageUnpriced.
@@ -42257,7 +41933,7 @@ abstract class L10n {
   /// No description provided for @tavernGroupHelperModelNote.
   ///
   /// In zh, this message translates to:
-  /// **'用辅助模型说（自动时 DeepSeek 用 flash 且不思考，其他渠道用主模型），适合配角。'**
+  /// **'用辅助模型说（自动时 FustAI 用 flash 且不思考，其他渠道用主模型），适合配角。'**
   String get tavernGroupHelperModelNote;
 
   /// No description provided for @tavernGroupMoveUp.
@@ -42563,7 +42239,7 @@ abstract class L10n {
   /// No description provided for @tavernToolPolicyNote.
   ///
   /// In zh, this message translates to:
-  /// **'只在用 DeepSeek、不开思考时，回复里才会用上这些；改了从下一回合起生效，角色卡也可以关掉它们'**
+  /// **'只在用 FustAI、不开思考时，回复里才会用上这些；改了从下一回合起生效，角色卡也可以关掉它们'**
   String get tavernToolPolicyNote;
 
   /// No description provided for @tavernToolPolicyFailed.
@@ -42779,13 +42455,13 @@ abstract class L10n {
   /// No description provided for @tavernChannelDeepSeek.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek 官方'**
+  /// **'FustAI 官方'**
   String get tavernChannelDeepSeek;
 
   /// No description provided for @tavernChannelDeepSeekNote.
   ///
   /// In zh, this message translates to:
-  /// **'用 App 里填的 DeepSeek Key'**
+  /// **'用 App 里填的 FustAI Key'**
   String get tavernChannelDeepSeekNote;
 
   /// No description provided for @tavernChannelAdd.
@@ -42803,7 +42479,7 @@ abstract class L10n {
   /// No description provided for @tavernChannelsNote.
   ///
   /// In zh, this message translates to:
-  /// **'兼容 OpenAI 接口的服务都能加：中转站、OpenRouter、自己电脑上跑的模型。Key 只存在这台手机的安全存储里。费用估算只认 DeepSeek 官方的价格，其他渠道只显示 token 数。'**
+  /// **'兼容 OpenAI 接口的服务都能加：中转站、OpenRouter、自己电脑上跑的模型。Key 只存在这台手机的安全存储里。费用估算只认 FustAI 官方的价格，其他渠道只显示 token 数。'**
   String get tavernChannelsNote;
 
   /// No description provided for @tavernChannelName.
@@ -42887,13 +42563,13 @@ abstract class L10n {
   /// No description provided for @tavernChannelDeepSeekApi.
   ///
   /// In zh, this message translates to:
-  /// **'按 DeepSeek 接口发送'**
+  /// **'按 FustAI 接口发送'**
   String get tavernChannelDeepSeekApi;
 
   /// No description provided for @tavernChannelDeepSeekApiNote.
   ///
   /// In zh, this message translates to:
-  /// **'用 DeepSeek 的续写方式和思考开关。只在 DeepSeek 官方或原样转发它的中转上打开。'**
+  /// **'用 FustAI 的续写方式和思考开关。只在 FustAI 官方或原样转发它的中转上打开。'**
   String get tavernChannelDeepSeekApiNote;
 
   /// No description provided for @tavernChannelDelete.
@@ -42911,7 +42587,7 @@ abstract class L10n {
   /// No description provided for @tavernChannelDeleteMessage.
   ///
   /// In zh, this message translates to:
-  /// **'它的 Key 也会一起删掉。正在用它的话，换回 DeepSeek 官方。'**
+  /// **'它的 Key 也会一起删掉。正在用它的话，换回 FustAI 官方。'**
   String get tavernChannelDeleteMessage;
 
   /// No description provided for @tavernChannelCopyFromApp.
@@ -43013,13 +42689,13 @@ abstract class L10n {
   /// No description provided for @tavernAuxiliaryAutoNote.
   ///
   /// In zh, this message translates to:
-  /// **'跟着主渠道：DeepSeek 用 Flash，其他渠道用同一个模型'**
+  /// **'跟着主渠道：FustAI 用 Flash，其他渠道用同一个模型'**
   String get tavernAuxiliaryAutoNote;
 
   /// No description provided for @tavernAuxiliaryDeepSeek.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek Flash'**
+  /// **'FustAI Flash'**
   String get tavernAuxiliaryDeepSeek;
 
   /// No description provided for @tavernChannelKeyClear.
@@ -43559,19 +43235,19 @@ abstract class L10n {
   /// No description provided for @tavernImportFromDeepSeek.
   ///
   /// In zh, this message translates to:
-  /// **'从 DeepSeek 接回来'**
+  /// **'从 FustAI 接回来'**
   String get tavernImportFromDeepSeek;
 
   /// No description provided for @tavernImportFromDeepSeekSubtitle.
   ///
   /// In zh, this message translates to:
-  /// **'在 DeepSeek 的设置里导出全部历史对话，再选那个 ZIP'**
+  /// **'在 FustAI 的设置里导出全部历史对话，再选那个 ZIP'**
   String get tavernImportFromDeepSeekSubtitle;
 
   /// No description provided for @tavernDeepSeekTitle.
   ///
   /// In zh, this message translates to:
-  /// **'接回 DeepSeek 的对话'**
+  /// **'接回 FustAI 的对话'**
   String get tavernDeepSeekTitle;
 
   /// No description provided for @tavernDeepSeekFound.
@@ -43619,13 +43295,13 @@ abstract class L10n {
   /// No description provided for @tavernDeepSeekNotExport.
   ///
   /// In zh, this message translates to:
-  /// **'这不是 DeepSeek 导出的对话'**
+  /// **'这不是 FustAI 导出的对话'**
   String get tavernDeepSeekNotExport;
 
   /// No description provided for @tavernDeepSeekNotExportMessage.
   ///
   /// In zh, this message translates to:
-  /// **'要选在 DeepSeek 里导出全部历史对话后得到的那个 ZIP'**
+  /// **'要选在 FustAI 里导出全部历史对话后得到的那个 ZIP'**
   String get tavernDeepSeekNotExportMessage;
 
   /// No description provided for @tavernDeepSeekFailed.
@@ -44387,7 +44063,7 @@ abstract class L10n {
   /// No description provided for @updateSettingsOpenFailedMessage.
   ///
   /// In zh, this message translates to:
-  /// **'到「设置 → 应用 → DSH Go」里允许「安装未知应用」，再回来安装。'**
+  /// **'到「设置 → 应用 → FustAI Harness」里允许「安装未知应用」，再回来安装。'**
   String get updateSettingsOpenFailedMessage;
 
   /// No description provided for @updateInstallCancelled.
@@ -44423,13 +44099,13 @@ abstract class L10n {
   /// No description provided for @updateSignatureMismatchMessage.
   ///
   /// In zh, this message translates to:
-  /// **'手机上的 DSH Go 签名不同（多半是测试包），需要先卸载旧版再装新版。卸载会清空对话、Linux 环境和设置。'**
+  /// **'手机上的 FustAI Harness 签名不同（多半是测试包），需要先卸载旧版再装新版。卸载会清空对话、Linux 环境和设置。'**
   String get updateSignatureMismatchMessage;
 
   /// No description provided for @updateWrongPackage.
   ///
   /// In zh, this message translates to:
-  /// **'不是 DSH 的安装包'**
+  /// **'不是 FustAI 的安装包'**
   String get updateWrongPackage;
 
   /// No description provided for @updateWrongPackageMessage.
@@ -44447,7 +44123,7 @@ abstract class L10n {
   /// No description provided for @updateDowngradeBlockedMessage.
   ///
   /// In zh, this message translates to:
-  /// **'手机上的 DSH 比这个安装包还新。'**
+  /// **'手机上的 FustAI 比这个安装包还新。'**
   String get updateDowngradeBlockedMessage;
 
   /// No description provided for @updateIncompatible.
@@ -44537,7 +44213,7 @@ abstract class L10n {
   /// No description provided for @updateInstallKeepsData.
   ///
   /// In zh, this message translates to:
-  /// **'安装时 DSH Go 会退出，对话和设置都会保留'**
+  /// **'安装时 FustAI Harness 会退出，对话和设置都会保留'**
   String get updateInstallKeepsData;
 
   /// No description provided for @updateNoCompatiblePackage.
@@ -44603,7 +44279,7 @@ abstract class L10n {
   /// No description provided for @updateAllowInstall.
   ///
   /// In zh, this message translates to:
-  /// **'允许 DSH Go 安装应用'**
+  /// **'允许 FustAI Harness 安装应用'**
   String get updateAllowInstall;
 
   /// No description provided for @updateAllowInstallMessage.
@@ -44657,7 +44333,7 @@ abstract class L10n {
   /// No description provided for @updateExportApkMessage.
   ///
   /// In zh, this message translates to:
-  /// **'会把这次下载并校验过的安装包复制到「下载/DSH-Go」，可以用 MT 管理器之类的工具重新签名后再装。\n\n重新签名后，手机上的签名和官方包不同，App 内更新会一直提示「签名不一致」，以后每次更新都要这样手动重签安装。\n\n如果只是系统拦着装不上（小米等机型），先试「安装路线」里的 Shizuku 或本机 ADB，那条路不用重新签名。'**
+  /// **'会把这次下载并校验过的安装包复制到「下载/FustAI Harness」，可以用 MT 管理器之类的工具重新签名后再装。\n\n重新签名后，手机上的签名和官方包不同，App 内更新会一直提示「签名不一致」，以后每次更新都要这样手动重签安装。\n\n如果只是系统拦着装不上（小米等机型），先试「安装路线」里的 Shizuku 或本机 ADB，那条路不用重新签名。'**
   String get updateExportApkMessage;
 
   /// No description provided for @updateExportApkDone.
@@ -44735,13 +44411,13 @@ abstract class L10n {
   /// No description provided for @usageStatsSection.
   ///
   /// In zh, this message translates to:
-  /// **'改进 DSH Go'**
+  /// **'改进 FustAI Harness'**
   String get usageStatsSection;
 
   /// No description provided for @usageStatsFooter.
   ///
   /// In zh, this message translates to:
-  /// **'这个开关只控制 dsh-go 自身的统计：各功能使用次数（含酒馆消息、伙伴小屋、语音通话）、模型回复报告的 token 数、版本、手机品牌和型号、系统版本，不含对话、角色卡、文件和账号；它不控制 Google ML Kit SDK 的统计。'**
+  /// **'这个开关只控制 FustAI Harness 自身的统计：各功能使用次数（含酒馆消息、伙伴小屋、语音通话）、模型回复报告的 token 数、版本、手机品牌和型号、系统版本，不含对话、角色卡、文件和账号；它不控制 Google ML Kit SDK 的统计。'**
   String get usageStatsFooter;
 
   /// No description provided for @usageNoticeBody.
@@ -44753,7 +44429,7 @@ abstract class L10n {
   /// No description provided for @usageUpgradeNotice.
   ///
   /// In zh, this message translates to:
-  /// **'新增匿名使用统计，帮助改进 DSH Go。\n不含对话和个人信息'**
+  /// **'新增匿名使用统计，帮助改进 FustAI Harness。\n不含对话和个人信息'**
   String get usageUpgradeNotice;
 
   /// No description provided for @usageUpgradeLearn.
@@ -44911,150 +44587,6 @@ abstract class L10n {
   /// In zh, this message translates to:
   /// **'第 {value} 页'**
   String viewArtifactPage(int value);
-
-  /// No description provided for @viewBalanceInvalidKey.
-  ///
-  /// In zh, this message translates to:
-  /// **'Key 无效，查不到余额'**
-  String get viewBalanceInvalidKey;
-
-  /// No description provided for @viewBalancePrefix.
-  ///
-  /// In zh, this message translates to:
-  /// **'余额 '**
-  String get viewBalancePrefix;
-
-  /// No description provided for @viewBalanceLowSuffix.
-  ///
-  /// In zh, this message translates to:
-  /// **' · 余额不足'**
-  String get viewBalanceLowSuffix;
-
-  /// No description provided for @viewBalanceUnavailableSuffix.
-  ///
-  /// In zh, this message translates to:
-  /// **' · 已不能调用'**
-  String get viewBalanceUnavailableSuffix;
-
-  /// No description provided for @viewBalanceTopUp.
-  ///
-  /// In zh, this message translates to:
-  /// **'充值'**
-  String get viewBalanceTopUp;
-
-  /// No description provided for @viewBalanceTitle.
-  ///
-  /// In zh, this message translates to:
-  /// **'DeepSeek 余额'**
-  String get viewBalanceTitle;
-
-  /// No description provided for @viewBalanceKeyRequired.
-  ///
-  /// In zh, this message translates to:
-  /// **'填写 API Key 后可查询余额'**
-  String get viewBalanceKeyRequired;
-
-  /// No description provided for @viewBalanceKeyInvalid.
-  ///
-  /// In zh, this message translates to:
-  /// **'API Key 无效，无法查询余额'**
-  String get viewBalanceKeyInvalid;
-
-  /// No description provided for @viewBalancePaid.
-  ///
-  /// In zh, this message translates to:
-  /// **'充值 {value}'**
-  String viewBalancePaid(String value);
-
-  /// No description provided for @viewBalanceGranted.
-  ///
-  /// In zh, this message translates to:
-  /// **'赠送 {value}'**
-  String viewBalanceGranted(String value);
-
-  /// No description provided for @viewBalanceLow.
-  ///
-  /// In zh, this message translates to:
-  /// **'余额不足'**
-  String get viewBalanceLow;
-
-  /// No description provided for @viewBalanceUnavailable.
-  ///
-  /// In zh, this message translates to:
-  /// **'已无法调用'**
-  String get viewBalanceUnavailable;
-
-  /// No description provided for @viewBalanceChecking.
-  ///
-  /// In zh, this message translates to:
-  /// **'正在查询余额…'**
-  String get viewBalanceChecking;
-
-  /// No description provided for @viewBalanceCheckFailed.
-  ///
-  /// In zh, this message translates to:
-  /// **'暂时无法查询余额'**
-  String get viewBalanceCheckFailed;
-
-  /// No description provided for @viewBalanceNoAlert.
-  ///
-  /// In zh, this message translates to:
-  /// **'不提醒'**
-  String get viewBalanceNoAlert;
-
-  /// No description provided for @viewBalanceBannerHidden.
-  ///
-  /// In zh, this message translates to:
-  /// **'本次运行不再显示余额提醒'**
-  String get viewBalanceBannerHidden;
-
-  /// No description provided for @viewBalanceTurnOff.
-  ///
-  /// In zh, this message translates to:
-  /// **'不再提醒'**
-  String get viewBalanceTurnOff;
-
-  /// No description provided for @viewBalanceBelow.
-  ///
-  /// In zh, this message translates to:
-  /// **'低于 {value}'**
-  String viewBalanceBelow(String value);
-
-  /// No description provided for @viewBalanceAlert.
-  ///
-  /// In zh, this message translates to:
-  /// **'低余额提醒'**
-  String get viewBalanceAlert;
-
-  /// No description provided for @viewBalanceThreshold.
-  ///
-  /// In zh, this message translates to:
-  /// **'提醒线'**
-  String get viewBalanceThreshold;
-
-  /// No description provided for @viewBalanceGoTopUp.
-  ///
-  /// In zh, this message translates to:
-  /// **'去充值'**
-  String get viewBalanceGoTopUp;
-
-  /// No description provided for @viewBalanceRemaining.
-  ///
-  /// In zh, this message translates to:
-  /// **'余额仅剩 {value}'**
-  String viewBalanceRemaining(String value);
-
-  /// No description provided for @viewBalanceModelDisabled.
-  ///
-  /// In zh, this message translates to:
-  /// **'余额不足，模型已停用'**
-  String get viewBalanceModelDisabled;
-
-  /// No description provided for @viewBalanceRestore.
-  ///
-  /// In zh, this message translates to:
-  /// **'充值后恢复'**
-  String get viewBalanceRestore;
 
   /// No description provided for @viewUiIncomplete.
   ///
@@ -45791,7 +45323,7 @@ abstract class L10n {
   /// No description provided for @viewTipSwitchHost.
   ///
   /// In zh, this message translates to:
-  /// **'点侧栏底部的主机名，可以切到电脑上的 DSH'**
+  /// **'点侧栏底部的主机名，可以切到电脑上的 FustAI'**
   String get viewTipSwitchHost;
 
   /// No description provided for @viewTipPasteImage.
@@ -45845,7 +45377,7 @@ abstract class L10n {
   /// No description provided for @viewTipShareIn.
   ///
   /// In zh, this message translates to:
-  /// **'在别的 App 里分享文字或图片给 DSH Go，会填进新对话'**
+  /// **'在别的 App 里分享文字或图片给 FustAI Harness，会填进新对话'**
   String get viewTipShareIn;
 
   /// No description provided for @viewTipShareSelect.
@@ -46217,7 +45749,7 @@ abstract class L10n {
   /// No description provided for @viewModelProvidersHint.
   ///
   /// In zh, this message translates to:
-  /// **'支持 DeepSeek 和其他模型渠道'**
+  /// **'支持 FustAI 和其他模型渠道'**
   String get viewModelProvidersHint;
 
   /// No description provided for @viewModelEnterKey.
@@ -46265,7 +45797,7 @@ abstract class L10n {
   /// No description provided for @viewContinueHeader.
   ///
   /// In zh, this message translates to:
-  /// **'> 分享的 DSH Go 对话 · {value}\n'**
+  /// **'> 分享的 FustAI Harness 对话 · {value}\n'**
   String viewContinueHeader(String value);
 
   /// No description provided for @viewContinueUser.
@@ -46361,7 +45893,7 @@ abstract class L10n {
   /// No description provided for @viewShareLinkText.
   ///
   /// In zh, this message translates to:
-  /// **'「{first}」· DSH Go 对话\n{second}'**
+  /// **'「{first}」· FustAI Harness 对话\n{second}'**
   String viewShareLinkText(String first, String second);
 
   /// No description provided for @viewShareEmpty.
@@ -46385,7 +45917,7 @@ abstract class L10n {
   /// No description provided for @viewShareFileHint.
   ///
   /// In zh, this message translates to:
-  /// **'在 DSH Go 里回放、接着聊'**
+  /// **'在 FustAI Harness 里回放、接着聊'**
   String get viewShareFileHint;
 
   /// No description provided for @viewShareWebHint.
@@ -46613,13 +46145,13 @@ abstract class L10n {
   /// No description provided for @viewShareBrandLine.
   ///
   /// In zh, this message translates to:
-  /// **'手机上的 DSH · 扫码获取'**
+  /// **'手机上的 FustAI · 扫码获取'**
   String get viewShareBrandLine;
 
   /// No description provided for @viewShareBrandLineNoQr.
   ///
   /// In zh, this message translates to:
-  /// **'手机上的 DSH'**
+  /// **'手机上的 FustAI'**
   String get viewShareBrandLineNoQr;
 
   /// No description provided for @viewShareSteps.
@@ -46697,7 +46229,7 @@ abstract class L10n {
   /// No description provided for @viewSharePluginTitle.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 插件「{value}」'**
+  /// **'FustAI 插件「{value}」'**
   String viewSharePluginTitle(String value);
 
   /// No description provided for @viewShareInstallCommand.
@@ -47129,7 +46661,7 @@ abstract class L10n {
   /// No description provided for @voiceModeAutoHint.
   ///
   /// In zh, this message translates to:
-  /// **'有 DeepSeek 账号或 API Key 时用 DeepSeek，否则用语音模型或系统识别'**
+  /// **'有 FustAI 账号或 API Key 时用 FustAI，否则用语音模型或系统识别'**
   String get voiceModeAutoHint;
 
   /// No description provided for @voiceModeSystemHint.
@@ -47501,13 +47033,13 @@ abstract class L10n {
   /// No description provided for @voiceModeDeepseek.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek'**
+  /// **'FustAI'**
   String get voiceModeDeepseek;
 
   /// No description provided for @voiceModeDeepseekHint.
   ///
   /// In zh, this message translates to:
-  /// **'用 DeepSeek 的语音识别，登录的账号或 API Key 付费'**
+  /// **'用 FustAI 的语音识别，登录的账号或 API Key 付费'**
   String get voiceModeDeepseekHint;
 
   /// No description provided for @voiceModeCloud.
@@ -47795,7 +47327,7 @@ abstract class L10n {
   /// No description provided for @webTitle.
   ///
   /// In zh, this message translates to:
-  /// **'DSH 网页版'**
+  /// **'FustAI 网页版'**
   String get webTitle;
 
   /// No description provided for @webSshAppOnly.
@@ -47807,7 +47339,7 @@ abstract class L10n {
   /// No description provided for @webRelayUnavailable.
   ///
   /// In zh, this message translates to:
-  /// **'经 DSH Remote 中转时打不开网页版，请在那台电脑上打开'**
+  /// **'经 FustAI Remote 中转时打不开网页版，请在那台电脑上打开'**
   String get webRelayUnavailable;
 
   /// No description provided for @webSshHost.
@@ -48203,7 +47735,7 @@ abstract class L10n {
   /// No description provided for @workshopMinApp.
   ///
   /// In zh, this message translates to:
-  /// **'需要 DSH Go {version} 或更新的版本。'**
+  /// **'需要 FustAI Harness {version} 或更新的版本。'**
   String workshopMinApp(String version);
 
   /// No description provided for @workshopInstalledVersion.

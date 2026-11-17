@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/l10n.dart';
 import '../../state/account_state.dart';
 import '../../state/settings_state.dart';
-import '../chat/balance_widgets.dart' show BalanceSettingsLine;
 import '../common/app_dialog.dart';
 import '../common/app_sheet.dart';
 import '../common/overview_card.dart';
@@ -19,8 +18,8 @@ import '../theme/theme.dart';
 import 'account_widgets.dart';
 import '../common/brief_notice.dart';
 
-/// 账号: the DeepSeek account of the on-device engine (profile, wallets, top-up,
-/// sign-out; the browser sign-in otherwise) and the API Key, the other way in.
+/// 账号: the DeepSeek account of the on-device engine (profile, usage, sign-out;
+/// the browser sign-in otherwise) and the API Key, the other way in.
 class AccountPage extends ConsumerStatefulWidget {
   const AccountPage({super.key});
 
@@ -30,9 +29,6 @@ class AccountPage extends ConsumerStatefulWidget {
 
 class _AccountPageState extends ConsumerState<AccountPage> {
   late final AppLifecycleListener _lifecycle;
-
-  /// A Platform page (top-up, usage) was opened: re-read wallets on return.
-  bool _awaitingReturn = false;
 
   @override
   void initState() {
@@ -53,22 +49,12 @@ class _AccountPageState extends ConsumerState<AccountPage> {
     super.dispose();
   }
 
-  void _onResume() {
-    ref.read(accountProvider.notifier).noteAppResumed();
-    if (_awaitingReturn) {
-      _awaitingReturn = false;
-      _refresh();
-    }
-  }
+  void _onResume() => ref.read(accountProvider.notifier).noteAppResumed();
 
-  void _refresh() {
-    ref.invalidate(accountBalanceProvider);
-    unawaited(ref.read(accountProvider.notifier).refreshProfile());
-  }
+  void _refresh() => unawaited(ref.read(accountProvider.notifier).refreshProfile());
 
-  Future<void> _openPlatform(String? url) async {
+  Future<void> _openUsage(String? url) async {
     if (url == null) return;
-    _awaitingReturn = true;
     await openAccountLink(context, ref, url);
   }
 
@@ -132,8 +118,7 @@ class _AccountPageState extends ConsumerState<AccountPage> {
             child: switch (state.phase) {
               AccountPhase.signedIn => _SignedInView(
                 state: state,
-                onTopUp: () => _openPlatform(state.links?.topUpUrl),
-                onUsage: () => _openPlatform(state.links?.usageUrl),
+                onUsage: () => _openUsage(state.links?.usageUrl),
                 onSignOut: _confirmSignOut,
               ),
               AccountPhase.signingIn => _SigningInView(state: state),
@@ -149,10 +134,9 @@ class _AccountPageState extends ConsumerState<AccountPage> {
 // ── Signed in ────────────────────────────────────────────────────────────────
 
 class _SignedInView extends ConsumerWidget {
-  const _SignedInView({required this.state, required this.onTopUp, required this.onUsage, required this.onSignOut});
+  const _SignedInView({required this.state, required this.onUsage, required this.onSignOut});
 
   final AccountState state;
-  final VoidCallback onTopUp;
   final VoidCallback onUsage;
   final VoidCallback onSignOut;
 
@@ -161,7 +145,6 @@ class _SignedInView extends ConsumerWidget {
     final l10n = context.l10n;
     final colors = DshColors.of(context);
     final profile = state.profile;
-    final balance = ref.watch(accountBalanceProvider);
 
     final name = profile?.displayName ?? (state.profileFailed ? l10n.engineAccountDeepSeek : ' ');
     final contact = profile?.contact;
@@ -177,40 +160,14 @@ class _SignedInView extends ConsumerWidget {
                 : (contact != null && contact != name ? contact : l10n.commonSignedIn),
           ),
         ),
-        SettingsSection(
-          title: l10n.engineAccountBalance,
-          footer: Text(state.connected ? l10n.engineAccountBalanceHint : l10n.engineAccountBalanceEngineOff),
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(SettingsMetrics.inset, 14, SettingsMetrics.inset, 4),
-              child: balance.when(
-                data: (b) => _Wallets(balance: b),
-                loading: () => const _Wallets(balance: null),
-                error: (_, _) => _WalletsUnavailable(onRetry: () => ref.invalidate(accountBalanceProvider)),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(SettingsMetrics.inset, 12, SettingsMetrics.inset, 14),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: FilledButton(
-                      onPressed: state.links == null ? null : onTopUp,
-                      child: Text(l10n.engineAccountTopUp),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: state.links == null ? null : onUsage,
-                      child: Text(l10n.engineAccountUsageDetails),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+        Padding(
+          padding: const EdgeInsets.fromLTRB(SettingsMetrics.inset, 12, SettingsMetrics.inset, 0),
+          child: OutlinedButton(
+            onPressed: state.links == null ? null : onUsage,
+            child: Text(l10n.engineAccountUsageDetails),
+          ),
         ),
+        const SizedBox(height: 8),
         const ApiKeySection(),
         Center(
           child: TextButton.icon(
@@ -220,87 +177,6 @@ class _SignedInView extends ConsumerWidget {
             label: Text(l10n.commonSignOut),
           ),
         ),
-      ],
-    );
-  }
-}
-
-/// Recharge and bonus balances side by side; [balance] null while unknown.
-class _Wallets extends StatelessWidget {
-  const _Wallets({required this.balance});
-
-  final AccountBalance? balance;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final b = balance;
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: _WalletStat(label: l10n.engineAccountToppedUpBalance, lines: b == null ? null : _lines(b.recharge)),
-        ),
-        const SizedBox(width: 16),
-        Expanded(
-          child: _WalletStat(label: l10n.engineAccountGrantedBalance, lines: b == null ? null : _lines(b.bonus)),
-        ),
-      ],
-    );
-  }
-
-  /// One line per currency; an empty list reads as zero in CNY.
-  static List<String> _lines(List<AccountWallet> wallets) {
-    final currencies = {for (final w in wallets) w.currency}.toList();
-    if (currencies.isEmpty) return const ['¥0.00'];
-    return [for (final c in currencies) '${currencySymbol(c)}${formatWalletAmount(sumWallets(wallets, c) ?? '0')}'];
-  }
-}
-
-class _WalletStat extends StatelessWidget {
-  const _WalletStat({required this.label, required this.lines});
-
-  final String label;
-  final List<String>? lines;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final scheme = theme.colorScheme;
-    final colors = DshColors.of(context);
-    final amountStyle = AppType.tabular(AppType.display(size: 26, color: scheme.onSurface)).copyWith(height: 1.25);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label, style: theme.textTheme.bodySmall?.copyWith(color: colors.textTertiary)),
-        const SizedBox(height: 4),
-        if (lines case final lines?)
-          for (final line in lines) Text(line, maxLines: 1, overflow: TextOverflow.ellipsis, style: amountStyle)
-        else
-          Text('—', style: amountStyle.copyWith(color: colors.textTertiary)),
-      ],
-    );
-  }
-}
-
-class _WalletsUnavailable extends StatelessWidget {
-  const _WalletsUnavailable({required this.onRetry});
-
-  final VoidCallback onRetry;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final theme = Theme.of(context);
-    return Row(
-      children: [
-        Expanded(
-          child: Text(
-            l10n.engineAccountBalanceUnavailable,
-            style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
-          ),
-        ),
-        TextButton(onPressed: onRetry, child: Text(l10n.commonRetry)),
       ],
     );
   }
@@ -411,16 +287,13 @@ class _SignedOutView extends StatelessWidget {
   }
 }
 
-/// 「API Key」: the key saved in the app (replace / clear) and, when set, its
-/// balance. The other way to use DeepSeek models besides the account.
-class ApiKeySection extends ConsumerWidget {
+/// 「API Key」: the key saved in the app (replace / clear).
+/// The other way to use DeepSeek models besides the account.
+class ApiKeySection extends StatelessWidget {
   const ApiKeySection({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final hasKey = ref.watch(settingsProvider.select((s) => s.hasApiKey));
-    return SettingsSection(title: 'API Key', children: [const ApiKeyTile(), if (hasKey) const BalanceSettingsLine()]);
-  }
+  Widget build(BuildContext context) => const SettingsSection(title: 'API Key', children: [ApiKeyTile()]);
 }
 
 /// The saved DeepSeek API Key, masked; opens "replace / clear", or the key page

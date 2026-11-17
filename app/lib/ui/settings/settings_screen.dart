@@ -9,7 +9,6 @@ import '../../runtime/runtime_state.dart';
 import '../../state/account_state.dart';
 import '../../state/android_features.dart';
 import '../../state/ask_ai.dart' show askAiAvailableProvider;
-import '../../state/balance_state.dart';
 import '../../state/connection_state.dart';
 import '../../state/engine_settings_state.dart';
 import '../../state/features_state.dart';
@@ -23,7 +22,6 @@ import '../../state/ui_mode_state.dart';
 import '../../state/update_state.dart';
 import '../account/account_page.dart';
 import '../account/account_widgets.dart';
-import '../chat/balance_widgets.dart' show formatMoney;
 import '../common/ask_ai.dart';
 import '../common/overview_card.dart';
 import '../common/search_capsule.dart';
@@ -77,7 +75,7 @@ abstract final class SettingsHues {
   static const help = 7;
 }
 
-/// Settings hub: search, the overview card (account, balance, engine), then
+/// Settings hub: search, the overview card (account, engine), then
 /// six groups by what people come to do — AI, 能力, 外观, 通用, 主机, 帮助与
 /// 关于 (docs/design/settings-ia.md §4.2). Every row that opens a page says
 /// where it stands; nothing here loosens a safeguard or deletes anything:
@@ -375,51 +373,26 @@ class SettingsScreen extends ConsumerWidget {
   }
 }
 
-/// The hub's overview card: who is paying (DeepSeek account or API Key) and
-/// the balance, with the engine's state underneath. The card opens 账号, the
-/// engine line opens 引擎. With no runtime on this phone and a remote host in
-/// use there is nothing here to sign in to: the card shows that host and
-/// opens 远程主机.
-class SettingsOverview extends ConsumerStatefulWidget {
+/// The hub's overview card: the signed-in account (or the saved API Key), with
+/// the engine's state underneath. The card opens 账号, the engine line opens 引擎.
+/// With no runtime on this phone and a remote host in use there is nothing here
+/// to sign in to: the card shows that host and opens 远程主机.
+class SettingsOverview extends ConsumerWidget {
   const SettingsOverview({super.key});
 
-  @override
-  ConsumerState<SettingsOverview> createState() => _SettingsOverviewState();
-}
-
-class _SettingsOverviewState extends ConsumerState<SettingsOverview> {
-  @override
-  void initState() {
-    super.initState();
-    // Opening settings counts as "open": refresh the balance (throttled).
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) ref.read(balanceProvider.notifier).refresh();
-    });
-  }
-
-  void _push(Widget page) => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => page));
+  void _push(BuildContext context, Widget page) =>
+      Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => page));
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final account = ref.watch(accountProvider);
     final settings = ref.watch(settingsProvider);
-    final balance = ref.watch(balanceProvider);
-    final wallets = ref.watch(accountWalletBalanceProvider);
     final runtime = ref.watch(localRuntimeProvider);
     final engine = EngineStatusView.of(runtime);
     final colors = DshColors.of(context);
     final active = ref.watch(activeHostProvider);
     final remoteOnly = runtime.status.runtimeMissing && !active.isLocal;
-
-    // The account's wallets when signed in; otherwise the key's balance.
-    final money = account.signedIn && wallets != null ? balanceFromAccount(wallets) : balance.balance;
-    final low = !account.signedIn && balance.isLow;
-    final balanceLine = money == null
-        ? null
-        : low
-        ? l10n.hubSettingsBalanceLow(formatMoney(money))
-        : l10n.hubSettingsBalance(formatMoney(money));
 
     final Widget leading;
     final String title;
@@ -432,7 +405,7 @@ class _SettingsOverviewState extends ConsumerState<SettingsOverview> {
       case AccountPhase.signedIn:
         leading = AccountAvatar(profile: account.profile, size: OverviewCard.avatarSize);
         title = account.profile?.displayName ?? l10n.hubSettingsAccount;
-        subtitle = balanceLine ?? account.profile?.contact ?? l10n.commonSignedIn;
+        subtitle = account.profile?.contact ?? l10n.commonSignedIn;
       case AccountPhase.signingIn:
         leading = const OverviewGlyph(AppIcons.apiKey);
         title = l10n.hubSettingsAccount;
@@ -447,14 +420,8 @@ class _SettingsOverviewState extends ConsumerState<SettingsOverview> {
       case _ when settings.hasApiKey:
         leading = const OverviewGlyph(AppIcons.apiKey);
         title = l10n.hubSettingsApiKey;
-        if (balance.status == BalanceStatus.invalidKey) {
-          subtitle = l10n.hubSettingsInvalidKey;
-          warn = true;
-        } else {
-          subtitle = balanceLine ?? maskApiKey(settings.apiKey);
-          mono = balanceLine == null;
-          warn = low;
-        }
+        subtitle = maskApiKey(settings.apiKey);
+        mono = true;
       case AccountPhase.unsupported:
         leading = const OverviewGlyph(AppIcons.apiKey);
         title = l10n.hubSettingsNoApiKey;
@@ -482,12 +449,12 @@ class _SettingsOverviewState extends ConsumerState<SettingsOverview> {
         semanticLabel: hostLink != null
             ? l10n.hubSettingsHostSemantics(title, hostLink)
             : l10n.hubSettingsAccountSemantics(title, subtitle),
-        onTap: () => _push(hostLink != null ? const RemoteScreen() : const AccountPage()),
+        onTap: () => _push(context, hostLink != null ? const RemoteScreen() : const AccountPage()),
         footer: OverviewFooter(
           tone: engine.tone,
-          text: [l10n.hubSettingsEngine, engine.label, if (dsh != null) 'DSH $dsh'].join(' · '),
+          text: [l10n.hubSettingsEngine, engine.label, if (dsh != null) 'FustAI Harness $dsh'].join(' · '),
         ),
-        onFooterTap: () => _push(const EngineScreen()),
+        onFooterTap: () => _push(context, const EngineScreen()),
       ),
     );
   }

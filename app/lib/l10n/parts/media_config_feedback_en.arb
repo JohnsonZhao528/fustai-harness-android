@@ -4,7 +4,7 @@
   "mediaConfigKeyNote": "Key presence is reported by the host. Saving a key does not verify authentication or model access.",
   "mediaConfigConsumers": "Media services using this key: {services}. Changing or removing it affects all of them; other host integrations may also use it.",
   "mediaConfigCheck": "Check saved configuration",
-  "mediaConfigCheckNote": "Local snapshot only; no provider request or generation charge. Does not verify the key, connectivity, balance, model access, or region. The host remains the authority on accepted settings.",
+  "mediaConfigCheckNote": "Local snapshot only; no provider request or generation charge. Does not verify the key, connectivity, model access, or region. The host remains the authority on accepted settings.",
   "mediaConfigCheckReady": "No local configuration issues found",
   "mediaConfigCheckMissingKey": "The host has not reported a saved key.",
   "mediaConfigCheckModels": "No selected models, or some selected models are missing or use a different protocol.",

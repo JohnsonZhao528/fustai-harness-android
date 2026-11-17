@@ -1,7 +1,7 @@
 // Share links (docs/design/share-codes.md).
 //
-//   dshgo://share/<kind>?p=<code>                app link, code inline
-//   dshgo://share/profile?gist=<id>&c=<sum>      a profile too large to inline
+//   fustai://share/<kind>?p=<code>                app link, code inline
+//   fustai://share/profile?gist=<id>&c=<sum>      a profile too large to inline
 //   <shareLandingUrl>#p=<code>                    the same on the landing page
 //   <shareLandingUrl>#gist=<id>&c=<sum>
 //
@@ -54,7 +54,7 @@ class ShareLink {
 
   bool get isGist => gistId != null;
 
-  /// `dshgo://share/…`.
+  /// `fustai://share/…`.
   Uri get appLink => isGist
       ? Uri(
           scheme: appLinkScheme,

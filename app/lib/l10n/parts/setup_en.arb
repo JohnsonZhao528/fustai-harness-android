@@ -9,5 +9,5 @@
   "setupCapsuleFailed": "Install failed",
   "setupWaitingBody": "Continues on its own when ready",
   "setupNotifyWhenDone": "We’ll notify you when it’s done",
-  "setupAwaitSignIn": "DeepSeek sign-in opens when it’s ready"
+  "setupAwaitSignIn": "FustAI sign-in opens when it’s ready"
 }
