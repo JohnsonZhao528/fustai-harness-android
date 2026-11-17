@@ -36,6 +36,12 @@ abstract final class AppInfo {
   static const authorXUrl = 'https://x.com/cccch1mneyyyy';
   static const authorGithubUrl = 'https://github.com/ccch1mneyyy';
 
+  /// This fork's public repository, where the AGPL-3.0 sources for every release
+  /// live, and the record of changes made to the upstream project.
+  static const projectRepo = 'JohnsonZhao528/fustai-harness-android';
+  static const projectUrl = 'https://github.com/$projectRepo';
+  static const projectChangesUrl = '$projectUrl/blob/main/MODIFICATIONS.md';
+
   static const deepseekPlatform = 'https://platform.deepseek.com/api_keys';
   static const remoteConsole = 'https://dsh.r2049.cn/app';
 

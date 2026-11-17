@@ -9723,7 +9723,7 @@ class L10nEn extends L10n {
   String get hubAbout => 'About FustAI Harness';
 
   @override
-  String get hubAboutAuthor => 'Original author of FustAI Harness';
+  String get hubAboutAuthor => 'Original author of the upstream project';
 
   @override
   String get hubAboutBilibili => 'Bilibili profile';
@@ -9733,6 +9733,15 @@ class L10nEn extends L10n {
 
   @override
   String get hubAboutGithub => 'GitHub profile';
+
+  @override
+  String get hubProject => 'This project';
+
+  @override
+  String get hubProjectSource => 'Source repository';
+
+  @override
+  String get hubProjectChanges => 'List of changes';
 
   @override
   String get hubAboutNewVersion => 'Update available';
@@ -19996,7 +20005,7 @@ class L10nEn extends L10n {
   String get stateIconInk => 'Ink';
 
   @override
-  String get stateAppDisclaimer => 'Built on FustAI Harness';
+  String get stateAppDisclaimer => 'Open source · Released under AGPL-3.0';
 
   @override
   String get stateWallpaper => 'Wallpaper';
@@ -21067,7 +21076,7 @@ class L10nEn extends L10n {
   String get stateProviderTokenCountInvalid => 'Enter a number, like 128K';
 
   @override
-  String get appSlogan => 'Anytime, anywhere. Just Go!';
+  String get appSlogan => 'Anytime, anywhere, on your phone.';
 
   @override
   String get statePasteEmpty => 'The clipboard has no text to paste.';

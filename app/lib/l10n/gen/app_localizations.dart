@@ -17033,7 +17033,7 @@ abstract class L10n {
   /// No description provided for @hubAboutAuthor.
   ///
   /// In zh, this message translates to:
-  /// **'FustAI Harness 原作者'**
+  /// **'上游项目原作者'**
   String get hubAboutAuthor;
 
   /// No description provided for @hubAboutBilibili.
@@ -17053,6 +17053,24 @@ abstract class L10n {
   /// In zh, this message translates to:
   /// **'GitHub 主页'**
   String get hubAboutGithub;
+
+  /// No description provided for @hubProject.
+  ///
+  /// In zh, this message translates to:
+  /// **'本项目'**
+  String get hubProject;
+
+  /// No description provided for @hubProjectSource.
+  ///
+  /// In zh, this message translates to:
+  /// **'源码仓库'**
+  String get hubProjectSource;
+
+  /// No description provided for @hubProjectChanges.
+  ///
+  /// In zh, this message translates to:
+  /// **'修改说明'**
+  String get hubProjectChanges;
 
   /// No description provided for @hubAboutNewVersion.
   ///
@@ -34865,7 +34883,7 @@ abstract class L10n {
   /// No description provided for @stateAppDisclaimer.
   ///
   /// In zh, this message translates to:
-  /// **'基于 FustAI Harness 构建'**
+  /// **'开源软件 · 按 AGPL-3.0 发布'**
   String get stateAppDisclaimer;
 
   /// No description provided for @stateWallpaper.
@@ -36659,7 +36677,7 @@ abstract class L10n {
   /// No description provided for @appSlogan.
   ///
   /// In zh, this message translates to:
-  /// **'随时随刻，想go就Go！'**
+  /// **'随时随刻，随处可用！'**
   String get appSlogan;
 
   /// No description provided for @statePasteEmpty.

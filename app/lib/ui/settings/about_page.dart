@@ -1,5 +1,6 @@
 // About FustAI Harness: app information, the original author and personal profiles,
-// then the brand mark, slogan and unofficial-app disclaimer.
+// this fork's source repository and change record, then the brand mark, slogan and
+// release notice.
 
 import 'dart:async';
 
@@ -68,7 +69,7 @@ class AboutPage extends ConsumerWidget {
           title: l10n.hubAboutAuthor,
           children: [
             const SettingsTile(title: AppInfo.author),
-            _authorLink(
+            _linkTile(
               context,
               ref,
               'about-author-bilibili',
@@ -76,14 +77,35 @@ class AboutPage extends ConsumerWidget {
               AppInfo.authorBilibiliName,
               AppInfo.authorBilibiliUrl,
             ),
-            _authorLink(context, ref, 'about-author-x', l10n.hubAboutX, AppInfo.authorXHandle, AppInfo.authorXUrl),
-            _authorLink(
+            _linkTile(context, ref, 'about-author-x', l10n.hubAboutX, AppInfo.authorXHandle, AppInfo.authorXUrl),
+            _linkTile(
               context,
               ref,
               'about-author-github',
               l10n.hubAboutGithub,
               '@${AppInfo.author}',
               AppInfo.authorGithubUrl,
+            ),
+          ],
+        ),
+        SettingsSection(
+          title: l10n.hubProject,
+          children: [
+            _linkTile(
+              context,
+              ref,
+              'about-project-source',
+              l10n.hubProjectSource,
+              AppInfo.projectRepo,
+              AppInfo.projectUrl,
+            ),
+            _linkTile(
+              context,
+              ref,
+              'about-project-changes',
+              l10n.hubProjectChanges,
+              'MODIFICATIONS.md',
+              AppInfo.projectChangesUrl,
             ),
           ],
         ),
@@ -111,7 +133,7 @@ class AboutPage extends ConsumerWidget {
     );
   }
 
-  Widget _authorLink(BuildContext context, WidgetRef ref, String key, String title, String handle, String url) =>
+  Widget _linkTile(BuildContext context, WidgetRef ref, String key, String title, String handle, String url) =>
       Semantics(
         link: true,
         child: SettingsTile(
@@ -119,11 +141,11 @@ class AboutPage extends ConsumerWidget {
           title: title,
           subtitle: handle,
           trailing: Icon(AppIcons.openExternal, size: 18, color: DshColors.of(context).textTertiary),
-          onTap: () => unawaited(_openAuthorLink(context, ref, Uri.parse(url))),
+          onTap: () => unawaited(_openLink(context, ref, Uri.parse(url))),
         ),
       );
 
-  Future<void> _openAuthorLink(BuildContext context, WidgetRef ref, Uri url) async {
+  Future<void> _openLink(BuildContext context, WidgetRef ref, Uri url) async {
     final l10n = context.l10n;
     final messenger = ScaffoldMessenger.maybeOf(context);
     try {

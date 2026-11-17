@@ -35,6 +35,12 @@ const _profiles = [
   ('about-author-github', 'https://github.com/ccch1mneyyy'),
 ];
 
+/// This fork's repository and the AGPL-3.0 change record the About page must link.
+const _projectLinks = [
+  ('about-project-source', 'https://github.com/JohnsonZhao528/fustai-harness-android'),
+  ('about-project-changes', 'https://github.com/JohnsonZhao528/fustai-harness-android/blob/main/MODIFICATIONS.md'),
+];
+
 void main() {
   late List<Uri> opened;
   late _StarStore store;
@@ -89,6 +95,9 @@ void main() {
 
   Future<void> tap(WidgetTester tester, String key) async {
     final row = find.byKey(ValueKey(key));
+    if (row.evaluate().isEmpty) {
+      await tester.scrollUntilVisible(row, 120, scrollable: find.byType(Scrollable).first);
+    }
     await tester.ensureVisible(row);
     await tester.pumpAndSettle();
     await tester.tap(row);
@@ -97,10 +106,10 @@ void main() {
 
   for (final locale in AppLocale.supported) {
     for (final brightness in Brightness.values) {
-      testWidgets('author profiles fit 360dp at 1.3x in $locale $brightness', (tester) async {
+      testWidgets('author profiles and project links fit 360dp at 1.3x in $locale $brightness', (tester) async {
         await pump(tester, locale: locale, brightness: brightness, scale: 1.3);
         final english = locale == AppLocale.en;
-        expect(find.text(english ? 'Original author of FustAI Harness' : 'FustAI Harness 原作者'), findsOneWidget);
+        expect(find.text(english ? 'Original author of the upstream project' : '上游项目原作者'), findsOneWidget);
         expect(find.text('ccch1mneyyy'), findsOneWidget);
         expect(find.text('ccchimneyyy'), findsOneWidget);
         expect(find.text('@cccch1mneyyyy'), findsOneWidget);
@@ -119,8 +128,30 @@ void main() {
           expect(tester.widget<SettingsTile>(row).onTap, isNotNull);
           expect(tester.takeException(), isNull, reason: 'No overflow at $key');
         }
+
+        // The list builds lazily: scroll to the project section before asserting it.
+        await tester.scrollUntilVisible(
+          find.byKey(const ValueKey('about-project-changes')),
+          120,
+          scrollable: find.byType(Scrollable).first,
+        );
+        await tester.pumpAndSettle();
+        expect(find.text(english ? 'This project' : '本项目'), findsOneWidget);
+        expect(find.text(english ? 'Source repository' : '源码仓库'), findsOneWidget);
+        expect(find.text(english ? 'List of changes' : '修改说明'), findsOneWidget);
+        expect(find.text('JohnsonZhao528/fustai-harness-android'), findsOneWidget);
+        expect(find.text('MODIFICATIONS.md'), findsOneWidget);
+
+        for (final (key, _) in _projectLinks) {
+          final row = find.byKey(ValueKey(key));
+          await tester.ensureVisible(row);
+          await tester.pumpAndSettle();
+          expect(tester.getSize(row).height, greaterThanOrEqualTo(64));
+          expect(tester.widget<SettingsTile>(row).onTap, isNotNull);
+          expect(tester.takeException(), isNull, reason: 'No overflow at $key');
+        }
         final disclaimer = find.text(
-          english ? 'Built on DeepSeek Harness · Unofficial DeepSeek app' : '基于 DeepSeek Harness 构建 · 非 DeepSeek 官方应用',
+          english ? 'Open source · Released under AGPL-3.0' : '开源软件 · 按 AGPL-3.0 发布',
         );
         await tester.ensureVisible(disclaimer);
         await tester.pumpAndSettle();
@@ -130,12 +161,12 @@ void main() {
     }
   }
 
-  testWidgets('each profile opens its exact personal URL without finishing the star prompt', (tester) async {
+  testWidgets('each profile and project link opens its exact URL without finishing the star prompt', (tester) async {
     await pump(tester);
-    for (final (key, _) in _profiles) {
+    for (final (key, _) in [..._profiles, ..._projectLinks]) {
       await tap(tester, key);
     }
-    expect(opened.map((uri) => uri.toString()), _profiles.map((profile) => profile.$2));
+    expect(opened.map((uri) => uri.toString()), [..._profiles, ..._projectLinks].map((link) => link.$2));
     expect(store.writes, isEmpty);
   });
 
@@ -175,12 +206,15 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('profiles are announced as actionable links', (tester) async {
+  testWidgets('author profiles and project links are announced as actionable links', (tester) async {
     final semantics = tester.ensureSemantics();
     try {
       await pump(tester, locale: AppLocale.en);
-      for (final (key, _) in _profiles) {
+      for (final (key, _) in [..._profiles, ..._projectLinks]) {
         final row = find.byKey(ValueKey(key));
+        if (row.evaluate().isEmpty) {
+          await tester.scrollUntilVisible(row, 120, scrollable: find.byType(Scrollable).first);
+        }
         await tester.ensureVisible(row);
         await tester.pumpAndSettle();
         final node = tester.getSemantics(row);

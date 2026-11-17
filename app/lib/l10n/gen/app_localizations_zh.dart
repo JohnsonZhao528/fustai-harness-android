@@ -9205,7 +9205,7 @@ class L10nZh extends L10n {
   String get hubAbout => '关于 FustAI Harness';
 
   @override
-  String get hubAboutAuthor => 'FustAI Harness 原作者';
+  String get hubAboutAuthor => '上游项目原作者';
 
   @override
   String get hubAboutBilibili => 'B站主页';
@@ -9215,6 +9215,15 @@ class L10nZh extends L10n {
 
   @override
   String get hubAboutGithub => 'GitHub 主页';
+
+  @override
+  String get hubProject => '本项目';
+
+  @override
+  String get hubProjectSource => '源码仓库';
+
+  @override
+  String get hubProjectChanges => '修改说明';
 
   @override
   String get hubAboutNewVersion => '有新版本';
@@ -18957,7 +18966,7 @@ class L10nZh extends L10n {
   String get stateIconInk => '墨';
 
   @override
-  String get stateAppDisclaimer => '基于 FustAI Harness 构建';
+  String get stateAppDisclaimer => '开源软件 · 按 AGPL-3.0 发布';
 
   @override
   String get stateWallpaper => '壁纸';
@@ -19960,7 +19969,7 @@ class L10nZh extends L10n {
   String get stateProviderTokenCountInvalid => '填写数字，如 128K';
 
   @override
-  String get appSlogan => '随时随刻，想go就Go！';
+  String get appSlogan => '随时随刻，随处可用！';
 
   @override
   String get statePasteEmpty => '剪贴板中没有可粘贴的文本。';

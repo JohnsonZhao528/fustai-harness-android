@@ -15,6 +15,7 @@
 - 应用名、包名、URL scheme 改为 FustAI Harness：`com.fustai.harness`、`fustai://`；Android 工程目录与 Kotlin 包路径同步迁移。
 - 应用图标、启动画面、引导图与品牌标记替换为 FustAI Harness 自有素材；上游 Deepy / 鲸娘形象不再使用。
 - `docs/guide/{zh,en,harmony}` 与 App 内指南同步改名，并重新生成 `app/assets/skills/dsh-go-guide/`。
+- 关于页保留上游作者与个人主页，标注为「上游项目原作者」；新增「本项目」分组，链接本仓库源码与本文档。标语与页脚声明改为 FustAI 自有文案（`app/lib/ui/settings/about_page.dart`、`app/lib/state/app_info.dart`）。
 
 ### 功能
 
