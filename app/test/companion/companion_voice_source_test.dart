@@ -379,7 +379,7 @@ void main() {
     test('her persona under the name she was given', () {
       expect(companionPersonaNamed(null), companionPersonaCore);
       expect(companionPersonaNamed('  '), companionPersonaCore);
-      expect(companionPersonaNamed('小蓝'), startsWith('你是小蓝，一只'));
+      expect(companionPersonaNamed('小蓝'), startsWith('你是小蓝，一直住在里面陪着对方。'));
       expect(companionNameNote('小蓝'), contains('「小蓝」'));
       expect(companionNameNote(null), isNull);
     });

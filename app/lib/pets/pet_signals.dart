@@ -106,26 +106,26 @@ class UserPetsController extends AsyncNotifier<List<PetPack>> {
     }
   }
 
-  /// Removes a brought pet; when it was the chosen one, the default comes
-  /// back. When it can't be removed it stays whole (pet_library.dart), is
-  /// chosen again if it was, and the error is rethrown for the picker to say.
+  /// Removes a brought pet; when it was the chosen one, 「不显示」 comes back.
+  /// When it can't be removed it stays whole (pet_library.dart), is chosen
+  /// again if it was, and the error is rethrown for the picker to say.
   /// Neither switch is the person's pick: a hidden pet stays hidden.
   Future<void> remove(String id) async {
     if (!isUserPet(id)) return;
     final prefs = ref.read(petPrefsProvider.notifier);
     final chosen = ref.read(petPrefsProvider).packId == id;
-    if (chosen) await prefs.replacePack(defaultPetId);
+    if (chosen) await prefs.replacePack(noPetId);
     try {
       await ref.read(petLibraryProvider).remove(id);
     } on Object {
-      if (chosen && ref.mounted && ref.read(petPrefsProvider).packId == defaultPetId) await prefs.replacePack(id);
+      if (chosen && ref.mounted && ref.read(petPrefsProvider).packId == noPetId) await prefs.replacePack(id);
       await _relist((was) => was);
       rethrow;
     }
     _changed(id);
-    // Picked again while it was being deleted: it is gone, the default it is
-    // (else no pet would draw, now or after a restart).
-    if (ref.mounted && ref.read(petPrefsProvider).packId == id) await prefs.replacePack(defaultPetId);
+    // Picked again while it was being deleted: it is gone, so 「不显示」 it is
+    // (else a deleted pack would keep drawing, now or after a restart).
+    if (ref.mounted && ref.read(petPrefsProvider).packId == id) await prefs.replacePack(noPetId);
     await _relist((was) => [...was.where((p) => p.id != id)]);
   }
 }

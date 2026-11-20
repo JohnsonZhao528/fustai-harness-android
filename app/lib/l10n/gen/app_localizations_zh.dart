@@ -2873,12 +2873,6 @@ class L10nZh extends L10n {
   String get botsPetSettings => '宠物设置';
 
   @override
-  String get botsPetDeepy => 'Deepy 小鲸鱼';
-
-  @override
-  String get botsPetWhaleGirl => '鲸娘';
-
-  @override
   String get botsPetNone => '不显示';
 
   @override
@@ -6006,7 +6000,7 @@ class L10nZh extends L10n {
   String get engineAccountUnsupported => '当前引擎不支持账号登录';
 
   @override
-  String get engineAccountSignInDeepSeek => '用 FustAI 账号登录';
+  String get engineAccountSignInDeepSeek => '登录 / 注册 FustAI 账号';
 
   @override
   String get engineAccountAutoStart => '引擎未运行，登录时会自动启动';
@@ -8666,7 +8660,7 @@ class L10nZh extends L10n {
   String get harmonyKwAccent => '颜色,主题色,强调色';
 
   @override
-  String get harmonyKwPets => '宠物,小鲸,桌宠,鲸鱼';
+  String get harmonyKwPets => '宠物,桌宠,伙伴,桌面';
 
   @override
   String get harmonyKwVoice => '语音识别,麦克风,听写,说话,语音';
@@ -16020,7 +16014,7 @@ class L10nZh extends L10n {
   String get remotePassword => '密码';
 
   @override
-  String get remoteRestoreServer => '改回默认服务器 dsh.r2049.cn';
+  String get remoteRestoreServer => '改回默认服务器 relay.fustai.com';
 
   @override
   String get remoteConsole => '远程控制台';
@@ -16047,7 +16041,7 @@ class L10nZh extends L10n {
   String get remoteWebConsole => '网页版远程控制台';
 
   @override
-  String get remoteWebConsoleProvider => 'dsh.r2049.cn · 第三方页面';
+  String get remoteWebConsoleProvider => 'relay.fustai.com · 第三方页面';
 
   @override
   String remoteActiveHost(String name) {
@@ -16724,6 +16718,24 @@ class L10nZh extends L10n {
   String get searchKwRemoteCompactHistory => '精简 简洁 历史 工具 传输 流量 远程 compact slim lite';
 
   @override
+  String get remoteRunOn => '运行位置';
+
+  @override
+  String get remoteRunPhone => '手机自己运转';
+
+  @override
+  String get remoteRunComputer => '我的电脑';
+
+  @override
+  String get remoteRunComputerOffline => '离线';
+
+  @override
+  String get remoteRunComputerOfflineHint => '在电脑上登录同一个 FustAI 账号后，这里会自动出现';
+
+  @override
+  String get searchKwRemoteRun => '运行位置 手机自己运转 我的电脑 离线 run location this phone computer offline';
+
+  @override
   String get remotePairErrInvalidCode => '这不是 FustAI Harness 的配对二维码';
 
   @override
@@ -16924,7 +16936,7 @@ class L10nZh extends L10n {
   String get searchKwTheme => '外观,配色,颜色,主题色,强调色,图标';
 
   @override
-  String get searchKwPets => '宠物,小鲸,桌宠,悬浮,鲸鱼';
+  String get searchKwPets => '宠物,桌宠,悬浮,伙伴,桌面上';
 
   @override
   String get searchKwPerformance => '省电,流畅,卡顿,发热,轻量,完整';
@@ -17089,7 +17101,7 @@ class L10nZh extends L10n {
   String get searchKwPetDisplayWhen => '宠物显示,显示时机';
 
   @override
-  String get searchKwPetOverlayShows => '悬浮伙伴,小屋里的她,像素宠物,Live2D';
+  String get searchKwPetOverlayShows => '悬浮伙伴,小屋里的伙伴,像素宠物,Live2D';
 
   @override
   String get searchKwPetOverlayFraming => '取景,全身,半身';
@@ -17501,13 +17513,80 @@ class L10nZh extends L10n {
   String get shellConnectDeepSeek => '连接 FustAI';
 
   @override
-  String get shellConnectDeepSeekMessage => '登录 FustAI 账号即可开始，无需 API Key';
+  String get shellConnectDeepSeekMessage => '手机号 + 短信验证码登录，首次登录自动创建账号';
 
   @override
   String get shellAccountSignInUnsupported => '当前引擎不支持账号登录';
 
   @override
-  String get shellSignInDeepSeek => '用 FustAI 账号登录';
+  String get shellSignInDeepSeek => '登录 / 注册 FustAI 账号';
+
+  @override
+  String get fustaiSignInTitle => '登录 FustAI 账号';
+
+  @override
+  String get fustaiSignInMessage => '输入手机号并填写短信验证码即可登录，首次登录会自动注册。桌面端登录同一账号后即可互通。';
+
+  @override
+  String get fustaiSignInMobile => '手机号';
+
+  @override
+  String get fustaiSignInMobileHint => '11 位手机号';
+
+  @override
+  String get fustaiSignInCode => '验证码';
+
+  @override
+  String get fustaiSignInCodeHint => '6 位短信验证码';
+
+  @override
+  String get fustaiSignInInvite => '邀请码';
+
+  @override
+  String get fustaiSignInInviteHint => '填写收到的邀请码';
+
+  @override
+  String get fustaiSignInSendCode => '获取验证码';
+
+  @override
+  String fustaiSignInResend(int seconds) {
+    return '重新获取（${seconds}s）';
+  }
+
+  @override
+  String get fustaiSignInSubmit => '登录 / 注册';
+
+  @override
+  String get fustaiSignInCodeSent => '验证码已发送，请查看短信';
+
+  @override
+  String fustaiSignInDevCode(String code) {
+    return '测试环境验证码：$code，已自动填入';
+  }
+
+  @override
+  String get fustaiSmsBadMobile => '手机号格式不正确';
+
+  @override
+  String get fustaiSmsBadCode => '验证码不正确或已过期';
+
+  @override
+  String get fustaiSmsBadInvite => '邀请码不正确';
+
+  @override
+  String get fustaiSmsExpired => '登录已超时，请重新获取验证码';
+
+  @override
+  String get fustaiSmsTooMany => '操作过于频繁，请稍后再试';
+
+  @override
+  String get fustaiSmsUnavailable => '服务暂时不可用，请稍后重试';
+
+  @override
+  String get fustaiSmsNetwork => '网络异常，请检查网络后重试';
+
+  @override
+  String get fustaiSmsUnknown => '登录失败，请重试';
 
   @override
   String get shellUseApiKey => '使用 API Key';
@@ -17919,7 +17998,7 @@ class L10nZh extends L10n {
   String get shellHideActivityStrip => '活动条';
 
   @override
-  String get shellHideWhaleTail => '鲸尾';
+  String get shellHideWhaleTail => '等待动画';
 
   @override
   String get shellHideTodoPill => '待办条';
@@ -18683,15 +18762,15 @@ class L10nZh extends L10n {
     String _temp0 = intl.Intl.pluralLogic(
       hours,
       locale: localeName,
-      other: '本鱼已经在 FustAI Harness 里陪你 $hours 个小时啦⁠~',
-      one: '本鱼已经在 FustAI Harness 里陪你一个小时啦⁠~',
-      zero: '本鱼已经在 FustAI Harness 里陪你半个小时啦⁠~',
+      other: 'FustAI Harness 已经陪你 $hours 个小时啦⁠~',
+      one: 'FustAI Harness 已经陪你一个小时啦⁠~',
+      zero: 'FustAI Harness 已经陪你半个小时啦⁠~',
     );
     return '$_temp0';
   }
 
   @override
-  String get starPromptBody => '这是一个免费开源的项目，如果它让你的移动端体验更好了一点，拜托点个 Star 支持一下，这对本鱼是很大的鼓励！';
+  String get starPromptBody => '这是一个免费开源的项目，如果它让你的移动端体验更好了一点，拜托点个 Star 支持一下，这对我是很大的鼓励！';
 
   @override
   String get starPromptPlea => '拜托你啦~ 这真的很重要！！';

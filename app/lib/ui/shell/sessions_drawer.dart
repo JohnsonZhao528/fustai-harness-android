@@ -249,7 +249,7 @@ class SessionsDrawer extends ConsumerWidget {
                       child: ExcludeSemantics(
                         excluding: selecting,
                         child: IdentityBar(
-                          onHost: () => showHostSheet(context, onManage: () => onOpen(DrawerDestination.remote)),
+                          onHost: () => showHostSheet(context),
                           onLocalDetails: () => onOpen(DrawerDestination.engine),
                           onFeatures: () => onOpen(DrawerDestination.features),
                           onSettings: () => onOpen(DrawerDestination.settings),

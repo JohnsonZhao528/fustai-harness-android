@@ -27,21 +27,50 @@ import 'account_api.dart';
 import 'connection_state.dart';
 import 'fustai_account.dart';
 import 'read_list_epoch.dart';
+import 'settings_state.dart';
 
 export 'account_api.dart';
 
 // ── Dependencies (overridable in tests) ─────────────────────────────────────
 
-/// FustAI account API; null until the on-device engine is running and connected.
+/// FustAI account API; available before the on-device engine is.
 ///
 /// PKCE, the loopback callback and the stored grant live in the app
-/// ([FustaiAccountApi]); the engine connection is only where the account's model
-/// key is installed. A remote Host never qualifies.
+/// ([FustaiAccountApi]), so signing in works while the runtime is missing. The
+/// local engine connection only carries the account's model key: it is
+/// attached whenever that connection appears. A remote Host never qualifies.
 final accountApiProvider = Provider<AccountApi?>((ref) {
-  final conn = ref.watch(localConnectionProvider).value;
-  if (conn == null || !conn.isLocal) return null;
-  final api = FustaiAccountApi(conn.client);
+  var disposed = false;
+  ref.onDispose(() => disposed = true);
+  final api = FustaiAccountApi(
+    onModelKey: (key, baseUrl) {
+      if (disposed) return;
+      // 账号下发的 key 与手填 key 同一份存储：本机引擎照旧推送，引导页也据此
+      // 认定「已有模型可用」，所以手机端不用再单独配置。
+      unawaited(ref.read(settingsProvider.notifier).setModelCredentials(key, baseUrl));
+    },
+  );
   ref.onDispose(api.dispose);
+  ref.listen<AppSettings>(settingsProvider, (prev, next) {
+    final key = next.apiKey.trim();
+    if (key.isEmpty) return;
+    final baseUrl = next.apiKeyBaseUrl;
+    if (key == prev?.apiKey.trim() && baseUrl == prev?.apiKeyBaseUrl) return;
+    // 本端手填/换 key → 上传账号中心；账号下发的 key 与远端相同，接口内直接跳过。
+    unawaited(api.uploadModelKey(key, baseUrl: baseUrl));
+  });
+  ref.listen<AsyncValue<HostConnection?>>(
+    localConnectionProvider,
+    (_, next) {
+      final conn = next.value;
+      if (conn == null || !conn.isLocal) {
+        api.detachClient();
+      } else {
+        api.attachClient(conn.client);
+      }
+    },
+    fireImmediately: true,
+  );
   return api;
 });
 
@@ -616,16 +645,20 @@ class AccountController extends Notifier<AccountState> {
   // ── Sign-in ──
 
   Future<void> _start(_Run run) async {
-    // Nothing to wait 90 s for: say so at once. (The runtime's state lives
-    // as long as the app; without it there is no report to go by.)
-    if (ref.exists(localRuntimeProvider) && ref.read(localRuntimeProvider).status.runtimeMissing) {
-      _fail(run, const SignInFailure(SignInFailureKind.noRuntime));
-      return;
-    }
-    try {
-      await ref.read(accountEngineStarterProvider)();
-    } catch (_) {
-      // The wait below reports an engine that never comes up.
+    // The FustAI account signs in inside the app, so the runtime and the engine
+    // connection are not preconditions. Only the engine-side account needs them.
+    if (_api is! FustaiAccountApi) {
+      // Nothing to wait 90 s for: say so at once. (The runtime's state lives
+      // as long as the app; without it there is no report to go by.)
+      if (ref.exists(localRuntimeProvider) && ref.read(localRuntimeProvider).status.runtimeMissing) {
+        _fail(run, const SignInFailure(SignInFailureKind.noRuntime));
+        return;
+      }
+      try {
+        await ref.read(accountEngineStarterProvider)();
+      } catch (_) {
+        // The wait below reports an engine that never comes up.
+      }
     }
     final AccountApi api;
     try {
@@ -711,6 +744,13 @@ class AccountController extends Notifier<AccountState> {
       _set(next.copyWith(phase: AccountPhase.signedIn, clearAttempt: true, clearFailure: true));
       if (prev.phase != AccountPhase.signedIn) {
         _statusChanged();
+        // 登录成功时账号中心若还没有密钥，把本端在用的密钥分享上去，另一端即可共用。
+        final api = _api;
+        final settings = ref.read(settingsProvider);
+        final localKey = settings.apiKey;
+        if (api is FustaiAccountApi && localKey.trim().isNotEmpty) {
+          unawaited(api.shareModelKeyIfAbsent(localKey, baseUrl: settings.apiKeyBaseUrl));
+        }
       }
       // Each accepted account snapshot can be the first frame after a mux
       // reconnect. A retained signed-in phase must not suppress revalidation.

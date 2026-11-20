@@ -16,9 +16,8 @@
   --glow-strength: 0.5;
   --reef-far: #1c5f8c;
   --reef-near: #123f68;
-  --whale: #0f4a78;
   --vignette: 5, 20, 44;
-  /* Her corner of the seabed (Pro C204 palette). */
+  /* The room's corner of the seabed (Pro C204 palette). */
   --floor-fill: #4c8a97;
   --object-ink: #194860;
   --shell-fill: #d8ebe6;
@@ -51,7 +50,6 @@ html[data-tod='dawn'] {
   --glow: 250, 222, 214;
   --reef-far: #355f88;
   --reef-near: #1f4068;
-  --whale: #2a527c;
 }
 
 html[data-tod='dusk'] {
@@ -77,7 +75,6 @@ html[data-tod='dusk'] {
   --glow-strength: 0.42;
   --reef-far: #3d3f76;
   --reef-near: #252a5a;
-  --whale: #33386e;
   --vignette: 14, 12, 42;
 }
 
@@ -104,7 +101,6 @@ html[data-tod='night'] {
   --glow-strength: 0.3;
   --reef-far: #122a52;
   --reef-near: #0a1a38;
-  --whale: #16325c;
   --vignette: 2, 7, 22;
 }
 
@@ -181,29 +177,6 @@ body {
 @keyframes shaft {
   from { transform: rotate(calc(var(--tilt) - 1.6deg)); opacity: 0.55; }
   to { transform: rotate(calc(var(--tilt) + 1.6deg)); opacity: 1; }
-}
-
-/* A whale far off, passing now and then. */
-.whale {
-  position: absolute;
-  top: 31%;
-  left: 0;
-  width: 92px;
-  height: 34px;
-  fill: var(--whale);
-  opacity: 0;
-  filter: blur(1px);
-  will-change: transform, opacity;
-  animation: whale 74s linear infinite;
-  animation-delay: -38s;
-}
-
-@keyframes whale {
-  0% { transform: translate3d(-24vw, 16px, 0); opacity: 0; }
-  4% { opacity: 0.5; }
-  46% { opacity: 0.5; }
-  50% { transform: translate3d(120vw, -22px, 0); opacity: 0; }
-  100% { transform: translate3d(120vw, -22px, 0); opacity: 0; }
 }
 
 .reef {
@@ -336,14 +309,12 @@ html[data-ready='1'] #stage {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .shafts i,
-  .whale {
+  .shafts i {
     animation: none;
   }
 }
 
-html[data-motion='reduced'] .shafts i,
-html[data-motion='reduced'] .whale {
+html[data-motion='reduced'] .shafts i {
   animation: none;
 }
 
@@ -351,13 +322,12 @@ html[data-motion='reduced'] #stage {
   transition: none;
 }
 
-html[data-paused='1'] .shafts i,
-html[data-paused='1'] .whale {
+html[data-paused='1'] .shafts i {
   animation-play-state: paused;
 }
 
 /* A bare stage (bare.js): only the model, the page behind it showing through.
-   Her room stays laid out, unseen, so nothing that measures it moves. */
+   The room stays laid out, unseen, so nothing that measures it moves. */
 html[data-bare='1'],
 html[data-bare='1'] body {
   background: transparent;

@@ -5,6 +5,13 @@ import 'package:dsh_client/dsh_client.dart';
 import '../../l10n/l10n.dart';
 import '../link_status.dart';
 
+/// FustAI's own relay origin (desktop and phone sign in with the same FustAI
+/// account). `--dart-define=FUSTAI_RELAY_ORIGIN=...` points a build elsewhere.
+const fustaiRelayOrigin = String.fromEnvironment(
+  'FUSTAI_RELAY_ORIGIN',
+  defaultValue: 'https://relay.fustai.com',
+);
+
 /// A sign-in provider the Server offers for browser sign-in
 /// (`github`, `zhihu`, `google`, ...). IDs are Server-owned and opaque.
 class RelayAuthProvider {
@@ -116,7 +123,7 @@ abstract class RelayBackend {
   /// False when the relay is turned off ([UnavailableRelayBackend]).
   bool get available;
 
-  /// Server shown in the UI (`dsh.r2049.cn`).
+  /// Server shown in the UI (`relay.fustai.com`).
   String get serverLabel;
 
   Future<RelayUser?> currentUser();
@@ -163,6 +170,16 @@ abstract class RelayBackend {
   Future<DshClient> connectHost(RelayHost host, {RelayStateCallback? onState});
 }
 
+/// Same-account sign-in with the FustAI account, implemented by
+/// `DshRemoteRelayBackend`; a backend without it only offers the Server's own
+/// sign-in methods.
+abstract interface class RelayFustaiBackend {
+  /// Signs this device in to the relay with an FustAI account access token.
+  /// The relay resolves the token to the same account the desktop uses, so
+  /// both ends see one device list and no code or password is typed.
+  Future<RelayUser> loginWithFustaiToken(String token);
+}
+
 /// Optional real network observations, without expanding the account/backend contract.
 abstract interface class RelayNetworkBackend {
   RemoteNetworkStatus? networkOf(DshClient client);
@@ -179,7 +196,7 @@ class UnavailableRelayBackend implements RelayBackend {
   bool get available => false;
 
   @override
-  String get serverLabel => 'dsh.r2049.cn';
+  String get serverLabel => Uri.parse(fustaiRelayOrigin).host;
 
   @override
   Future<RelayUser?> currentUser() async => null;
@@ -487,7 +504,7 @@ class RelayPairingOffer {
     required this.token,
   });
 
-  /// Origin of the Server the code belongs to (`https://dsh.r2049.cn`).
+  /// Origin of the Server the code belongs to (`https://relay.fustai.com`).
   final String server;
 
   /// Untrusted display name from the code / Server.

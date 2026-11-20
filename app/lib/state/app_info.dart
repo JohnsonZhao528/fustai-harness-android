@@ -43,7 +43,7 @@ abstract final class AppInfo {
   static const projectChangesUrl = '$projectUrl/blob/main/MODIFICATIONS.md';
 
   static const deepseekPlatform = 'https://platform.deepseek.com/api_keys';
-  static const remoteConsole = 'https://dsh.r2049.cn/app';
+  static const remoteConsole = 'https://relay.fustai.com/app';
 
   /// DSH Remote's upstream, credited under the DSH Remote card as its GitHub
   /// handle and name.

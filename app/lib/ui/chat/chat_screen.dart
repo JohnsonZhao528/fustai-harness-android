@@ -78,6 +78,7 @@ import '../plugins/seats/plugin_overlay_layer.dart';
 import '../safe_mode/engine_failure_card.dart';
 import '../safe_mode/safe_mode_banner.dart';
 import '../session/session_detail_page.dart';
+import '../remote/host_switcher.dart' show ComposerHostPill;
 import '../settings/media_settings_page.dart' show MediaSettingsPage, showMediaInstallSheet, showMediaUnavailableSheet;
 import '../settings/settings_widgets.dart' show SettingsTile;
 import '../shell/adaptive/adaptive_layout.dart' show WindowClass;
@@ -2237,9 +2238,19 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with WidgetsBindingObse
                                     leading: AttachButton(onPressed: connected ? _attach : null),
                                     keyboardInset: MediaQuery.viewInsetsOf(context).bottom,
                                     footer: _composerOpens(context) && !isChild
-                                        ? ComposerModelPill(
-                                            selection: sessionId == null ? pendingModel : chat?.model,
-                                            onSelected: _modelTarget(),
+                                        ? Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              // 运行位置: 手机自己运转 / 我的电脑.
+                                              const ComposerHostPill(),
+                                              const SizedBox(width: 6),
+                                              Flexible(
+                                                child: ComposerModelPill(
+                                                  selection: sessionId == null ? pendingModel : chat?.model,
+                                                  onSelected: _modelTarget(),
+                                                ),
+                                              ),
+                                            ],
                                           )
                                         : null,
                                     tray: ComposerTrayStack.maybe(

@@ -24,7 +24,7 @@
   "engineAccountUsageDetails": "Usage details",
   "engineAccountNoKeyNeeded": "No API key needed when signed in",
   "engineAccountUnsupported": "This engine doesn’t support account sign-in",
-  "engineAccountSignInDeepSeek": "Sign in with FustAI",
+  "engineAccountSignInDeepSeek": "Sign in or sign up with FustAI",
   "engineAccountAutoStart": "Signing in starts the engine automatically",
   "engineAccountReplaceKey": "Replace key",
   "engineAccountClearKeyTitle": "Clear API key?",

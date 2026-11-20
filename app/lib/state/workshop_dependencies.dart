@@ -10,6 +10,7 @@ import '../pets/pet_library.dart';
 import '../pets/pet_prefs.dart';
 import '../pets/pet_sheets.dart';
 import '../pets/pet_signals.dart' show petPackProvider, userPetsProvider;
+import '../pets/pet_state.dart' show noPetId;
 import '../workshop/workshop_client.dart';
 import '../workshop/workshop_http.dart';
 import '../workshop/workshop_models.dart';
@@ -148,7 +149,7 @@ final workshopPackageChangedProvider = Provider<WorkshopPackageChanged>((ref) {
         await _waitPetPreferences(ref);
         if (!ref.mounted) return;
         if (ref.read(petPrefsProvider).packId == item.localId) {
-          await ref.read(petPrefsProvider.notifier).replacePack(defaultPetId);
+          await ref.read(petPrefsProvider.notifier).replacePack(noPetId);
         }
       }
       if (ref.mounted) await ref.read(petOverlayChannelProvider).reloadPack(item.localId);

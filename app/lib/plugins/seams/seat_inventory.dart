@@ -154,7 +154,7 @@ class SeatInventory {
     final placement = switch (slot) {
       Slots.rightPaneTab => DshGoPanel.sessionTab,
       Slots.main => DshGoPanel.features,
-      Slots.dshGoPanel => '',
+      Slots.fustaiPanel => '',
       _ => null,
     };
     if (placement == null) return const [];

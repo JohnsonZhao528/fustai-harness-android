@@ -21,7 +21,8 @@ import 'network_route.dart';
 ///
 /// [direct] (直连优先) lets connections try LAN / P2P / TURN over
 /// [peerConnector] (flutter_webrtc) before the Server's relay.
-class DshRemoteRelayBackend implements RelayBackend, RelayNetworkBackend, RelayPairingBackend {
+class DshRemoteRelayBackend
+    implements RelayBackend, RelayNetworkBackend, RelayPairingBackend, RelayFustaiBackend {
   DshRemoteRelayBackend({
     required SecretStore secrets,
     Object? serverUrl,
@@ -38,9 +39,9 @@ class DshRemoteRelayBackend implements RelayBackend, RelayNetworkBackend, RelayP
              secrets: _Secrets(secrets),
              serverUrl: serverUrl,
              deviceName: switch (Platform.operatingSystem) {
-               'ohos' => 'DSH App (HarmonyOS)',
-               'ios' => 'DSH App (iOS)',
-               _ => 'DSH App (Android)',
+               'ohos' => 'FustAI App (HarmonyOS)',
+               'ios' => 'FustAI App (iOS)',
+               _ => 'FustAI App (Android)',
              },
              platform: 'dsh-app-android',
              clientVersion: clientVersion,
@@ -95,7 +96,7 @@ class DshRemoteRelayBackend implements RelayBackend, RelayNetworkBackend, RelayP
   /// pins only a key whose fingerprint is exactly the one they saw.
   final Map<String, String> _approved = {};
 
-  /// The server's origin (`https://dsh.r2049.cn`), or a [HostLinkError] for
+  /// The server's origin (`https://relay.fustai.com`), or a [HostLinkError] for
   /// something that isn't one (self-hosted servers: HTTPS, or HTTP on a
   /// private address).
   static String normalizeServer(String input) {
@@ -144,6 +145,23 @@ class DshRemoteRelayBackend implements RelayBackend, RelayNetworkBackend, RelayP
         throw HostLinkError(
           HostLinkErrorKind.authFailed,
           appL10n.remoteErrEmailPassword,
+          detail: '$code: ${e.failure.message}',
+        );
+      }
+      throw describe(e.failure);
+    }
+  }
+
+  @override
+  Future<RelayUser> loginWithFustaiToken(String token) async {
+    try {
+      return _user(await account.loginWithFustaiToken(token));
+    } on remote.RemoteConnectException catch (e) {
+      final code = e.failure.code;
+      if (code.contains('AUTH') || code.contains('CREDENTIAL') || code == 'UNAUTHORIZED') {
+        throw HostLinkError(
+          HostLinkErrorKind.authFailed,
+          appL10n.remoteErrSignIn,
           detail: '$code: ${e.failure.message}',
         );
       }

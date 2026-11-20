@@ -5324,18 +5324,6 @@ abstract class L10n {
   /// **'宠物设置'**
   String get botsPetSettings;
 
-  /// No description provided for @botsPetDeepy.
-  ///
-  /// In zh, this message translates to:
-  /// **'Deepy 小鲸鱼'**
-  String get botsPetDeepy;
-
-  /// No description provided for @botsPetWhaleGirl.
-  ///
-  /// In zh, this message translates to:
-  /// **'鲸娘'**
-  String get botsPetWhaleGirl;
-
   /// No description provided for @botsPetNone.
   ///
   /// In zh, this message translates to:
@@ -11177,7 +11165,7 @@ abstract class L10n {
   /// No description provided for @engineAccountSignInDeepSeek.
   ///
   /// In zh, this message translates to:
-  /// **'用 FustAI 账号登录'**
+  /// **'登录 / 注册 FustAI 账号'**
   String get engineAccountSignInDeepSeek;
 
   /// No description provided for @engineAccountAutoStart.
@@ -16031,7 +16019,7 @@ abstract class L10n {
   /// No description provided for @harmonyKwPets.
   ///
   /// In zh, this message translates to:
-  /// **'宠物,小鲸,桌宠,鲸鱼'**
+  /// **'宠物,桌宠,伙伴,桌面'**
   String get harmonyKwPets;
 
   /// No description provided for @harmonyKwVoice.
@@ -29405,7 +29393,7 @@ abstract class L10n {
   /// No description provided for @remoteRestoreServer.
   ///
   /// In zh, this message translates to:
-  /// **'改回默认服务器 dsh.r2049.cn'**
+  /// **'改回默认服务器 relay.fustai.com'**
   String get remoteRestoreServer;
 
   /// No description provided for @remoteConsole.
@@ -29459,7 +29447,7 @@ abstract class L10n {
   /// No description provided for @remoteWebConsoleProvider.
   ///
   /// In zh, this message translates to:
-  /// **'dsh.r2049.cn · 第三方页面'**
+  /// **'relay.fustai.com · 第三方页面'**
   String get remoteWebConsoleProvider;
 
   /// No description provided for @remoteActiveHost.
@@ -30674,6 +30662,42 @@ abstract class L10n {
   /// **'精简 简洁 历史 工具 传输 流量 远程 compact slim lite'**
   String get searchKwRemoteCompactHistory;
 
+  /// No description provided for @remoteRunOn.
+  ///
+  /// In zh, this message translates to:
+  /// **'运行位置'**
+  String get remoteRunOn;
+
+  /// No description provided for @remoteRunPhone.
+  ///
+  /// In zh, this message translates to:
+  /// **'手机自己运转'**
+  String get remoteRunPhone;
+
+  /// No description provided for @remoteRunComputer.
+  ///
+  /// In zh, this message translates to:
+  /// **'我的电脑'**
+  String get remoteRunComputer;
+
+  /// No description provided for @remoteRunComputerOffline.
+  ///
+  /// In zh, this message translates to:
+  /// **'离线'**
+  String get remoteRunComputerOffline;
+
+  /// No description provided for @remoteRunComputerOfflineHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'在电脑上登录同一个 FustAI 账号后，这里会自动出现'**
+  String get remoteRunComputerOfflineHint;
+
+  /// No description provided for @searchKwRemoteRun.
+  ///
+  /// In zh, this message translates to:
+  /// **'运行位置 手机自己运转 我的电脑 离线 run location this phone computer offline'**
+  String get searchKwRemoteRun;
+
   /// No description provided for @remotePairErrInvalidCode.
   ///
   /// In zh, this message translates to:
@@ -31061,7 +31085,7 @@ abstract class L10n {
   /// No description provided for @searchKwPets.
   ///
   /// In zh, this message translates to:
-  /// **'宠物,小鲸,桌宠,悬浮,鲸鱼'**
+  /// **'宠物,桌宠,悬浮,伙伴,桌面上'**
   String get searchKwPets;
 
   /// No description provided for @searchKwPerformance.
@@ -31391,7 +31415,7 @@ abstract class L10n {
   /// No description provided for @searchKwPetOverlayShows.
   ///
   /// In zh, this message translates to:
-  /// **'悬浮伙伴,小屋里的她,像素宠物,Live2D'**
+  /// **'悬浮伙伴,小屋里的伙伴,像素宠物,Live2D'**
   String get searchKwPetOverlayShows;
 
   /// No description provided for @searchKwPetOverlayFraming.
@@ -32171,7 +32195,7 @@ abstract class L10n {
   /// No description provided for @shellConnectDeepSeekMessage.
   ///
   /// In zh, this message translates to:
-  /// **'登录 FustAI 账号即可开始，无需 API Key'**
+  /// **'手机号 + 短信验证码登录，首次登录自动创建账号'**
   String get shellConnectDeepSeekMessage;
 
   /// No description provided for @shellAccountSignInUnsupported.
@@ -32183,8 +32207,134 @@ abstract class L10n {
   /// No description provided for @shellSignInDeepSeek.
   ///
   /// In zh, this message translates to:
-  /// **'用 FustAI 账号登录'**
+  /// **'登录 / 注册 FustAI 账号'**
   String get shellSignInDeepSeek;
+
+  /// No description provided for @fustaiSignInTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'登录 FustAI 账号'**
+  String get fustaiSignInTitle;
+
+  /// No description provided for @fustaiSignInMessage.
+  ///
+  /// In zh, this message translates to:
+  /// **'输入手机号并填写短信验证码即可登录，首次登录会自动注册。桌面端登录同一账号后即可互通。'**
+  String get fustaiSignInMessage;
+
+  /// No description provided for @fustaiSignInMobile.
+  ///
+  /// In zh, this message translates to:
+  /// **'手机号'**
+  String get fustaiSignInMobile;
+
+  /// No description provided for @fustaiSignInMobileHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'11 位手机号'**
+  String get fustaiSignInMobileHint;
+
+  /// No description provided for @fustaiSignInCode.
+  ///
+  /// In zh, this message translates to:
+  /// **'验证码'**
+  String get fustaiSignInCode;
+
+  /// No description provided for @fustaiSignInCodeHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'6 位短信验证码'**
+  String get fustaiSignInCodeHint;
+
+  /// No description provided for @fustaiSignInInvite.
+  ///
+  /// In zh, this message translates to:
+  /// **'邀请码'**
+  String get fustaiSignInInvite;
+
+  /// No description provided for @fustaiSignInInviteHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'填写收到的邀请码'**
+  String get fustaiSignInInviteHint;
+
+  /// No description provided for @fustaiSignInSendCode.
+  ///
+  /// In zh, this message translates to:
+  /// **'获取验证码'**
+  String get fustaiSignInSendCode;
+
+  /// No description provided for @fustaiSignInResend.
+  ///
+  /// In zh, this message translates to:
+  /// **'重新获取（{seconds}s）'**
+  String fustaiSignInResend(int seconds);
+
+  /// No description provided for @fustaiSignInSubmit.
+  ///
+  /// In zh, this message translates to:
+  /// **'登录 / 注册'**
+  String get fustaiSignInSubmit;
+
+  /// No description provided for @fustaiSignInCodeSent.
+  ///
+  /// In zh, this message translates to:
+  /// **'验证码已发送，请查看短信'**
+  String get fustaiSignInCodeSent;
+
+  /// No description provided for @fustaiSignInDevCode.
+  ///
+  /// In zh, this message translates to:
+  /// **'测试环境验证码：{code}，已自动填入'**
+  String fustaiSignInDevCode(String code);
+
+  /// No description provided for @fustaiSmsBadMobile.
+  ///
+  /// In zh, this message translates to:
+  /// **'手机号格式不正确'**
+  String get fustaiSmsBadMobile;
+
+  /// No description provided for @fustaiSmsBadCode.
+  ///
+  /// In zh, this message translates to:
+  /// **'验证码不正确或已过期'**
+  String get fustaiSmsBadCode;
+
+  /// No description provided for @fustaiSmsBadInvite.
+  ///
+  /// In zh, this message translates to:
+  /// **'邀请码不正确'**
+  String get fustaiSmsBadInvite;
+
+  /// No description provided for @fustaiSmsExpired.
+  ///
+  /// In zh, this message translates to:
+  /// **'登录已超时，请重新获取验证码'**
+  String get fustaiSmsExpired;
+
+  /// No description provided for @fustaiSmsTooMany.
+  ///
+  /// In zh, this message translates to:
+  /// **'操作过于频繁，请稍后再试'**
+  String get fustaiSmsTooMany;
+
+  /// No description provided for @fustaiSmsUnavailable.
+  ///
+  /// In zh, this message translates to:
+  /// **'服务暂时不可用，请稍后重试'**
+  String get fustaiSmsUnavailable;
+
+  /// No description provided for @fustaiSmsNetwork.
+  ///
+  /// In zh, this message translates to:
+  /// **'网络异常，请检查网络后重试'**
+  String get fustaiSmsNetwork;
+
+  /// No description provided for @fustaiSmsUnknown.
+  ///
+  /// In zh, this message translates to:
+  /// **'登录失败，请重试'**
+  String get fustaiSmsUnknown;
 
   /// No description provided for @shellUseApiKey.
   ///
@@ -32915,7 +33065,7 @@ abstract class L10n {
   /// No description provided for @shellHideWhaleTail.
   ///
   /// In zh, this message translates to:
-  /// **'鲸尾'**
+  /// **'等待动画'**
   String get shellHideWhaleTail;
 
   /// No description provided for @shellHideTodoPill.
@@ -34331,13 +34481,13 @@ abstract class L10n {
   /// The star prompt's first line. hours is the whole hours of use so far, rounded down; 0 is half an hour (the first ask comes after 30 minutes). The word joiner keeps the ~ on the line of the word before it.
   ///
   /// In zh, this message translates to:
-  /// **'{hours, plural, =0{本鱼已经在 FustAI Harness 里陪你半个小时啦⁠~} =1{本鱼已经在 FustAI Harness 里陪你一个小时啦⁠~} other{本鱼已经在 FustAI Harness 里陪你 {hours} 个小时啦⁠~}}'**
+  /// **'{hours, plural, =0{FustAI Harness 已经陪你半个小时啦⁠~} =1{FustAI Harness 已经陪你一个小时啦⁠~} other{FustAI Harness 已经陪你 {hours} 个小时啦⁠~}}'**
   String starPromptTitle(int hours);
 
   /// No description provided for @starPromptBody.
   ///
   /// In zh, this message translates to:
-  /// **'这是一个免费开源的项目，如果它让你的移动端体验更好了一点，拜托点个 Star 支持一下，这对本鱼是很大的鼓励！'**
+  /// **'这是一个免费开源的项目，如果它让你的移动端体验更好了一点，拜托点个 Star 支持一下，这对我是很大的鼓励！'**
   String get starPromptBody;
 
   /// No description provided for @starPromptPlea.

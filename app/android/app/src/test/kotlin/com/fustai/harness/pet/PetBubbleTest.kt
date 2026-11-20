@@ -8,15 +8,15 @@ import org.junit.Test
 import java.io.File
 
 /**
- * The out-of-app bubble over the bundled pets, as PetOverlay places it: over the picture on screen
+ * The out-of-app bubble over the fixture pets, as PetOverlay places it: over the picture on screen
  * (the body and the current animation's cell), never in front of it, at every kind of dock.
  */
 class PetBubbleTest {
     private fun shipped(id: String): PetPack {
         val dir = generateSequence(File("").absoluteFile) { it.parentFile }
-            .flatMap { sequenceOf(File(it, "app/assets/pets/$id"), File(it, "assets/pets/$id")) }
+            .flatMap { sequenceOf(File(it, "app/test/fixtures/pets/$id"), File(it, "test/fixtures/pets/$id")) }
             .firstOrNull { File(it, "pack.json").isFile }
-        assertNotNull("bundled pack $id", dir)
+        assertNotNull("fixture pack $id", dir)
         return PetPack.parse(File(dir, "pack.json").readText())
     }
 

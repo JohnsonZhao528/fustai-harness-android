@@ -18,6 +18,7 @@ import 'package:dsh_app/pets/pet_mood.dart';
 import 'package:dsh_app/pets/pet_signals.dart';
 import 'package:dsh_app/runtime/runtime_bridge.dart' show RuntimePhase, RuntimeStatus;
 import 'package:dsh_app/runtime/runtime_state.dart';
+import 'package:dsh_app/state/account_state.dart';
 import 'package:dsh_app/state/draft_store.dart';
 import 'package:dsh_app/state/hosts_state.dart';
 import 'package:dsh_app/state/notify_state.dart';
@@ -41,6 +42,7 @@ import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../account/support.dart' show FixedAccount, sampleProfile;
 import '../phone/support.dart' show FixedActiveHost;
 import '../shell/golden_harness.dart';
 import '../support/test_fonts.dart';
@@ -298,9 +300,9 @@ void main() {
     test('the first line tells the real time: half an hour, then whole hours', () {
       final zh = lookupL10n(AppLocale.zhCN);
       final en = lookupL10n(AppLocale.en);
-      expect(zh.starPromptTitle(0), '本鱼已经在 FustAI Harness 里陪你半个小时啦⁠~');
-      expect(zh.starPromptTitle(1), '本鱼已经在 FustAI Harness 里陪你一个小时啦⁠~');
-      expect(zh.starPromptTitle(5), '本鱼已经在 FustAI Harness 里陪你 5 个小时啦⁠~');
+      expect(zh.starPromptTitle(0), 'FustAI Harness 已经陪你半个小时啦⁠~');
+      expect(zh.starPromptTitle(1), 'FustAI Harness 已经陪你一个小时啦⁠~');
+      expect(zh.starPromptTitle(5), 'FustAI Harness 已经陪你 5 个小时啦⁠~');
       expect(en.starPromptTitle(0), 'I’ve kept you company in FustAI Harness for half an hour now~');
       expect(en.starPromptTitle(1), 'I’ve kept you company in FustAI Harness for an hour now~');
       expect(en.starPromptTitle(6), 'I’ve kept you company in FustAI Harness for 6 hours now~');
@@ -348,7 +350,7 @@ void main() {
       await bench.settle();
       expect(bench.showing, isTrue);
       expect(find.text(_title(0)), findsOneWidget);
-      expect(find.text('本鱼已经在 FustAI Harness 里陪你半个小时啦⁠~'), findsOneWidget);
+      expect(find.text('FustAI Harness 已经陪你半个小时啦⁠~'), findsOneWidget);
       expect(bench.store.record, const StarPromptRecord(used: _halfHour, shows: 1, askedAt: _halfHour));
     });
 
@@ -473,7 +475,7 @@ void main() {
       expect(await comesBack(bench, const Duration(hours: 4, minutes: 59)), isFalse);
       expect(await comesBack(bench, const Duration(minutes: 1)), isTrue);
       expect(find.text(_title(5)), findsOneWidget);
-      expect(find.text('本鱼已经在 FustAI Harness 里陪你 5 个小时啦⁠~'), findsOneWidget);
+      expect(find.text('FustAI Harness 已经陪你 5 个小时啦⁠~'), findsOneWidget);
       // The back gesture: as 下次再说, the second time.
       await tester.binding.handlePopRoute();
       await tester.pumpAndSettle();
@@ -651,6 +653,9 @@ void main() {
             ),
             brightness: Brightness.light,
             overrides: [
+              accountProvider.overrideWith(
+                () => FixedAccount(const AccountState(phase: AccountPhase.signedIn, connected: true, profile: sampleProfile)),
+              ),
               starPromptGateProvider.overrideWithValue(true),
               ...bench.overrides,
               localRuntimeProvider.overrideWith(

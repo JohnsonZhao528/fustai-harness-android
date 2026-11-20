@@ -24,13 +24,13 @@ data class FramePx(val left: Int, val top: Int, val right: Int, val bottom: Int)
  * - **rest**: [restBox] × k, the pack's wide hit box with the idle picture's cell
  *   ([PetPack.windowBox]). Kept small: on Android 12+ an app overlay takes every touch over its whole
  *   frame, transparent pixels included, so a bigger window is a bigger dead spot over other apps;
- * - **held**: rest plus the drag reaction's whole cell. Picked up, the pet is drawn lifted (Deepy's
+ * - **held**: rest plus the drag reaction's whole cell. Picked up, the pet is drawn lifted (a pack's
  *   react-drag body reaches 13.6 art px above the wide box), so while held, and until that
  *   picture is gone, the window grows to hold it;
  * - **grown**: rest plus the cell of any animation the pet can play that reaches past it, while
- *   that animation shows: a jump (Deepy's happy, 13 art px up), a laptop (its typing, 8 left), a
+ *   that animation shows: a jump (a happy animation, 13 art px up), a laptop (its typing, 8 left), a
  *   thought cloud (its thinking, 12 up and 8 left), notes and props (music, conducting), Zzz. A cell
- *   is trimmed to what its frames draw, so a union only grows where the art does (Deepy's typing:
+ *   is trimmed to what its frames draw, so a union only grows where the art does (a typing animation:
  *   8 art px left, and above only the 1 its top row needs) and the window takes no more than the
  *   picture.
  *

@@ -8,7 +8,7 @@
     android:minHeight="72dp"
     android:minResizeWidth="140dp"
     android:minResizeHeight="64dp"
-    android:previewImage="@drawable/companion_widget_happy"
+    android:previewImage="@drawable/companion_widget_mark"
     android:resizeMode="horizontal|vertical"
     android:targetCellWidth="3"
     android:targetCellHeight="1"

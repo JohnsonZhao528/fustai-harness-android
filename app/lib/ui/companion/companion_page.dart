@@ -39,7 +39,6 @@ import '../../l10n/l10n.dart';
 import '../../notify/chat_alerts.dart' show CompanionAlertDelivery, companionHostKey;
 import '../../pets/pet_mood.dart' show PetEvent, PetEventKind;
 import '../../pets/pet_signals.dart' show petEventBusProvider;
-import '../../pets/pet_state.dart';
 import '../../speech/speech_settings.dart';
 import '../../speech/voice_cloud.dart';
 import '../../state/app_mode_state.dart';
@@ -3126,7 +3125,6 @@ class _CompanionPageState extends ConsumerState<CompanionPage> implements Compan
               title: l10n.companionFailedTitle,
               message: _loadFailureText(l10n),
               action: l10n.companionSetupImport,
-              state: PetStateName.error,
               busy: _installing,
               error: _installError,
               onAction: _import,

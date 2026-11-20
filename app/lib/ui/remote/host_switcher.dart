@@ -67,25 +67,100 @@ class HostChip extends ConsumerWidget {
   }
 }
 
-/// "切换主机": 本机, saved SSH hosts and the DSH Remote account's hosts, each
-/// with its state; picking one makes it active. [onManage] opens the remote
-/// page.
-Future<void> showHostSheet(BuildContext context, {required VoidCallback onManage}) {
-  return showAppSheet<void>(context, isScrollControlled: true, builder: (sheet) => HostSheet(onManage: onManage));
-}
-
-class HostSheet extends ConsumerWidget {
-  const HostSheet({super.key, required this.onManage});
-
-  final VoidCallback onManage;
+/// Composer-footer chip: where this conversation runs. `● 手机自己运转 ⌄` /
+/// `● 我的电脑 ⌄`; opens the same sheet as [HostChip].
+class ComposerHostPill extends ConsumerWidget {
+  const ComposerHostPill({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    final host = ref.watch(activeHostProvider);
+    final view = watchHostStatus(ref, host);
+    final label = host.isLocal
+        ? l10n.remoteRunPhone
+        : ref.watch(hostNameProvider(host)) ?? l10n.remoteRunComputer;
+    return Semantics(
+      button: true,
+      label: l10n.remoteHostSwitcherSemantics(label, view.label),
+      child: ExcludeSemantics(
+        child: GlassSurface(
+          tier: GlassTier.pill,
+          stadium: true,
+          onTap: () => showHostSheet(context),
+          padding: const EdgeInsets.fromLTRB(9, 5, 7, 5),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AnimatedStatusDot(tone: view.tone, size: 7),
+              const SizedBox(width: 6),
+              Flexible(
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppType.tabular(theme.textTheme.labelMedium!.copyWith(color: scheme.onSurfaceVariant)),
+                ),
+              ),
+              const SizedBox(width: 2),
+              Icon(AppIcons.dropdown, size: 16, color: DshColors.of(context).textTertiary),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// "切换主机": 本机, saved SSH hosts and the DSH Remote account's hosts, each
+/// with its state; picking one makes it active. A computer that is not online
+/// is a plain 离线 row — nothing to fill in. [onManage] opens the remote page;
+/// without it the sheet offers no way in.
+Future<void> showHostSheet(BuildContext context, {VoidCallback? onManage}) {
+  return showAppSheet<void>(context, isScrollControlled: true, builder: (sheet) => HostSheet(onManage: onManage));
+}
+
+class HostSheet extends ConsumerStatefulWidget {
+  const HostSheet({super.key, this.onManage});
+
+  final VoidCallback? onManage;
+
+  @override
+  ConsumerState<HostSheet> createState() => _HostSheetState();
+}
+
+class _HostSheetState extends ConsumerState<HostSheet> {
+  @override
+  void initState() {
+    super.initState();
+    unawaited(_relist());
+  }
+
+  /// The account's host list is loaded once and never again on its own, so a
+  /// computer that signed in later — or a listing that failed while the phone
+  /// was offline — would leave this panel showing 离线 forever. Opening it asks
+  /// the Server again.
+  Future<void> _relist() async {
+    RelayAccountState account;
+    try {
+      account = await ref.read(relayAccountProvider.future);
+    } on Object {
+      return;
+    }
+    if (!mounted || !account.signedIn || account.refreshing) return;
+    await ref.read(relayAccountProvider.notifier).refresh();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = context.l10n;
     final active = ref.watch(activeHostProvider);
     final ssh = ref.watch(hostsProvider.select((s) => s.ssh));
     final account = ref.watch(relayAccountProvider).value;
     final relayHosts = account?.signedIn == true ? account!.hosts : const <RelayHost>[];
+    final onManage = widget.onManage;
 
     Future<void> pick(HostRef host) async {
       if (host == active) {
@@ -117,14 +192,14 @@ class HostSheet extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SheetTitleBar(l10n.remoteSwitchHost),
+              SheetTitleBar(l10n.remoteRunOn),
               SheetGroup(
                 margin: const EdgeInsets.fromLTRB(SheetTitleBar.inset, 0, SheetTitleBar.inset, 12),
                 children: [
                   if (localAvailable)
                     _HostRow(
                       host: HostRef.local,
-                      title: l10n.commonThisPhone,
+                      title: l10n.remoteRunPhone,
                       subtitle: l10n.remoteThisPhoneDsh,
                       active: active.isLocal,
                       onTap: localMissing ? installLocal : () => pick(HostRef.local),
@@ -147,6 +222,20 @@ class HostSheet extends ConsumerWidget {
                       active: active == HostRef.relay(h.id),
                       relay: h,
                       onTap: () => pick(HostRef.relay(h.id, name: h.name)),
+                    ),
+                  // 电脑不在线: the account has no computer to reach. Nothing to
+                  // fill in here — it shows up once that computer signs in.
+                  if (ssh.isEmpty && relayHosts.isEmpty)
+                    SettingsTile(
+                      icon: AppIcons.computer,
+                      tinted: false,
+                      chevron: false,
+                      title: l10n.remoteRunComputer,
+                      subtitle: l10n.remoteRunComputerOfflineHint,
+                      value: Text(
+                        l10n.remoteRunComputerOffline,
+                        style: TextStyle(color: DshColors.of(context).textTertiary),
+                      ),
                     ),
                 ],
               ),
@@ -172,16 +261,18 @@ class HostSheet extends ConsumerWidget {
                       unawaited(navigator.push(MaterialPageRoute<void>(builder: (_) => const CompanionPage())));
                     },
                   ),
-                  SettingsTile(
-                    icon: ssh.isEmpty && relayHosts.isEmpty ? AppIcons.add : AppIcons.configure,
-                    tinted: false,
-                    title: ssh.isEmpty && relayHosts.isEmpty ? l10n.remoteConnectComputer : l10n.remoteManageHosts,
-                    subtitle: ssh.isEmpty && relayHosts.isEmpty ? l10n.remoteConnectionMethods : null,
-                    onTap: () {
-                      Navigator.of(context).pop();
-                      onManage();
-                    },
-                  ),
+                  // 手动配置不在这个面板里: the remote page is reached from 设置.
+                  if (onManage case final manage?)
+                    SettingsTile(
+                      icon: ssh.isEmpty && relayHosts.isEmpty ? AppIcons.add : AppIcons.configure,
+                      tinted: false,
+                      title: ssh.isEmpty && relayHosts.isEmpty ? l10n.remoteConnectComputer : l10n.remoteManageHosts,
+                      subtitle: ssh.isEmpty && relayHosts.isEmpty ? l10n.remoteConnectionMethods : null,
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        manage();
+                      },
+                    ),
                 ],
               ),
               const SizedBox(height: 4),

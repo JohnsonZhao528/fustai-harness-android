@@ -6,14 +6,11 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/l10n.dart';
-import '../../pets/pet_signals.dart';
-import '../../pets/pet_state.dart';
 import '../common/pressable.dart';
 import '../common/typing_indicator.dart';
-import '../pets/pet_sprite.dart';
+import '../shell/brand_mark.dart';
 import '../theme/app_icons.dart';
 import '../theme/glass.dart';
 import '../theme/motion.dart';
@@ -777,40 +774,18 @@ class CompanionWater extends StatelessWidget {
   );
 }
 
-/// The little pixel whale girl the app already ships: on first run and when
-/// something failed, she stands in for the Live2D one.
-class CompanionPixelWhale extends ConsumerWidget {
-  const CompanionPixelWhale({super.key, this.state = PetStateName.idle, this.bodyHeight = 92});
+/// The FustAI mark, standing in while the Live2D stage loads or after it failed.
+class CompanionMark extends StatelessWidget {
+  const CompanionMark({super.key, this.bodyHeight = 92});
 
-  final PetStateName state;
-
-  /// Roughly how tall she should be, in logical pixels.
+  /// Roughly how tall the mark should be, in logical pixels.
   final double bodyHeight;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final pack = ref.watch(petPackProvider('whale-girl')).value;
-    final dpr = MediaQuery.devicePixelRatioOf(context);
-    if (pack == null) return SizedBox(height: bodyHeight);
-    // Whole device pixels per art pixel, or pixel art goes soft.
-    final k = math.max(1, (bodyHeight * dpr / pack.contentBox.height).round());
-    final scale = k / dpr;
-    return SizedBox(
-      width: pack.canvas.width * scale,
-      height: pack.canvas.height * scale,
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Positioned.fill(
-            child: PetSprite(pack: pack, anim: pack.animFor(state), scale: scale),
-          ),
-        ],
-      ),
-    );
-  }
+  Widget build(BuildContext context) => BrandMark(size: bodyHeight);
 }
 
-/// First run, and the way back when she couldn't load: a picture, one sentence,
+/// First run, and the way back when it couldn't load: a picture, one sentence,
 /// one button.
 class CompanionWelcome extends StatelessWidget {
   const CompanionWelcome({
@@ -820,7 +795,6 @@ class CompanionWelcome extends StatelessWidget {
     required this.action,
     required this.busy,
     required this.onAction,
-    this.state = PetStateName.idle,
     this.error,
     this.secondary,
     this.onSecondary,
@@ -835,7 +809,6 @@ class CompanionWelcome extends StatelessWidget {
   /// A quieter second way, under the button.
   final String? secondary;
   final VoidCallback? onSecondary;
-  final PetStateName state;
   final String? error;
 
   @override
@@ -852,7 +825,7 @@ class CompanionWelcome extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  CompanionPixelWhale(state: state),
+                  const CompanionMark(),
                   const SizedBox(height: 28),
                   Text(
                     title,
@@ -930,7 +903,7 @@ class CompanionWelcome extends StatelessWidget {
   }
 }
 
-/// While the stage loads: the same pixel whale, swimming over.
+/// While the stage loads: the same mark.
 class CompanionArriving extends StatelessWidget {
   const CompanionArriving({super.key});
 
@@ -941,7 +914,7 @@ class CompanionArriving extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const CompanionPixelWhale(bodyHeight: 64),
+          const CompanionMark(bodyHeight: 64),
           const SizedBox(height: 14),
           Text(
             context.l10n.companionArriving,

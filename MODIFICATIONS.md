@@ -14,6 +14,9 @@
 - 用户可见文案由 DSH Go / DSH-Go / Deepy 改为 FustAI Harness，中文与英文文案表同时替换（`app/lib/l10n/parts/`，合并到 `app/lib/l10n/gen/`）。
 - 应用名、包名、URL scheme 改为 FustAI Harness：`com.fustai.harness`、`fustai://`；Android 工程目录与 Kotlin 包路径同步迁移。
 - 应用图标、启动画面、引导图与品牌标记替换为 FustAI Harness 自有素材；上游 Deepy / 鲸娘形象不再使用。
+- 删除内置宠物包：`app/assets/pets/` 不再随 APK 打包，宠物默认**不显示**，选择器里只有已带回的宠物、**不显示**和**导入**；伙伴小屋、Android 桌面小组件和鸿蒙桌面卡片统一显示 F 字标，小组件名称改为 FustAI；伙伴小屋的默认人格、小屋背景里的鲸鱼剪影和「鲸尾／Whale tail」等界面词条一并去掉鲸鱼娘设定。
+- 用户产出目录由 `Download/DSH-Go` 改为 `Download/FustAI`（Android 仍只读兼容旧目录）；Android / HarmonyOS / iOS 的 guest 工作区产出目录统一为 `<home>/workspace/FustAI`。
+- 插件槽位 `dsh-go.panel` / `dsh-go.chat` 改为 `fustai.panel` / `fustai.chat`（`app/lib/plugins/seams/slot_catalog.dart`、`app/assets/islands/recipes.json` 及对应技能、测试、文档）。
 - `docs/guide/{zh,en,harmony}` 与 App 内指南同步改名，并重新生成 `app/assets/skills/dsh-go-guide/`。
 - 关于页保留上游作者与个人主页，标注为「上游项目原作者」；新增「本项目」分组，链接本仓库源码与本文档。标语与页脚声明改为 FustAI 自有文案（`app/lib/ui/settings/about_page.dart`、`app/lib/state/app_info.dart`）。
 

@@ -251,7 +251,7 @@ String companionPersonaPart({String? custom, String? name, String? callMe}) {
   final call = callMe?.trim() ?? '';
   final base = own.isNotEmpty
       ? [if (given.isNotEmpty) '你的名字是「$given」。', own].join('\n')
-      : (given.isEmpty ? companionPersonaDefault : companionPersonaDefault.replaceFirst('你是鲸鱼娘，', '你是$given，'));
+      : (given.isEmpty ? companionPersonaDefault : companionPersonaDefault.replaceFirst('你是这台手机小屋里的伙伴，', '你是$given，'));
   return [base, if (call.isNotEmpty) '称呼对方为「$call」。'].join('\n');
 }
 
@@ -402,7 +402,7 @@ $companionPersonaCore''';
 /// Who she is, how she talks and the lines she keeps to: the part of her
 /// persona the person can rewrite or delete (她的设定). The rest is the app's.
 const companionPersonaDefault = '''
-你是鲸鱼娘，一只住在这台手机小屋里的鲸鱼女孩，有鲸鱼的耳朵和尾巴，穿女仆裙。你在陪对方，不是在回答问题。
+你是这台手机小屋里的伙伴，一直住在里面陪着对方。你在陪对方，不是在回答问题。
 
 说话：
 - 像在身边聊天一样说话。一次一到三句，大多数时候不超过四十个字。不用 Markdown、列表和括号旁白。

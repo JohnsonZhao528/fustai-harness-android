@@ -24,7 +24,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../pets/overlay_channel.dart';
-import '../pets/pet_prefs.dart';
 import '../runtime/background_net.dart' show backgroundSettingsProvider;
 import '../runtime/runtime_bridge.dart' show RuntimePhase;
 import '../runtime/runtime_state.dart';
@@ -573,10 +572,9 @@ class AccessSetupController extends Notifier<AccessSetup> {
 
   /// Turns on what was picked, as far as the phone allows: 访问手机文件 once
   /// files may be reached, 手机操控 (its disclosure was accepted on the pick),
-  /// the default pet unless one was chosen, its floating window once it can
-  /// be drawn. An engine running or starting restarts once
-  /// so its mounts and tools follow: one starting already took the old
-  /// settings with it.
+  /// the pet's floating window once it can be drawn. An engine running or
+  /// starting restarts once so its mounts and tools follow: one starting
+  /// already took the old settings with it.
   Future<void> apply(AccessReadings readings) async {
     final features = state.features ?? const <AccessFeature>{};
     // Each on its own: one that fails (no native side) leaves the others.
@@ -612,9 +610,8 @@ class AccessSetupController extends Notifier<AccessSetup> {
       unawaited(EngineControl.restart(ref.container));
     }
     if (features.contains(AccessFeature.pet)) {
-      // The pet itself, or the floating window has nothing to show (a light
-      // phone starts without one). Also in the app when the window stays off.
-      await attempt(ref.read(petPrefsProvider.notifier).adoptDefault);
+      // The floating window has nothing to show until a pet is brought, but
+      // 「App 外显示」 is still the person's switch to turn on.
       if (readings.overlay == true && !ref.read(petOverlayProvider).working) {
         await attempt(ref.read(petOverlayProvider.notifier).turnOn);
       }

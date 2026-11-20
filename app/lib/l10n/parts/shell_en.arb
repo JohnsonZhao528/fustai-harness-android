@@ -15,9 +15,44 @@
   "shellApiKeyEncrypted": "Encrypted on this phone",
   "shellGetApiKey": "Get API key",
   "shellConnectDeepSeek": "Connect FustAI",
-  "shellConnectDeepSeekMessage": "Sign in to FustAI to start. No API key needed.",
+  "shellConnectDeepSeekMessage": "Sign in with a phone number and SMS code; a first sign-in creates the account.",
   "shellAccountSignInUnsupported": "This engine doesn’t support account sign-in",
-  "shellSignInDeepSeek": "Sign in with FustAI",
+  "shellSignInDeepSeek": "Sign in or sign up with FustAI",
+  "fustaiSignInTitle": "Sign in to FustAI",
+  "fustaiSignInMessage": "Enter your phone number and the SMS code. The first sign-in creates the account. Sign in with the same account on desktop to stay in sync.",
+  "fustaiSignInMobile": "Phone number",
+  "fustaiSignInMobileHint": "11-digit phone number",
+  "fustaiSignInCode": "Verification code",
+  "fustaiSignInCodeHint": "6-digit SMS code",
+  "fustaiSignInInvite": "Invite code",
+  "fustaiSignInInviteHint": "The invite code you received",
+  "fustaiSignInSendCode": "Send code",
+  "fustaiSignInResend": "Resend in {seconds}s",
+  "@fustaiSignInResend": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "fustaiSignInSubmit": "Sign in or sign up",
+  "fustaiSignInCodeSent": "Code sent; check your messages.",
+  "fustaiSignInDevCode": "Test code: {code}, filled in for you",
+  "@fustaiSignInDevCode": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "fustaiSmsBadMobile": "That phone number is not valid.",
+  "fustaiSmsBadCode": "The code is wrong or has expired.",
+  "fustaiSmsBadInvite": "That invite code is not valid.",
+  "fustaiSmsExpired": "Sign-in timed out; request a new code.",
+  "fustaiSmsTooMany": "Too many attempts; try again later.",
+  "fustaiSmsUnavailable": "The service is unavailable; try again later.",
+  "fustaiSmsNetwork": "Network error; check your connection and try again.",
+  "fustaiSmsUnknown": "Sign-in failed; try again.",
   "shellUseApiKey": "Use API key",
   "shellOtherProviders": "Other providers",
   "shellOnboardingStep": "Step {step} of {steps}",
@@ -139,7 +174,7 @@
   "shellHideTokenCount": "Token count",
   "shellHideReasoning": "Thinking",
   "shellHideActivityStrip": "Activity strip",
-  "shellHideWhaleTail": "Whale tail",
+  "shellHideWhaleTail": "Waiting animation",
   "shellHideTodoPill": "To-do bar",
   "shellHideGoalBar": "Goal bar",
   "shellToday": "Today",

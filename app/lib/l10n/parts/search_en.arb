@@ -8,7 +8,7 @@
   "searchNeedsWorkshop": "This build doesn't include the Workshop",
   "searchNeedsChat": "Available with a chat open",
   "searchKwTheme": "appearance,colors,colours,accent,icons",
-  "searchKwPets": "pet,pets,companion,whale,overlay",
+  "searchKwPets": "pet,pets,companion,overlay,home screen",
   "searchKwPerformance": "battery,smooth,lag,lite,full,speed",
   "searchKwVoice": "speech recognition,dictation,microphone,mic,voice,read aloud,voice call,call,TTS,speech",
   "searchKwVoiceReading": "read aloud,reading voice,TTS,voice,Stella,Tide,speech",

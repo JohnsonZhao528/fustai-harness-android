@@ -8,17 +8,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../performance/performance_state.dart';
 import 'pet_library.dart';
 import 'pet_state.dart';
 
-/// The pets that ship with the app, in picker order.
-const builtInPets = ['deepy-whale', 'whale-girl'];
-
-/// The default pet.
-const defaultPetId = 'deepy-whale';
-
-/// Explicit choice for the existing Android overlay. Pixel remains the default.
+/// The renderer the overlay uses unless 「取景」 picks the Live2D room. Pixel is
+/// the default.
 enum PetOverlayRenderer {
   pixel,
   companion;
@@ -27,14 +21,14 @@ enum PetOverlayRenderer {
 }
 
 /// 「取景」 for the companion in the overlay, as the stage reads `floatZoom`
-/// and `floatY` (app/assets/companion/stage.js): her model stands 2 tall
+/// and `floatY` (app/assets/companion/stage.js): the model stands 2 tall
 /// around 0, the camera looks at `y` and magnifies by `zoom`.
 enum PetOverlayFraming {
-  /// The whole of her, with a little room around ([PetPrefs]' defaults).
+  /// The whole model, with a little room around ([PetPrefs]' defaults).
   full(zoom: 0.9, y: 0),
 
-  /// Twice as close and looking half-way up: her upper half fills what the
-  /// whole of her did. A first guess from the numbers above, not tuned on a phone.
+  /// Twice as close and looking half-way up: the upper half fills what the
+  /// whole model did. A first guess from the numbers above, not tuned on a phone.
   half(zoom: 1.8, y: 0.5);
 
   const PetOverlayFraming({required this.zoom, required this.y});
@@ -50,7 +44,7 @@ enum PetOverlayFraming {
 @immutable
 class PetPrefs {
   const PetPrefs({
-    this.packId = defaultPetId,
+    this.packId = noPetId,
     this.packExplicit = true,
     this.size = PetSize.medium,
     this.customHeight = 30,
@@ -159,9 +153,6 @@ class PetPrefsController extends Notifier<PetPrefs> {
 
   @override
   PetPrefs build() {
-    ref.listen(performanceDefaultsProvider.select((p) => p.petEnabled), (_, next) {
-      if (!state.packExplicit) state = state.copyWith(packId: next ? defaultPetId : noPetId);
-    });
     _loaded = _load();
     return const PetPrefs(packExplicit: false);
   }
@@ -170,12 +161,10 @@ class PetPrefsController extends Notifier<PetPrefs> {
     try {
       final prefs = await SharedPreferences.getInstance();
       if (!ref.mounted) return;
-      await performanceReady(ref);
-      if (!ref.mounted) return;
       final pack = prefs.getString(keys.pack);
-      // A brought pet stays chosen; removing it here picks the default
+      // A brought pet stays chosen; removing it here picks 「不显示」
       // (UserPetsController.remove).
-      final explicit = pack == noPetId || builtInPets.contains(pack) || (pack != null && isUserPet(pack));
+      final explicit = pack == noPetId || (pack != null && isUserPet(pack));
       final hidden = prefs.getInt(keys.hidden);
       var zoom = 0.9, y = 0.0;
       try {
@@ -189,11 +178,7 @@ class PetPrefsController extends Notifier<PetPrefs> {
         // A corrupt framing preference cannot change the renderer default.
       }
       state = PetPrefs(
-        packId: explicit
-            ? pack!
-            : ref.read(performanceDefaultsProvider).petEnabled
-            ? defaultPetId
-            : noPetId,
+        packId: explicit ? pack! : noPetId,
         packExplicit: explicit,
         size: PetSize.fromName(prefs.getString(keys.size)),
         customHeight: _customHeight(prefs.getDouble(keys.customHeight)),
@@ -234,15 +219,6 @@ class PetPrefsController extends Notifier<PetPrefs> {
   /// unlike [setPack], 「藏起来 1 小时」 stays as it was.
   Future<void> replacePack(String id) =>
       _save((s) => s.copyWith(packId: id, packExplicit: true), (p) => p.setString(keys.pack, id));
-
-  /// First run's 「桌宠与悬浮窗」 was picked: the default pet, unless a pet
-  /// (or 「不显示」) was chosen already. Without it a light phone, whose
-  /// default is no pet, would turn on 「App 外显示」 with nothing to show.
-  Future<void> adoptDefault() async {
-    await _loaded;
-    if (!ref.mounted || state.packExplicit) return;
-    await setPack(defaultPetId);
-  }
 
   Future<void> setSize(PetSize v) => _save((s) => s.copyWith(size: v), (p) => p.setString(keys.size, v.name));
 

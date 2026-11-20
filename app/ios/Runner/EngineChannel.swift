@@ -638,7 +638,7 @@ final class EngineChannel: NSObject, FlutterStreamHandler {
   private var dshHome: URL { home.appendingPathComponent(".dsh", isDirectory: true) }
   private var agentsHome: URL { home.appendingPathComponent(".agents", isDirectory: true) }
   private var workspace: URL { home.appendingPathComponent("workspace", isDirectory: true) }
-  private var outputs: URL { workspace.appendingPathComponent("DSH-Go", isDirectory: true) }
+  private var outputs: URL { workspace.appendingPathComponent("FustAI", isDirectory: true) }
   private var cache: URL {
     (FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
       ?? URL(fileURLWithPath: NSTemporaryDirectory()))

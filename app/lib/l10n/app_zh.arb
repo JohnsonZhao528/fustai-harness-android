@@ -1799,8 +1799,6 @@
   "botsPetChange": "换宠物",
   "botsPetHideHour": "藏起来 1 小时",
   "botsPetSettings": "宠物设置",
-  "botsPetDeepy": "Deepy 小鲸鱼",
-  "botsPetWhaleGirl": "鲸娘",
   "botsPetNone": "不显示",
   "botsPets": "宠物",
   "botsPetSource": "来自 FustAI-TUI",
@@ -3563,7 +3561,7 @@
   "engineAccountUsageDetails": "用量明细",
   "engineAccountNoKeyNeeded": "登录后无需 API Key",
   "engineAccountUnsupported": "当前引擎不支持账号登录",
-  "engineAccountSignInDeepSeek": "用 FustAI 账号登录",
+  "engineAccountSignInDeepSeek": "登录 / 注册 FustAI 账号",
   "engineAccountAutoStart": "引擎未运行，登录时会自动启动",
   "engineAccountReplaceKey": "更换 Key",
   "engineAccountClearKeyTitle": "清除 API Key？",
@@ -5277,7 +5275,7 @@
   "harmonyLaunchEmbedded": "应用内启动",
   "harmonyLaunchNodeExited": "引擎已退出",
   "harmonyKwAccent": "颜色,主题色,强调色",
-  "harmonyKwPets": "宠物,小鲸,桌宠,鲸鱼",
+  "harmonyKwPets": "宠物,桌宠,伙伴,桌面",
   "harmonyKwVoice": "语音识别,麦克风,听写,说话,语音",
   "harmonyBackgroundSubtitleLong": "应用离开屏幕后，正在跑的对话会尽量继续",
   "harmonyBackgroundLocalLong": "这个版本可以申请长时任务：对话留在后台继续跑，通知栏会有一条提示。系统不批准或中途收回时，对话跟着应用暂停，回到应用后会尽量接着跑",
@@ -9566,7 +9564,7 @@
   "remoteServerAddress": "服务器地址",
   "remoteEmail": "邮箱",
   "remotePassword": "密码",
-  "remoteRestoreServer": "改回默认服务器 dsh.r2049.cn",
+  "remoteRestoreServer": "改回默认服务器 relay.fustai.com",
   "remoteConsole": "远程控制台",
   "remoteHostsIntro": "在手机上接着用电脑或服务器上的 FustAI",
   "remoteSshHosts": "SSH 主机",
@@ -9575,7 +9573,7 @@
   "remoteSshDirect": "不经过第三方服务器",
   "remoteOtherMethods": "其他方式",
   "remoteWebConsole": "网页版远程控制台",
-  "remoteWebConsoleProvider": "dsh.r2049.cn · 第三方页面",
+  "remoteWebConsoleProvider": "relay.fustai.com · 第三方页面",
   "remoteActiveHost": "正在使用「{name}」",
   "@remoteActiveHost": {
     "placeholders": {
@@ -10046,6 +10044,12 @@
   "remoteErrHistoryModeChanged": "主机已不支持精简历史，请切换到其他主机后再连回来，或重启 App，重新加载历史",
   "remoteCompactHistoryHint": "支持的 FustAI Remote 主机会精简历史工具详情，实时回复和审批不变。切换主机或重启 App 后生效；旧主机仍传输完整历史。",
   "searchKwRemoteCompactHistory": "精简 简洁 历史 工具 传输 流量 远程 compact slim lite",
+  "remoteRunOn": "运行位置",
+  "remoteRunPhone": "手机自己运转",
+  "remoteRunComputer": "我的电脑",
+  "remoteRunComputerOffline": "离线",
+  "remoteRunComputerOfflineHint": "在电脑上登录同一个 FustAI 账号后，这里会自动出现",
+  "searchKwRemoteRun": "运行位置 手机自己运转 我的电脑 离线 run location this phone computer offline",
   "remotePairErrInvalidCode": "这不是 FustAI Harness 的配对二维码",
   "remotePairErrOtherServer": "这个二维码来自另一个 Remote 服务器",
   "remotePairErrUnsupported": "这个 Remote 服务器还不支持扫码配对",
@@ -10138,7 +10142,7 @@
   "searchNeedsWorkshop": "这个版本没有带创意工坊",
   "searchNeedsChat": "打开对话时可用",
   "searchKwTheme": "外观,配色,颜色,主题色,强调色,图标",
-  "searchKwPets": "宠物,小鲸,桌宠,悬浮,鲸鱼",
+  "searchKwPets": "宠物,桌宠,悬浮,伙伴,桌面上",
   "searchKwPerformance": "省电,流畅,卡顿,发热,轻量,完整",
   "searchKwVoice": "语音识别,麦克风,听写,说话,语音,朗读,语音通话,打电话,TTS,声音",
   "searchKwVoiceReading": "朗读,朗读的声音,TTS,音色,海星,暗潮,声音",
@@ -10193,7 +10197,7 @@
   "searchKwPetQuiet": "安静,宠物安静",
   "searchKwPetOutside": "悬浮窗,桌面宠物,宠物悬浮",
   "searchKwPetDisplayWhen": "宠物显示,显示时机",
-  "searchKwPetOverlayShows": "悬浮伙伴,小屋里的她,像素宠物,Live2D",
+  "searchKwPetOverlayShows": "悬浮伙伴,小屋里的伙伴,像素宠物,Live2D",
   "searchKwPetOverlayFraming": "取景,全身,半身",
   "searchKwWorkshop": "工坊,下载宠物,下载伙伴,分享宠物,投稿",
   "searchKwBlur": "模糊,毛玻璃,玻璃",
@@ -10399,9 +10403,44 @@
   "shellApiKeyEncrypted": "加密保存在本机",
   "shellGetApiKey": "获取 API Key",
   "shellConnectDeepSeek": "连接 FustAI",
-  "shellConnectDeepSeekMessage": "登录 FustAI 账号即可开始，无需 API Key",
+  "shellConnectDeepSeekMessage": "手机号 + 短信验证码登录，首次登录自动创建账号",
   "shellAccountSignInUnsupported": "当前引擎不支持账号登录",
-  "shellSignInDeepSeek": "用 FustAI 账号登录",
+  "shellSignInDeepSeek": "登录 / 注册 FustAI 账号",
+  "fustaiSignInTitle": "登录 FustAI 账号",
+  "fustaiSignInMessage": "输入手机号并填写短信验证码即可登录，首次登录会自动注册。桌面端登录同一账号后即可互通。",
+  "fustaiSignInMobile": "手机号",
+  "fustaiSignInMobileHint": "11 位手机号",
+  "fustaiSignInCode": "验证码",
+  "fustaiSignInCodeHint": "6 位短信验证码",
+  "fustaiSignInInvite": "邀请码",
+  "fustaiSignInInviteHint": "填写收到的邀请码",
+  "fustaiSignInSendCode": "获取验证码",
+  "fustaiSignInResend": "重新获取（{seconds}s）",
+  "@fustaiSignInResend": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "fustaiSignInSubmit": "登录 / 注册",
+  "fustaiSignInCodeSent": "验证码已发送，请查看短信",
+  "fustaiSignInDevCode": "测试环境验证码：{code}，已自动填入",
+  "@fustaiSignInDevCode": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "fustaiSmsBadMobile": "手机号格式不正确",
+  "fustaiSmsBadCode": "验证码不正确或已过期",
+  "fustaiSmsBadInvite": "邀请码不正确",
+  "fustaiSmsExpired": "登录已超时，请重新获取验证码",
+  "fustaiSmsTooMany": "操作过于频繁，请稍后再试",
+  "fustaiSmsUnavailable": "服务暂时不可用，请稍后重试",
+  "fustaiSmsNetwork": "网络异常，请检查网络后重试",
+  "fustaiSmsUnknown": "登录失败，请重试",
   "shellUseApiKey": "使用 API Key",
   "shellOtherProviders": "其他模型渠道",
   "shellOnboardingStep": "第 {step} 步，共 {steps} 步",
@@ -10693,7 +10732,7 @@
   "shellHideTokenCount": "token 数",
   "shellHideReasoning": "思考过程",
   "shellHideActivityStrip": "活动条",
-  "shellHideWhaleTail": "鲸尾",
+  "shellHideWhaleTail": "等待动画",
   "shellHideTodoPill": "待办条",
   "shellHideGoalBar": "目标条",
   "shellToday": "今天",
@@ -11122,7 +11161,7 @@
   "speechCallVisualMono": "细线",
   "speechCallVisualGlass": "光球",
   "speechInsecure": "这个云端服务的地址不是 https，Key 不能这样发出去",
-  "starPromptTitle": "{hours, plural, =0{本鱼已经在 FustAI Harness 里陪你半个小时啦⁠~} =1{本鱼已经在 FustAI Harness 里陪你一个小时啦⁠~} other{本鱼已经在 FustAI Harness 里陪你 {hours} 个小时啦⁠~}}",
+  "starPromptTitle": "{hours, plural, =0{FustAI Harness 已经陪你半个小时啦⁠~} =1{FustAI Harness 已经陪你一个小时啦⁠~} other{FustAI Harness 已经陪你 {hours} 个小时啦⁠~}}",
   "@starPromptTitle": {
     "description": "The star prompt's first line. hours is the whole hours of use so far, rounded down; 0 is half an hour (the first ask comes after 30 minutes). The word joiner keeps the ~ on the line of the word before it.",
     "placeholders": {
@@ -11131,7 +11170,7 @@
       }
     }
   },
-  "starPromptBody": "这是一个免费开源的项目，如果它让你的移动端体验更好了一点，拜托点个 Star 支持一下，这对本鱼是很大的鼓励！",
+  "starPromptBody": "这是一个免费开源的项目，如果它让你的移动端体验更好了一点，拜托点个 Star 支持一下，这对我是很大的鼓励！",
   "starPromptPlea": "拜托你啦~ 这真的很重要！！",
   "starPromptStar": "去 GitHub 点 Star",
   "starPromptDone": "已经点过啦",

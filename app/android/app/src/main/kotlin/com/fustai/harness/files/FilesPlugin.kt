@@ -37,10 +37,10 @@ import kotlin.concurrent.thread
  * MethodChannel `dsh/files`.
  *
  * - `resolveGuest {path}` → host path of a local-engine file, or null.
- * - `listOutputs {depth}` → `[{path, bytes, modified}]` under `/sdcard/Download/DSH-Go`, then
- *   the old `/sdcard/Download/DSH` (guest paths; empty without phone storage).
+ * - `listOutputs {depth}` → `[{path, bytes, modified}]` under `/sdcard/Download/FustAI`, then
+ *   the old `/sdcard/Download/DSH-Go` (guest paths; empty without phone storage).
  * - `open {path, mime, name, chooser}` → ACTION_VIEW through this app's FileProvider.
- * - `saveToDownloads {path, name, mime}` → shown location (`Download/DSH-Go/x.pdf`):
+ * - `saveToDownloads {path, name, mime}` → shown location (`Download/FustAI/x.pdf`):
  *   MediaStore Downloads on API 29+, the public Downloads directory before
  *   (asks for the storage permission when needed).
  *

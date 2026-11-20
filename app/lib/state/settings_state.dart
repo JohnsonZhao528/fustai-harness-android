@@ -7,6 +7,7 @@ import '../performance/performance_state.dart';
 import '../secrets/secure_storage.dart';
 import 'provider_keys.dart';
 import 'read_list_epoch.dart';
+import 'shared_model_endpoint.dart';
 
 /// User settings: the DeepSeek API key (and custom-provider keys, see
 /// [ProviderKeyVault]) live in the Android Keystore-backed secure storage;
@@ -14,6 +15,7 @@ import 'read_list_epoch.dart';
 class AppSettings {
   const AppSettings({
     this.apiKey = '',
+    this.apiKeyBaseUrl = '',
     this.themeMode = ThemeMode.system,
     this.autoStartLocal = true,
     this.autoStartLocalExplicit = true,
@@ -31,6 +33,10 @@ class AppSettings {
   });
 
   final String apiKey;
+
+  /// [apiKey] 所属的推理端点，账号中心、桌面端与本机存同一份；空表示
+  /// DeepSeek 官方端点。
+  final String apiKeyBaseUrl;
   final ThemeMode themeMode;
 
   /// Start the local DSH automatically when the app opens.
@@ -85,6 +91,7 @@ class AppSettings {
 
   AppSettings copyWith({
     String? apiKey,
+    String? apiKeyBaseUrl,
     ThemeMode? themeMode,
     bool? autoStartLocal,
     bool? autoStartLocalExplicit,
@@ -101,6 +108,7 @@ class AppSettings {
     bool? loaded,
   }) => AppSettings(
     apiKey: apiKey ?? this.apiKey,
+    apiKeyBaseUrl: apiKeyBaseUrl ?? this.apiKeyBaseUrl,
     themeMode: themeMode ?? this.themeMode,
     autoStartLocal: autoStartLocal ?? this.autoStartLocal,
     autoStartLocalExplicit: autoStartLocalExplicit ?? this.autoStartLocalExplicit,
@@ -128,6 +136,7 @@ List<(double, String)> get chatTextScales => [
 
 class SettingsController extends Notifier<AppSettings> {
   static const _apiKeyKey = 'deepseek_api_key';
+  static const _apiKeyBaseUrlKey = 'deepseek_api_key_base_url';
   static const _themeKey = 'theme_mode';
   static const _autoStartKey = 'auto_start_local';
   static const _autoApproveKey = 'auto_approve_commands';
@@ -157,8 +166,10 @@ class SettingsController extends Notifier<AppSettings> {
     await performanceReady(ref);
     if (!ref.mounted) return;
     String apiKey = '';
+    String apiKeyBaseUrl = '';
     try {
       apiKey = await _secure.read(key: _apiKeyKey) ?? '';
+      apiKeyBaseUrl = await _secure.read(key: _apiKeyBaseUrlKey) ?? '';
     } catch (_) {
       // Keystore unavailable or corrupted; the user can re-enter the key.
     }
@@ -172,6 +183,7 @@ class SettingsController extends Notifier<AppSettings> {
     if (!ref.mounted) return;
     state = AppSettings(
       apiKey: apiKey,
+      apiKeyBaseUrl: apiKeyBaseUrl,
       themeMode: ThemeMode.values.firstWhere(
         (m) => m.name == prefs.getString(_themeKey),
         orElse: () => ThemeMode.system,
@@ -199,15 +211,21 @@ class SettingsController extends Notifier<AppSettings> {
     await _loaded;
     if (!ref.mounted) return;
     var apiKey = '';
+    var apiKeyBaseUrl = '';
     var providerIds = const <String>{};
     try {
       apiKey = await _secure.read(key: _apiKeyKey) ?? '';
+      apiKeyBaseUrl = await _secure.read(key: _apiKeyBaseUrlKey) ?? '';
       providerIds = (await ref.read(providerKeyVaultProvider).readAll()).keys.toSet();
     } catch (_) {
       // As in [_load]: the user can re-enter them.
     }
     if (!ref.mounted) return;
-    state = state.copyWith(apiKey: apiKey, customProviderIds: providerIds);
+    state = state.copyWith(
+      apiKey: apiKey,
+      apiKeyBaseUrl: apiKeyBaseUrl,
+      customProviderIds: providerIds,
+    );
   }
 
   /// Keeps [key] for the local engine's custom provider [id] (see
@@ -224,15 +242,23 @@ class SettingsController extends Notifier<AppSettings> {
     state = state.copyWith(customProviderIds: {...state.customProviderIds}..remove(id));
   }
 
-  Future<void> setApiKey(String key) async {
+  /// Saves a hand-entered key, which always belongs to the DeepSeek endpoint.
+  Future<void> setApiKey(String key) => setModelCredentials(key, '');
+
+  /// Saves the account's key and the endpoint it belongs to as one pair; the
+  /// desktop app, the account centre and this device keep the same values.
+  Future<void> setModelCredentials(String key, String? baseUrl) async {
     ref.read(readListCredentialEpochProvider.notifier).advance();
     final trimmed = key.trim();
+    final endpoint = trimmed.isEmpty ? '' : (normalizeSharedBaseUrl(baseUrl) ?? '');
     if (trimmed.isEmpty) {
       await _secure.delete(key: _apiKeyKey);
+      await _secure.delete(key: _apiKeyBaseUrlKey);
     } else {
       await _secure.write(key: _apiKeyKey, value: trimmed);
+      await _secure.write(key: _apiKeyBaseUrlKey, value: endpoint.isEmpty ? null : endpoint);
     }
-    state = state.copyWith(apiKey: trimmed);
+    state = state.copyWith(apiKey: trimmed, apiKeyBaseUrl: endpoint);
   }
 
   Future<void> setThemeMode(ThemeMode mode) async {

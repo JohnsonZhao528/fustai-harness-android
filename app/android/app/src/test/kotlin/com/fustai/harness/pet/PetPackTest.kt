@@ -360,10 +360,10 @@ class PetPackTest {
         }
     }
 
-    /** The bundled packs, by id, with their folder. */
+    /** The fixture packs, by id, with their folder. */
     private fun shippedDirs(): Map<String, Pair<File, PetPack>> {
-        val root = generateSequence(File("").absoluteFile) { it.parentFile }.map { File(it, "app/assets/pets") }.firstOrNull { it.isDirectory }
-            ?: generateSequence(File("").absoluteFile) { it.parentFile }.map { File(it, "assets/pets") }.firstOrNull { it.isDirectory }
+        val root = generateSequence(File("").absoluteFile) { it.parentFile }.map { File(it, "app/test/fixtures/pets") }.firstOrNull { it.isDirectory }
+            ?: generateSequence(File("").absoluteFile) { it.parentFile }.map { File(it, "test/fixtures/pets") }.firstOrNull { it.isDirectory }
             ?: return emptyMap()
         return root.listFiles { f -> File(f, "pack.json").isFile }.orEmpty().associate { dir ->
             dir.name to (dir to PetPack.parse(File(dir, "pack.json").readText()))

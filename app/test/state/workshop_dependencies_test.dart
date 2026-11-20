@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:dsh_app/pets/overlay_channel.dart';
 import 'package:dsh_app/pets/pet_prefs.dart';
+import 'package:dsh_app/pets/pet_state.dart' show noPetId;
 import 'package:dsh_app/state/workshop_dependencies.dart';
 import 'package:dsh_app/update/update_http.dart';
 import 'package:dsh_app/workshop/workshop_http.dart';
@@ -198,8 +199,8 @@ void main() {
         expect(overlay.reloaded, isEmpty);
         preferences.restore(restored);
         await pending;
-        expect(preferences.replacements, selected == item.localId ? [defaultPetId] : isEmpty);
-        expect(container.read(petPrefsProvider).packId, selected == item.localId ? defaultPetId : selected);
+        expect(preferences.replacements, selected == item.localId ? [noPetId] : isEmpty);
+        expect(container.read(petPrefsProvider).packId, selected == item.localId ? noPetId : selected);
         expect(container.read(petPrefsProvider).hiddenUntil, hiddenUntil);
         expect(overlay.reloaded, [item.localId]);
       } finally {

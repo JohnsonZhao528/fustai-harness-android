@@ -9,9 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/l10n.dart';
-import '../../runtime/local_footprint.dart';
-import '../../runtime/runtime_bridge.dart';
 import '../../runtime/runtime_state.dart';
+import '../../state/account_state.dart';
 import '../../state/engine_control.dart';
 import '../../state/hosts_state.dart';
 import '../../state/onboarding_state.dart';
@@ -19,9 +18,7 @@ import '../../state/settings_state.dart';
 import '../remote/remote_screen.dart';
 import '../shell/page_frame.dart';
 import '../theme/app_icons.dart';
-import '../theme/theme.dart';
 import 'connect_page.dart';
-import 'onboarding_scaffold.dart';
 import 'runtime_setup_page.dart';
 
 /// Opens the install page over whatever is showing; the host list on a build
@@ -41,9 +38,10 @@ Future<void> openLocalInstall(BuildContext context, {bool useWhenDone = false}) 
     ? (title: l10n.localEnvNotInstalled, action: l10n.phoneEngineInstallRuntime)
     : (title: l10n.localEnvUnavailable, action: l10n.localEnvUseRemote);
 
-/// What installing costs and one 「安装」; then the same progress as first
-/// run. Once installed the engine starts, and a phone with no model yet goes
-/// on to 「连接 DeepSeek」.
+/// Unpacks the bundled runtime and shows the progress; the environment ships
+/// inside the app, so nothing is downloaded and there is no step to confirm.
+/// Once installed the engine starts, and a phone with no model yet goes on to
+/// 「连接 DeepSeek」.
 ///
 /// The back key leaves at any point: an install already running carries on
 /// in the background (its notification shows the progress) and this page
@@ -59,14 +57,13 @@ class LocalInstallPage extends ConsumerStatefulWidget {
 }
 
 class _LocalInstallPageState extends ConsumerState<LocalInstallPage> {
-  bool _confirmed = false;
-
   Future<void> _done() async {
     final container = ProviderScope.containerOf(context, listen: false);
     final navigator = Navigator.of(context);
     unawaited(EngineControl.ensureStarted(container));
     if (widget.useWhenDone) container.read(activeHostProvider.notifier).select(HostRef.local);
-    if (container.read(settingsProvider).hasModelAccess || container.read(onboardingPrefsProvider).keySkipped) {
+    final hasModel = container.read(settingsProvider).hasModelAccess || container.read(accountProvider).signedIn;
+    if (hasModel || container.read(onboardingPrefsProvider).keySkipped) {
       navigator.pop();
       return;
     }
@@ -74,68 +71,21 @@ class _LocalInstallPageState extends ConsumerState<LocalInstallPage> {
       MaterialPageRoute(builder: (context) => ConnectPage(onDone: () => Navigator.of(context).pop())),
     );
     // Left without a key or a sign-in: don't bring the step back at launch.
-    if (!container.read(settingsProvider).hasModelAccess) {
+    if (!container.read(settingsProvider).hasModelAccess && !container.read(accountProvider).signedIn) {
       await container.read(onboardingPrefsProvider.notifier).setKeySkipped(true);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final phase = ref.watch(localRuntimeProvider.select((s) => s.status.phase));
-    final back = GlassIconButton(
-      icon: AppIcons.back,
-      tooltip: context.l10n.commonBack,
-      grouped: false,
-      onPressed: () => Navigator.of(context).maybePop(),
-    );
-    final ask = !_confirmed && phase == RuntimePhase.notInstalled;
-    return OnboardingSwitcher(
-      child: ask
-          ? _Confirm(key: const ValueKey('confirm'), leading: back, onInstall: () => setState(() => _confirmed = true))
-          : KeyedSubtree(
-              key: const ValueKey('install'),
-              child: RuntimeSetupPage(onDone: () => unawaited(_done()), leading: back),
-            ),
-    );
-  }
-}
-
-class _Confirm extends ConsumerWidget {
-  const _Confirm({super.key, required this.leading, required this.onInstall});
-
-  final Widget leading;
-  final VoidCallback onInstall;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = context.l10n;
-    final footprint = ref.watch(localFootprintProvider).value;
-    final colors = DshColors.of(context);
-    final unpacked = footprint?.unpackedMb;
-    return OnboardingScaffold(
-      leading: leading,
-      children: [
-        const Spacer(),
-        OnboardingHeader(
-          icon: AppIcons.thisPhone,
-          title: l10n.localEnvInstallTitle,
-          message: l10n.localEnvInstallMessage,
-        ),
-        const SizedBox(height: 28),
-        if (footprint != null && footprint.lowStorage)
-          OnboardingFact(
-            icon: AppIcons.artifacts,
-            text: l10n.localEnvLowStorage(footprint.requiredRoundedMb!),
-            color: colors.warning,
-          )
-        else if (unpacked != null)
-          OnboardingFact(icon: AppIcons.artifacts, text: l10n.localEnvFactStorage(LocalFootprint.round(unpacked))),
-        OnboardingFact(icon: AppIcons.engine, text: l10n.localEnvFactMemory(LocalFootprint.engineMemoryMb)),
-        OnboardingFact(icon: AppIcons.localOnly, text: l10n.shellRuntimeLocalOnly),
-        const Spacer(flex: 2),
-        const SizedBox(height: 24),
-        FilledButton(onPressed: onInstall, child: Text(l10n.commonInstall)),
-      ],
+    return RuntimeSetupPage(
+      onDone: () => unawaited(_done()),
+      leading: GlassIconButton(
+        icon: AppIcons.back,
+        tooltip: context.l10n.commonBack,
+        grouped: false,
+        onPressed: () => Navigator.of(context).maybePop(),
+      ),
     );
   }
 }

@@ -2,7 +2,7 @@
 // native panel, drawn with the plugin view renderer under the plugin's name.
 // Its occupants are the inventory's `dsh-go:<id>` cells: 对话详情's 「插件」
 // tab for `session.tab`, 全部功能 for `features`, and the synthetic
-// `dsh-go.panel` slot. A package with one shows it instead of its web entry
+// `fustai.panel` slot. A package with one shows it instead of its web entry
 // there (the planner sees to that; ui.json can still ask for the web).
 
 import 'package:flutter/widgets.dart';
@@ -22,7 +22,7 @@ class DshUiPanelAdapter implements NativeSlotAdapter {
   String get id => 'dsh-ui-panel';
 
   @override
-  Set<String> get slots => const {Slots.dshGoPanel, Slots.rightPaneTab, Slots.main};
+  Set<String> get slots => const {Slots.fustaiPanel, Slots.rightPaneTab, Slots.main};
 
   /// A native panel's cell (the inventory only makes them for declared,
   /// switched-on panels).

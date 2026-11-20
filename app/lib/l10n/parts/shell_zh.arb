@@ -15,9 +15,44 @@
   "shellApiKeyEncrypted": "加密保存在本机",
   "shellGetApiKey": "获取 API Key",
   "shellConnectDeepSeek": "连接 FustAI",
-  "shellConnectDeepSeekMessage": "登录 FustAI 账号即可开始，无需 API Key",
+  "shellConnectDeepSeekMessage": "手机号 + 短信验证码登录，首次登录自动创建账号",
   "shellAccountSignInUnsupported": "当前引擎不支持账号登录",
-  "shellSignInDeepSeek": "用 FustAI 账号登录",
+  "shellSignInDeepSeek": "登录 / 注册 FustAI 账号",
+  "fustaiSignInTitle": "登录 FustAI 账号",
+  "fustaiSignInMessage": "输入手机号并填写短信验证码即可登录，首次登录会自动注册。桌面端登录同一账号后即可互通。",
+  "fustaiSignInMobile": "手机号",
+  "fustaiSignInMobileHint": "11 位手机号",
+  "fustaiSignInCode": "验证码",
+  "fustaiSignInCodeHint": "6 位短信验证码",
+  "fustaiSignInInvite": "邀请码",
+  "fustaiSignInInviteHint": "填写收到的邀请码",
+  "fustaiSignInSendCode": "获取验证码",
+  "fustaiSignInResend": "重新获取（{seconds}s）",
+  "@fustaiSignInResend": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "fustaiSignInSubmit": "登录 / 注册",
+  "fustaiSignInCodeSent": "验证码已发送，请查看短信",
+  "fustaiSignInDevCode": "测试环境验证码：{code}，已自动填入",
+  "@fustaiSignInDevCode": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "fustaiSmsBadMobile": "手机号格式不正确",
+  "fustaiSmsBadCode": "验证码不正确或已过期",
+  "fustaiSmsBadInvite": "邀请码不正确",
+  "fustaiSmsExpired": "登录已超时，请重新获取验证码",
+  "fustaiSmsTooMany": "操作过于频繁，请稍后再试",
+  "fustaiSmsUnavailable": "服务暂时不可用，请稍后重试",
+  "fustaiSmsNetwork": "网络异常，请检查网络后重试",
+  "fustaiSmsUnknown": "登录失败，请重试",
   "shellUseApiKey": "使用 API Key",
   "shellOtherProviders": "其他模型渠道",
   "shellOnboardingStep": "第 {step} 步，共 {steps} 步",
@@ -309,7 +344,7 @@
   "shellHideTokenCount": "token 数",
   "shellHideReasoning": "思考过程",
   "shellHideActivityStrip": "活动条",
-  "shellHideWhaleTail": "鲸尾",
+  "shellHideWhaleTail": "等待动画",
   "shellHideTodoPill": "待办条",
   "shellHideGoalBar": "目标条",
   "shellToday": "今天",

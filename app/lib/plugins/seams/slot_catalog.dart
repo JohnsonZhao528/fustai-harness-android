@@ -187,7 +187,7 @@ abstract final class Slots {
   static const pluginDetailSection = 'plugins.detail.section';
 
   /// Declarative panels (§4.3): the app's own surface, served by the bridge.
-  static const dshGoPanel = 'dsh-go.panel';
+  static const fustaiPanel = 'fustai.panel';
 
   /// Where the app has a seat today (docs/design/plugin-ui-v3.md §1.2, A):
   /// a plugin's web part anywhere else is listed under 「网页版界面」 in its
@@ -202,7 +202,7 @@ abstract final class Slots {
     rightPaneTab,
     rightPaneTabTitle,
     cordisView,
-    dshGoPanel,
+    fustaiPanel,
     conversationView,
     sidebarFooter,
     settingsPluginsTab,
@@ -213,7 +213,7 @@ abstract final class Slots {
   /// The chat page's 「插件」 sheet: one panel island of the app's own
   /// showing all of [chatPanel] (docs/design/plugin-ui-v3.md §3.4). Not a
   /// DSH slot: only `recipes.json` knows it.
-  static const chatSheet = 'dsh-go.chat';
+  static const chatSheet = 'fustai.chat';
 
   /// The slots one chat-page panel island shows stacked (§3).
   static const chatPanel = [
@@ -711,8 +711,8 @@ const Map<String, SlotInfo> slotCatalog = {
     replacesShippedUi: true,
     policy: SeatPolicy.never,
   ),
-  'dsh-go.panel': SlotInfo(
-    'dsh-go.panel',
+  'fustai.panel': SlotInfo(
+    'fustai.panel',
     SlotKind.keyed,
     SlotScope.sessionMaybe,
     policy: SeatPolicy.p2Native,

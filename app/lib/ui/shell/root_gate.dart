@@ -24,12 +24,13 @@ import '../../state/ohos_linux_state.dart';
 import '../../state/onboarding_state.dart';
 import '../../state/settings_state.dart';
 import '../../ui_config/ui_skill.dart';
+import '../home/task_directory_page.dart';
 import '../onboarding/connect_page.dart';
 import '../onboarding/onboarding_flow.dart';
 import '../onboarding/setup_progress.dart';
 import '../remote/remote_screen.dart';
 import '../theme/theme.dart';
-import '../web/mode_home.dart';
+
 import 'brand_mark.dart';
 import 'usage_upgrade_notice.dart';
 
@@ -43,10 +44,8 @@ import 'usage_upgrade_notice.dart';
 /// - The app runs without the runtime ([OnboardingPrefs.localDeclined]: a
 ///   remote host instead, or uninstalled) → home.
 /// - Runtime outdated → setup, which upgrades it.
-/// - Runtime missing → setup, which first asks 本机 or 远程主机 (welcome
-///   first on a truly fresh install).
-/// - Runtime ready but nothing to talk to (no DeepSeek key, no custom provider
-///   on the local engine), and the user never chose "稍后设置" → key entry.
+/// - Runtime missing on a fresh install → home (the login gate comes first);
+///   「手机自己运转」 installs it on demand.
 /// - Otherwise → home (`null`).
 OnboardingStep? initialOnboardingStep({
   required RuntimeStatus status,
@@ -77,11 +76,13 @@ OnboardingStep? initialOnboardingStep({
     if (status.phase == RuntimePhase.installing) return OnboardingStep.runtime;
     // Runs without it (also after leaving a failed upgrade for a remote host).
     if (prefs.localDeclined) return null;
-    // An upgrade (an older rootfs exists) skips the welcome and the choice.
+    // An upgrade (an older rootfs exists) still has to run.
     if (!runtimeStepAsks(status)) return OnboardingStep.runtime;
-    return prefs.welcomeSeen ? OnboardingStep.runtime : OnboardingStep.welcome;
+    // A fresh install: login is the first screen; 「手机自己运转」 installs the
+    // runtime when the user picks it.
+    return null;
   }
-  if (!hasApiKey && !hasCustomProvider && !prefs.keySkipped) return OnboardingStep.apiKey;
+  // The model key comes from the FustAI account at sign-in.
   return null;
 }
 
@@ -96,7 +97,7 @@ bool runtimeStepAsks(RuntimeStatus status) =>
 class RootGate extends ConsumerStatefulWidget {
   const RootGate({super.key, this.home});
 
-  /// Stands in for [ModeHome] (tests).
+  /// Stands in for [TaskDirectoryPage] (tests).
   @visibleForTesting
   final Widget? home;
 
@@ -364,7 +365,15 @@ class _RootGateState extends ConsumerState<RootGate> {
         if (_chooseRuntime && _step != null) ref.read(localFootprintProvider);
         _resumeBeside(prefs.setupStep, runtime.status);
       }
-      if (_step case final step?) {
+      // 首页是登录页: the FustAI account signs in inside the app and does not
+      // need the runtime, so the gate comes before every setup step.
+      final account = ref.watch(accountProvider);
+      if (!account.signedIn) {
+        // The stored grant is being read; the gate decides next frame.
+        child = account.phase == AccountPhase.unknown
+            ? const _Splash()
+            : ConnectPage(loginOnly: true, onDone: _afterKey);
+      } else if (_step case final step?) {
         child = OnboardingFlow(
           step: step,
           chooseRuntime: _chooseRuntime,
@@ -387,19 +396,9 @@ class _RootGateState extends ConsumerState<RootGate> {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (mounted) _maybeAutoStart();
         });
-        // 登录门: once the local engine is there, the shell (chat, plugins,
-        // terminal, models) opens only for a FustAI account that signed in.
-        final account = ref.watch(accountProvider);
-        if (account.connected && account.phase == AccountPhase.unknown) {
-          // The stored grant is being read; the gate decides next frame.
-          child = const _Splash();
-        } else if (account.connected && !account.signedIn) {
-          child = ConnectPage(onDone: _afterKey);
-        } else {
-          // The native shell or the web page, by 界面 (ui_mode_state.dart); an
-          // install from before usage statistics is told about them there, once.
-          child = UsageUpgradeNotice(child: widget.home ?? const ModeHome());
-        }
+        // The native shell or the web page, by 界面 (ui_mode_state.dart); an
+        // install from before usage statistics is told about them there, once.
+        child = UsageUpgradeNotice(child: widget.home ?? const TaskDirectoryPage());
       }
     }
     if (child is! _Splash && !_launchReady) {

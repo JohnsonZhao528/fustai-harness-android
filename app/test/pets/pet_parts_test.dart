@@ -3,6 +3,7 @@
 // (the pet's bubble replaces the glass banner while it is on screen), the
 // empty state's whale, and 宠物设置.
 
+import 'package:dsh_app/pets/pet_pack.dart';
 import 'package:dsh_app/pets/pet_prefs.dart';
 import 'package:dsh_app/pets/pet_signals.dart';
 import 'package:dsh_app/pets/pet_state.dart';
@@ -210,7 +211,11 @@ void main() {
   });
 
   group('宠物设置', () {
-    Future<ProviderContainer> page(WidgetTester tester) async {
+    Future<ProviderContainer> page(
+      WidgetTester tester, {
+      List<PetPack> brought = const [],
+      PetPrefs prefs = const PetPrefs(loaded: true),
+    }) async {
       usePhoneView(tester);
       final clock = TestClock();
       await tester.pumpWidget(
@@ -219,7 +224,8 @@ void main() {
           overrides: [
             petClockProvider.overrideWithValue(clock.call),
             petPackProvider.overrideWith((ref, id) async => diskPack(id)),
-            petPrefsProvider.overrideWith(() => FixedPetPrefs(const PetPrefs(loaded: true))),
+            userPetsProvider.overrideWith(() => FixedUserPets(brought)),
+            petPrefsProvider.overrideWith(() => FixedPetPrefs(prefs)),
           ],
         ),
       );
@@ -281,25 +287,20 @@ void main() {
       image!.dispose();
     });
 
-    testWidgets('three choices with names, the source line, size and quiet mode', (tester) async {
+    testWidgets('不显示 and 导入 alone until a pet is brought: no brand pet, no size or quiet', (tester) async {
       await page(tester);
-      expect(find.text('Deepy 小鲸鱼'), findsOneWidget);
-      expect(find.text('鲸娘'), findsOneWidget);
       expect(find.text('不显示'), findsOneWidget);
-      expect(find.textContaining('来自 DSH-TUI'), findsOneWidget);
-      expect(find.text('大小'), findsOneWidget);
-      for (final s in ['小', '标准', '大', '自定义']) {
-        expect(find.text(s), findsOneWidget);
-      }
-      expect(find.text('安静模式'), findsOneWidget);
-      expect(find.text('只做动作，不冒气泡'), findsOneWidget);
+      expect(find.text('导入'), findsOneWidget);
+      expect(find.byType(PetPreview), findsOneWidget, reason: '不显示 is the only tile before an import');
+      expect(find.text('大小'), findsNothing);
+      expect(find.text('安静模式'), findsNothing);
     });
 
-    testWidgets('choosing: the pet, its size, quiet; 不显示 folds the rest away', (tester) async {
-      final c = await page(tester);
-      await tester.tap(find.text('鲸娘'));
-      await tester.pump();
-      expect(c.read(petPrefsProvider).packId, 'whale-girl');
+    testWidgets('a brought pet: its size, quiet; 不显示 folds the rest away', (tester) async {
+      final c = await page(tester, brought: [girl]);
+      await tester.tap(find.text(girl.name));
+      await tester.pumpAndSettle();
+      expect(c.read(petPrefsProvider).packId, girl.id);
       await tester.ensureVisible(find.text('大'));
       await tester.tap(find.text('大'));
       await tester.pump();
@@ -314,11 +315,11 @@ void main() {
       await tester.pump(const Duration(milliseconds: 500));
       expect(c.read(petPrefsProvider).packId, noPetId);
       expect(find.text('安静模式'), findsNothing);
-      expect(find.byType(PetPreview), findsNWidgets(3));
+      expect(find.byType(PetPreview), findsNWidgets(2), reason: 'the brought pet and 不显示');
     });
 
     testWidgets('自定义: a slider under the sizes, saved on release, the pet at that height', (tester) async {
-      final c = await page(tester);
+      final c = await page(tester, brought: [girl], prefs: PetPrefs(packId: girl.id, loaded: true));
       expect(find.byKey(const ValueKey('pet-custom-size')), findsNothing);
       await tester.tap(find.text('自定义'));
       await tester.pump();

@@ -24,8 +24,8 @@ internal class PetSheet(val bitmap: Bitmap, val perLogical: Int)
  * A pet pack's files: `pack.json` and the sheets, from the app's bundled assets
  * (`assets/pets/<id>/`, through [assetPath]) or, for packs added later, `files/pets/<id>/`.
  *
- * Sheets decode one animation at a time, off the main thread, into a small LRU (Deepy decoded
- * whole is ~139 MB). A hi-res sheet is decoded no finer than it is drawn and within [SHEET_BYTES]:
+ * Sheets decode one animation at a time, off the main thread, into a small LRU (a pack decoded
+ * whole can be ~139 MB). A hi-res sheet is decoded no finer than it is drawn and within [SHEET_BYTES]:
  * rows are read with BitmapRegionDecoder and scaled to a whole number of pixels per logical pixel,
  * so cells and boxes stay exact.
  */

@@ -14,7 +14,7 @@ export class RuntimePaths {
     this.dshHome = this.home + '/.dsh';
     this.agentsHome = this.home + '/.agents';
     this.workspace = this.home + '/workspace';
-    this.outputs = this.workspace + '/DSH-Go';
+    this.outputs = this.workspace + '/FustAI';
     this.linuxDirectory = filesDir + '/linux-tools';
   }
 }

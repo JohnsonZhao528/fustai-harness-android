@@ -3045,12 +3045,6 @@ class L10nEn extends L10n {
   String get botsPetSettings => 'Pet settings';
 
   @override
-  String get botsPetDeepy => 'Deepy';
-
-  @override
-  String get botsPetWhaleGirl => 'Whale girl';
-
-  @override
   String get botsPetNone => 'None';
 
   @override
@@ -6367,7 +6361,7 @@ class L10nEn extends L10n {
   String get engineAccountUnsupported => 'This engine doesn’t support account sign-in';
 
   @override
-  String get engineAccountSignInDeepSeek => 'Sign in with FustAI';
+  String get engineAccountSignInDeepSeek => 'Sign in or sign up with FustAI';
 
   @override
   String get engineAccountAutoStart => 'Signing in starts the engine automatically';
@@ -9144,7 +9138,7 @@ class L10nEn extends L10n {
   String get harmonyKwAccent => 'color,colour,accent,palette';
 
   @override
-  String get harmonyKwPets => 'pet,pets,companion,whale';
+  String get harmonyKwPets => 'pet,pets,companion,home screen';
 
   @override
   String get harmonyKwVoice => 'speech recognition,dictation,microphone,mic,voice';
@@ -16836,7 +16830,7 @@ class L10nEn extends L10n {
   String get remotePassword => 'Password';
 
   @override
-  String get remoteRestoreServer => 'Restore default server dsh.r2049.cn';
+  String get remoteRestoreServer => 'Restore default server relay.fustai.com';
 
   @override
   String get remoteConsole => 'Remote console';
@@ -16863,7 +16857,7 @@ class L10nEn extends L10n {
   String get remoteWebConsole => 'Web remote console';
 
   @override
-  String get remoteWebConsoleProvider => 'dsh.r2049.cn · Third-party page';
+  String get remoteWebConsoleProvider => 'relay.fustai.com · Third-party page';
 
   @override
   String remoteActiveHost(String name) {
@@ -17605,6 +17599,24 @@ class L10nEn extends L10n {
   String get searchKwRemoteCompactHistory => 'compact slim lite history tools transfer bandwidth remote';
 
   @override
+  String get remoteRunOn => 'Run on';
+
+  @override
+  String get remoteRunPhone => 'This phone';
+
+  @override
+  String get remoteRunComputer => 'My computer';
+
+  @override
+  String get remoteRunComputerOffline => 'Offline';
+
+  @override
+  String get remoteRunComputerOfflineHint => 'Appears here once your computer signs in with the same FustAI account';
+
+  @override
+  String get searchKwRemoteRun => 'run location this phone my computer offline';
+
+  @override
   String get remotePairErrInvalidCode => 'That isn’t a FustAI Harness pairing code';
 
   @override
@@ -17822,7 +17834,7 @@ class L10nEn extends L10n {
   String get searchKwTheme => 'appearance,colors,colours,accent,icons';
 
   @override
-  String get searchKwPets => 'pet,pets,companion,whale,overlay';
+  String get searchKwPets => 'pet,pets,companion,overlay,home screen';
 
   @override
   String get searchKwPerformance => 'battery,smooth,lag,lite,full,speed';
@@ -18434,13 +18446,82 @@ class L10nEn extends L10n {
   String get shellConnectDeepSeek => 'Connect FustAI';
 
   @override
-  String get shellConnectDeepSeekMessage => 'Sign in to FustAI to start. No API key needed.';
+  String get shellConnectDeepSeekMessage =>
+      'Sign in with a phone number and SMS code; a first sign-in creates the account.';
 
   @override
   String get shellAccountSignInUnsupported => 'This engine doesn’t support account sign-in';
 
   @override
-  String get shellSignInDeepSeek => 'Sign in with FustAI';
+  String get shellSignInDeepSeek => 'Sign in or sign up with FustAI';
+
+  @override
+  String get fustaiSignInTitle => 'Sign in to FustAI';
+
+  @override
+  String get fustaiSignInMessage =>
+      'Enter your phone number and the SMS code. The first sign-in creates the account. Sign in with the same account on desktop to stay in sync.';
+
+  @override
+  String get fustaiSignInMobile => 'Phone number';
+
+  @override
+  String get fustaiSignInMobileHint => '11-digit phone number';
+
+  @override
+  String get fustaiSignInCode => 'Verification code';
+
+  @override
+  String get fustaiSignInCodeHint => '6-digit SMS code';
+
+  @override
+  String get fustaiSignInInvite => 'Invite code';
+
+  @override
+  String get fustaiSignInInviteHint => 'The invite code you received';
+
+  @override
+  String get fustaiSignInSendCode => 'Send code';
+
+  @override
+  String fustaiSignInResend(int seconds) {
+    return 'Resend in ${seconds}s';
+  }
+
+  @override
+  String get fustaiSignInSubmit => 'Sign in or sign up';
+
+  @override
+  String get fustaiSignInCodeSent => 'Code sent; check your messages.';
+
+  @override
+  String fustaiSignInDevCode(String code) {
+    return 'Test code: $code, filled in for you';
+  }
+
+  @override
+  String get fustaiSmsBadMobile => 'That phone number is not valid.';
+
+  @override
+  String get fustaiSmsBadCode => 'The code is wrong or has expired.';
+
+  @override
+  String get fustaiSmsBadInvite => 'That invite code is not valid.';
+
+  @override
+  String get fustaiSmsExpired => 'Sign-in timed out; request a new code.';
+
+  @override
+  String get fustaiSmsTooMany => 'Too many attempts; try again later.';
+
+  @override
+  String get fustaiSmsUnavailable => 'The service is unavailable; try again later.';
+
+  @override
+  String get fustaiSmsNetwork => 'Network error; check your connection and try again.';
+
+  @override
+  String get fustaiSmsUnknown => 'Sign-in failed; try again.';
 
   @override
   String get shellUseApiKey => 'Use API key';
@@ -18897,7 +18978,7 @@ class L10nEn extends L10n {
   String get shellHideActivityStrip => 'Activity strip';
 
   @override
-  String get shellHideWhaleTail => 'Whale tail';
+  String get shellHideWhaleTail => 'Waiting animation';
 
   @override
   String get shellHideTodoPill => 'To-do bar';
@@ -19728,7 +19809,7 @@ class L10nEn extends L10n {
 
   @override
   String get starPromptBody =>
-      'FustAI Harness is free and open source. If it’s made your phone a little nicer to use, please give it a Star — it means so much to this little whale!';
+      'FustAI Harness is free and open source. If it’s made your phone a little nicer to use, please give it a Star — it means so much to this little project!';
 
   @override
   String get starPromptPlea => 'Pretty please~ It really matters!!';

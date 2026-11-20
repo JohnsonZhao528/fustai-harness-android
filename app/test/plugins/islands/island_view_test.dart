@@ -191,7 +191,7 @@ void main() {
     const sheet = IslandSpec(
       host: HostRef.local,
       form: IslandForm.panel,
-      slot: 'dsh-go.chat',
+      slot: 'fustai.chat',
       sessionId: 's1',
       maskOfficial: true,
     );

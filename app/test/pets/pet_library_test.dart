@@ -11,6 +11,8 @@ import 'package:dsh_app/ui/pets/pet_picker.dart' show codexImportWarnings, codex
 import 'package:flutter/widgets.dart' show Locale;
 import 'package:flutter_test/flutter_test.dart';
 
+import 'support.dart' show fixturePetsDir;
+
 /// A real (transparent) PNG of [w] × [h]; [data] replaces its image data
 /// (filter bytes included), [interlace] sets IHDR's interlace method,
 /// [chunks] are empty chunks of those types after IHDR.
@@ -141,9 +143,9 @@ void main() {
     expect(pngIntact(png(2, 2, interlace: 1, data: List.filled(5 + 5 + 8, 0))), isFalse);
   });
 
-  test('the shipped packs pass every check an import makes', () {
+  test('the fixture packs pass every check an import makes', () {
     for (final id in ['deepy-whale', 'whale-girl']) {
-      final dir = 'assets/pets/$id';
+      final dir = '$fixturePetsDir/$id';
       final json = jsonDecode(File('$dir/pack.json').readAsStringSync()) as Map<String, Object?>;
       expect(overlayPackProblem(json), isNull, reason: id);
       final sheets = {for (final a in (json['animations']! as Map).values) (a as Map)['sheet'] as String};

@@ -589,7 +589,7 @@
   "remoteServerAddress": "服务器地址",
   "remoteEmail": "邮箱",
   "remotePassword": "密码",
-  "remoteRestoreServer": "改回默认服务器 dsh.r2049.cn",
+  "remoteRestoreServer": "改回默认服务器 relay.fustai.com",
   "remoteConsole": "远程控制台",
   "remoteHostsIntro": "在手机上接着用电脑或服务器上的 FustAI",
   "remoteSshHosts": "SSH 主机",
@@ -598,7 +598,7 @@
   "remoteSshDirect": "不经过第三方服务器",
   "remoteOtherMethods": "其他方式",
   "remoteWebConsole": "网页版远程控制台",
-  "remoteWebConsoleProvider": "dsh.r2049.cn · 第三方页面",
+  "remoteWebConsoleProvider": "relay.fustai.com · 第三方页面",
   "remoteActiveHost": "正在使用「{name}」",
   "@remoteActiveHost": {
     "placeholders": {
@@ -1068,5 +1068,11 @@
   "remoteCompactHistory": "精简历史",
   "remoteErrHistoryModeChanged": "主机已不支持精简历史，请切换到其他主机后再连回来，或重启 App，重新加载历史",
   "remoteCompactHistoryHint": "支持的 FustAI Remote 主机会精简历史工具详情，实时回复和审批不变。切换主机或重启 App 后生效；旧主机仍传输完整历史。",
-  "searchKwRemoteCompactHistory": "精简 简洁 历史 工具 传输 流量 远程 compact slim lite"
+  "searchKwRemoteCompactHistory": "精简 简洁 历史 工具 传输 流量 远程 compact slim lite",
+  "remoteRunOn": "运行位置",
+  "remoteRunPhone": "手机自己运转",
+  "remoteRunComputer": "我的电脑",
+  "remoteRunComputerOffline": "离线",
+  "remoteRunComputerOfflineHint": "在电脑上登录同一个 FustAI 账号后，这里会自动出现",
+  "searchKwRemoteRun": "运行位置 手机自己运转 我的电脑 离线 run location this phone computer offline"
 }

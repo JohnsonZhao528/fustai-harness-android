@@ -1,8 +1,7 @@
-// Picks the pet (Deepy 小鲸鱼, 鲸娘, the ones you brought, 不显示) with live
-// previews, for 宠物设置 and the pet's long-press menu. Same grid as the other
-// pickers on the 主题 page (PickerGrid: 16 in, 12 apart, label 8 under), three
-// to a row. 宠物设置 adds 导入 (a pack zip, pet_library.dart); a brought pet
-// is removed with a long press.
+// Picks the pet (the ones you brought, 不显示) with live previews, for 宠物设置
+// and the pet's long-press menu. Same grid as the other pickers on the 主题 page
+// (PickerGrid: 16 in, 12 apart, label 8 under), three to a row. 宠物设置 adds
+// 导入 (a pack zip, pet_library.dart); a brought pet is removed with a long press.
 
 import 'dart:async';
 import 'dart:convert';
@@ -28,8 +27,6 @@ import 'pet_sprite.dart';
 
 /// Names for the picker before a pack has loaded (and for 不显示).
 Map<String, String> get petNames => {
-  'deepy-whale': appL10n.botsPetDeepy,
-  'whale-girl': appL10n.botsPetWhaleGirl,
   noPetId: appL10n.botsPetNone,
 };
 
@@ -67,10 +64,10 @@ String petImportProblemText(L10n l10n, PetImportException error) => switch (erro
 ///
 /// ```
 /// ╭────────╮  ╭────────╮  ╭────────╮
-/// │  🐋    │  │  👧    │  │        │   the pet standing on a little capsule
+/// │  🐾    │  │        │  │        │   a brought pet standing on a little capsule
 /// │ ▔▔▔▔▔▔ │  │ ▔▔▔▔▔▔ │  │ ▔▔▔▔▔▔ │
 /// ╰────────╯  ╰────────╯  ╰────────╯
-///  Deepy 小鲸鱼   鲸娘       不显示
+///  我的宠物      不显示       导入
 /// ```
 class PetPicker extends ConsumerStatefulWidget {
   const PetPicker({super.key, this.padding = const EdgeInsets.all(16), this.onPicked, this.importable = false});
@@ -180,7 +177,6 @@ class _PetPickerState extends ConsumerState<PetPicker> {
     final selected = ref.watch(petPrefsProvider.select((p) => p.packId));
     final brought = ref.watch(userPetsProvider).value ?? const <PetPack>[];
     final tiles = <Widget>[
-      for (final id in builtInPets) _Option(id: id, selected: id == selected, onTap: () => _pick(id)),
       for (final pack in brought)
         _Option(
           id: pack.id,

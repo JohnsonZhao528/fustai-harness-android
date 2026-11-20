@@ -246,7 +246,7 @@
   "remoteServerAddress": "Server address",
   "remoteEmail": "Email",
   "remotePassword": "Password",
-  "remoteRestoreServer": "Restore default server dsh.r2049.cn",
+  "remoteRestoreServer": "Restore default server relay.fustai.com",
   "remoteConsole": "Remote console",
   "remoteHostsIntro": "Keep using FustAI from your computer or server on your phone",
   "remoteSshHosts": "SSH hosts",
@@ -255,7 +255,7 @@
   "remoteSshDirect": "No third-party server",
   "remoteOtherMethods": "Other methods",
   "remoteWebConsole": "Web remote console",
-  "remoteWebConsoleProvider": "dsh.r2049.cn · Third-party page",
+  "remoteWebConsoleProvider": "relay.fustai.com · Third-party page",
   "remoteActiveHost": "Using “{name}”",
   "remoteSwitchToPhone": "Use this phone",
   "remoteSignInAgain": "Sign in again",
@@ -471,5 +471,11 @@
   "remoteCompactHistory": "Compact history",
   "remoteErrHistoryModeChanged": "The Host no longer supports compact history. Switch to another host and back, or restart the app, to reload history.",
   "remoteCompactHistoryHint": "Reduces historical tool details on supporting FustAI Remote Hosts; live replies and approvals stay unchanged. Switch hosts or restart the app to apply. Older Hosts keep full history.",
-  "searchKwRemoteCompactHistory": "compact slim lite history tools transfer bandwidth remote"
+  "searchKwRemoteCompactHistory": "compact slim lite history tools transfer bandwidth remote",
+  "remoteRunOn": "Run on",
+  "remoteRunPhone": "This phone",
+  "remoteRunComputer": "My computer",
+  "remoteRunComputerOffline": "Offline",
+  "remoteRunComputerOfflineHint": "Appears here once your computer signs in with the same FustAI account",
+  "searchKwRemoteRun": "run location this phone my computer offline"
 }

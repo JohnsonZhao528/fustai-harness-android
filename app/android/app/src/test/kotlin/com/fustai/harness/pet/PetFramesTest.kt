@@ -102,21 +102,21 @@ private class PaletteAlpha(val width: Int, val height: Int, private val alpha: B
 class PetFramesTest {
     private fun packDir(id: String): File? =
         generateSequence(File("").absoluteFile) { it.parentFile }
-            .flatMap { sequenceOf(File(it, "app/assets/pets/$id"), File(it, "assets/pets/$id")) }
+            .flatMap { sequenceOf(File(it, "app/test/fixtures/pets/$id"), File(it, "test/fixtures/pets/$id")) }
             .firstOrNull { File(it, "pack.json").isFile }
 
     private fun shipped(id: String): PetPack {
         val dir = packDir(id)
-        assertNotNull("bundled pack $id", dir)
+        assertNotNull("fixture pack $id", dir)
         return PetPack.parse(File(dir, "pack.json").readText())
     }
 
-    /** Every bundled pack: each directory under assets/pets with a pack.json. */
+    /** Every fixture pack: each directory under test/fixtures/pets with a pack.json. */
     private val packs: List<String> by lazy {
         val root = packDir("deepy-whale")?.parentFile
-        assertNotNull("bundled packs", root)
+        assertNotNull("fixture packs", root)
         root!!.listFiles().orEmpty().filter { File(it, "pack.json").isFile }.map { it.name }.sorted().also {
-            assertTrue("both bundled pets at least: $it", it.containsAll(listOf("deepy-whale", "whale-girl")))
+            assertTrue("both fixture pets at least: $it", it.containsAll(listOf("deepy-whale", "whale-girl")))
         }
     }
 

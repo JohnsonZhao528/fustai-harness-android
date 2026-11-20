@@ -36,9 +36,9 @@ const companionRuntimeDigest = '20e4e35ce1de09bd9017197363a96afdb4d9fc045d574fb6
 const CompanionPackSource? companionPackSource = null;
 
 /// A pack that comes inside the app, unpacked the first time the room opens.
-/// It isn't in the repository (its model's terms aren't settled for that):
-/// builds made with the zip in place carry it, the others simply have none.
-const companionBundledPack = 'assets/companion/whale-girl.zip';
+/// It isn't in the repository: a build made with the zip in place carries it,
+/// provided the character is FustAI's own artwork.
+const companionBundledPack = 'assets/companion/bundled.zip';
 
 /// Whether this build carries the pack, without reading it.
 Future<bool> hasBundledCompanionPack([AssetBundle? bundle]) async {

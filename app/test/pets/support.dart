@@ -1,4 +1,4 @@
-// Shared setup for the pet tests: the shipped packs read straight from disk,
+// Shared setup for the pet tests: the fixture packs read straight from disk,
 // sheets decoded ahead (decoding needs real async), and a chat-bottom
 // harness: a page with a list stand-in, the run strip, the composer and the
 // pet stage over them, as on the chat page.
@@ -28,9 +28,15 @@ import 'package:flutter_test/flutter_test.dart';
 
 export '../chat/support/harness.dart' show testApp, usePhoneView, testTheme;
 
-/// A shipped pack, from `assets/pets/<id>/pack.json`.
-PetPack diskPack(String id) =>
-    PetPack.parse(jsonDecode(File('assets/pets/$id/pack.json').readAsStringSync()) as Map<String, Object?>);
+/// Packs that exist only for these tests: `test/fixtures/pets/<id>/pack.json`.
+/// They are not bundled into the app.
+const fixturePetsDir = 'test/fixtures/pets';
+
+/// A fixture pack, from `test/fixtures/pets/<id>/pack.json`.
+PetPack diskPack(String id) => PetPack.parse(
+  jsonDecode(File('$fixturePetsDir/$id/pack.json').readAsStringSync()) as Map<String, Object?>,
+  dir: '$fixturePetsDir/$id',
+);
 
 final deepy = diskPack('deepy-whale');
 final girl = diskPack('whale-girl');
@@ -140,6 +146,16 @@ class FixedPetPrefs extends PetPrefsController {
 
   @override
   Future<void> unhide() async => state = state.copyWith(clearHidden: true);
+}
+
+/// A picker whose brought pets are exactly [packs], with no disk behind it.
+class FixedUserPets extends UserPetsController {
+  FixedUserPets(this.packs);
+
+  final List<PetPack> packs;
+
+  @override
+  Future<List<PetPack>> build() async => packs;
 }
 
 /// A running-strip activity for the harness.

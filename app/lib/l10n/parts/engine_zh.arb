@@ -24,7 +24,7 @@
   "engineAccountUsageDetails": "用量明细",
   "engineAccountNoKeyNeeded": "登录后无需 API Key",
   "engineAccountUnsupported": "当前引擎不支持账号登录",
-  "engineAccountSignInDeepSeek": "用 FustAI 账号登录",
+  "engineAccountSignInDeepSeek": "登录 / 注册 FustAI 账号",
   "engineAccountAutoStart": "引擎未运行，登录时会自动启动",
   "engineAccountReplaceKey": "更换 Key",
   "engineAccountClearKeyTitle": "清除 API Key？",

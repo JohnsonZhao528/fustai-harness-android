@@ -14,7 +14,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'support.dart';
 
 Map<String, Object?> _json(String id) =>
-    jsonDecode(File('assets/pets/$id/pack.json').readAsStringSync()) as Map<String, Object?>;
+    jsonDecode(File('$fixturePetsDir/$id/pack.json').readAsStringSync()) as Map<String, Object?>;
 
 /// A [math.Random] whose draw is fixed, so a pick can be checked.
 class _Pick implements math.Random {

@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/l10n.dart';
 import '../../runtime/runtime_state.dart';
 import '../../state/account_state.dart';
+import '../../state/fustai_account.dart';
 import '../../state/onboarding_state.dart';
 import '../account/account_widgets.dart';
 import '../common/progress_halo.dart';
@@ -28,11 +30,15 @@ import 'setup_progress.dart';
 /// with 「就绪后自动打开 DeepSeek 登录」 and goes on by itself once it is
 /// done. The API key needs no engine and is saved at once.
 class ConnectPage extends ConsumerStatefulWidget {
-  const ConnectPage({super.key, required this.onDone});
+  const ConnectPage({super.key, required this.onDone, this.loginOnly = false});
 
   /// Called after a successful sign-in, a saved key, a saved custom provider,
   /// or "稍后设置".
   final VoidCallback onDone;
+
+  /// 登录页: only the FustAI sign-in is offered — no API key, no other
+  /// providers, no skipping.
+  final bool loginOnly;
 
   @override
   ConsumerState<ConnectPage> createState() => _ConnectPageState();
@@ -182,12 +188,15 @@ class _ConnectPageState extends ConsumerState<ConnectPage> {
         onDone: widget.onDone,
         onBack: () => setState(() => _keyEntry = false),
       );
-    } else if (_succeeded || state.signingIn) {
+    } else if (_succeeded || (state.signingIn && !widget.loginOnly)) {
       page = _SigningIn(key: const ValueKey('signing'), state: state, succeeded: _succeeded);
+    } else if (widget.loginOnly) {
+      page = _SmsSignIn(key: const ValueKey('sms'));
     } else {
       page = _Choose(
         key: const ValueKey('choose'),
         state: state,
+        loginOnly: widget.loginOnly,
         onSignIn: _signIn,
         onApiKey: () {
           ref.read(accountProvider.notifier).dismissFailure();
@@ -197,13 +206,13 @@ class _ConnectPageState extends ConsumerState<ConnectPage> {
         onSkip: _skip,
       );
     }
-    final depth = page is _Choose ? 0 : 1;
+    final depth = page is _Choose || page is _SmsSignIn ? 0 : 1;
     if (depth != _depth) {
       _forward = depth > _depth;
       _depth = depth;
     }
     return PopScope<void>(
-      canPop: page is _Choose,
+      canPop: page is _Choose || page is _SmsSignIn,
       onPopInvokedWithResult: (didPop, result) {
         if (didPop || _succeeded) return;
         if (_awaitingRuntime) {
@@ -223,6 +232,7 @@ class _Choose extends StatelessWidget {
   const _Choose({
     super.key,
     required this.state,
+    required this.loginOnly,
     required this.onSignIn,
     required this.onApiKey,
     required this.onOther,
@@ -230,6 +240,7 @@ class _Choose extends StatelessWidget {
   });
 
   final AccountState state;
+  final bool loginOnly;
   final VoidCallback onSignIn;
   final VoidCallback onApiKey;
   final VoidCallback onOther;
@@ -268,20 +279,352 @@ class _Choose extends StatelessWidget {
           FilledButton(onPressed: onSignIn, child: Text(l10n.shellSignInDeepSeek)),
           const SizedBox(height: 10),
         ],
-        OutlinedButton(onPressed: onApiKey, child: Text(l10n.shellUseApiKey)),
-        const SizedBox(height: 6),
-        // Two equal halves: the quieter ways on.
-        Row(
-          children: [
-            for (final (label, onTap) in [(l10n.shellOtherProviders, onOther), (l10n.shellSetUpLater, onSkip)])
-              Expanded(
-                child: TextButton(
-                  onPressed: onTap,
-                  style: TextButton.styleFrom(foregroundColor: scheme.onSurfaceVariant),
-                  child: Text(label),
+        if (!loginOnly) ...[
+          OutlinedButton(onPressed: onApiKey, child: Text(l10n.shellUseApiKey)),
+          const SizedBox(height: 6),
+          // Two equal halves: the quieter ways on.
+          Row(
+            children: [
+              for (final (label, onTap) in [(l10n.shellOtherProviders, onOther), (l10n.shellSetUpLater, onSkip)])
+                Expanded(
+                  child: TextButton(
+                    onPressed: onTap,
+                    style: TextButton.styleFrom(foregroundColor: scheme.onSurfaceVariant),
+                    child: Text(label),
+                  ),
                 ),
-              ),
-          ],
+            ],
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+/// 首页登录表单：手机号 + 短信验证码，全程在 App 内完成，不打开浏览器。
+class _SmsSignIn extends ConsumerStatefulWidget {
+  const _SmsSignIn({super.key});
+
+  @override
+  ConsumerState<_SmsSignIn> createState() => _SmsSignInState();
+}
+
+class _SmsSignInState extends ConsumerState<_SmsSignIn> {
+  /// 重新获取验证码的冷却，与账号中心登录页一致。
+  static const _resendCooldown = 60;
+
+  static final _mobilePattern = RegExp(r'^1\d{10}$');
+
+  final _mobile = TextEditingController();
+  final _code = TextEditingController();
+  final _invite = TextEditingController();
+  final _codeFocus = FocusNode();
+
+  FustaiAccountApi? _api;
+  bool _ready = false;
+  bool _starting = false;
+  bool _sending = false;
+  bool _submitting = false;
+  bool _codeSent = false;
+  int _cooldown = 0;
+  Timer? _ticker;
+  FustaiSmsFailure? _failure;
+
+  /// 测试环境由账号中心随发送响应返回的验证码：自动填入并展示。
+  String? _devCode;
+
+  @override
+  void initState() {
+    super.initState();
+    _api = switch (ref.read(accountApiProvider)) {
+      final FustaiAccountApi api => api,
+      _ => null,
+    };
+    for (final controller in [_mobile, _code, _invite]) {
+      controller.addListener(_refresh);
+    }
+    unawaited(_begin());
+  }
+
+  @override
+  void dispose() {
+    _ticker?.cancel();
+    for (final controller in [_mobile, _code, _invite]) {
+      controller.dispose();
+    }
+    _codeFocus.dispose();
+    // 页面走了就不再等这份授权：关掉回环端口与超时计时器。
+    if (_api case final api?) unawaited(api.abortSmsSignIn());
+    super.dispose();
+  }
+
+  void _refresh() => setState(() {});
+
+  /// 申请一份授权标识；失败把可展示的原因留在 [_failure]。
+  Future<bool> _begin() async {
+    final api = _api;
+    if (api == null) {
+      setState(() => _failure = FustaiSmsFailure.unknown);
+      return false;
+    }
+    if (_starting) return _ready;
+    _starting = true;
+    try {
+      await api.beginSmsSignIn();
+      if (!mounted) return false;
+      setState(() {
+        _ready = true;
+        _failure = null;
+      });
+      return true;
+    } on FustaiSmsException catch (error) {
+      if (!mounted) return false;
+      setState(() => _failure = error.failure);
+      return false;
+    } finally {
+      _starting = false;
+    }
+  }
+
+  Future<void> _sendCode() async {
+    final mobile = _mobile.text.trim();
+    if (!_mobilePattern.hasMatch(mobile)) {
+      setState(() => _failure = FustaiSmsFailure.badMobile);
+      return;
+    }
+    final api = _api;
+    if (api == null || _sending || _cooldown > 0) return;
+    setState(() {
+      _sending = true;
+      _failure = null;
+    });
+    try {
+      if (!_ready && !await _begin()) {
+        if (mounted) setState(() => _sending = false);
+        return;
+      }
+      final devCode = await api.sendSmsCode(mobile);
+      if (!mounted) return;
+      setState(() {
+        _sending = false;
+        _codeSent = true;
+        _devCode = devCode != null && devCode.isNotEmpty ? devCode : null;
+        _cooldown = _resendCooldown;
+      });
+      // 测试环境不发短信：把返回的验证码直接填好，人只需点登录。
+      if (_devCode case final code?) _code.text = code;
+    } on FustaiSmsException catch (error) {
+      if (!mounted) return;
+      setState(() {
+        _sending = false;
+        _failure = error.failure;
+      });
+      return;
+    }
+    if (!mounted) return;
+    _codeFocus.requestFocus();
+    _ticker?.cancel();
+    _ticker = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!mounted) {
+        timer.cancel();
+        return;
+      }
+      setState(() => _cooldown -= 1);
+      if (_cooldown <= 0) timer.cancel();
+    });
+  }
+
+  Future<void> _submit() async {
+    final mobile = _mobile.text.trim();
+    final code = _code.text.trim();
+    if (!_mobilePattern.hasMatch(mobile)) {
+      setState(() => _failure = FustaiSmsFailure.badMobile);
+      return;
+    }
+    if (code.isEmpty) {
+      setState(() => _failure = FustaiSmsFailure.badCode);
+      return;
+    }
+    final api = _api;
+    if (api == null || _submitting) return;
+    FocusScope.of(context).unfocus();
+    setState(() {
+      _submitting = true;
+      _failure = null;
+    });
+    try {
+      if (!_ready && !await _begin()) {
+        if (mounted) setState(() => _submitting = false);
+        return;
+      }
+      await api.signInWithSms(mobile: mobile, code: code, invite: _invite.text.trim());
+      // 成功：登录态由 accountProvider 广播，本页由 ConnectPage 的监听接走。
+    } on FustaiSmsException catch (error) {
+      if (!mounted) return;
+      setState(() {
+        _submitting = false;
+        _failure = error.failure;
+      });
+      // 授权过期：重新申请一份，验证码可继续用同一手机号重发。
+      if (error.failure == FustaiSmsFailure.expired) await _begin();
+    }
+  }
+
+  /// 可展示的失败原因。
+  String? _failureText(L10n l10n) => switch (_failure) {
+    FustaiSmsFailure.badMobile => l10n.fustaiSmsBadMobile,
+    FustaiSmsFailure.badCode => l10n.fustaiSmsBadCode,
+    FustaiSmsFailure.badInvite => l10n.fustaiSmsBadInvite,
+    FustaiSmsFailure.expired => l10n.fustaiSmsExpired,
+    FustaiSmsFailure.tooMany => l10n.fustaiSmsTooMany,
+    FustaiSmsFailure.unavailable => l10n.fustaiSmsUnavailable,
+    FustaiSmsFailure.network => l10n.fustaiSmsNetwork,
+    FustaiSmsFailure.unknown => l10n.fustaiSmsUnknown,
+    null => null,
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    final colors = DshColors.of(context);
+    final failure = _failureText(l10n);
+    final devCode = _devCode;
+    final canSend = !_sending && _cooldown == 0 && _mobile.text.trim().isNotEmpty;
+    final canSubmit = !_submitting && _mobile.text.trim().isNotEmpty && _code.text.trim().isNotEmpty;
+
+    return OnboardingScaffold(
+      children: [
+        const Spacer(),
+        OnboardingHeader(icon: AppIcons.account, title: l10n.fustaiSignInTitle, message: l10n.fustaiSignInMessage),
+        const SizedBox(height: 28),
+        _Field(
+          label: l10n.fustaiSignInMobile,
+          controller: _mobile,
+          hint: l10n.fustaiSignInMobileHint,
+          keyboardType: TextInputType.phone,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          textInputAction: TextInputAction.next,
+          autofillHints: const [AutofillHints.telephoneNumber],
+          onSubmitted: (_) => _codeFocus.requestFocus(),
+        ),
+        const SizedBox(height: 14),
+        _Field(
+          label: l10n.fustaiSignInCode,
+          controller: _code,
+          hint: l10n.fustaiSignInCodeHint,
+          focusNode: _codeFocus,
+          keyboardType: TextInputType.number,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          textInputAction: TextInputAction.done,
+          autofillHints: const [AutofillHints.oneTimeCode],
+          onSubmitted: (_) => _submit(),
+          suffix: TextButton(
+            onPressed: canSend ? _sendCode : null,
+            child: Text(
+              _cooldown > 0 ? l10n.fustaiSignInResend(_cooldown) : l10n.fustaiSignInSendCode,
+              style: theme.textTheme.labelLarge?.copyWith(color: canSend ? scheme.primary : colors.textTertiary),
+            ),
+          ),
+        ),
+        const SizedBox(height: 14),
+        _Field(
+          label: l10n.fustaiSignInInvite,
+          controller: _invite,
+          hint: l10n.fustaiSignInInviteHint,
+          textInputAction: TextInputAction.go,
+          onSubmitted: (_) => _submit(),
+        ),
+        const SizedBox(height: 12),
+        AnimatedSwitcher(
+          duration: AppMotion.of(context, AppMotion.quick),
+          child: failure != null
+              ? Text(
+                  key: ValueKey(failure),
+                  failure,
+                  style: theme.textTheme.bodySmall?.copyWith(color: scheme.error),
+                )
+              : devCode != null
+              ? Text(
+                  key: ValueKey('dev-$devCode'),
+                  l10n.fustaiSignInDevCode(devCode),
+                  style: theme.textTheme.bodySmall?.copyWith(color: colors.textTertiary),
+                )
+              : _codeSent
+              ? Text(
+                  key: const ValueKey('sent'),
+                  l10n.fustaiSignInCodeSent,
+                  style: theme.textTheme.bodySmall?.copyWith(color: colors.textTertiary),
+                )
+              : const SizedBox(key: ValueKey('none'), height: 16),
+        ),
+        const Spacer(flex: 2),
+        const SizedBox(height: 24),
+        FilledButton(
+          onPressed: canSubmit ? _submit : null,
+          child: _submitting
+              ? SizedBox.square(
+                  dimension: 20,
+                  child: CircularProgressIndicator(strokeWidth: 2.2, color: scheme.onPrimary),
+                )
+              : Text(l10n.fustaiSignInSubmit),
+        ),
+      ],
+    );
+  }
+}
+
+/// 登录表单里的一格：小标签在上，输入框在下，可选后缀按钮。
+class _Field extends StatelessWidget {
+  const _Field({
+    required this.label,
+    required this.controller,
+    required this.hint,
+    this.focusNode,
+    this.keyboardType,
+    this.inputFormatters,
+    this.textInputAction,
+    this.autofillHints,
+    this.onSubmitted,
+    this.suffix,
+  });
+
+  final String label;
+  final TextEditingController controller;
+  final String hint;
+  final FocusNode? focusNode;
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextInputAction? textInputAction;
+  final List<String>? autofillHints;
+  final ValueChanged<String>? onSubmitted;
+  final Widget? suffix;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = DshColors.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(label, style: theme.textTheme.bodySmall?.copyWith(color: colors.textTertiary)),
+        const SizedBox(height: 6),
+        TextField(
+          controller: controller,
+          focusNode: focusNode,
+          keyboardType: keyboardType,
+          inputFormatters: inputFormatters,
+          textInputAction: textInputAction,
+          autofillHints: autofillHints,
+          onSubmitted: onSubmitted,
+          style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onSurface),
+          decoration: InputDecoration(
+            hintText: hint,
+            hintStyle: theme.textTheme.bodyLarge?.copyWith(color: colors.textTertiary),
+            contentPadding: const EdgeInsets.fromLTRB(16, 15, 8, 15),
+            suffixIcon: suffix,
+          ),
         ),
       ],
     );

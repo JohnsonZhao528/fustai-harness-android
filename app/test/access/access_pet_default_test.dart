@@ -1,7 +1,7 @@
-// First run's 「桌宠与悬浮窗」 means "show me the pet": on a phone whose default
-// is no pet (a light device) and with no pet chosen yet, finishing the step
-// picks the default one, so 「App 外显示」 has something to show (0.9.8 smoke
-// 03j / 03k). A choice already made, 「不显示」 included, stays.
+// The first-run 「桌宠与悬浮窗」 step means "let the pet show": it turns the
+// floating window on, and leaves the pack alone. No pet ships with the app, so
+// nothing is chosen until a pack is brought in; a choice already made,
+// 「不显示」 included, stays.
 
 import 'package:dsh_app/performance/performance_state.dart';
 import 'package:dsh_app/pets/overlay_channel.dart';
@@ -52,33 +52,34 @@ void main() {
 
   Future<String?> storedPack() async => (await SharedPreferences.getInstance()).getString(PetPrefsController.keys.pack);
 
-  test('picked, granted, no pet chosen on a light phone: the default pet, and the overlay on', () async {
+  test('picked, granted, no pet brought: the floating window goes on, the pack stays 「不显示」', () async {
     final c = await container();
-    expect(c.read(petPrefsProvider).packId, noPetId, reason: 'a light phone starts without a pet');
+    expect(c.read(petPrefsProvider).packId, noPetId, reason: 'no pet ships with the app');
     await c.read(accessSetupProvider.notifier).choose({AccessFeature.pet});
     await c.read(accessSetupProvider.notifier).apply(readingsWith(offPhone, overlay: true));
-    expect(c.read(petPrefsProvider).packId, defaultPetId);
-    expect(c.read(petPrefsProvider).packExplicit, isTrue);
-    expect(await storedPack(), defaultPetId);
+    expect(c.read(petPrefsProvider).packId, noPetId);
+    expect(c.read(petPrefsProvider).packExplicit, isFalse);
+    expect(await storedPack(), isNull);
     expect(pet.calls.where((m) => m.method == 'setEnabled').single.arguments, {'enabled': true});
   });
 
-  test('picked but the floating window still off: the pet shows in the app at least', () async {
+  test('picked but the floating window still off: nothing else changes', () async {
     final c = await container();
     await c.read(accessSetupProvider.notifier).choose({AccessFeature.pet});
     await c.read(accessSetupProvider.notifier).apply(offPhone);
-    expect(c.read(petPrefsProvider).packId, defaultPetId);
+    expect(c.read(petPrefsProvider).packId, noPetId);
     expect(pet.methods, isNot(contains('setEnabled')));
   });
 
-  test('the whole step through 继续 picks it too', () async {
+  test('the whole step through 继续 leaves the pack alone', () async {
     final c = await container();
     await c.read(accessSetupProvider.notifier).choose({AccessFeature.pet});
     await c.read(accessSetupProvider.notifier).finish();
-    expect(c.read(petPrefsProvider).packId, defaultPetId);
+    expect(c.read(petPrefsProvider).packId, noPetId);
+    expect(await storedPack(), isNull);
   });
 
-  for (final chosen in [noPetId, 'whale-girl']) {
+  for (final chosen in [noPetId, 'user-brought']) {
     test('a pet choice already made stays: $chosen', () async {
       final c = await container(prefs: {PetPrefsController.keys.pack: chosen});
       await c.read(accessSetupProvider.notifier).choose({AccessFeature.pet});
@@ -88,7 +89,7 @@ void main() {
     });
   }
 
-  test('not picked: the light phone keeps its default (no pet), nothing stored', () async {
+  test('not picked: nothing changes, nothing stored', () async {
     final c = await container();
     await c.read(accessSetupProvider.notifier).choose({AccessFeature.voice});
     await c.read(accessSetupProvider.notifier).apply(readingsWith(offPhone, overlay: true));
@@ -97,11 +98,11 @@ void main() {
     expect(await storedPack(), isNull);
   });
 
-  test('a full phone shows the default pet anyway; picking it makes the choice its own', () async {
+  test('a full phone does not invent a pet either', () async {
     final c = await container(tier: DeviceTier.high);
     await c.read(accessSetupProvider.notifier).choose({AccessFeature.pet});
     await c.read(accessSetupProvider.notifier).apply(readingsWith(offPhone, overlay: true));
-    expect(c.read(petPrefsProvider).packId, defaultPetId);
-    expect(await storedPack(), defaultPetId);
+    expect(c.read(petPrefsProvider).packId, noPetId);
+    expect(await storedPack(), isNull);
   });
 }

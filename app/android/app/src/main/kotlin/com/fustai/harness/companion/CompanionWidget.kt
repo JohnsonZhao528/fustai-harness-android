@@ -17,12 +17,12 @@ import com.fustai.harness.i18n.AppStrings
 import java.util.Calendar
 
 /**
- * 伙伴小屋 on the home screen: the little pixel whale, her name, what she's doing, the last thing
- * she said, and how well she knows you (lib/companion/companion_widget.dart).
+ * 伙伴小屋 on the home screen: the FustAI mark, the room's name, what it's doing, the last thing
+ * it said, and how well it knows you (lib/companion/companion_widget.dart).
  *
  * The app sends what the room looks like through MethodChannel `dsh/companion_widget` (`update`);
  * it is kept in this module's own preferences and drawn on every widget. Between visits the
- * provider only moves her between awake and asleep with the hour and lets an activity run out.
+ * provider only moves it between awake and asleep with the hour and lets an activity run out.
  * Tapping opens the room through the app's own page link, `fustai://open/companion`.
  */
 class CompanionWidgetProvider : AppWidgetProvider() {
@@ -70,11 +70,6 @@ class CompanionWidgetProvider : AppWidgetProvider() {
             val line = prefs.getString("line", null)?.takeIf { now - prefs.getLong("saidAt", 0) < LINE_MS } ?: ""
             val bond = prefs.getLong("bond", -1).coerceIn(-1, 3)
             val pearls = if (bond >= 0) "●".repeat((bond + 1).toInt()) + "○".repeat((3 - bond).toInt()) else ""
-            val image = when {
-                night && !busy -> R.drawable.companion_widget_sleeping
-                bond >= 2 -> R.drawable.companion_widget_happy
-                else -> R.drawable.companion_widget_idle
-            }
             val open = PendingIntent.getActivity(
                 context,
                 0,
@@ -93,7 +88,6 @@ class CompanionWidgetProvider : AppWidgetProvider() {
                 views.setTextViewText(R.id.companion_widget_status, status)
                 views.setTextViewText(R.id.companion_widget_line, line)
                 views.setViewVisibility(R.id.companion_widget_line, if (line.isEmpty()) View.GONE else View.VISIBLE)
-                views.setImageViewResource(R.id.companion_widget_whale, image)
                 views.setOnClickPendingIntent(R.id.companion_widget_root, open)
                 manager.updateAppWidget(id, views)
             }

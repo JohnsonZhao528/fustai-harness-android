@@ -19,6 +19,7 @@ import 'permission_default_repair.dart';
 import 'provider_backend.dart';
 import 'provider_keys.dart';
 import 'settings_state.dart';
+import 'shared_model_endpoint.dart';
 
 /// A connected DSH host: the on-device engine, an SSH host or a relay device.
 class HostConnection {
@@ -115,17 +116,19 @@ class LocalConnectionController extends AsyncNotifier<HostConnection?> {
       ),
     );
 
-    // Keep DSH's own credential store in sync with the key saved in the app.
-    r.listen(settingsProvider.select((s) => s.apiKey), (prev, next) {
+    // Keep DSH's own credential store in sync with the account's key and the
+    // endpoint it belongs to (the same pair the desktop app and the account
+    // centre keep).
+    r.listen(settingsProvider.select((s) => (s.apiKey, s.apiKeyBaseUrl)), (prev, next) {
       if (next == prev) return;
-      if (next.isNotEmpty) {
-        unawaited(_pushKey(client, next));
-      } else if (prev != null && prev.isNotEmpty) {
-        unawaited(client.clearProviderKey().catchError((_) {}));
+      if (next.$1.isNotEmpty) {
+        unawaited(_pushKey(client, next.$1, next.$2));
+      } else if (prev != null && prev.$1.isNotEmpty) {
+        unawaited(_clearKey(client, prev.$2));
       }
     });
-    final apiKey = r.read(settingsProvider).apiKey;
-    if (apiKey.isNotEmpty) await _pushKey(client, apiKey);
+    final saved = r.read(settingsProvider);
+    if (saved.apiKey.isNotEmpty) await _pushKey(client, saved.apiKey, saved.apiKeyBaseUrl);
     if (!r.mounted) return null;
     if (readyFailure case final failure?) Error.throwWithStackTrace(failure.$1, failure.$2);
     final connection = HostConnection(client: client, isLocal: true);
@@ -148,11 +151,26 @@ class LocalConnectionController extends AsyncNotifier<HostConnection?> {
     return connection;
   }
 
-  Future<void> _pushKey(DshClient client, String key) async {
+  Future<void> _pushKey(DshClient client, String key, String baseUrl) async {
+    if (isDeepSeekOfficialEndpoint(baseUrl) || normalizeSharedBaseUrl(baseUrl) == null) {
+      try {
+        await client.setProviderKey(key);
+      } catch (_) {
+        // Rejected when the launch environment already provides the key; harmless.
+      }
+      return;
+    }
+    // Installing an account endpoint creates or reuses a provider route and
+    // points the default model at it, which takes several round trips; the
+    // connection must not wait, and the next sync retries on failure.
+    unawaited(installSharedModelKey(client, key: key, baseUrl: baseUrl).catchError((_) {}));
+  }
+
+  Future<void> _clearKey(DshClient client, String baseUrl) async {
     try {
-      await client.setProviderKey(key);
+      await removeSharedModelKey(client, baseUrl: baseUrl);
     } catch (_) {
-      // Rejected when the launch environment already provides the key; harmless.
+      // Engine offline: the key is gone locally and will not be pushed again.
     }
   }
 }

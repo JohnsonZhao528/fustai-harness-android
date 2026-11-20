@@ -71,7 +71,7 @@ data class PetTier(val min: Int, val anim: String)
 /** One idle action and how often it comes up (`idlePool`). */
 data class PetIdleItem(val anim: PetAnimation, val ms: Long, val weight: Int)
 
-/** A state's occasional replacement animation (`bonus`, e.g. whale-girl's attention extras). */
+/** A state's occasional replacement animation (`bonus`, e.g. a pack's attention extras). */
 data class PetBonus(val anims: List<PetAnimation>, val chance: Float)
 
 /**
@@ -83,7 +83,7 @@ class PetPack(
     val id: String,
     val name: String,
     val pixelArt: Boolean,
-    /** Sheet pixels per logical pixel: 1 for whale-girl, 5 for Deepy. */
+    /** Sheet pixels per logical pixel: 1 for a 1× pack, 5 for a 5× one. */
     val scale: Int,
     val canvasW: Int,
     val canvasH: Int,
@@ -164,7 +164,7 @@ class PetPack(
 
     /**
      * The out-of-app window at rest, on the canvas: `hitBoxes.wide` with the idle picture's cell (the
-     * hit box, measured on the body, leaves out the idle art's bottom row: 鲸娘's outline, Deepy's
+     * hit box, measured on the body, leaves out the idle art's bottom row: the outline and the
      * shadow), else every state animation's box (roam aside). Held, the window adds the drag pose;
      * showing an animation that reaches past it, that animation's cell ([PetFrames]).
      */

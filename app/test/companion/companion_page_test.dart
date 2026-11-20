@@ -351,7 +351,7 @@ void main() {
       await tester.pumpAndSettle();
       Finder field(String? hint) => find.byWidgetPredicate((w) => w is TextField && w.decoration?.hintText == hint);
       // The persona starts as the default, to edit from.
-      expect(find.textContaining('你是鲸鱼娘，一只住在这台手机小屋里'), findsOneWidget);
+      expect(find.textContaining('一直住在里面陪着对方'), findsOneWidget);
       await tester.enterText(field('鲸鱼娘'), '小蓝');
       await tester.enterText(field('比如 小周'), '阿周');
       await tester.enterText(
@@ -380,7 +380,7 @@ void main() {
       // The marks her stage reads stay, whatever the persona says; the rest is theirs.
       expect(system, contains('[表情:开心]'));
       expect(system, contains(companionPersonaRules));
-      expect(system, isNot(contains('你是鲸鱼娘')));
+      expect(system, isNot(contains('你是这台手机小屋里的伙伴')));
 
       await tester.pumpWidget(const SizedBox());
       await tester.pump(const Duration(seconds: 20));

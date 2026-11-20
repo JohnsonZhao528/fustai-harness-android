@@ -57,7 +57,7 @@ abstract final class ChatPluginsMetrics {
 }
 
 /// The chat page's seven slots in page order (the header's, then the
-/// composer's): how the island stacks them (`recipes.json` `dsh-go.chat`)
+/// composer's): how the island stacks them (`recipes.json` `fustai.chat`)
 /// and how the sources line names them.
 const chatSheetSlots = [
   Slots.headerActions,

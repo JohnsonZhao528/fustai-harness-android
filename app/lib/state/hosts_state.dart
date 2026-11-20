@@ -9,8 +9,10 @@ import 'package:url_launcher/url_launcher.dart';
 import '../l10n/l10n.dart';
 import '../remote/link_status.dart';
 import '../remote/relay/dsh_remote_backend.dart';
+import 'account_state.dart';
 import 'android_features.dart';
 import 'app_info.dart';
+import 'fustai_account.dart';
 import '../remote/relay/relay_backend.dart';
 import '../remote/relay/webrtc_peer.dart';
 import '../remote/secret_store.dart';
@@ -380,7 +382,7 @@ final activeHostProvider = NotifierProvider<ActiveHostController, HostRef>(Activ
 
 // ── DSH Remote (relay) account ───────────────────────────────────────────────
 
-/// The DSH Remote server: null for the hosted dsh.r2049.cn, else a
+/// The relay server: null for FustAI's own relay.fustai.com, else a
 /// self-hosted origin with its own sign-in methods.
 class RelayServerController extends Notifier<String?> {
   static const prefsKey = 'remote_relay_server';
@@ -411,7 +413,7 @@ class RelayServerController extends Notifier<String?> {
     } catch (_) {}
   }
 
-  /// Back to dsh.r2049.cn (each server keeps its own sign-in).
+  /// Back to relay.fustai.com (each server keeps its own sign-in).
   Future<void> useDefault() => ref.read(_relayServerActionsProvider).useDefault();
 
   /// Switches to [server] after the person selects it or agrees to a pairing code;
@@ -473,7 +475,7 @@ class _RelayServerActions {
   }
 }
 
-const defaultRelayServer = 'https://dsh.r2049.cn';
+const defaultRelayServer = fustaiRelayOrigin;
 
 final relayServerProvider = NotifierProvider<RelayServerController, String?>(RelayServerController.new);
 
@@ -483,7 +485,7 @@ final relayBackendProvider = Provider<RelayBackend>((ref) {
   final history = ref.read(remoteCompactHistoryProvider.notifier);
   final backend = DshRemoteRelayBackend(
     secrets: ref.watch(secretStoreProvider),
-    serverUrl: ref.watch(relayServerProvider),
+    serverUrl: ref.watch(relayServerProvider) ?? defaultRelayServer,
     clientVersion: AppInfo.version.split('+').first,
     // flutter_webrtc has no HarmonyOS implementation: straight to the relay,
     // not two handshakes that fail on the way there.
@@ -503,8 +505,43 @@ final relayBackendProvider = Provider<RelayBackend>((ref) {
     SharedPreferences.getInstance().then((prefs) => prefs.remove('remote_direct_p2p')).catchError((_) => false),
   );
   ref.onDispose(() => unawaited(backend.close()));
+  // One FustAI account on desktop and phone: the relay signs in with the
+  // account's grant, so both ends share one Host list with no code or password.
+  ref.listen<AccountState>(
+    accountProvider,
+    (previous, next) {
+      if (!next.signedIn || previous?.signedIn == true) return;
+      unawaited(_signInRelayWithAccount(ref, backend));
+    },
+    fireImmediately: true,
+  );
   return backend;
 });
+
+/// Signs the relay in with the FustAI account the person already signed in
+/// with. A relay that is offline or refuses the grant stays signed out; the
+/// account screens then show 离线 instead of blocking the FustAI sign-in.
+Future<void> _signInRelayWithAccount(Ref ref, RelayBackend backend) async {
+  final api = ref.read(accountApiProvider);
+  if (api is! FustaiAccountApi || backend is! RelayFustaiBackend) {
+    return;
+  }
+  // `RelayBackend` and `RelayFustaiBackend` are unrelated interfaces: Dart
+  // does not promote across them, so the checked value is cast once here.
+  final relay = backend as RelayFustaiBackend;
+  final token = await api.accessToken();
+  if (token == null) return;
+  try {
+    if (await backend.currentUser() != null) {
+      return;
+    }
+    await relay.loginWithFustaiToken(token);
+    ref.invalidate(relayAccountProvider);
+  } on Object {
+    // Relay unreachable or grant rejected: stay signed out, the account
+    // screens show 离线 rather than blocking the FustAI sign-in.
+  }
+}
 
 /// Opens the login page: a Custom Tab on Android (Google sign-in refuses
 /// WebViews), the browser elsewhere.
@@ -610,7 +647,8 @@ class RelayAccountController extends AsyncNotifier<RelayAccountState> {
     }
     if (user == null) return base.copyWith(providers: await _loginProviders(backend));
     try {
-      return base.copyWith(user: () => user, hosts: await backend.listHosts());
+      final hosts = await backend.listHosts();
+      return base.copyWith(user: () => user, hosts: hosts);
     } catch (_) {
       return base.copyWith(user: () => user, hostsFailed: true);
     }

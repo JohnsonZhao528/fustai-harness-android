@@ -1,5 +1,5 @@
-// 伙伴小屋 on the home screen, as Android's companion_widget.xml draws it: the pixel whale,
-// her name and how well she knows you, what she is doing, the last thing she said.
+// 伙伴小屋 on the home screen, as Android's companion_widget.xml draws it: the FustAI mark,
+// its name and how well it knows you, what it is doing, the last thing it said.
 // CompanionFormAbility binds widgetView's fields; tapping opens the room.
 
 const storage: LocalStorage = new LocalStorage();
@@ -17,10 +17,8 @@ struct CompanionCard {
   @LocalStorageProp('pose') pose: string = 'idle';
   @LocalStorageProp('openUri') openUri: string = 'dshgo://open/companion';
 
-  private whale(): Resource {
-    if (this.pose === 'sleeping') return $r('app.media.companion_widget_sleeping');
-    if (this.pose === 'happy') return $r('app.media.companion_widget_happy');
-    return $r('app.media.companion_widget_idle');
+  private mark(): Resource {
+    return $r('app.media.icon');
   }
 
   private statusText(): ResourceStr {
@@ -31,7 +29,7 @@ struct CompanionCard {
 
   build() {
     Row() {
-      Image(this.whale())
+      Image(this.mark())
         .width(64)
         .height(64)
         .objectFit(ImageFit.Contain)

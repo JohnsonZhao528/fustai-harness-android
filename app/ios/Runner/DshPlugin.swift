@@ -411,7 +411,7 @@ private struct LocalEngineFiles {
   /// carry engine-visible absolute paths and epoch milliseconds, as Dart expects.
   func outputs(depth: Int) -> [[String: Any]] {
     guard let root = canonical(guestRoot.path) else { return [] }
-    let expected = root + "/root/workspace/DSH-Go"
+    let expected = root + "/root/workspace/FustAI"
     guard canonical(expected) == expected else { return [] }
     let manager = FileManager.default
     let maxDepth = min(max(depth, 1), 8)
