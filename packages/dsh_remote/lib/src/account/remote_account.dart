@@ -597,6 +597,13 @@ class RemoteAccount {
     return _registerWithAccountToken(login.token, login.account, provider: 'password');
   });
 
+  /// FustAI account sign-in. The relay resolves the access token to the same
+  /// account on desktop and mobile, so both ends share one device list.
+  Future<RemoteUser> loginWithFustaiToken(String token) => _guard(() async {
+    final login = await api.loginWithFustaiToken(token);
+    return _registerWithAccountToken(login.token, login.account, provider: 'fustai');
+  });
+
   Future<RemoteUser> _registerWithAccountToken(
     String accountToken,
     String account, {

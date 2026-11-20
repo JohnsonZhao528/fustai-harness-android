@@ -416,6 +416,19 @@ class RemoteServerApi {
     final body = asMap(
       await _request('POST', '/api/v1/auth/login', body: {'email': email.trim(), 'password': password}),
     );
+    return _accountLogin(body);
+  }
+
+  /// FustAI account sign-in: the relay verifies the access token with the
+  /// account center and returns a relay session token for the same account.
+  Future<AccountLogin> loginWithFustaiToken(String token) async {
+    final body = asMap(
+      await _request('POST', '/api/v1/auth/fustai', body: {'token': token}),
+    );
+    return _accountLogin(body);
+  }
+
+  AccountLogin _accountLogin(Map<String, dynamic>? body) {
     final token = asString(body?['token']);
     final account = asString(body?['account']);
     if (token == null || token.length < 16 || account == null || account.isEmpty) {

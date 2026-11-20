@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Puts the whale-girl companion pack into a HarmonyOS build's Flutter assets.
+"""Puts the FustAI companion pack into a HarmonyOS build's Flutter assets.
 
 Android release builds carry the pack because the release machine drops
-app/assets/companion/whale-girl.zip in before `flutter build`
+app/assets/companion/bundled.zip in before `flutter build`
 (docs/design/companion.md). A HarmonyOS HAP takes its flutter_assets from the
 Actions AOT artifact, built without the zip (it stays out of the repository),
 so this adds it afterwards: the pack with the repository's character.json in
@@ -22,7 +22,7 @@ import sys
 import zipfile
 from pathlib import Path
 
-ASSET = 'assets/companion/whale-girl.zip'
+ASSET = 'assets/companion/bundled.zip'
 CHARACTER = 'character/character.json'
 REPO = Path(__file__).resolve().parents[2]
 

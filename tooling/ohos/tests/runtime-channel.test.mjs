@@ -807,11 +807,11 @@ test('P2 v6: 原生参数、真实沙箱目录和交付指令使用同一个gues
   assert.equal(options.runtimeRoot, c.dir + '/dsh-runtime/tree');
   assert.equal(options.linuxDirectory, c.dir + '/linux-tools');
   assert((await fs.stat(options.linuxDirectory)).isDirectory());
-  for (const relative of ['root/.dsh', 'root/.agents', 'root/workspace/DSH-Go']) {
+  for (const relative of ['root/.dsh', 'root/.agents', 'root/workspace/FustAI']) {
     assert((await fs.stat(root + '/' + relative)).isDirectory());
   }
   const instructions = await fs.readFile(root + '/root/.dsh/AGENTS.md', 'utf8');
-  assert(instructions.includes(root + '/root/workspace/DSH-Go'));
+  assert(instructions.includes(root + '/root/workspace/FustAI'));
   const diagnostic = await c.controller.publishDiagnostics('# 实际报告\n');
   assert.equal(diagnostic.get('path'), root + '/root/.dsh/dsh-app/diagnostics.md');
   assert.equal(await fs.readFile(diagnostic.get('path'), 'utf8'), '# 实际报告\n');

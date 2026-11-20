@@ -234,8 +234,8 @@ test('detach during copying cancels, closes descriptors and removes the uncommit
 
 test('listOutputs depth, hidden files, symlink exclusion and seconds to milliseconds match Dart', async t => {
   const f = await fixture(t);
-  const path = await f.file('DSH-Go/top.txt', '1234');
-  await f.file('DSH-Go/.private.txt'); await f.file('DSH-Go/one/two/three.txt');
+  const path = await f.file('FustAI/top.txt', '1234');
+  await f.file('FustAI/.private.txt'); await f.file('FustAI/one/two/three.txt');
   await fsp.symlink(path, join(f.paths.outputs, 'link.txt'));
   await f.file('package.json', '{"name":"project"}');
   await f.file('node_modules/package/index.js', 'project dependency');

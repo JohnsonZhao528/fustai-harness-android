@@ -9,7 +9,7 @@ Pick a pet to keep you company in chats. When a turn finishes, fails, or waits f
 
 Tap **Pets** in the Appearance group of Settings, or touch and hold the pet in a chat and choose **Pet settings**. Choose a pet first; the other settings appear below it.
 
-- Choose **Deepy**, **Whale girl** or **None**.
+- No pet ships with the app: tap **Import** to pick your own pet pack, or install one from the **Workshop**. Until then it stays **None**.
 - **Size**: **Small**, **Standard** or **Large**. Standard by default. If a pet looks too small or too big, choose **Custom** and drag the slider to 50–300% of Standard; the preview above follows, and it saves when you let go.
 - **Quiet mode**: animations only, no bubbles.
 
@@ -25,7 +25,7 @@ On HarmonyOS the pet stays in the app: it can't show outside the app, and there'
 
 The companion room is a separate full page with an animated Live2D character. It isn't the status pet above: the pet watches the agent for you, and the room is a place to spend a little time.
 
-Tap the **Switch mode** button at the top of the chat list, then **Companion room**; if you've set a startup mode, the app opens straight into it. When the app comes with her, she swims in by herself the first time; after you remove her from the menu at the top right of the room, you can bring her back or import another asset pack (zip). Her assets stay on this phone.
+Tap the **Switch mode** button at the top of the chat list, then **Companion room**; if you've set a startup mode, the app opens straight into it. The app doesn't ship her assets, so the room starts on the FustAI mark; import an asset pack (zip) from the menu at the top right to bring in an animated character, and you can bring her back after removing her. Her assets stay on this phone.
 
 On HarmonyOS she can't live in a floating window.
 
